@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="KOA/infrastructure/source/MobileVotingSystem/SMSRelay/src"/>
+	<classpathentry kind="src" path="KOA/infrastructure/source/Radboud_Tally_Snapshot/src"/>
+	<classpathentry kind="src" path="KOA/infrastructure/source/MobileVotingSystem/Voting Client J2ME/src"/>
+	<classpathentry kind="src" path="KOA/infrastructure/source/Stemdienst/src"/>
+	<classpathentry kind="src" path="KOA/infrastructure/source/Telprogramma/koa/src"/>
+	<classpathentry kind="src" path="KOA/infrastructure/source/MobileVotingSystem/Voting Server J2SE/src"/>
+	<classpathentry kind="src" path="KOA/plugins/votail/src"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/avalon-framework-4.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/axis.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/batik.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/bcprov-jdk14-129.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/checkstyle-all-4.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/checkstyle-optional-4.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/commons-fileupload-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/fop.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/jmljunitruntime.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/jmlmodels.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/jmlmodelsnonrac.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/jml-release.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/jmlruntime.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/xercesImpl.jar"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/junit.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.4.2"/>
+	<classpathentry exported="true" kind="lib" path="KOA/infrastructure/jars/esctools2.jar"/>
+	<classpathentry kind="lib" path="KOA/infrastructure/source/Radboud_Tally_Snapshot/build"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
