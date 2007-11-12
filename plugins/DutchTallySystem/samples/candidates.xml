@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result action="replace" contenttype="kieslijst">
+  <metadata>
+    <requestreference>
+    </requestreference>
+    <responsereference>
+    </responsereference>
+    <creationtime>
+    </creationtime>
+    <kieskringcount>
+    </kieskringcount>
+    <districtcount>
+    </districtcount>
+    <kieslijstcount>
+    </kieslijstcount>
+    <positiecount>
+    </positiecount>
+  </metadata>
+  <kieskring nummer="12" naam="'s-Gravenhage">
+    <district nummer="1" naam="'s-Gravenhage"/>
+    <kieslijst nummer="1" groepering="Europese kleurenpartij">
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+    </kieslijst>
+    <kieslijst nummer="99" groepering="[Blanco]">
+      <positie nummer="1" achternaam="[Blanco]" voorletters="-" roepnaam="-" geslacht="M" woonplaats="-">
+        <code>142662082</code>
+      </positie>
+    </kieslijst>
+  </kieskring>
+</result>

@@ -1,0 +1,57 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package java.security;
+
+/**
+ * @deprecated A new certificate handling package is created in the
+ *             Java 2 platform.  This Certificate interface is
+ *             entirely deprecated and is here to allow for a smooth
+ *             transition to the new package.
+ * @see java.security.cert.Certificate
+ */
+
+public /*@ pure @*/ interface Certificate
+{
+    /*@ public normal_behavior
+      @   ensures \result != null;
+      @*/
+    public abstract Principal getGuarantor();
+
+    /*@ public normal_behavior
+      @   ensures \result != null;
+      @*/
+    public abstract Principal getPrincipal();
+
+    /*@ public normal_behavior
+      @   ensures \result != null;
+      @*/
+    public abstract PublicKey getPublicKey();
+
+    /*@ public normal_behavior
+      @   requires stream != null;
+      @*/
+    public abstract void encode(java.io.OutputStream stream)
+        throws KeyException, java.io.IOException;
+
+    /*@ public normal_behavior
+      @   requires stream != null;
+      @*/
+    public abstract void decode(java.io.InputStream stream)
+        throws KeyException, java.io.IOException;
+
+    /*@ public normal_behavior
+      @   ensures \result != null;
+      @*/
+    public abstract String getFormat();
+
+    /*@ public normal_behavior
+      @   ensures \result != null;
+      @*/
+    public String toString(boolean detailed);
+}
+

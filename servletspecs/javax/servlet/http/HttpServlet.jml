@@ -1,0 +1,89 @@
+/*
+ * @(#)HttpServlet.jml
+ *
+ * @version $Id: HttpServlet.jml 775 2006-04-15 13:45:44Z alanm $
+ *
+ * Copyright (C) 2004 Iowa State University
+ *
+ * This file is part of JML.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
+package javax.servlet.http;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.lang.reflect.Method;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public abstract class HttpServlet extends GenericServlet
+implements Serializable
+{
+   /*@
+     @ ensures
+     @    _state == _CONSTRUCTED;
+    */
+   public HttpServlet();
+
+   protected /*@ pure */ long getLastModified(/*@ non_null */ HttpServletRequest req);
+
+   public void service(/*@ non_null */ ServletRequest req,
+                       /*@ non_null */ ServletResponse res)
+   throws ServletException, IOException;
+
+   protected void doDelete(/*@ non_null */ HttpServletRequest req,
+                           /*@ non_null */ HttpServletResponse resp)
+   throws ServletException, IOException;
+
+   // based on an interpretation of the javadoc API
+   /*@
+     @ requires false; // 'Needed' because of the fact that 'also'
+     @                 // implies disjunction of pre-conditions.
+     @*/
+   protected void doGet(/*@ non_null */ HttpServletRequest req,
+                        /*@ non_null */ HttpServletResponse resp)
+   throws ServletException, IOException;
+
+   protected void doHead(/*@ non_null */ HttpServletRequest req,
+                         /*@ non_null */ HttpServletResponse resp)
+   throws ServletException, IOException;
+
+   protected void doOptions(/*@ non_null */ HttpServletRequest req,
+                            /*@ non_null */ HttpServletResponse resp)
+   throws ServletException, IOException;
+
+   // based on an interpretation of the javadoc API
+   protected void doPost(/*@ non_null */ HttpServletRequest req,
+                         /*@ non_null */ HttpServletResponse resp)
+   throws ServletException, IOException;
+
+   protected void doPut(/*@ non_null */ HttpServletRequest req,
+                        /*@ non_null */ HttpServletResponse resp)
+   throws ServletException, IOException;
+
+   protected void doTrace(/*@ non_null */ HttpServletRequest req,
+                          /*@ non_null */ HttpServletResponse resp)
+   throws ServletException, IOException;
+
+   protected void service(/*@ non_null */ HttpServletRequest req,
+                          /*@ non_null */ HttpServletResponse resp)
+   throws ServletException, IOException;
+}
+

@@ -1,0 +1,70 @@
+/*
+ * @(#)Servlet.jml
+ *
+ * @version $Id: Servlet.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet;
+
+import java.io.IOException;
+
+/**
+ * Relevant information for modeling the life cycle from the JavaDoc API spec:
+ *
+ *    This interface defines methods to initialize a servlet, to service
+ *    requests, and to remove a servlet from the server. These are known as
+ *    life-cycle methods and are called in the following sequence:
+ *
+ *       1. The servlet is constructed, then initialized with the init method.
+ *       2. Any calls from clients to the service method are handled.
+ *       3. The servlet is taken out of service, then destroyed with the
+ *          destroy method, then garbage collected and finalized.
+ */
+public interface Servlet
+{
+   /*@ model static final int _CONSTRUCTED; */
+   /*@ model static final int _INITIALIZED; */
+   /*@ model static final int _DESTROYED; */
+
+   /*@ invariant _CONSTRUCTED != _INITIALIZED &&
+     @           _CONSTRUCTED != _DESTROYED &&
+     @           _INITIALIZED != _DESTROYED; */
+
+   /*@ model int _state; */
+
+   /*@ invariant _state == _CONSTRUCTED ||
+     @           _state == _INITIALIZED ||
+     @           _state == _DESTROYED; */
+
+   /*@ behavior
+     @    requires
+     @       _state == _INITIALIZED;
+     @    ensures
+     @       _state == _DESTROYED;
+    */
+   public void destroy();
+
+   public /*@ pure non_null */ String getServletInfo();
+
+   public /*@ pure non_null */ ServletConfig getServletConfig();
+
+   /*@ behavior
+     @    requires
+     @       _state == _CONSTRUCTED;
+     @    ensures
+     @       _state == _INITIALIZED;
+    */
+   public void init(/*@ non_null */ ServletConfig config)
+   throws ServletException;
+
+   /*@ behavior
+     @    requires
+     @       _state == _INITIALIZED;
+     @    ensures
+     @       _state == _INITIALIZED;
+    */
+   public void service(/*@ non_null */ ServletRequest req,
+                       /*@ non_null */ ServletResponse res)
+   throws ServletException, IOException;
+}
+

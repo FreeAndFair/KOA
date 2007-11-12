@@ -1,0 +1,47 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package javax.crypto.spec;
+
+import java.math.BigInteger;
+import java.security.spec.AlgorithmParameterSpec;
+
+public class PBEParameterSpec implements AlgorithmParameterSpec
+{
+//     private byte[] salt;
+//     private int iterationCount;
+
+    /**
+     * Constructs a parameter set for password-based encryption as defined in
+     * the PKCS #5 standard.
+     *
+     * @param salt the salt.
+     * @param iterationCount the iteration count.
+     */
+    public PBEParameterSpec(byte[] salt, int iterationCount) {
+	this.salt = (byte[])salt.clone();
+	this.iterationCount = iterationCount;
+    }
+
+    /**
+     * Returns the salt.
+     *
+     * @return the salt
+     */
+    public byte[] getSalt() {
+	return (byte[])this.salt.clone();
+    }
+
+    /**
+     * Returns the iteration count.
+     *
+     * @return the iteration count
+     */
+    public int getIterationCount() {
+	return this.iterationCount;
+    }
+}

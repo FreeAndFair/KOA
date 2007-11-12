@@ -1,0 +1,43 @@
+/*
+ * @(#)BasicPermission.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.security.*;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.StringTokenizer;
+import java.io.IOException;
+
+public abstract class BasicPermission extends Permission
+implements java.io.Serializable
+{
+   /*@ public behavior
+     @    requires name != null;
+    */
+   public BasicPermission(String name);
+
+   /*@ public behavior
+     @    requires name != null;
+     @    requires actions != null;
+    */
+   public BasicPermission(String name, String actions);
+
+   public /*@ pure */ boolean implies(Permission p);
+
+   public /*@ pure */ boolean equals(Object obj);
+
+   public /*@ pure */ int hashCode();
+
+   public /*@ pure non_null */ String getActions();
+
+   public /*@ pure non_null */ PermissionCollection newPermissionCollection();
+}
+

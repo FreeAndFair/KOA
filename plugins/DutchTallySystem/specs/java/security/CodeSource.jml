@@ -1,0 +1,41 @@
+/*
+ * @(#)CodeSource.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.net.URL;
+import java.net.SocketPermission;
+import java.util.Hashtable;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.security.cert.*;
+
+public class CodeSource implements java.io.Serializable
+{
+   /*@ public behavior
+     @    requires url != null;
+     @    requires certs != null;
+     @    ensures getLocation().equals(url);
+    */
+   public CodeSource(URL url, java.security.cert.Certificate[] certs);
+
+   public /*@ pure */ int hashCode();
+
+   public /*@ pure */  boolean equals(Object obj);
+
+   public final /*@ pure */ URL getLocation();
+
+   public final /*@ pure non_null */ java.security.cert.Certificate[] getCertificates();
+
+   public /*@ pure */ boolean implies(CodeSource codesource);
+
+   public /*@ pure non_null */ String toString();
+}
+

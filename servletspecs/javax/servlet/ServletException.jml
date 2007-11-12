@@ -1,0 +1,35 @@
+/*
+ * @(#)ServletException.jml
+ *
+ * @version $Id: ServletException.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet;
+
+public class ServletException extends Exception {
+
+   private /*@ spec_public */ Throwable rootCause;
+
+   public ServletException();
+
+   public ServletException(/*@ non_null */ String message);
+
+   /*@
+     @ ensures
+     @    this.rootCause.equals(rootCause);
+    */
+   public ServletException(/*@ non_null */ Throwable rootCause);
+
+   /*@
+     @ ensures
+     @    this.rootCause.equals(rootCause);
+    */
+   public ServletException(/*@ non_null */ String message, /*@ non_null */ Throwable rootCause);
+
+   /*@
+     @ ensures
+     @    \result.equals(rootCause);
+    */
+   public /*@ pure */ Throwable getRootCause();
+}
+

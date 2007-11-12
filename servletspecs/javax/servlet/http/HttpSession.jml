@@ -1,0 +1,111 @@
+/*
+ * @(#)HttpSession.jml
+ *
+ * @version $Id: HttpSession.jml 775 2006-04-15 13:45:44Z alanm $
+ *
+ * Copyright (C) 2004 Iowa State University, Dependable Software
+ * Research Group, Concordia University.
+ *
+ * This file is part of JML.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
+package javax.servlet.http;
+
+import java.util.Enumeration;
+
+import javax.servlet.ServletContext;
+
+/*@ model import java.util.Map;
+ */
+
+public interface HttpSession
+{
+   /*@ spec_public non_null model Map _attributes;
+    */
+
+   public /*@ pure */ int getMaxInactiveInterval();
+
+   /*@
+     @ ensures
+     @    \result >= 0;
+    */
+   public long getCreationTime();
+
+   /*@
+     @ ensures
+     @    \result >= 0;
+    */
+   public /*@ pure */ long getLastAccessedTime();
+
+   public void invalidate();
+
+   public /*@ pure */ boolean isNew();
+
+   public void setMaxInactiveInterval(int interval);
+
+   public /*@ pure non_null */ String getId();
+
+   public /*@ pure non_null */ String[] getValueNames();
+
+   /*@
+     @ ensures
+     @    _attributes.get(name) == null;
+    */
+   public void removeAttribute(/*@ non_null */ String name);
+
+   public void removeValue(/*@ non_null */ String name);
+
+   /*@
+     @ ensures
+     @    \result.elementType == String.class;
+    */
+   public /*@ pure non_null */ Enumeration getAttributeNames();
+
+   public /*@ pure non_null */ ServletContext getServletContext();
+
+   public /*@ pure non_null */ HttpSessionContext getSessionContext();
+
+   public void putValue(/*@ non_null */ String name,
+                        /*@ non_null */ Object value);
+
+   public /*@ pure */ Object getValue(/*@ non_null */ String arg);
+
+   /*@
+     @ ensures
+     @    _attributes.get(name) == value;
+     @ ensures
+     @    (\old(_attributes.containsKey(name)) ==> _attributes.size() == \old(_attributes.size())) &&
+     @    (!\old(_attributes.containsKey(name)) ==> _attributes.size() == \old(_attributes.size()) + 1);
+    */
+   public void setAttribute(/*@ non_null */ String name, Object value);
+
+   /*@
+     @ ensures
+     @    \result == _attributes.get(name);
+     @ ensures
+     @    _attributes.size() == \old(_attributes.size());
+    */
+   public /*@ pure */ Object getAttribute(/*@ non_null */ String name);
+
+/* DIT_IS_GEEN_JML @
+     @ ensures
+     @    (\old(_attributes.containsKey(name)) ==> \result.equals(_attributes.get(name))) &&
+     @    (!\old(_attributes.containsKey(name)) ==> \result == null);
+*/
+
+}
+

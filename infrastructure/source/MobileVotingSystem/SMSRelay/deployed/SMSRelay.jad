@@ -1,0 +1,8 @@
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: Midlet Suite Vendor
+MIDlet-Jar-URL: SMSRelay.jar
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: relay,,SMSRelay
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Jar-Size: 2927
+MIDlet-Name: SMSRelay

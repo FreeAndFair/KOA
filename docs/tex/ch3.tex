@@ -1,0 +1,407 @@
+\chapter{Roles and steps in the voting process}\label{cha:role-steps-voting}
+
+Three different roles are distinguished: the data maintainer, the
+Chairman and the Voter. All roles will be described in more detail in
+this chapter.
+
+All roles are realized by the standard given by the functionality that
+is present in the underlying e-Platform. Data maintainer and Chairman
+are explicitly loaded into the system as users during the preliminary
+phase of the experiment. At this stage a role is assigned to them
+which ensures that they can only perform functions associated with
+their respective roles. Voters are anonymous, thus Voters form an
+implicit role that is assigned to anybody who connects to the KOA
+system via WSM and TSM.
+
+\section{Data maintainer}\label{sec3:data-maintainer}
+
+The sole purpose of the data maintainer's role is to maintain the
+voter register and the candidate lists. The data maintainer is
+equipped with a specially prepared laptop which allows access to the
+KOA system. This laptop is equipped with tools for encrypting and
+decrypting data files. Communication with the KOA system takes place
+via a web-interface.
+
+The voter register is edited with data files delivered by the
+Customer. Such a file can be replacing, adding or deleting (see
+Section~\ref{sec2:kr-choser-register}). If the elections have started
+only adding and deleting files can be used.
+
+Loading the voter register into the KOA system works as follows:
+
+\begin{enumerate}
+	\item The voter file is constructed by the Customer in the
+	specified format (see Chapter~\ref{cha:interch-form-bkz}) and
+	delivered to the data maintainer. A special
+	letter\footnote{Dutch: oplegbrief MW.} belonging to this file
+	is send via a different route which contains a reference
+	number, date and time op delivery, type of file (replacing,
+	adding or deleting) and the number of persons being replaced,
+	added or deleted. The letter also contains the access code that
+	is needed to decrypt the file.
+	
+	\item The date maintainer decrypts the file and loads it into
+	the KOA system.
+
+	\item A first check of the file is carried out. Both the
+	(syntactic) format and the number of persons involved is
+	checked at this moment. If this does not match the file not is
+	processed to exclude any possibly of loading incorrect data
+	into the KOA system.
+
+	\item The data maintainer receives a report form this check
+	and checks himself if the data in the report matches the data
+	in the special letter described above. If everything checks
+	out, he gives permission to process the file.
+
+	\item The file is used to replace or alter the KR. The system
+	generates three output files:
+
+	\begin{itemize} 
+
+		\item Return file: an export of the by the Customer
+		delivered data (anonymous identity of the Voter, voter
+		district and voter circle) and the voter codes for all
+		the Voters in the KR. This file is also exported if
+		data was added or deleted.
+
+		\item Error file: a file containing the data of the
+		persons that could not be processed (e.g.\ because the
+		anonymous identity wasn't unique). This file is
+		supposed to be empty.
+
+		\item A processing file that contains any possible
+		problems. This file can be used for auditing purposes.
+	\end{itemize}
+
+	\item The export files and the processing file are encrypted
+	by the data maintainer and delivered to the Customer. The
+	Customer matches these files with the originals to ensure that
+	files are processed correctly and completely.
+
+	\item If errors are signaled during processing then these are
+	corrected by the Customer. As long as the elections haven't
+	started the corrected files are loaded into the system again
+	(see Section~\ref{sec2:kr-choser-register}).
+
+	\item The Customer processes the data concerning a voter and
+	sends this to the Voter.
+
+\end{enumerate}
+
+Processing candidate lists can only occur during the preliminary
+stages (before the elections) have started. This is for the most part
+equivalent with processing the voter lists:
+
+\begin{enumerate}
+\setcounter{enumi}{8}
+	\item The Customer sends a file (see
+	Chapter~\ref{cha:interch-form-bkz}) containing the candidate
+	lists. Via an alternate route a special letter is send which
+	contains the access code and control data.
+
+	\item The data maintainer decrypts the file and delivers it to
+	the VSL.
+
+	\item In the VSL the data is checked. The result is send to
+	the data maintainer.
+
+	\item If the data maintainer confirms that the data is valid
+	it can be processed and read into the VSL. At this time each
+	candidate gets 1000 candidate codes assigned to him/her.
+
+	\item The result is stored in three files:
+
+	\begin{itemize}
+		
+		\item A return file: an export of the read data and
+		the assigned access codes.
+		
+		\item An error file containing unprocessed records.
+
+		\item A processing file
+
+	\end{itemize}
+
+	\item The data maintainer preforms a visual inspection of the
+	web pages concerning the candidate lists that are generated by
+	the WSM. 
+
+	\item The data maintainer reports the result to the
+	Chairman. Any necessary corrections are again processed by
+	reloading the entire file from the Customer. The export files
+	are returned to the Customer.
+
+\end{enumerate}
+
+\section{Chairman}\label{sec3:chairman}
+
+\subsection{Tasks of the chairman before polling}\label{sec3:tasks-chairm-before}
+
+\subsubsection{Opening the elections}\label{sec3:begin-elections}
+
+\begin{enumerate}
+\setcounter{enumi}{15}
+	\item The Chairman connects to the KOA system using the
+	specially prepared laptop facilitated by LogicaCMG. This
+	laptop is equipped with all necessary programs and associated
+	files. The connection with the KOA system is secured.
+
+	The interface that the Chairman uses is menu-driven. The menu
+	structure is simple: a main menu that displays the status
+	overview of the system and sub menus for changing the status
+	of the system, retrieving reports and retrieving files for
+	further processing outside the KOA system.
+
+	A pop-up message will always be displayed which asks for an
+	explicit conformation of a status change of the system,
+	because many status changes are irreversible (e.g.\ if the
+	elections are closed they can't be reopened). This operation
+	is also protected by two PIN codes; in order to change items
+	of the system two different members of the polling station have to give
+	their PIN codes.
+
+	\item The Chairman orders that the KOA system can be
+	initialized. The Chairman has to give the corresponding public
+	key which is used to encrypt the votes. Initialization can
+	take some time, thus this has to be started at least 10
+	minutes before the start of the elections.
+
+	\item The KOA system delivers a status report, which can be
+	used by the Chairman to check if the system is ready for use
+	(all components function as required, the voting register has
+	been correctly initialized, the voter store is empty).
+
+	\item The Chairman orders that the elections can begin. The
+	telephone and internet connnections are now opened. The system
+	confirms that it is fully operational.
+
+\end{enumerate}
+
+\subsection{Tasks of the chairman during polling}\label{sec3:tasks-chairm-during}
+
+\subsubsection{Interrupting the elections}\label{sec3:interr-elect}
+
+\begin{enumerate}
+\setcounter{enumi}{19}
+	\item The Chairman orders that the elections are interrupted.
+
+	\item The VSL ensures that all voting is impossible from this
+	moment onwards\footnote{It's possible that voting is already
+	blocked by the system because of a critical error that makes
+	continuing the elections not responsible. The interruption by
+	the Chairman then forms the formal confirmation of this
+	state. See Section~\ref{sec4:state-blocked}.}. The WSM and TSM
+	are informed in order to ensure that voters that are still
+	connected to the system receive the proper error message.
+
+	\item The critical files of the system (KR, ESB and audit
+	logs) are stored on removable media. An electronic fingerprint
+	is made that can be used by the Chairman when the elections
+	are continued.
+
+\end{enumerate}
+
+\subsubsection{Continuing the elections}\label{sec3:continuing-elections}
+
+\begin{enumerate}
+\setcounter{enumi}{22}
+	\item The Chairman orders re-initialization of the system. The
+	KR and ESB can be re-initialized from the secured copies; this
+	requires an action by the operational maintainer. The system
+	again calculates the electronic fingerprint and displays this
+	as part of the status report.
+
+	\item The Chairman checks the status of the system; the
+	fingerprint has to match the fingerprint of the system when it
+	was interrupted.
+
+	\item If the Chairman is convinced that the elections can
+	continue the order for continuing is given. The VSL module
+	redirects this to the WSM and TSM, so that the elections can
+	go on.
+
+\end{enumerate}
+
+\subsection{Tasks of the chairman after polling}\label{sec3:tasks-chairman-after}
+
+\subsubsection{Closing the elections}\label{sec:closing-elections}
+
+\begin{enumerate}
+\setcounter{enumi}{25}
+	\item The Chairman orders the closing of the elections.
+	
+	\item The VSL module ensures that the elections are closed
+	immediately. This command is redirected to the WSM and TSM,
+	which ensure that all connected users receive a proper
+	error message stating that the elections are over.
+
+	\item The critical files (KR, ESB, audit logs en statistics)
+	are stored on a removable disk.
+
+	\item Fingerprints are generated which are compared with
+	previously taken fingerprints and are stored in the audit
+	log. This data can be used (if necessary) to check if the KR
+	and ESB are correct in case of an audit after the elections.
+
+	From this moment onwards an export with the encrypted votes
+	can be generated. This facilitates recounting outside the
+	scope of the KOA system. 
+
+\end{enumerate}
+
+\subsubsection{Opening the votes and counting}\label{sec3:open-votes-count}
+
+\begin{enumerate}
+\setcounter{enumi}{29}
+	\item The Chairman orders that the stored votes can be
+	opened. The private key that is necessary to decrypt the votes
+	is also transmitted at this point.
+
+	\item An export file of the encrypted votes is generated.
+
+	\item The votes are translated into a processable table in a
+	database. This table can also be exported to facilitate
+	recounting by another system.
+
+	\item The votes are counted and the result is reported back to
+	the Chairman.
+
+	\item The audit log is updated.
+
+	\item The KR and the counting files are frozen, but will
+	remain available for a unspecified time period for audit and
+	verification purposes.
+
+	\item The Chairman request the audit reports which are added
+	to the official result\footnote{The Dutch text literally
+	speaks of a `proces-verbaal' (a specific kind of Dutch legal
+	document) in stead of the `official result'. MW \label{footnote:official_result}}.
+
+	\item The Chairman can at this (or some later) time request
+	the cleaning of the entire KOA system.
+
+\end{enumerate}
+
+\subsection{Additional tasks of the Chairman}\label{sec:addit-tasks-chairm}
+
+These functions can be used by the Chairman to request information
+concerning the progress of the elections. Reports can be requested at
+any given moment; thus it is not necessary to wait until the elections
+are finished to request reports which are added to the official
+result\footnote{`official result' as meant in the previous
+footnote~\ref{footnote:official_result}. MW}
+
+\begin{enumerate}
+\setcounter{enumi}{37}
+	\item Requesting reports concerning the audit logs. This
+	function displays all the audit information available at this
+	moment. It can be added to the official result.
+
+	\item Requesting status. This function displays data
+	concerning the progress of the elections.
+
+	\item Requesting fingerprints concerning the candidates and
+	associated data. The KOA system uses fingerprints to check
+	that data in the system has not been altered in any illegal
+	way. Most of these fingerprints are generated and checked
+	automatically (see Chapter~\ref{cha:interf-voting-mach} and
+	Chapter~\ref{cha:audit-logs-acco}); however since the fingerprint
+	of the candidate lists never (should) change it is only
+	checked on request of the Chairman. The function checks the
+	complete candidate list (including all assigned candidate
+	codes), and should therefore not be used during the election
+	process.
+
+	\item Exporting the assigned transaction codes (in XML
+	format). This function is available after the elections have
+	closed. The codes can be used by voters to verify that the
+	code they received after the voting process is indeed used
+	during the elections.
+
+	\item Exporting encrypted votes (in XML format). This function
+	is available after the elections have closed. The encrypted
+	votes can be used to recount the votes outside the KOA system.
+
+\end{enumerate}
+
+\section{The voter}\label{sec3:voter}
+
+\subsection{Voting via PC}\label{sec3:voting-via-pc}
+
+\begin{enumerate}
+\setcounter{enumi}{42}
+	\item The Voter connects to the KOA system using his/her own
+	ISP and a standard web browser.
+
+	\item The Voter authenticates to the system with the voter
+	code and the self-chosen access code.
+
+	\item The voter code and access code are verified in the KR.
+
+	\item The Voter inputs the candidate code of the candidate
+	he/she wants to vote for. The system checks if the candidate
+	code is valid for this specific voter and, if this is indeed
+	the case, displays the data associated with the candidate on
+	the screen. This to ensure that the correct candidate was
+	chosen. The Voter can confirm his/her choice.
+
+	\item The data associated with the voter and the chosen
+	candidate are transmitted to the KOA system. Another check is
+	preformed if the Voter can still cast a vote; in principle a
+	vote could have been casted in the mean time via another PC or
+	telephone.
+
+	\item The vote is encrypted and stored in the ESB; in the same
+	transaction the KR stores that the Voter has voted.
+
+	\item The system generates the transaction code and transmits
+	it to the WSM.
+
+	\item The WSM displays a closing screen that (if so specified
+	in the corresponding system parameter) displays the
+	transaction code.
+
+\end{enumerate}
+
+\subsection{Voting via telephone}\label{sec3:voting-via-telephone}
+
+\begin{enumerate}
+\setcounter{enumi}{50}
+	\item The Voter connects via a telephone using tone codes to
+	the TSM.
+
+	\item The Voter authenticates to the system with the voter
+	code and the self-chosen access code.
+
+	\item The voter code and access code are transmitted by the
+	TSM to the VSL. The VSL verifies the Voter's right to vote
+	with the KR.
+
+	\item The Voter transmits the candidate code to the TSM. The
+	TSM verifies with the VSL if this is a valid choice and asks
+	the Voter to confirm it.
+
+	\item The TSM transmits the vote to the VSL module. Another
+	check is preformed if the Voter can still cast a vote; in
+	principle a vote could have been casted in the mean time via
+	another telephone or PC.
+
+	\item The vote is encrypted and stored in the ESB; in the same
+	transaction the KR stores the that Voter has casted a vote.
+
+	\item The system generates the transaction code and sends it
+	to the TSM.
+
+	\item The TSM gives a closing message to the Voter with (if so
+	specified in the associated systems parameter) the transaction
+	code and disconnects.
+
+
+\end{enumerate}
+
+
+%%% Local Variables: ***
+%%% mode:latex ***
+%%% TeX-master: "funDesign.tex"  ***
+%%% End: ***

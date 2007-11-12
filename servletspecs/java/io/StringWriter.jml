@@ -1,0 +1,60 @@
+/*
+ * @(#)StringWriter.jml
+ */
+
+package java.io;
+
+public class StringWriter extends Writer {
+
+    /**
+     * Create a new string writer, using the default initial string-buffer
+     * size.
+     */
+    public StringWriter();
+
+    /**
+     * Create a new string writer, using the specified initial string-buffer
+     * size.
+     *
+     * @param initialSize  an int specifying the initial size of the buffer.
+     */
+    public StringWriter(int initialSize);
+
+    /**
+     * Write a single character.
+     */
+    public void write(int c);
+
+    /**
+     * Write a portion of an array of characters.
+     *
+     * @param  cbuf  Array of characters
+     * @param  off   Offset from which to start writing characters
+     * @param  len   Number of characters to write
+     */
+    public void write(char cbuf[], int off, int len);
+
+    /**
+     * Write a string.
+     */
+    public void write(String str);
+
+    public void write(String str, int off, int len);
+
+    public /*@ pure non_null */ String toString();
+
+    public /*@ pure non_null */ StringBuffer getBuffer();
+
+    /**
+     * Flush the stream.
+     */
+    public void flush();
+
+    // "No effect" means it can be "pure", right? -- martijno
+    /**
+     * Closing a <tt>StringWriter</tt> has no effect. The methods in this
+     * class can be called after the stream has been closed without generating
+     * an <tt>IOException</tt>.
+     */
+    public /*@ pure */ void close() throws IOException;
+}

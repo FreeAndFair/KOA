@@ -1,0 +1,42 @@
+KOA/2 First Alpha Release
+=========================
+
+This is first alpha release of the KOA/2 remote voting system.  This system is intended for use a platform for research 
+in electronic voting and applied formal methods.  It is not intended for use in governmental elections.  For further 
+information please visit http://secure.ucd.ie/products/opensource/KOA.
+
+License
+=======
+This distribution is released under the GNU public license.
+
+Version Number
+==============
+This is version 2.0.0 of KOA.
+
+Release Date
+============
+Friday 24th August 2007
+
+Contributors
+============
+Joseph R. Kiniry, Alan E. Morkan, Dermot Cochran, Fintan Fairmichael, Patrice Chalin, Martijn Oostdijk, Englelbert Hubbers, 
+Patrick E. Tierney, Robin Green, Alexander Zapata Lenis and Martijn Warnier
+
+Features Added Since The Original KOA Release under GPL
+=======================================================
+(1) The Irish PRSTV system was formally specified by Dermot Cochran and implemented by Patrick E. Tierney
+(2) Missing code or libraries (i.e. proprietary code excluded from the original release) has
+been replaced with open source libraries or else rewritten by Alan E. Morkan
+(3) The verification of the Dutch tally system has been validated by Fintan Fairmichael
+
+Known Issues
+============
+(1) Several of the unit tests are failing or incomplete
+(2) Extended Static Checking takes too long
+(3) Irish PRSTV implementation needs an end-to-end test/demo
+(4) Irish PRSTV implementation needs a ballot screen user interface
+(5) End-to-end security properties need to be formally specified and verified
+
+Source Code Repository Location
+===============================
+svn+ssh://kind.ucd.ie/Volumes/Data/svn/software/koa

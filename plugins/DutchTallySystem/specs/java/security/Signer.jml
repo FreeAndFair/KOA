@@ -1,0 +1,45 @@
+/*
+ * @(#)Signer.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public abstract class Signer extends Identity
+{
+   protected Signer();
+
+   /*@ public behavior
+     @    requires name != null;
+     @    ensures getName().equals(name);
+    */
+   public Signer(String name);
+
+   /*@ public behavior
+     @    requires name != null;
+     @    requires scope != null;
+     @    ensures getName().equals(name);
+     @    ensures getScope().equals(scope);
+     @    signals(KeyManagementException) true;
+    */
+   public Signer(String name, IdentityScope scope)
+   throws KeyManagementException;
+
+   public /*@ pure non_null */ PrivateKey getPrivateKey();
+
+   /*@ public behavior
+     @    requires pair != null;
+     @    signals(InvalidParameterException) true;
+     @    signals(KeyException) true;
+    */
+   public final void setKeyPair(KeyPair pair)
+   throws InvalidParameterException, KeyException;
+
+   public /*@ pure non_null */ String toString();
+}
+

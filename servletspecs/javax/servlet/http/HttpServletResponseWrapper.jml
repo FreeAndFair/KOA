@@ -1,0 +1,56 @@
+/*
+ * @(#)HttpServletResponseWrapper.jml
+ *
+ * @version $Id: HttpServletResponseWrapper.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet.http;
+
+import java.io.IOException;
+
+import javax.servlet.ServletResponseWrapper;
+
+/**
+ * According to Javadoc specs this implements a
+ * decorator pattern. How to specify this in JML?
+ */
+public class HttpServletResponseWrapper extends ServletResponseWrapper
+implements HttpServletResponse
+{
+   public HttpServletResponseWrapper(HttpServletResponse response);
+
+   public void sendError(int sc) throws IOException;
+
+   public void setStatus(int sc);
+
+   public void sendError(int sc, String msg) throws IOException;
+
+   public void setStatus(int sc, String sm);
+
+   public void sendRedirect(String location) throws IOException;
+
+   public /*@ pure */ boolean containsHeader(String name);
+
+   public void addIntHeader(String name, int value);
+
+   public void setIntHeader(String name, int value);
+
+   public void addDateHeader(String name, long date);
+
+   public void setDateHeader(String name, long date);
+
+   public void addCookie(Cookie cookie);
+
+   public String encodeRedirectURL(String url);
+
+   public String encodeRedirectUrl(String url);
+
+   public String encodeURL(String url);
+
+   public String encodeUrl(String url);
+
+   public void addHeader(String name, String value);
+
+   public void setHeader(String name, String value);
+}
+

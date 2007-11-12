@@ -1,0 +1,29 @@
+/*
+ * @(#)KeyPair.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.util.*;
+
+public final class KeyPair implements java.io.Serializable {
+
+   /*@ public behavior
+     @    requires publicKey != null;
+     @    requires privateKey != null;
+     @    ensures getPublic().equals(publicKey);
+     @    ensures getPrivate().equals(privateKey);
+    */
+   public KeyPair(PublicKey publicKey, PrivateKey privateKey);
+
+   public /*@ pure non_null */ PublicKey getPublic();
+
+   public /*@ pure non_null */ PrivateKey getPrivate();
+}
+

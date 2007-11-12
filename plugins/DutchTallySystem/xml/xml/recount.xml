@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result action="replace" contenttype="kieslijst">
+  <metadata>
+    <requestreference>
+    </requestreference>
+    <responsereference>
+    </responsereference>
+    <creationtime>
+    </creationtime>
+    <kieskringcount>
+    </kieskringcount>
+    <districtcount>
+    </districtcount>
+    <kieslijstcount>
+    </kieslijstcount>
+    <positiecount>
+    </positiecount>
+  </metadata>
+  <globaal stembureau="Digitaal Stembureau" voorzitter="Voorzitter" state="State" verkiezing="Europese verkiezingen van 2004" periode_start="10 Mei 2004 9:00" periode_eind="10 Juni 2004 17:00" telling_start="15 Maart 2004 20:32:33" telling_eind="15 Maart 2004 20:40:18" kiesgerechtigden="12345" kiesgerechtigden_gestemd="543" kiesgerechtigden_niet_gestemd="11802"/>
+  <kieskring nummer="11" naam="Smurfenland">
+    <district nummer="1" naam="'s-Gravenhage"/>
+    <kieslijst nummer="1" groepering="Europese kleurenpartij" stemmen="12">
+      <positie nummer="1" achternaam="Äzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="3">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzúûr" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="3" achternaam="Goudg¬el" voorletters="ª«¬.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="4" achternaam="0ÈÓzÿur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="5" achternaam="BzÊ§r" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="6" achternaam="Æzu²ur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="7" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="8" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="9" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="10" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="11" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="12" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="13" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="14" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="15" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="16" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="17" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="18" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="19" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="20" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="21" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="22" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="23" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="24" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="25" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="26" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="27" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="28" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="29" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="30" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="31" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="32" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="33" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="34" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="35" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="36" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="37" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="38" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="39" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="40" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="41" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="42" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="43" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="44" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="45" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="46" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="47" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="48" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="49" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="50" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="51" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="52" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="53" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="54" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="55" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="56" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="57" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="58" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="59" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="60" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="2" achternaam="Bzuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika" stemmen="9">
+        <code>142662082</code>
+      </positie>
+    </kieslijst>
+    <kieslijst nummer="99" groepering="[Blanco]" stemmen="8">
+      <positie nummer="1" achternaam="[Blanco]" voorletters="-" roepnaam="-" geslacht="M" woonplaats="-" stemmen="8">
+        <code>142662082</code>
+      </positie>
+    </kieslijst>
+  </kieskring>
+  <kieskring nummer="12" naam="'s-Gravenhage">
+    <district nummer="1" naam="'s-Gravenhage"/>
+    <kieslijst nummer="1" groepering="Europese kleurenpartij">
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+      <positie nummer="1" achternaam="Azuur" voorletters="W.F." roepnaam="Willem" geslacht="M" woonplaats="Zuid-Afrika">
+        <code>142662082</code>
+      </positie>
+    </kieslijst>
+    <kieslijst nummer="99" groepering="[Blanco]">
+      <positie nummer="1" achternaam="[Blanco]" voorletters="-" roepnaam="-" geslacht="M" woonplaats="-">
+        <code>142662082</code>
+      </positie>
+    </kieslijst>
+  </kieskring>
+</result>

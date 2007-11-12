@@ -1,0 +1,42 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package javax.crypto.spec;
+
+import java.math.BigInteger;
+
+public /*@ pure @*/ class DHPublicKeySpec
+  implements java.security.spec.KeySpec
+{
+  //@ public non_null model BigInteger _publicValue, _primeModulus, _baseGenerator;
+  //@ public represents _publicValue <- getY();
+  //@ public represents _primeModulus <- getP();
+  //@ public represents _baseGenerator <- getG();
+
+  /*@ public normal_behavior
+    @   requires y != null && p != null && g != null;
+    @   ensures y.equals(getY());
+    @   ensures p.equals(getP());
+    @   ensures g.equals(getG());
+    @*/ 
+  public DHPublicKeySpec(BigInteger y, BigInteger p, BigInteger g);
+
+  /*@ public normal_behavior
+    @  ensures \result == _publicValue;
+    @*/
+  public BigInteger getY();
+
+  /*@ public normal_behavior
+    @  ensures \result == _primeModulus;
+    @*/
+  public BigInteger getP();
+
+  /*@ public normal_behavior
+    @  ensures \result == _baseGenerator;
+    @*/
+  public BigInteger getG();
+}

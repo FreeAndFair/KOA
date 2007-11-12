@@ -1,0 +1,149 @@
+/*
+ * @(#)MessageDigest.java
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public abstract class MessageDigest extends MessageDigestSpi
+{
+   /*@ model static final int _INITIAL; */
+   /*@ model static final int _IN_PROGRESS; */
+
+   /*@ public invariant
+     @    _INITIAL != _IN_PROGRESS;
+    */
+
+   /*@ model int _state; */
+
+   /*@ public invariant
+     @    _state == _INITIAL || _state == _IN_PROGRESS;
+    */
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures _state == _INITIAL;
+     @    ensures this.getAlgorithm().equals(algorithm);
+    */
+   protected MessageDigest(String algorithm);
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures \result != null && \result._state == _INITIAL;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static MessageDigest getInstance(String algorithm)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result != null && \result._state == _INITIAL;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals (NoSuchAlgorithmException) true;
+     @    signals (NoSuchProviderException) true;
+    */
+   public static MessageDigest getInstance(String algorithm, String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result != null && \result._state == _INITIAL;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static MessageDigest getInstance(String algorithm, Provider provider)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+    */
+   public final /*@ pure */ Provider getProvider();
+
+   /*@ public behavior
+     @    assignable _state;
+     @    ensures _state == _IN_PROGRESS;
+    */
+   public void update(byte input);
+
+   /*@ public behavior
+     @    requires offset >= 0;
+     @    requires len >= 0;
+     @    requires input != null &&
+     @             (offset + len) <= input.length;
+     @    assignable _state;
+     @    ensures _state == _IN_PROGRESS;
+    */
+   public void update(byte[] input, int offset, int len);
+
+   /*@ public behavior
+     @    requires input != null;
+     @    assignable _state;
+     @    ensures _state == _IN_PROGRESS;
+    */
+   public void update(byte[] input);
+
+   /*@ public behavior
+     @    requires _state == _IN_PROGRESS;
+     @    ensures \result != null ==> \result.length == getDigestLength();
+    */
+   public byte[] digest();
+
+   /*@ public behavior
+     @    requires _state == _IN_PROGRESS;
+     @    requires offset >= 0;
+     @    requires len >= 0;
+     @    requires buf != null &&
+     @             (offset + len) <= buf.length;
+     @    signals (DigestException) true;
+    */
+   public int digest(byte[] buf, int offset, int len) throws DigestException;
+
+   /*@ public behavior
+     @    requires _state == _IN_PROGRESS;
+     @    requires input != null;
+     @    ensures \result != null;
+    */
+   public byte[] digest(byte[] input);
+
+   /*@ also
+     @ public behavior
+     @    ensures \result != null;
+    */
+   public /*@ pure */ String toString();
+
+   /*@ public behavior
+     @    ensures \result == ((digesta == null && digestb == null) ||
+     @            ((digesta.length == digestb.length) &&
+     @            (\forall int i; i < digesta.length;
+     @                            digesta[i] == digestb[i])));
+    */
+   public static /*@ pure */ boolean isEqual(byte[] digesta, byte[] digestb);
+
+   /*@ public behavior
+     @    assignable _state;
+     @    ensures _state == _INITIAL;
+    */
+   public void reset();
+
+   public final /*@ pure */ String getAlgorithm();
+
+   /*@ public behavior
+     @    ensures \result >= 0;
+    */
+   public final /*@ pure */ int getDigestLength();
+
+   /*@ also
+     @ public behavior
+     @    ensures \result != null;
+    */
+   public /*@ pure */ Object clone() throws CloneNotSupportedException;
+}
+

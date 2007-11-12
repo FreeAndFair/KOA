@@ -1,0 +1,100 @@
+/*
+ * @(#)HttpServletRequest.jml
+ *
+ * @version $Id: HttpServletRequest.jml 775 2006-04-15 13:45:44Z alanm $
+ *
+ * Copyright (C) 2004 Iowa State University, Dependable Software
+ * Research Group, Concordia University.
+ *
+ * This file is part of JML.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
+package javax.servlet.http;
+
+import java.security.Principal;
+import java.util.Enumeration;
+
+import javax.servlet.ServletRequest;
+
+public interface HttpServletRequest extends ServletRequest
+{
+   public static final String BASIC_AUTH;
+   public static final String FORM_AUTH;
+   public static final String CLIENT_CERT_AUTH;
+   public static final String DIGEST_AUTH;
+
+   public /*@ pure */ boolean isRequestedSessionIdFromCookie();
+
+   public /*@ pure */ boolean isRequestedSessionIdFromURL();
+
+   public /*@ pure */ boolean isRequestedSessionIdFromUrl();
+
+   public /*@ pure */ boolean isRequestedSessionIdValid();
+
+   public /*@ pure */ String getAuthType();
+
+   public /*@ pure non_null */ String getContextPath();
+
+   public /*@ pure */ String getMethod();
+
+   public /*@ pure */ String getPathInfo();
+
+   public /*@ pure */ String getPathTranslated();
+
+   public /*@ pure */ String getQueryString();
+
+   public /*@ pure */ String getRemoteUser();
+
+   public /*@ pure */ String getRequestURI();
+
+   public /*@ pure */ String getRequestedSessionId();
+
+   /*
+    * Remark (by martijno): non_null was added due to
+    * merging with Patrice's specs... Not sure if it's correct.
+    */
+   // based on an interpretation of the javadoc API
+   public /*@ pure non_null */ String getServletPath();
+
+   public /*@ pure */ int getIntHeader(/*@ non_null */ String name);
+
+   public /*@ pure */ long getDateHeader(/*@ non_null */ String name);
+
+   public /*@ pure */ boolean isUserInRole(/*@ non_null */ String role);
+
+   public /*@ pure */ StringBuffer getRequestURL();
+
+   public /*@ pure */ Principal getUserPrincipal();
+
+   public /*@ pure */ Enumeration getHeaderNames();
+
+   public /*@ pure */ Cookie[] getCookies();
+
+   /*
+    * Remark (by martijno): non_null was added due to
+    * merging with Patrice's specs... Not sure if it's correct.
+    */
+   // based on an interpretation of the javadoc API
+   public /*@ pure non_null */ HttpSession getSession();
+
+   public /*@ pure */ HttpSession getSession(boolean create);
+
+   public /*@ pure */ String getHeader(/*@ non_null */ String name);
+
+   public /*@ pure */ Enumeration getHeaders(/*@ non_null */ String name);
+}
+

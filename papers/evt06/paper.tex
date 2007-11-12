@@ -1,0 +1,879 @@
+%
+% $Id: paper.tex 764 2006-04-04 02:51:21Z alanm $
+%
+
+\documentclass[times, 10pt, twocolumn]{article}
+
+\usepackage{latex8}
+\usepackage{times}
+\usepackage{ifpdf}
+%% \usepackage{a4wide}
+
+\ifpdf \usepackage[pdftex]{graphicx} \else
+\usepackage{graphicx}
+\fi
+
+% \usepackage{html}
+% \usepackage{url}
+\usepackage{xspace}
+%\usepackage{doublespace}
+\usepackage{tabularx}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{eucal}
+% \ifpdf
+% \usepackage[centredisplay]{diagrams}
+% \else
+% \usepackage[centredisplay,PostScript=dvips]{diagrams}
+% \fi
+\usepackage{float}
+
+\ifpdf \usepackage[pdftex,bookmarks=false,a4paper=true, 
+plainpages=false,naturalnames=true, colorlinks=true,pdfstartview=FitV, 
+linkcolor=blue,citecolor=blue,urlcolor=blue, pdfauthor="Joseph R. 
+Kiniry"]{hyperref} \else 
+\usepackage[dvips,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref} \fi
+
+\newcommand{\todo}{\textbf{TODO:}}
+\newcommand{\tablesize}{\footnotesize}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\etc}{etc.\xspace}
+% \newcommand{\myhref}[2]{\ifpdf\href{#1}{#2}\else\htmladdnormallinkfoot{#2}{#1}\fi}
+\newcommand{\myhref}[2]{\emph{#2}}
+\newcommand{\NL}{the Netherlands\xspace}
+\newcommand{\Votail}{Vot{\'a}il\xspace}
+
+%---------------------------------------------------------------------
+% New commands, macros, etc.
+%---------------------------------------------------------------------
+
+%% \input{kt}
+
+%=====================================================================
+
+\begin{document}
+
+% Tweaks of page setup from Erik.
+%% \setlength{\textwidth}{17.0cm}
+%% \topmargin=-.75cm
+%% \evensidemargin=0mm
+%% \oddsidemargin=0mm
+%% \headheight=0mm
+%% \headsep=0mm
+%% \footskip=0mm
+
+% Omit page numbers and running heads.
+% take the % away on next line to produce the final camera-ready version
+\pagestyle{empty}
+
+% --- Author Metadata here ---
+%\conferenceinfo{EVT}{2006 USENIX/ACCURATE Electronic Voting Technology Workshop}
+%\setpagenumber{50}
+%\CopyrightYear{2006}
+%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
+
+\title{The KOA Remote Voting System:\\
+A Summary of Work To-Date}
+
+\author{Joseph R.~Kiniry, Alan E.~Morkan, Fintan Fairmichael, and Dermot Cochran\\
+School of Computer Science and Informatics\\
+University College Dublin\\
+Belfield, Dublin 4, Ireland\\ 
+\\
+Patrice Chalin\\
+Department of Computer Science and Software Engineering\\
+Concordia University\\
+Montreal, Quebec, H3G 1M8, Canada\\
+\\
+Martijn Oostdijk and Engelbert Hubbers\\
+Nijmegen Institute of Information and Computing Sciences\\
+Radboud University Nijmegen\\
+Postbus 9010, 6500GL Nijmegen, The Netherlands}
+
+\maketitle
+
+%======================================================================
+\thispagestyle{empty}
+\begin{abstract}
+
+The Kiezen op Afstand (KOA) Remote Voting System is a Free Software voting 
+system developed for the Dutch government in 2003/2004. ``Kiezen op Afstand'' 
+is literally translated from Dutch as ``Remote Voting.''  The KOA system may 
+well be the first Free Software Internet voting system developed for, used by, 
+and subsequently released by a government in the world.  This paper summarises 
+the work carried out to-date on the KOA remote voting system at three 
+universities.  It charts the development of the system, from its initial 
+conception by the Dutch Government, through to its current status. It also 
+describes a roadmap of milestones towards completing its next release: a Free 
+Software, general-purpose, and formally specified and verified Internet Voting 
+System.
+
+\end{abstract}
+
+%=====================================================================
+\Section{Introduction} % Joe/Alan
+
+The Netherlands is known for its forward-thinking and progressive government, 
+laws, and policies. Unfortunately, a government's progressiveness, particularly 
+with respect to the adoption of new technology, is sometimes contrary to the 
+good of its citizens.
+
+To help avoid such a situation in the adoption of remote voting technology, the 
+Security of Systems (SoS) Group at Radboud University Nijmegen, led by 
+Prof.~Bart Jacobs, became directly involved in the evaluation and development 
+of a remote voting system in 2004.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{Voting Machines in the Netherlands}
+
+Electronic voting machines (EVMs), whose primary supplier in \NL is Nedap, (the 
+same supplier as in Ireland), were introduced without controversy in \NL 
+around 1998. They have been widely used in local and national elections ever 
+since.
+
+Part of the reason that EVMs were so readily accepted and were used for the 
+elections to the European Parliament in June 2004 is historical.  The 
+Netherlands has used digital voting machines (the previous-generation systems 
+with little-to-no software) since the 1980s.  Therefore, Dutch citizens are 
+comfortable with the idea of using technology for voting. The security and 
+reliability issues of the new generation of machines was not an issue at the 
+time of their introduction, much like their adoption by other governments in 
+the late 90s.
+
+Unfortunately, many aspects of these systems have not been made public, 
+contrary to the requests of concerned parties in \NL.  The internals of such 
+systems are secret and are only exposed to evaluators.  Each system must be 
+evaluated (according to an unknown set of criteria) before being accepted by 
+the Dutch parliament for use in elections.  The main national evaluator is TNO. 
+Evaluation reports are also secret.
+
+As attention has been focused the world-over on EVMs, the Dutch parliament has 
+begun to reevaluate its use of EVMs.  Changes to the current systems are likely 
+to be mandated soon, particularly with respect to voter verifiable paper trails.
+
+The Dutch parliament decided to conduct experiments with the next natural
+technological 
+step in the use of technology for voting: remote voting, using both the 
+internet and the telephone.  The main inspiration is that many things can be 
+done from home these days (e.g., banking), so why not voting?
+
+It is believed by some that such a system will increase voter participation 
+because voting is relatively inconvenient today. Currently, Dutch citizens must 
+take time off to vote because polls are open only during extended business 
+hours (8:00 to 20:00) for a single day of the working week and each individual 
+must vote in a particular location near their home, which might be far from 
+their workplace.
+
+But, given what we know about unreliability and vulnerability of software and 
+networks, do the risks inherent in the introduction of such a system outweigh 
+the benefits?
+
+
+The rest of this paper is organized as follows. 
+Section~\ref{sec:kiezen-op-afstand} presents some background information on the 
+genesis of the KOA project. Past academic work on the system up to the end of 
+2005 is presented in Section~\ref{sec:academic-past-work}. Current work is 
+discussed in Section~\ref{sec:acad-curr-work}. Future work is considered in 
+Section~\ref{sec:future-work} and Section~\ref{sec:conclusion} concludes.
+
+
+%=====================================================================
+\Section{Kiezen op Afstand (KOA)}
+\label{sec:kiezen-op-afstand}
+
+The genesis of KOA stemmed from a promise made by the Dutch government to 
+parliament that they would investigate possible developments to the Dutch 
+voting system. This promise was fulfilled in the KOA experiment (i.e., 
+expatriates were allowed to vote in the elections to the European Parliament 
+via the Internet and by telephone).
+
+However, the Dutch national election law is quite explicit with regard to what
+it 
+permits and on what it does not permit with respect to the manner in which votes may
+be cast. Therefore, in order to conduct an experiment in voting over the
+Internet, some 
+amendments to this general law were formulated in order to legalise such an 
+election. This formed the legal foundation for the KOA project. 
+
+Apart from the general rules governing Internet voting, it also included some 
+additional rules detailing a citizen's right to vote from a different polling 
+booth other than the one originally appointed. However, in this paper we will 
+refer to the KOA project as if it consisted purely as an Internet 
+voting experiment.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{Internet Voting in \NL}
+
+The elections to the European Parliament of June 2004 allowed remote voting via 
+the Internet and telephone.  It was limited to 
+expatriates who were required to explicitly register beforehand.  It was thought that such
+a small-scale use (thousands of voters) would provide a useful real-world test 
+for the technology.
+
+The main reason why it was thought that an Internet-based solution was suitable 
+is decidedly non-technical.  Essentially, by significantly constraining the 
+remote voting problem, particularly with respect to the registration and voting 
+process itself, it was believed that a ``sufficiently secure'' and reliable
+system 
+could be constructed.  In particular, the system needed to be at least as 
+secure and reliable as the existing remote voting system which was based upon 
+paper mail.
+
+%---------------------------------------------------------------------
+\SubSubSection{The Remote Voting Process}
+
+When a citizen registers to use remote voting, the voter chooses their own 
+personal access code (a PIN). Some time later, a customized information packet 
+is mailed to the voter. This packet contains general information about the vote 
+itself (date, time, etc.), and also voter-customized details that are known to 
+only that voter. These details include information for voter authentication, 
+including an identification code and the previously chosen access code.
+
+Also included is a list of all candidates. Each candidate is assigned a large 
+set of unique random numbers, and exactly one of those numbers is given to each 
+voter. The set of codes per voter is determined randomly but is not unique.
+
+To vote, a registered voter logs in to a web site with their voter code and 
+access code. They then step through a series of simple web pages, typing in 
+their candidate codes as appropriate for their choices. The system shows the 
+voter the actual names and parties of the candidates in question to confirm the 
+accuracy of the vote. When a voter is finished, a transaction code is provided. 
+This code can later be used to check that the voter's choices were included 
+correctly in the final tally for the election.
+
+Communication with the voting web site is secured with SSL. All votes are 
+stored in a doubly-encrypted fashion; each vote is encrypted by a symmetric key 
+per voter and a public key of the voting authority. Only a small number of 
+appropriate voting officials have the corresponding private key and know its 
+passphrase.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{Use and GPL Release} %Joe/Martijn/Engelbert/Alan/Fintan
+
+The trial during the European Parliamentary Elections in June, 2004 was 
+restricted to roughly 16,000 Dutch expatriates. Expatriates could vote either 
+via the Internet or by telephone. The telephone votes were fed into the KOA 
+tally system. 5,351 people used one or other system.
+
+Subsequently, in July 2004, the Dutch Government released the majority of the 
+source code for the KOA system under the GNU General Public Licence (GPL) 
+making it the first Open Source Internet voting system in the world.
+%=====================================================================
+\Section{Academic Past Work}
+\label{sec:academic-past-work}
+
+Three research groups have now worked on the KOA system: the Radboud University 
+Nijmegen in the Netherlands, Concordia University in Canada, and University 
+College Dublin in Ireland.  The work, which has both research and development 
+aspects, is summarised in this section.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{At Radboud University Nijmegen}
+
+Several pieces of work were accomplished in Nijmegen in 2004 and 2005.
+This work included participating in an expert panel, performing a
+network security evalution, and the development of a vote counting
+system with formal methods.
+
+%---------------------------------------------------------------------
+\SubSubSection{External Security Evalution} % Joe/Martijn/Engelbert/Alan/Fintan
+
+In late 2003 Prof. Bart Jacobs of the SoS group participated in an
+external review of the requirements and design of this
+application. One of the recommendations made by the panel was that the
+system should not be designed, implemented and tested all by the same
+company.
+
+The system itself was designed and implemented by LogicaCMG.  Although
+eventually the government decided to make the system open source,
+during implementation it was not.  In order to improve its quality, the
+Dutch company Software Improvement Group~\cite{SIG} performed a
+code review of the system. However, they were only allowed to do this after
+signing some Non-Disclosure Agreemenets (NDAs).  In fact it was quite surprising
+that the government ultimately opted for an Open Source solution.
+
+The SoS group did not taken part in the design or implementation of the system. 
+However, this group took an active part in the final stages of the project. The 
+group performed two tasks: it wrote an independent tally application which will 
+be explained in detail in Section~\ref{subsubsec:vote-counting-system} and it 
+has performed a penetration test on the vote servers which will be explained in 
+this section.
+
+This penetration test was set up as a black box test.  In particular
+the SoS group had hardly any knowledge about the actual hardware,
+software, networks or personnel involved with the server system.  
+Indeed, the information it did possess, could have been considered public
+information since it could easily be obtained by standard available analysis
+tools.
+
+The main goal was to break into the system and try to compromise its integrity. 
+The second goal was to test whether the system was vulnerable to denial of 
+service attacks.  Because of the limited added value of this work with respect 
+to this paper, we will not describe all the details but only report the main 
+conclusions.  These conclusions were positive. It turned out that their systems 
+were adequately hosted, monitored and configured.  Their software was 
+up-to-date.  No unnecessary services were run.  And adequate measures were in 
+place for detecting basic probes by adversaries.  The aforementioned primary goal 
+was not achieved: the system was not be compromised.  However, the system was 
+very easily paralysed by a denial of service attack.  However, it was noted that 
+this problem is virtually impossible to prevent completely.  In particular the SoS 
+group did not find any problem with the system that would have given reason to
+the Dutch Ministry to reject it.
+
+%---------------------------------------------------------------------
+\SubSubSection{Vote Counting System} % Joe/Martijn/Engelbert/Alan/Fintan
+\label{subsubsec:vote-counting-system}
+
+As seen in the previous section, one of the results
+of the recommendation to split the responsibilities of the parties involved, was that
+the government decided to accept bids for 
+the creation of a separate vote counting subsystem, to be implemented in 
+isolation by a third party. This separate tally application would allow the 
+vote counting to be independently verified. The SoS group put forward a 
+proposal to write this application, and were successful in this bid. The key 
+idea behind their tender was that the vote counting program should be formally 
+verified using JML~\cite{BurdyEtal05-STTT} and the ESC/Java2~\cite{KiniryCok04} 
+tools.
+
+The vote counting system formed a small but important part of the whole KOA 
+system. This provided the SoS group with a suitable opportunity to test the use 
+of some of the formal techniques and practices that they had been developing. 
+The application was built by three members of the group over a four week 
+period, given the severe time constraints placed upon them due to the impending 
+election. Java was chosen as the programming language in which to implement the 
+system so that JML could be used as the formal specification language. Due to the time 
+constraints, verification was only attempted with the core modules.
+
+Counting votes within KOA proceeds offline using a seperate tally application. 
+The input to this application consists of two XML files (one containing the 
+list of candidates and their codes, and one containing the encrypted votes), 
+and a public/private keypair used to decrypt the votes.
+
+As the informal requirements of vote-counting are obvious (for every candidate 
+in the candidate list count the number of votes for that candidate), the 
+functional specification~\cite{KOAspec} (in Dutch) mostly prescribes details of 
+file formats and encryption algorithms to be used.
+
+Nevertheless, the functional specification does impose some requirements that 
+greatly influence the structure of the Java application and its JML 
+specification developed at Radboud University. First, the different tasks that 
+need to be performed in order to count the votes (reading in the two files, 
+reading in the keys, decrypting the contents of the votes file, counting the 
+votes, generating reports) are made explicit in this document and, more 
+importantly, the order in which they have to be performed is specified. Second, 
+the document provides a rough sketch of the user interface and its contents. 
+Finally, the document gives some bounds on the data, such as the lengths of 
+fields or the maximum number of candidates in each list, which are incorporated 
+in the JML specifications of the data structures.
+
+%% How important is the following - Alan?
+% It transpired that the order of performing the tasks, had some negative 
+% influence on the overall performance. Since the functional specification 
+% demanded separate sequences for reading, decrypting and counting the votes, the 
+% intermediate results needed to be stored for a longer period than was strictly 
+% necessary.
+%% DONE: Engelbert has checked this with the functional specs: it is OK.
+
+%% Structure of the application -- martijno
+
+In accordance with the above high-level specification, the resulting tally 
+application consists of some 30 classes, which can be grouped into three 
+categories: the data structures, the user interface, and the tasks.
+
+The data structure classes form an excellent opportunity to write JML 
+specifications. Typical concepts from the world of voting, such as candidate, 
+district and municipality can be provided with detailed JML specifications.
+
+The different tasks associated with counting votes were mapped to individual 
+classes. After successful completion of a task, the application state is 
+changed. A task can only be started if the application is in an appropriate 
+state. The life-cycle model of the application that therefore emerges is 
+maintained in the main class of the application inside a simple integral field. 
+This life-cycle model can be specified in JML using invariants and constraints, 
+essentially stating that on successful completion of the application, the 
+application went from ``initial state'' to ``votes counted state''. The state 
+of attributes associated with the individual tasks can be linked to the 
+application life-cycle state using invariants. For instance, such an invariant 
+could read: `after the application reaches the ``keys imported state'', the 
+private key field is no longer null'.
+
+A graphical user interface is usually not very amenable to formal 
+specification. Nonetheless, some light-weight specifications were written. One 
+of the requirements defined in the original informal specification was that 
+users should not be allowed to start certain tasks before certain other tasks 
+are succesfully completed. For instance, a user should (by means of the user 
+interface) not be able to start decrypting votes before the votes are read in 
+from file. In the graphical user interface, this demand is met by only enabling 
+certain buttons when the application reaches certain states in the life-cycle 
+model. The fact that the graphical user interface complies with the life-cycle 
+model can be neatly specified in the GUI classes by referring to the 
+application state.
+%---------------------------------------------------------------------
+\SubSubSection{Process} % Joe/Martijn/Engelbert
+
+As already stated, ESC/Java2 was only used to verify the core of the tally 
+application. This means that it was used for reading in the XML-files with the 
+candidates and the votes, for decrypting the votes and for counting the votes. 
+The final generation of the reports is not checked with JML.
+
+Using JML on reading XML files is quite straightforward. Essentially, for every 
+object that is read, some methods are called that specify that the total number 
+of objects will be increased by exactly one. Naturally, in order to verify code 
+that uses functionality provided in external libraries, some of the 
+corresponding APIs must also be specified. The JML community has provided 
+specifications for most of the APIs that come with Sun's standard edition of 
+Java. However, APIs dealing with cryptography, XML parsing, and PDF generation, 
+as used by the tally application had not previously been specified. These APIs 
+were specified in a light-weight manner: the specifications mostly deal with 
+purity and non-null references in the API methods which makes verification of 
+client code using ESC/Java2 much easier.
+
+Naturally, the counting process is likewise formally specified in JML, which  
+ensures that each valid vote is counted for exactly one candidate. This also 
+implies that specifications are easy to check to make sure that the total 
+number of votes a party list gets, is equal to the sum of votes for each 
+candidate (including the `blanco' or `blank ballot' candidate) on this party
+list.
+
+The JML run-time assertion checker was also used in the development process. 
+First, for testing the data structure classes, the checker was used to generate 
+unit tests. Second, we ran the full application, including user interface, 
+using the checker. Obviously this made the application very, very slow to the 
+point of non-usability.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{At Concordia University}
+
+%---------------------------------------------------------------------
+\SubSubSection{Analysis of KOA} % Patrice
+In the Dependable Software Research Group at Concordia University, the KOA 
+source code was used as a subject of a study in the frequency of occurrences of 
+non-null reference type declarations \cite{ChalinRioux05}. This work consisted 
+in adding nullity annotations (or constraints) and then verifying their 
+correctness by making use of ESC/Java2.  The results were similar to those of 
+F{\"a}hndrich and Leino \cite{fahndrich03declaring}, that is to say, it was 
+found that even a simple specification exercise of adding nullity annotations 
+can help uncover non-trivial bugs both in the code and in the specifications.
+
+For example, in the \texttt{sos.koa.CounterAdapter} class in the Tally 
+Application it was found that the field named \texttt{errors} is declared 
+nullable and yet the method \texttt{getErrors}, which uses this field, assumes 
+that the field is non-null (a \texttt{NullPointerException} will be thrown).
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{At University College Dublin}
+After working on the KOA system in Nijmegen, Joe Kiniry moved to a new position 
+at University College Dublin and continued to work on the system there with a 
+number of his students.  This work included developing a full FLOSS (Free/Libre 
+Open Source Software) version of KOA, performing a detailed code and 
+specification review of the Radboud Vote Counting application discussed in 
+Section~\ref{subsubsec:vote-counting-system}, and developing a formal 
+specification of the (non-trivial) Irish vote counting system.
+%---------------------------------------------------------------------
+\SubSubSection{Reverse Engineering Missing Components} % Alan/Joe
+The version of KOA released under the GPL was not complete. A number of pieces 
+of functionality, constituting roughly 10\% of the deployed KOA system, were 
+proprietary and owned by LogicaCMG. Moreover, certain other changes were made 
+for publication purposes (e.g., the length of Public/Private Key pairs).
+
+In addition, the released KOA system contains no high-level design 
+documentation and very little information on how to build the system. This 
+means that it is only possible to inspect the (partial) source, not to compile 
+and run it. Therefore, it was necessary to perform a full analysis of the 
+released system\cite{Morkan05}.
+
+One of the most beneficial aspects of this analysis was that errors were found 
+in the KOA system. One such error was found in the Java Server Pages (JSPs) whereby a
+button that 
+should have guided the user back to the interface homepage had, in fact, the
+same action as that of the ``submit'' button that processed and saved a list of 
+candidates to the database. This was due a trivial mistake: placing the HTML 
+tags for the ``Return Home'' button within the ``FORM'' tag block. Such a 
+basic mistake in the design of the user interface of a 
+critical system is unacceptable. The fact that such a mistake could be made, remain
+unnoticed in
+the testing and evaluation phase of the software, and actually be used in the 
+elections to the European Parliament, would suggest that there is in all 
+likelihood further errors in this software.
+
+Once the analysis was complete, it was possible to reverse engineer the missing 
+functionality. 59 additional classes together with a some properties files were 
+added to the system. These classes carry out the base functionality of the 
+servlets, error reporting, logging functionality, event handling, etc. as well 
+as additonal classes, automatically generated by the IBM WebSphere IDE, which 
+consist of persistence and container EJB modules.
+
+%---------------------------------------------------------------------
+\SubSubSection{Full Open Source Foundations} % Alan/Joe
+\label{subsubsec:full-open-source}
+
+One of the major goals in the redevelopment of the KOA system was that it would 
+be entirely composed of, and dependent upon, Open Source software.  The 
+original system was developed in, deployed upon and tightly coupled to the IBM 
+WebSphere IDE.  During the reimplementation, the KOA system was ported to an 
+Open Source alternative.  This foundation consisted of a MySQL 
+database server backend, twinned with a JBoss application server front-end 
+which incorporated the Tomcat servlet container.  The other major restriction 
+in terms of making the system fully GPL-compliant was its use of proprietary 
+security and encryption utilities developed by IAIK and Sun.  These were 
+seamlessly replaced using the BouncyCastle Open Source alternatives.
+
+%---------------------------------------------------------------------
+\SubSubSection{Formal Specification and Extended Static Checking Review} % Fintan/Alan
+
+As has already been stated, the Tally Application of the KOA system was 
+specified with formal methods, extensively tested and partially verified to the 
+extent that was possible within the given timeframe. Subsequently, efforts were 
+made to complete the specification and verification\cite{Fairmichael05}.
+
+When the KOA vote counting system was being designed, precedence was given to 
+verifying the core units. These were designed by contract and as result have 
+good specification coverage. The remaining parts, however, were only lightly 
+annotated with JML notation.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline & {\bf File I/O } & {\bf Graphical I/O} & {\bf Core} \\ \hline Classes & 
+8 & 13 & 6 \\
+
+Methods & 154 & 200 & 83 \\
+
+NCSS & 837 & 1599 & 395 \\
+
+Specs & 446 & 172 & 529 \\
+
+Specs:NCSS & 1:2 & 1:10 & 5:4\\ \hline
+\end{tabular}
+\end{center}
+\caption{KOA initial release system summary}
+\label{table}
+\end{table}
+
+Table~\ref{table} summarizes the size (in number of classes and methods), 
+complexity (non-comment size of source (NCSS)), and specification coverage of 
+the three subsystems, as measured with the JavaNCSS tool version 20.40 during 
+the week of 24 May, 2004. This is the version of the program that was released 
+and used in the elections to the European Parliament in June 2004.
+
+At the time of its initial release, verification coverage of the core subsystem 
+was good, but not 100\%. Approximately 10\% of the core methods (8 methods) 
+were unverified due to issues with ESC/Java's Simplify theorem prover (i.e., 
+either the prover did not terminate or terminated abnormally). Another 31\% of 
+the core methods (26 methods) had postconditions that could not be verified, 
+typically due to completeness issues in ESC/Java, and 12\% of the methods (10 
+methods) failed to verify due to invariant issues, most of which are due to 
+suspected inconsistencies in the specifications of the core Java class 
+libraries or JML model classes. The remaining 47\% (39 methods) of the core 
+verified completely. Since 100\% verification coverage was not possible in the 
+timeframe of the original project, to ensure the KOA application was of the 
+highest quality level possible, a large number unit tests were generated with 
+the jmlunit tool (part of the JML suite) for all core classes. A total of 
+nearly 8,000 unit tests were generated, focusing on key values of the various 
+datatypes and their dependent base types. These tests cover 100\% of the core 
+code and are 100\% successful.
+
+After this analysis was completed, the specifications were 
+gradually augmented. As an example, consider the \texttt{AuditLog} class. This 
+class records information about the vote counting as the application proceeds. 
+This information is then used at the end of the vote counting to help fill in 
+the details for two of the reports that are generated. This class keeps track 
+of the program's progress in a similar manner to that which was used for the 
+overall program state. There were multiple invariants used to ensure the 
+program and auditing proceeded in the correct fashion. Several corrections were 
+required for this class, the bulk of which were modifications to the behaviours 
+of the methods that allowed the audit log's state to change. The original 
+specifications allowed the possibility of the variables to be changed to a 
+state where the invariants would not hold. The changes made to this class' 
+specifications disallowed any actions that would violate the object invariants.
+
+%---------------------------------------------------------------------
+\SubSubSection{Documentation Writing and Translation} % Alan/MartijnW
+\label{subsubsec:docum-writ-transl}
+
+The vast majority of the voting system, including high-level documentation, web 
+interfaces, Java comments and variable names are in Dutch. Furthermore, much of 
+the voting system is sparsely commented and unspecified. This clearly poses an 
+obstacle to the understanding and adoption of such a system by a wider, 
+international audience. It was therefore decided at an early stage that a 
+complete translation of the 
+system into an international language such as English, together with the
+production of additional documentation, was necessary 
+in order to facilitate a larger number of people to carry out the necessary 
+specification, development and testing. Consequently, the major high-level 
+specification document and all of the JSPs have been translated from Dutch into 
+English.
+
+%---------------------------------------------------------------------
+\SubSubSection{Other Voting Systems} % Dermot
+\label{subsubsec:other-voting-systems}
+
+Not only are there language differences, but there are different vote counting 
+systems in \NL and in Ireland. The Dutch Voting system is list based while the
+Republic of
+Ireland uses Proportional Representation with a Single Transferable Vote.
+
+\paragraph{The Irish Voting System.} % Dermot/Joe
+
+The D{\'a}il, Ireland's lower house of parliament, is composed of 166 members 
+representing 41 constituencies. Each constituency elects multiple members to 
+parliament. The average constituency elects four representatives; every 
+constituency elects at least three representatives. The Irish electoral system 
+uses proportional representation and transferable votes. This combination 
+increases the representativeness of the D{\'a}il.
+
+Irish voters, by ranking the candidates, give instructions as to who should 
+receive their support should the first choice candidate be eliminated or 
+elected. Surplus votes are the number of votes in excess of the threshold of 
+election a candidate receives. Surplus votes are transferred proportionally to 
+the remaining candidates according to the indicated second preference of the 
+voters. If the election is undecided after counting the first preferences and 
+transferring surplus votes, then the lowest polling candidate is eliminated. 
+The ballots cast initially in support of this candidate are now counted 
+according to their indicated second preference. If any candidate has more than 
+a quota of votes then he or she is elected and his or her surplus votes are 
+transferred to the next preference candidate.  If there are more candidates 
+than seats and all surpluses have been transfered, then the candidate with 
+least votes is excluded and his or her votes transfered to the next preference 
+on each ballot paper.  This process is repeated until the number of candidates 
+remaining equals the number of seats remaining.
+
+%---------------------------------------------------------------------
+\paragraph{Formal Specification.} % Dermot/Joe
+
+\Votail is the Irish word for Voting.  The \Votail specification is a JML 
+specification for the Irish vote counting system~\cite{Cochran06}.  This formal 
+specification is derived from the complete functional specification for the 
+D{\'a}il election count algorithm~\cite{CEV00,CEV02}.
+
+Thirty Nine formal assertions were identified in the Commentary on Count Rules 
+published by the Irish Department of Environment and Local Government. Each 
+assertation expressed in JML was identified by a Javadoc comment. In addition, a 
+state machine was specified so as to link all of the assertations together. 
+Java classes were specified for the vote counting algorithm, to represent the 
+ballot papers and to represent the candidates. A concrete example of how the 
+methodology was applied will clarify this work.
+
+Section 7, item 3.2 on page 25 of~\cite{CEV00} states:
+\begin{quote}
+As a first step, a transfer factor is calculated, viz. the number of votes in 
+the surplus is divided by the total number of transferable votes in the last 
+set of votes. This transfer factor is multiplied in turn by the total number of 
+votes in each sub-set of next available preferences for continuing candidates 
+(note that the transfer factor is not applied to the sub-set of 
+non-transferable votes in the set of votes).
+\end{quote}
+
+The requirement is translated into formal natural language as follows:
+\begin{quote}
+  The number of votes in the surplus is divided by the total number of
+  transferable votes in the last set of votes. This transfer factor is
+  multiplied in turn by the total number of votes in each sub-set of
+  next available preferences for continuing candidates.
+\end{quote}
+
+Finally, this formal natural language is formally specified in the
+architecture as a JML postcondition for the method that is
+specifically for this requirement (the \texttt{getActualTransfers}
+method).  The Javadoc for this method follows.
+
+\footnotesize
+\begin{verbatim}
+/**
+ * Determine actual number of votes to transfer to 
+ * this candidate, excluding rounding up of 
+ * fractional transfers
+ *
+ * @see requirement 25 from section 7 item 3.2 
+ * on page 25
+ *
+ * @design The votes in a surplus are transfered in 
+ * proportion to the number of transfers available 
+ * throughout the candidates ballot stack.  The 
+ * calculations are made using integer values 
+ * because there is no concept of fractional votes 
+ * or fractional transfer of votes, in the existing 
+ * manual counting system. If not all transferable 
+ * votes are accounted for the highest remainders 
+ * for each continuing candidate need to be examined.
+ *
+ * @param fromCandidate Candidate from which to 
+ *        count the transfers
+ * @param toCandidate Continuing candidate eligible 
+ *        to receive votes
+ * @return Number of votes to be transfered, 
+ *         excluding fractional transfers
+ */
+//@ ensures 
+//@  \\result == 
+//@     (getSurplus(fromCandidate) * 
+//@      getPotentialTransfers(fromCandidate, 
+//@         toCandidate.getCandidateID()) /
+//@      getTotalTransferableVotes(fromCandidate);
+\end{verbatim}
+\normalsize
+
+The \Votail specification was typechecked and checked for soundness using 
+ESC/Java2.
+
+%=====================================================================
+\Section{Academic Current Work}
+\label{sec:acad-curr-work}
+
+%---------------------------------------------------------------------
+\SubSubSection{Generalisation of System for non-Dutch Voting Systems} 
+%Joe/Dermot/Alan
+\label{subsubsec:gener-syst-non}
+
+The Java code for \Votail was written in JML using a kind of 
+``verification-centric'' Design by Contract methodology.  This means that not 
+only are we writing each method implementation according to its JML 
+specification, but we are checking each method's correctness with ESC/Java2 and 
+automatically generating thousands of unit tests using 
+JMLUnit~\cite{Cheon-Leavens02}.
+
+The KOA system has a state machine similar to that used in the \Votail 
+specification.  This allows KOA to make calls to the appropriate part of the 
+\Votail code.  The \texttt{ElectionAlgorithm} class in \Votail will be invoked 
+from within the KOA system using the following four method calls: 
+\texttt{setup}, which defines election parameters such as candidate list and 
+number of seats, \texttt{load}, which loads all valid ballots and then 
+calculate quota and deposit saving thresholds, \texttt{count}, which assign 
+votes to candidates, distribute surpluses and exclude candidates until finished, and \texttt{report}, which reports the election results.  These methods 
+must be called in the order shown, and this fact is captured by the invariants 
+of the state machine.  Only the \texttt{report} method is called more than once 
+for each instance of the \texttt{ElectionAlgorithm} class.
+
+The user interface is being designed in a flexible fashion so as to present 
+non-Dutch ballot papers to the voter.  The original KOA system was designed for 
+use with a party-list system with a single national constituency.  Its user 
+interface is being extended in line with the guidelines for the Irish voting 
+system.  The KOA system allows the voter to select a list of candidates; in the 
+Irish system each candidate is in a list of one.  The KOA system allows only 
+one selection by the voter; in the Irish system. the voter makes multiple 
+selections in order of preference.
+
+%=====================================================================
+\Section{Future Work}
+\label{sec:future-work}
+
+Several pieces of future work have been identified and some of them
+are currently underway by researchers at UCD.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{Specification of Security Properties} % Joe/Alan
+
+The EU Mobius Project~\cite{MOBIUS}, of which UCD and Nijmegen are
+both members, focuses on several topics including the specification
+and verification of security properties at several levels.
+
+The domain of voting provides an excellent case study for security as a
+relatively small number of concrete security properties are embodied
+in such a system.  We intend to identify these properties, formally
+specify them at a high-level in a domain specific language, and
+provide a methodology, both theoretical and practical, for translating
+such high-level specifications into concrete, low-level specifications
+and type-annotations so that we can formally verify these properties
+in KOA.
+
+Additionally, a MIDP-based remote voting applet has been developed at
+UCD by a final year student this year.  We intend to review this
+application for possible incorporation into KOA, using the same
+verification-centric approach used in the rest of the KOA work.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{Full-blown Verification} % Joe/Alan
+
+We intend to fully specify and verify critical subsystems of the KOA
+system as a case study for the new MOBIUS Integrated Verification
+Environment (IVE) that is being developed by UCD and others.
+
+This goal is much more ambitious than simply performing extended
+static checking on various critical classes.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{Just-in-Time Deployment with PCC} % Joe/Alan
+
+One of the primary problems with electronic voting systems is that new
+software updates, at both operating system and application levels, are
+typically installed in the field without any certification.  One
+technology that can help solve this deployment issue is Proof-Carrying
+Code (PCC)~\cite{Necula97}, the primary underlying formal foundation
+and technology used by the MOBIUS IVE.
+
+Using a PCC technology foundation, new system and application patches
+could be just-in-time deployed to the thousands of voting machines
+used in an election with complete assurance.  Developing such a
+foundation is part of the MOBIUS project's mandate, so the KOA system
+may be used as a deployment case study in the coming years.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{American Voting System} % Joe/Alan
+
+The American voting system is the focus of an intense amount of
+discussion and work, given the ongoing fiasco in electronic voting we
+have witnessed in the U.S. over the past several years.
+
+After integrating the \Votail Irish voting subsystem, we intend on
+formally specifying and verifying an American presidential voting
+subsystem using the same verification-centric methodology we have
+followed thus far.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\SubSection{Electronic Voting Systems} % Joe/Alan
+
+A voting-system independent, formally specified and verified remote
+voting system can be used in an electronic voting system, as the
+latter is just a trivial version of the former.  It is our intention
+to build and demonstrate such a system, incorporating a new formally
+specified and verified voter-verifiable paper trail subsystem.
+
+%=====================================================================
+\Section{Conclusion} % Joe/Alan
+\label{sec:conclusion}
+
+While integrating the \Votail subsystem into the KOA system, and prior 
+to/during the new full FLOSS foundation release of KOA as discussed in 
+Section~\ref{subsubsec:full-open-source}, a number of new pieces of English 
+documentation and functional specification must be written. We hope that the 
+availability of such documentation and specification will provide additional 
+motivation for electronic and remote voting researchers and developers to 
+seriously consider the KOA system as a foundation for their work.
+
+The availability of an American voting subsystem will make KOA the
+first formally specified and verified remote and local voting system
+available in the world, and furthermore it will be available under the
+GPL license.  It is unclear how to compare such a system to the
+current commerical and FLOSS voting systems being proposed by others,
+given that none of them, to our knowledge, even write formal
+specifications, let alone perform verification.
+
+%=====================================================================
+\Section{Acknowledgments}
+
+This work is being supported by the European Project Mobius within the frame of 
+IST 6th Framework, national grants from the Science Foundation Ireland and 
+Enterprise Ireland and by the Irish Research Council for Science, Engineering 
+and Technology.  This paper reflects only the authors' views and the Community 
+is not liable for any use that may be made of the information contained therein.
+
+
+%======================================================================
+%% \nocite{ex1,ex2}
+\bibliographystyle{latex8}
+%\bibliography{abbrev,ads,category,complexity,hypertext,icsr,knowledge,languages,linguistics,meta,metrics,misc,modeling,modeltheory,reuse,rewriting,softeng,specification,ssr,technology,theory,web,upcoming,upcoming_conferences,conferences,workshops,verification,escjava,jml,nijmegen}
+% \bibliography{icse04}
+\bibliography{koa}
+%======================================================================
+% Fin
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

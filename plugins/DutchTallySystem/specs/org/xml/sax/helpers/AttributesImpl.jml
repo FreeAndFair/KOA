@@ -1,0 +1,107 @@
+/*
+ * @(#)AttributesImpl.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Engelbert Hubbers (hubbers@cs.kun.nl)
+ */
+
+package org.xml.sax.helpers;
+
+import org.xml.sax.Attributes;
+
+public class AttributesImpl extends Object implements Attributes
+{
+
+/*@ pure @*/ public AttributesImpl();
+
+/*@ pure @*/ public AttributesImpl(Attributes atts);
+
+/*@ pure @*/ public int getLength();
+
+/*@ pure @*/ public String getURI(int index);
+
+/*@ pure @*/ public String getLocalName(int index);
+
+/*@ pure @*/ public String getQName(int index);
+
+/*@ pure @*/ public String getType(int index);
+
+/*@ pure @*/ public String getValue(int index);
+
+/*@ pure @*/ public int getIndex(String uri,
+                    String localName);
+
+/*@ pure @*/ public int getIndex(String qName);
+
+/*@ pure @*/ public String getType(String uri,
+                      String localName);
+
+/*@ pure @*/ public String getType(String qName);
+
+/*@ pure @*/ public String getValue(String uri,
+                       String localName);
+
+/*@ pure @*/ public String getValue(String qName);
+
+public void clear();
+
+public void setAttributes(Attributes atts);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void addAttribute(String uri,
+                         String localName,
+                         String qName,
+                         String type,
+                         String value);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setAttribute(int index,
+                         String uri,
+                         String localName,
+                         String qName,
+                         String type,
+                         String value)
+                         throws ArrayIndexOutOfBoundsException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void removeAttribute(int index) throws  ArrayIndexOutOfBoundsException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setURI(int index,
+                   String uri) throws ArrayIndexOutOfBoundsException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setLocalName(int index,
+                         String localName) throws ArrayIndexOutOfBoundsException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setQName(int index,
+                     String qName) throws ArrayIndexOutOfBoundsException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setType(int index,
+                    String type) throws ArrayIndexOutOfBoundsException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setValue(int index,
+                     String value) throws ArrayIndexOutOfBoundsException;
+}

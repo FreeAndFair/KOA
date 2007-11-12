@@ -1,0 +1,365 @@
+<project name="koa" default="all" basedir=".">
+
+  	<property file="${basedir}/build.properties"/>
+  	<property name="src.dir"       	value="${basedir}/src"/>
+  	<property name="build.dir"     	value="${basedir}/bin"/>
+  	<property name="java_home"	 	value="/usr/java/j2sdk1.4.2_09"/>
+
+	<path id="classpath">
+		<fileset dir="${java_home}/lib">
+    		<include name="*.jar"/>
+	  	</fileset>
+		<fileset dir="${basedir}/jar">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${java_home}/jre/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path> 
+  
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+	
+  	<target name="prepare">
+    	<mkdir dir="${build.dir}"/>
+    	<mkdir dir="${build.dir}/jar"/>
+  		<mkdir dir="${build.dir}/war"/>
+  		<mkdir dir="${build.dir}/ear"/> 
+  	</target>
+
+	<target name="package-esb-entity">
+		<delete file="${build.dir}/jar/KOAESBEntity.jar"/>
+    	<copy file="${basedir}/META-INF/KOAESBEntity.xml" tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+    	<copy file="dd/esb-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+  		<jar jarfile="${build.dir}/jar/KOAESBEntity.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     	  		<include name="${build.dir}/ie/ucd/srg/koa/esb/beans/*"/>
+     	  		<include name="ie/ucd/srg/ibm/ejs/container/**"/>
+				<include name="ie/ucd/srg/ejs/persistence/**"/>
+   	  	</fileset>
+  		</jar>
+	</target>
+
+	<target name="package-esb-session">
+		<delete file="${build.dir}/jar/KOAESBSessionEJB.jar"/>
+		<copy file="${basedir}/META-INF/KOAESBSessionEJB.xml" tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+    	<copy file="dd/esb-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+		<jar jarfile="${build.dir}/jar/KOAESBSessionEJB.jar">
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     		  	<include name="ie/ucd/srg/koa/esb/beans/**"/>
+				<include name="ie/ucd/srg/koa/**/**"/>
+     		  	<include name="ie/ucd/srg/ejs/container/**"/>
+     		</fileset>
+  		</jar>
+	</target>
+
+	<target name="package-controller-entity">
+		<delete file="${build.dir}/jar/KOAControllerEntityEJB.jar"/>
+   	<copy file="${basedir}/META-INF/KOAControllerEntityEJB.xml" tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+		<copy file="dd/controller-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+	 	<jar jarfile="${build.dir}/jar/KOAControllerEntityEJB.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     		  	<include name="ie/ucd/srg/koa/controller/beans/*Koa*.class"/>
+				<include name="ie/ucd/srg/ejs/container/**"/>
+				<include name="ie/ucd/srg/ejs/persistence/**"/>
+				<include name="ie/ucd/srg/koa/scheduler/XMLProperties.class"/>
+	 	  	</fileset>
+  		</jar>
+	</target>
+
+	<target name="package-controller-session">
+		<delete file="${build.dir}/jar/KOAControllerSessionEJB.jar"/>
+    	<copy file="${basedir}/META-INF/KOAControllerSessionEJB.xml" tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+    	<copy file="dd/controller-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+	 	<jar jarfile="${build.dir}/jar/KOAControllerSessionEJB.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     		  	<include name="ie/ucd/srg/koa/controller/beans/*Controller*.class"/>
+				<include name="ie/ucd/srg/koa/controller/subscription/ClientSubscription.class"/>
+				<include name="ie/ucd/srg/koa/**/**"/>
+				<include name="ie/ucd/srg/ejs/container/**"/>
+				<include name="ie/ucd/srg/logica/eplatform/error/ErrorMessageFactory.class"/>
+ 	  		</fileset>
+	  	</jar>
+	</target>
+
+	<target name="package-databeheer-session">
+		<delete file="${build.dir}/jar/KOADatabeheerSessionEJB.jar"/>
+   	<copy file="${basedir}/META-INF/KOADatabeheerSessionEJB.xml" tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+		<copy file="dd/databeheer-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+		<jar jarfile="${build.dir}/jar/KOADatabeheerSessionEJB.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     		  	<include name="ie/ucd/srg/koa/databeheer/ejb/session/**"/>
+      		<include name="ie/ucd/srg/ejs/container/**"/>
+				<include name="ie/ucd/srg/logicacmg/koa/**/**"/>
+				<include name="ie/ucd/srg/logica/eplatform/error/ErrorMessageFactory.class"/>
+				<include name="ie/ucd/srg/logica/eplatform/util/XMLProperties.class"/>
+      	   <include name="ie/ucd/srg/koa/kieslijst/beans/**"/>
+				<include name="ie/ucd/srg/koa/kr/beans/**"/>
+				<include name="ie/ucd/srg/koa/databeheer/data/KiezerData.class"/>
+				<include name="ie/ucd/srg/koa/databeheer/xml/WrongIdWriter.class"/>
+				<include name="ie/ucd/srg/ivj/ejb/associations/interfaces/**"/>
+ 	  		</fileset>
+  		</jar>
+	</target>
+
+	<target name="package-koa-entity">
+		<delete file="${build.dir}/jar/KOAEntityEJB.jar"/>
+		<copy file="${basedir}/META-INF/KOAEntityEJB.xml" 					tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+		<copy file="dd/koa-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+		<jar jarfile="${build.dir}/jar/KOAEntityEJB.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     	  		<include name="ie/ucd/srg/koa/koaschema/**"/>
+      		<include name="ie/ucd/srg/ejs/container/**"/>
+				<include name="ie/ucd/srg/ejs/persistence/**"/>
+			</fileset>
+	  	</jar>
+	</target>
+
+	<target name="package-kieslijst">
+		<delete file="${build.dir}/jar/KOAKieslijstBean.jar"/>
+    	<copy file="${basedir}/META-INF/KOAKieslijstBean.xml" tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+    	<copy file="dd/kieslijst-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+	 	<jar jarfile="${build.dir}/jar/KOAKieslijstBean.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     		  	<include name="ie/ucd/srg/koa/kieslijst/beans/**"/>
+      		<include name="ie/ucd/srg/ejs/container/**"/>
+				<include name="ie/ucd/srg/koa/**/**"/>
+				<include name="ie/ucd/srg/koa/kr/beans/**"/>
+				<include name="ie/ucd/srg/koa/controller/beans/**"/>
+				<include name="ie/ucd/srg/logica/eplatform/error/ErrorMessageFactory.class"/>
+ 	  		</fileset>
+	  	</jar>
+	</target>
+
+	<target name="package-kr-entity">
+		<delete file="${build.dir}/jar/KOAKREntityEJB.jar"/>
+    	<copy file="${basedir}/META-INF/KOAKREntityEJB.xml" 				tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+    	<copy file="dd/kr-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+	 	<jar jarfile="${build.dir}/jar/KOAKREntityEJB.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     		  	<include name="ie/ucd/srg/koa/kr/beans/**"/>
+     		  	<include name="ie/ucd/srg/ejs/container/**"/>
+				<include name="ie/ucd/srg/ejs/persistence/**"/>
+				<include name="ie/ucd/srg/koa/constants/FuctionalProps.class"/>
+ 	  		</fileset>
+  		</jar>
+	</target>
+
+	<target name="package-sar-entity">
+		<delete file="${build.dir}/jar/KOASAREntityEJB.jar"/>
+    	<copy file="${basedir}/META-INF/KOASAREntityEJB.xml" 					tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+    	<copy file="dd/sar-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+	 	<jar jarfile="${build.dir}/jar/KOASAREntityEJB.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     		  	<include name="ie/ucd/srg/koa/sar/**"/>
+     		 	<include name="ie/ucd/srg/ejs/container/**"/>
+				<include name="ie/ucd/srg/ejs/persistence/**"/>
+ 	 	 	</fileset>
+  		</jar>
+	</target>
+
+	<target name="package-scheduler">
+		<delete file="${build.dir}/jar/KOASchedulerEJB.jar"/>
+    	<copy file="${basedir}/META-INF/KOASchedulerEJB.xml" 					tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+    	<copy file="dd/scheduler-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+	 	<jar jarfile="${build.dir}/jar/KOASchedulerEJB.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     	  	<include name="ie/ucd/srg/koa/scheduler/beans/**"/>
+			<include name="ie/ucd/srg/ejs/container/**"/>
+			<include name="ie/ucd/srg/ejs/persistence/**"/>
+			<include name="ie/ucd/srg/logica/eplatform/error/EPlatformException.class"/>
+			<include name="ie/ucd/srg/koa/**/**"/>		
+ 	  		</fileset>
+  		</jar>
+	</target>
+
+	<target name="package-koa-session">
+		<delete file="${build.dir}/jar/KOASessionEJB.jar"/>
+    	<copy file="${basedir}/META-INF/KOASessionEJB.xml" 					tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+    	<copy file="dd/koa-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+	 	<jar jarfile="${build.dir}/jar/KOASessionEJB.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     		 	<include name="ie/ucd/srg/koa/session/beans/**"/>
+     		  	<include name="ie/ucd/srg/koa/kr/beans/**"/>   
+				<include name="ie/ucd/srg/ejs/container/**"/>
+				<include name="ie/ucd/srg/koa/**/**"/>
+				<include name="ie/ucd/srg/koa/controller/beans/**"/>
+ 	  		</fileset>
+	  	</jar>
+	</target>
+
+	<target name="package-stemproces-session">
+		<delete file="${build.dir}/jar/KOAStemprocesSessionBean.jar"/>
+    	<copy file="${basedir}/META-INF/KOAStemprocesSessionBean.xml" tofile="${build.dir}/ejb-jar.xml" overwrite="true"/>
+    	<copy file="dd/stemproces-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
+	 	<jar jarfile="${build.dir}/jar/KOAStemprocesSessionBean.jar">    
+     		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     		<fileset dir="${build.dir}">
+     		  	<include name="ie/ucd/srg/koa/stemproces/beans/**"/>
+				<include name="ie/ucd/srg/ejs/container/**"/>
+				<include name="ie/ucd/srg/koa/**/**"/>
+				<include name="ie/ucd/srg/koa/kieslijst/beans/**"/>
+				<include name="ie/ucd/srg/koa/esb/beans/**"/>
+		  	</fileset>
+  		</jar>
+	</target>
+
+<!--<target name="package-eplatform-ejb" depends="">
+	<delete file="${build.dir}/jar/ePlatformEJBCore.jar"/>
+   <jar jarfile="${build.dir}/jar/ePlatformEJBCore.jar">    
+     	<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
+     	<fileset dir="${build.dir}">
+			<include name="/ie/ucd/srg/logica/eplatform/**/**"/>  	  	
+ 	  	</fileset>
+  	</jar>
+</target>-->
+
+	<target name="package-ejb" depends="package-esb-entity, package-esb-session, package-controller-entity, package-controller-session, package-kr-entity, package-koa-entity, package-koa-session, package-databeheer-session, package-stemproces-session, package-sar-entity, package-scheduler, package-kieslijst">
+	</target>
+
+	<target name="package-koa-web">
+		<delete file="${build.dir}/war/KOAWeb.war"/>
+     	<copy file="${basedir}/web/voter/WEB-INF/web.xml" tofile="dd/web.xml" overwrite="true"/>
+		<war warfile="${build.dir}/war/KOAWeb.war" webxml="dd/web.xml">
+      	<fileset dir="${basedir}/web/voter/">
+      	   <include name="*.jsp" />
+			   <include name="images/*.gif" />
+			   <include name="KiezerWeb.css" />
+				<include name="WEB-INF/jsp/**" />
+			</fileset>
+			<fileset dir="${basedir}/properties/globalproperties/">
+				<include name="koa_jndi.properties" />
+			</fileset>
+			<fileset dir="${basedir}/web/voter/WEB-INF/jsp/">
+				<include name="*.jsp" />
+			</fileset>
+      	<lib dir="${build.dir}/jar/">
+         	<include name="struts.jar" />
+         	<include name="commons*.jar"/>
+				<include name="bcprov-jdk14-123.jar" />
+			</lib>
+       	<classes dir="${build.dir}/" >
+				<include name="ie/ucd/srg/koa/constants/**" />
+         	<include name="ie/ucd/srg/koa/servlet/**" />
+				<include name="ie/ucd/srg/koa/ticket/**" />				
+				<include name="ie/ucd/srg/koa/eventhandling/**" />
+				<include name="ie/ucd/srg/koa/utils/**" />
+				<include name="ie/ucd/srg/koa/**" />
+				<include name="ie/ucd/srg/logica/eplatform/**" />
+			</classes>
+		</war> 
+	</target>
+
+	<target name="package-voorzitter-web">
+   	<delete file="${build.dir}/war/KOAVoorzitterWeb.war"/>
+   	<copy file="${basedir}/web/voorzitter/WEB-INF/web.xml" tofile="dd/web.xml" overwrite="true"/>
+   	<war warfile="${build.dir}/war/KOAVoorzitterWeb.war" webxml="dd/web.xml">
+   		<fileset dir="${basedir}/web/voorzitter/">
+   			<include name="*.jsp" />
+				<include name="properties/**" />
+   			<include name="images/*.gif" />
+				<include name="*.css" />
+   		</fileset>
+   		<lib dir="${build.dir}/jar/">
+            <include name="struts.jar" />
+        		<include name="commons*.jar"/>
+				<include name="bcprov-jdk14-123.jar" />
+			</lib>
+			<classes dir="${build.dir}/" >
+       		<include name="ie/ucd/srg/koa/ticket/**" />
+        		<include name="ie/ucd/srg/koa/servlet/KOASchedulerServlet.class" />
+       		<include name="ie/ucd/srg/koa/scheduler/Scheduler.class" />
+				<include name="ie/ucd/srg/koa/voorzitter/**" />
+				<include name="ie/ucd/srg/logica/eplatform/**" />
+				<include name="ie/ucd/srg/koa/reportserver/command/**" />
+				<include name="ie/ucd/srg/koa/reportserver/servlet/**" />
+				<include name="ie/ucd/srg/koa/utils/**" />
+				<include name="ie/ucd/srg/koa/eventhandling/**" />
+       	</classes>
+			<classes dir="${basedir}/properties/globalproperties/">
+				<include name="*.properties"/>
+			</classes>
+		</war> 
+	</target>
+
+	<target name="package-databeheer-web">
+		<delete file="${build.dir}/war/KOADatabeheerWeb.war"/>
+		<copy file="web/databeheer/WEB-INF/web.xml" tofile="dd/web.xml" overwrite="true"/>
+		<war warfile="${build.dir}/war/KOADatabeheerWeb.war" webxml="dd/web.xml">
+      	<fileset dir="${basedir}/web/databeheer/">
+      		<include name="*.jsp" />
+	  			<include name="images/*.gif" />
+				<include name="DatabeheerWeb.css" />
+       	</fileset>
+			<fileset dir="${basedir}/properties/globalproperties/">
+				<include name="*.properties" />
+			</fileset>
+        	<lib dir="${build.dir}/jar/">
+         		<include name="struts.jar" />
+         		<include name="commons*.jar"/>
+			</lib>
+       	<classes dir="${build.dir}/" >
+				<include name="ie/ucd/srg/koa/ticket/**" />
+         		<include name="ie/ucd/srg/koa/databeheer/**" />
+				<include name="ie/ucd/srg/logica/eplatform/**" />
+				<include name="ie/ucd/srg/koa/reportserver/servlet/**" />
+				<include name="ie/ucd/srg/koa/reportserver/command/**" />
+				<include name="ie/ucd/srg/koa/eventhandling/**" />
+				<include name="ie/ucd/srg/koa/utils/**" />
+				<!--<include name="ie/ucd/srg/koa/votecommands/**" />-->
+				<include name="ie/ucd/srg/koa/soap/command/**" />
+			</classes>
+		</war> 
+	</target>
+
+	<target name="package-tsm-web">
+   	<delete file="${build.dir}/war/TSMWeb.war"/>
+   	<copy file="${basedir}/web/TSM/WEB-INF/web.xml" tofile="dd/web.xml" overwrite="true"/>
+		<war warfile="${build.dir}/war/TSMWeb.war" webxml="dd/web.xml">
+			<lib dir="${build.dir}/jar/">
+         		<include name="struts.jar" />
+	         	<include name="commons*.jar"/>
+    	   		<include name="axis.jar" />
+        	</lib>
+			<classes dir="${build.dir}/">
+         		<include name="ie/ucd/srg/koa/soap/VSL.class"/>
+	       	</classes>
+			<!--<classes dir="${src.dir}/jar/">
+       			<include name="org/apache/axis/transport/http/*.class"/>
+			</classes>-->
+     	</war>
+	</target>
+
+	<target name="package-web" depends="package-koa-web, package-databeheer-web, package-tsm-web, package-voorzitter-web">
+	</target>
+
+	<target name="assemble-app">
+		<copy file="${basedir}/META-INF/application.xml" tofile="dd/application.xml" overwrite="true"/>
+	   <delete file="${build.dir}/ear/KOA.ear"/>
+		<ear destfile="${build.dir}/ear/KOA.ear" appxml="dd/application.xml">
+			<fileset dir="${build.dir}/jar" includes="KOA*.jar"/>
+			<fileset dir="${basedir}/" includes="users.properties,roles.properties"/>
+			<fileset dir="${build.dir}/war" includes="*.war" />
+      </ear>    
+	</target>
+
+	<target name="deploy" depends="assemble-app">
+	<copy file="${build.dir}/ear/KOA.ear" todir="${jboss.deploy.dir}" overwrite="true"/>
+	</target>
+
+	<target name="all" depends="prepare, package-ejb, package-web, deploy"></target>
+
+</project>
+

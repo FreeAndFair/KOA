@@ -1,0 +1,296 @@
+
+% \paragraph{Formal Diagrams}
+
+% \paragraph{Inheritance}
+
+% \paragraph{Client-Supplier Relationships}
+
+% \paragraph{Scenarios}
+
+% Note how JML expresses the medium- to low-level design.  It would be
+% beneficial if the requirement could be expressed at a higher level,
+% without loss of formality or accuracy, so that it could be reviewed by
+% a domain expert or business analyst and yet is unambiguous for the
+% software engineer.  This is a dilemma which occurs frequently in large
+% complex software engineering projects.
+
+% % Without the ability to execute the specification directly, it cannot
+% % be proven to be complete until an implementation is developed.
+
+% \paragraph{Resulting design changes.} %Patrick
+
+%=====================================================================    
+% \section{High-level System Specifications for Trustworthy Electronic Voting}
+
+% \paragraph{A need for standard terminology of the domain.}
+
+% McGaley's work~\cite{McGaley06}
+
+% %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{Generic System Specifications}
+
+% \todo discuss use of B and VDM
+
+% %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{Domain Specific Languages}
+
+% \paragraph{Sketch of a DSL for e-Voting.}
+
+% It would be desirable that a high level specification would have these
+% three properties:
+% \begin{enumerate}
+% \item it is mathematically complete and logically sound
+% \item it is readable by a domain expert or business analyst
+% \item it is executable by a software tool and could be used either to
+%   generate or to verify the source code
+% \end{enumerate}
+
+% The first and third requirement above could be proven if the
+% specification could be transformed into JML annotated Java with JML
+% specifications.
+
+% The ability to read and understand a high level specification does not
+% imply the ability to write one.  Most people can successfully read a
+% novel, only a minority of people can successfully write a novel.
+% Likewise the high level specification would most likely be written by
+% a software engineer in consultation with a domain expert or business
+% analyst.
+
+% The second requirement can be met by using a domain specific language
+% (DSL).  We illustrate this by expressing the invariants in formal
+% English:
+% \begin{verbatim}
+%    total fractional votes equals 
+%    total rounded fractional votes 
+%    during each count
+
+%    when fractional vote less than threshold 
+%    then round up otherwise round down
+% \end{verbatim}
+
+% This expression is awkward and could be restated as follows:
+% \begin{itemize}
+% \item if fraction A is greater than fraction B and fraction A is
+%   rounded up, then fraction B is also rounded up
+% \item if (A>B) round (A) > round (B)
+% \end{itemize}
+
+% However, the imperative procedure is more intuitive:
+% \begin{itemize}
+% \item if we have a remainder of N then roundup the N highest fractions
+%   in the set
+% \end{itemize}
+
+% Mathematically this can de defined as a mapping from an ordered set of
+% rational numbers to an ordered set of 1s and 0s.
+
+% In DSL pseudo code it might look like this:
+% \begin{itemize}
+% \item define a fractional number as a pair of integers, the numerator
+%   and denominator
+% \item method Round Fractional Votes on array of fractional numbers:
+%   \begin{itemize}
+%   \item sort the array in descending order
+%   \item calculate remainder = sum of fractions
+%   \item starting at highest fraction not yet rounded up: if number
+%     rounded so far is less than remainder then round up and go to next
+%     highest otherwise stop
+%   \end{itemize}
+% \item sort the array in descending order
+% \item calculate remainder = sum of fractions
+% \item starting at highest fraction not yet rounded up: if number
+%   rounded so far is less than remainder then round up and go to next
+%   highest otherwise stop
+% \end{itemize}
+
+% If we express the DSL in a ruby like syntax, with declarative
+% functions and imperative procedures it might look like this:
+% \footnotesize
+% \begin{verbatim}
+%   definition fraction is 
+%              integer numerator, 
+%              integer denominator.
+
+%   function compare (fraction X, fraction Y) 
+%            returns boolean is
+%            (numerator of X * denominator of Y) >
+%            (numerator of Y * denominator of X).
+
+%   function sum (fraction X, fraction Y) 
+%            returns fraction is
+%            numerator of result = 
+%            (numerator of X * denominator of Y) + 
+%            (numerator of Y * denominator of X),
+%            denominator of result = 
+%            denominator of X * denominator of Y.
+
+%   function sum (array A of fraction) 
+%            returns fraction is
+%            sum (top of A, tail of A). 
+
+%   comment top and tail are built in functions. 
+
+%   procedure rounding (array A of fraction) does
+%             B = sort array of fraction by 
+%             compare (fraction, fraction),
+%             calculate total = sum (B),
+%             calculate length = count (B),
+%             if total >= length then 
+%               result = (1, rounding (tail B))
+%             else result = (array of 0).
+% \end{verbatim}
+% \normalsize
+
+% This an only an example of what a domain specific language might look
+% like.  At first glance, it might not appear to discuss voting concepts
+% at all, but we need to be able to discuss the rounding algorithm in
+% precise detail because this will determine the allocation of second
+% and subsequent preferences in a PRSTV system.
+
+% The declarative part of the specification can easily be transformed
+% into JML.  Now we consider the imperative part.
+
+% The alternative to the generation of a JML specification would be to
+% generate Java annotated with JML.
+
+% It seems more natural to refine from an imperative specification to an
+% imperative language, rather than turning the specification fragment
+% inside out i.e. convoluting the logic by attempting to express it in a
+% declarative format.
+     
+% We believe that adopting this methodology will overcome the
+% awkwardness of the original specification.
+
+% \paragraph{Overview of proposed DSL}
+
+% Keywords identified by McGaley et al include ballot, cast, voter,
+% eligible voter, evoting system, polling period, vote, voter register,
+% voting system and voting channel.
+
+% %=====================================================================
+% \section{Ongoing Work}
+% \label{sec:acad-curr-work}
+
+% \todo introduction
+
+% %---------------------------------------------------------------------
+% \subsection{Generalisation of System for other\\Voting Systems} 
+% \label{subsubsec:gener-syst-non}
+
+% The Java code for \Votail was written in JML using a kind of
+% ``verification-centric'' Design by Contract methodology.  This means
+% that not only are we writing each method implementation according to
+% its JML specification, but we are checking each method's correctness
+% with ESC/Java2 and automatically generating thousands of unit tests
+% using JMLUnit~\cite{Cheon-Leavens02}.
+
+% The KOA system has a state machine similar to that used in the \Votail
+% specification.  This allows KOA to make calls to the appropriate part
+% of the \Votail code.  The \texttt{ElectionAlgorithm} class in \Votail
+% will be invoked from within the KOA system using the following four
+% method calls: \texttt{setup}, which defines election parameters such
+% as candidate list and number of seats, \texttt{load}, which loads all
+% valid ballots and then calculate quota and deposit saving thresholds,
+% \texttt{count}, which assign votes to candidates, distribute surpluses
+% and exclude candidates until finished, and \texttt{report}, which
+% reports the election results.  These methods must be called in the
+% order shown, and this fact is captured by the invariants of the state
+% machine.  Only the \texttt{report} method is called more than once for
+% each instance of the \texttt{ElectionAlgorithm} class.
+
+% The user interface is being designed in a flexible fashion so as to
+% present non-Dutch ballot papers to the voter.  The original KOA system
+% was designed for use with a party-list system with a single national
+% constituency.  Its user interface is being extended in line with the
+% guidelines for the Irish voting system.  The KOA system allows the
+% voter to select a list of candidates; in the Irish system each
+% candidate is in a list of one.  The KOA system allows only one
+% selection by the voter; in the Irish system. the voter makes multiple
+% selections in order of preference.
+
+% %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{State of the Current Implementation of \Votail}
+
+% \paragraph{Current test coverage.} %Patrick
+
+% \todo implementation issues: Joe, Patrick
+
+%=====================================================================
+%\section{Future Work}
+%\label{sec:future-work}
+
+%Several pieces of future work have been identified and some of them
+%are currently underway by researchers at UCD.
+
+% %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{Specification of Security Properties} % 
+
+% The EU Mobius Project~\cite{MOBIUS}, of which UCD is a member, focuses
+% on several topics, including the specification and verification of
+% security properties at several levels.
+
+% The domain of voting provides an excellent security case study as a
+% relatively small number of concrete security properties are embodied
+% in such a system.  We have identified some of these properties,
+% formally specify them at a high-level in EBON, and are now using this
+% methodology to translate these high-level specifications into
+% concrete, low-level specifications and type-annotations so that we can
+% formally verify these properties in KOA.
+
+% Additionally, a MIDP-based remote voting applet has been developed at
+% UCD by a final year student.  We intend to review this application for
+% possible incorporation into KOA, using the same verification-centric
+% approach used in the rest of the KOA work.
+
+% %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{Full-blown Verification} % 
+
+% We intend to fully specify and verify critical subsystems of the KOA
+% system as a case study for the new MOBIUS Integrated Verification
+% Environment (IVE) that is being developed by UCD and others.
+
+% This goal is much more ambitious than simply performing extended
+% static checking on various critical classes.
+
+% %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{Just-in-Time Deployment with PCC} % Joe/Alan
+
+% One of the primary problems with electronic voting systems is that new
+% software updates, at both operating system and application levels, are
+% typically installed in the field without any certification.  One
+% technology that can help solve this deployment issue is Proof-Carrying
+% Code (PCC)~\cite{Necula97}, the primary underlying formal foundation
+% and technology used by the MOBIUS IVE.
+
+% Using a PCC technology foundation, new system and application patches
+% could be just-in-time deployed to the thousands of voting machines
+% used in an election with complete assurance.  Developing such a
+% foundation is part of the MOBIUS project's mandate, so the KOA system
+% may be used as a deployment case study in the coming years.
+
+% %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{American Voting Systems} % Joe/Alan
+
+% American voting systems are the focus of an intense amount of
+% discussion and work, given the ongoing fiasco in electronic voting we
+% have witnessed in the U.S.~over the past several years.
+
+% After integrating the \Votail Irish voting subsystem, we intend on
+% formally specifying and verifying an American presidential voting
+% subsystem using the same verification-centric methodology we have
+% followed thus far.
+
+% %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{Electronic Voting Systems} % Joe/Alan
+
+% A voting-system independent, formally specified and verified remote
+% voting system can be used in an electronic voting system, as the
+% latter is just a trivial version of the former.  It is our intention
+% to build and demonstrate such a system, incorporating a new formally
+% specified and verified voter-verifiable paper trail subsystem.
+
+% %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{Trustworthy Cryptographic Voting Algorithms}
+
+% \todo discuss work starting with Peter Ryan
+

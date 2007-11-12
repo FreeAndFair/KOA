@@ -1,0 +1,23 @@
+/*
+ * @(#)PSSParameterSpec.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+public class PSSParameterSpec implements AlgorithmParameterSpec
+{
+    /*@ public behavior
+      @    requires saltLen >= 0;
+      @    ensures getSaltLength() == saltLen;
+     */
+    public PSSParameterSpec(int saltLen);
+
+    public /*@ pure */ int getSaltLength();
+}
+

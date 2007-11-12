@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log timestamp="16 Maart 2004 10:20:34">
+  <importcandidates success="yes">
+    <error>File not valid</error>
+    <file location="/usr/local/test/" name="candidates.xml" timestamp="16 Maart 2004 09:27:10"/>
+    <candidatecontents refnr="1234" nroflists="3" nrofcandidates="27" nrofblanco="1"/>
+  </importcandidates>
+  <importvotes success="yes">
+    <error>File too long</error>
+    <file location="/usr/local/test/" name="candidates.xml" timestamp="16 Maart 2004 09:27:10"/>
+    <votecontents nrofkieskringen="2" nrofvotes="300"/>
+  </importvotes>
+  <importprivkey success="yes">
+    <error>Key not private</error>
+    <file location="/usr/local/test/" name="candidates.xml" timestamp="16 Maart 2004 09:27:10"/>
+  </importprivkey> 
+  <importpubkey success="yes">
+    <error>Key too public</error>
+    <file location="/usr/local/test/" name="candidates.xml" timestamp="16 Maart 2004 09:27:10"/>
+  </importpubkey> 
+  <keypair success="yes"/>
+  <decrypt success="yes">
+    <error>Out of memory error</error>
+    <runtime start="16 Maart 2004 09:35:01" end="16 Maart 2004 10:01:10"/>
+    <result nrofvotes="234"/>
+  </decrypt>
+  <count success="yes">
+    <error>Out of memory error</error>
+    <runtime start="16 Maart 2004 10:01:11" end="16 Maart 2004 10:01:20"/>
+    <result nrofvotes="233"/>
+  </count>
+</log>

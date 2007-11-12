@@ -1,0 +1,43 @@
+/*
+ * @(#)RSAKeyGenParameterSpec.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+import java.math.BigInteger;
+import java.security.spec.AlgorithmParameterSpec;
+
+public class RSAKeyGenParameterSpec implements AlgorithmParameterSpec
+{
+   /*@ invariant F0.equals(BigInteger.valueOf(3)); */
+   public static final BigInteger F0;
+
+   /*@ invariant F4.equals(BigInteger.valueOf(65537)); */
+   public static final BigInteger F4;
+
+   /*@ public behavior
+     @    requires keysize >= 0;
+     @    requires publicExponent != null;
+     @    ensures this.keysize == keysize;
+     @    ensures this.publicExponent.equals(publicExponent);
+    */
+   public RSAKeyGenParameterSpec(int keysize, BigInteger publicExponent);
+
+   /*@ public behavior
+     @    ensures \result == keysize;
+     @    ensures \result >= 0;
+    */
+   public /*@ pure */ int getKeysize();
+
+   /*@ public behavior
+     @    ensures \result.equals(publicExponent);
+    */
+   public /*@ pure non_null */ BigInteger getPublicExponent();
+}
+

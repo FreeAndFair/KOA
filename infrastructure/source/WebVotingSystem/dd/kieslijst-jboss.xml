@@ -1,0 +1,12 @@
+<jboss>
+  <enterprise-beans>  
+    <session>
+      <ejb-name>KOAKieslijstBean</ejb-name>
+      <jndi-name>KieslijstSession</jndi-name>
+      <resource-ref>
+        <res-ref-name>jdbc/KOA01</res-ref-name>
+        <jndi-name>java:DefaultDS</jndi-name>
+      </resource-ref>
+    </session>
+   </enterprise-beans>    
+</jboss>

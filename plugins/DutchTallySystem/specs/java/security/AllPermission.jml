@@ -1,0 +1,46 @@
+/*
+ * @(#)AllPermission.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.security.*;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.StringTokenizer;
+
+public final class AllPermission extends Permission
+{
+   public AllPermission();
+
+   /*@ public behavior
+     @    requires name != null;
+     @    requires actions != null;
+    */
+   public AllPermission(String name, String actions);
+
+   /*@ also
+     @ public behavior
+     @    ensures \result;
+    */
+   public /*@ pure */ boolean implies(Permission p);
+
+   /*@ also
+     @ public behavior
+     @    requires obj != null;
+    */
+   public /*@ pure */ boolean equals(Object obj);
+
+   public /*@ pure */ int hashCode();
+
+   public /*@ pure non_null */ String getActions();
+
+   public /*@ pure non_null */ PermissionCollection newPermissionCollection();
+}
+

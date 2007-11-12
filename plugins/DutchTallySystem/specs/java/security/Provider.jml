@@ -1,0 +1,64 @@
+/*
+ * @(#)Provider.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.io.*;
+import java.util.*;
+
+public abstract class Provider extends Properties
+{
+   /*@ public behavior
+     @    requires name != null;
+     @    requires info != null;
+     @    ensures getName().equals(name);
+     @    ensures getVersion() == version;
+     @    ensures getInfo().equals(info);
+    */
+   protected Provider(String name, double version, String info);
+
+   public /*@ pure non_null */ String getName();
+
+   public /*@ pure */ double getVersion();
+
+   public /*@ pure non_null */ String getInfo();
+
+   public /*@ pure non_null */ String toString();
+
+   public synchronized void clear();
+
+   /*@ also
+     @ public behavior
+     @    requires inStream != null;
+     @    signals (IOException) true;
+    */
+   public synchronized void load(InputStream inStream) throws IOException;
+
+   public synchronized void putAll(Map t);
+
+   public synchronized /*@ pure */ Set entrySet();
+
+   public /*@ pure */ Set keySet();
+
+   public /*@ pure */ Collection values();
+
+   /*@ also
+     @ public behavior
+     @    requires key != null;
+    */
+   public synchronized Object put(Object key, Object value);
+
+   /*@ also
+     @ public behavior
+     @    requires key != null;
+    */
+   public synchronized Object remove(Object key);
+}
+

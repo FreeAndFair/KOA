@@ -1,0 +1,28 @@
+/*
+ * @(#)SecurityPermission.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.security.*;
+
+public final class SecurityPermission extends BasicPermission
+{
+   /*@ public behavior
+     @    requires name != null;
+    */
+   public SecurityPermission(String name);
+
+   /*@ public behavior
+     @    requires name != null;
+     @    requires actions != null;
+    */
+   public SecurityPermission(String name, String actions);
+}
+

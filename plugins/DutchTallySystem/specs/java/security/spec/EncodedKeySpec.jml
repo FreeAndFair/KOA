@@ -1,0 +1,24 @@
+/*
+ * @(#)EncodedKeySpec.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+public abstract class EncodedKeySpec implements KeySpec
+{
+   /*@ public behavior
+     @    requires encodedKey != null;
+    */
+   public EncodedKeySpec(byte[] encodedKey);
+
+   public /*@ pure non_null */ byte[] getEncoded();
+
+   public abstract /*@ pure non_null */ String getFormat();
+}
+

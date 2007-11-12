@@ -1,0 +1,132 @@
+/*
+ * @(#)KeyAgreement.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.security.*;
+import java.security.spec.AlgorithmParameterSpec;
+
+public class KeyAgreement
+{
+   /*@ public behavior
+     @    requires keyAgreeSpi != null;
+     @    requires provider != null;
+     @    requires algorithm != null;
+     @    ensures getProvider().equals(provider);
+     @    ensures getAlgorithm().equals(algorithm);
+    */
+   protected KeyAgreement(KeyAgreementSpi keyAgreeSpi, Provider provider,
+                          String algorithm);
+
+   public final /*@ pure non_null */ String getAlgorithm();
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static final KeyAgreement getInstance(String algorithm)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals (NoSuchAlgorithmException) true;
+     @    signals (NoSuchProviderException) true;
+    */
+   public static final KeyAgreement getInstance(String algorithm,
+                                                String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    ensures \result.getProvider().equals(provider);
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static final KeyAgreement getInstance(String algorithm,
+                                                Provider provider)
+   throws NoSuchAlgorithmException;
+
+   public final /*@ pure non_null */ Provider getProvider();
+
+   /*@ public behavior
+     @    requires key != null;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void init(Key key)
+   throws InvalidKeyException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    requires random != null;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void init(Key key, SecureRandom random)
+   throws InvalidKeyException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    requires params != null;
+     @    signals (InvalidKeyException) true;
+     @    signals (InvalidAlgorithmParameterException) true;
+    */
+   public final void init(Key key, AlgorithmParameterSpec params)
+   throws InvalidKeyException, InvalidAlgorithmParameterException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    requires params != null;
+     @    requires random != null;
+     @    signals (InvalidKeyException) true;
+     @    signals (InvalidAlgorithmParameterException) true;
+    */
+   public final void init(Key key, AlgorithmParameterSpec params,
+                          SecureRandom random)
+   throws InvalidKeyException, InvalidAlgorithmParameterException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    signals (InvalidKeyException) true;
+     @    signals (IllegalStateException) true;
+    */
+   public final Key doPhase(Key key, boolean lastPhase)
+   throws InvalidKeyException, IllegalStateException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+     @    signals (IllegalStateException) true;
+    */
+   public final byte[] generateSecret()
+   throws IllegalStateException;
+
+   /*@ public behavior
+     @    requires sharedSecret != null;
+     @    requires offset >= 0;
+     @    signals (IllegalStateException) true;
+     @    signals (ShortBufferException) true;
+    */
+   public final int generateSecret(byte[] sharedSecret, int offset)
+   throws IllegalStateException, ShortBufferException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures \result != null;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals (IllegalStateException) true;
+     @    signals (NoSuchAlgorithmException) true;
+     @    signals (InvalidKeyException) true;
+    */
+   public final SecretKey generateSecret(String algorithm)
+   throws IllegalStateException, NoSuchAlgorithmException, InvalidKeyException;
+}
+

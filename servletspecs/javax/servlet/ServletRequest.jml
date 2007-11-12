@@ -1,0 +1,181 @@
+/*
+ * @(#)ServletRequest.jml
+ *
+ * @version $Id: ServletRequest.jml 775 2006-04-15 13:45:44Z alanm $
+ *
+ * Copyright (C) 2005 SoS group, Radboud University Nijmegen.
+ *
+ * Based on earlier work published under the GPL by
+ *    Dependable Software Research Group, Concordia University.
+ *    Iowa State University.
+ *
+ * This file is part of JML.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
+package javax.servlet;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.Map;
+
+public interface ServletRequest
+{
+   /*@ spec_public non_null model Map _attributes;
+    */
+
+   /*@ spec_public non_null model Map _parameters;
+    */
+
+   /* COMMENTED_OUT @ invariant
+     @    (\forall String name;
+     @       \typeof(_parameters.get(name)) == String[].class);
+    */
+
+   /*@
+     @ ensures
+     @    \result >= 0;
+    */
+   public /*@ pure */ int getContentLength();
+
+   /*@
+     @ ensures
+     @    0 <= \result && \result <= 65535;
+    */
+   public /*@ pure */ int getLocalPort();
+
+   /*@
+     @ ensures
+     @    0 <= \result && \result <= 65535;
+    */
+   public /*@ pure */ int getRemotePort();
+
+   /*@
+     @ ensures
+     @    0 <= \result && \result <= 65535;
+    */
+   public /*@ pure */ int getServerPort();
+
+   public /*@ pure */ boolean isSecure();
+
+   public /*@ pure non_null */ BufferedReader getReader() throws IOException;
+
+   public /*@ pure non_null */ String getCharacterEncoding();
+
+   public /*@ pure */ String getContentType();
+
+   public /*@ pure non_null */ String getLocalAddr();
+
+   public /*@ pure non_null */ String getLocalName();
+
+   public /*@ pure non_null */ String getProtocol();
+
+   public /*@ pure non_null */ String getRemoteAddr();
+
+   public /*@ pure non_null */ String getRemoteHost();
+
+   public /*@ pure non_null */ String getScheme();
+
+   public /*@ pure non_null */ String getServerName();
+
+   /*@
+     @ ensures
+     @    _attributes.get(name) == null;
+    */
+   public void removeAttribute(/*@ non_null */ String name);
+
+   public void setCharacterEncoding(/*@ non_null */ String env)
+   throws UnsupportedEncodingException;
+
+   /*@
+     @ ensures
+     @    \result.elementType == String.class;
+    */
+   public /*@ pure non_null */ Enumeration getAttributeNames();
+
+   public /*@ pure non_null */ Enumeration getLocales();
+
+   /*@
+     @ ensures
+     @    \result.elementType == String.class;
+    */
+   public /*@ pure non_null */ Enumeration getParameterNames();
+
+   public /*@ pure non_null */ Locale getLocale();
+
+   /*@
+     @ ensures
+     @    \result == _parameters;
+    */
+   public /*@ pure non_null */ Map getParameterMap();
+
+   public /*@ pure non_null */ ServletInputStream getInputStream()
+   throws IOException;
+
+   /*@
+     @ ensures
+     @    \result == _attributes.get(name);
+    */
+   public /*@ pure */ Object getAttribute(/*@ non_null */ String name);
+
+   /*@
+     @ ensures
+     @    _attributes.get(name) == o;
+    */
+   public void setAttribute(/*@ non_null */ String name, Object o);
+
+   /**
+    * From the Javadoc documentation:
+    *
+    *    You should only use this method when you are sure the parameter has
+    *    only one value. If the parameter might have more than one value, use
+    *    getParameterValues(String).
+    *
+    * Attempt to specify this using _parameters model Map is below.
+    * Unfortunately it turns out that checking for null result to detect
+    * whether parameter is present is actually used in practice, so we also
+    * need the second behavior spec.
+    */
+   /*@ behavior
+     @    requires
+     @       _parameters.containsKey(name) &&
+     @       _parameters.get(name) != null &&
+     @        ((String[])_parameters.get(name)).length == 1;
+     @    ensures
+     @       \result == ((String[])_parameters.get(name))[0];
+     @ also
+     @ behavior
+     @    requires
+     @       !_parameters.containsKey(name);
+     @    ensures
+     @       \result == null;
+    */
+   public /*@ pure */ String getParameter(/*@ non_null */ String name);
+
+   /*@
+     @ ensures
+     @    \result == _parameters.get(name);
+    */
+   public /*@ pure */ String[] getParameterValues(/*@ non_null */ String name);
+
+   public /*@ pure non_null */ String getRealPath(/*@ non_null */ String path);
+
+   public /*@ pure */ RequestDispatcher getRequestDispatcher(/*@ non_null */ String path);
+}
+

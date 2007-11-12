@@ -1,0 +1,146 @@
+%
+% $Id: paper.tex $
+%
+
+\documentclass{llncs}
+\usepackage{llncsdoc}
+\usepackage{times}
+\usepackage{ifpdf}
+
+\ifpdf \usepackage[pdftex]{graphicx} \else
+\usepackage{graphicx}
+\fi
+
+\usepackage{xspace}
+\usepackage{tabularx}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{eucal}
+\usepackage{float}
+
+\ifpdf \usepackage[pdftex,bookmarks=false,a4paper=true, 
+plainpages=false,naturalnames=true, colorlinks=true,pdfstartview=FitV, 
+linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref} \else 
+\usepackage[dvips,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref} \fi
+
+
+\newcommand{\todo}{\textbf{TODO:}}
+\newcommand{\tablesize}{\footnotesize}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\etc}{etc.\xspace}
+\newcommand{\myhref}[2]{\emph{#2}}
+\newcommand{\NL}{the Netherlands\xspace}
+\newcommand{\Votail}{Vot{\'a}il\xspace}
+
+%---------------------------------------------------------------------
+% New commands, macros, etc.
+%---------------------------------------------------------------------
+
+%% \input{kt}
+
+%=====================================================================
+
+\begin{document}
+
+\date{}
+
+\title{\Large \bf Formally Specified Security Properties for a Remote
+Voting System}
+
+\maketitle
+
+\thispagestyle{empty}
+
+%======================================================================
+\subsection*{Abstract}
+security requirements, formal analysis and evaluation of KOA/2 remote voting
+system
+
+
+%=====================================================================
+\section{Introduction}
+
+ 
+% in 2004.
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{KOA: A (Remote, Trustworthy) Voting Architecture for Voting Research}
+
+The KOA system, originally developed for and released by the Dutch government, 
+can be used as both a standard
+kiosk-based computer-based voting system as well as a remote telephone and
+Internet-based voting system.  It has a general-purpose voting
+system-independent core and a ``plugin'' model for supporting various
+voting systems like the list-based system of Holland or Ireland's
+Proportional Representation - Single Transferable Vote (PR-STV) based
+system~\cite{KiniryEtAl06}.
+
+%=====================================================================
+\section{}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{}
+
+\paragraph{The Java Modeling Language.}
+
+The Java Modeling Language (JML) is a formal behavioral specification
+language for Java~\cite{LeavensBakerRuby99,LeavensBakerRuby-Prelim}.
+Effectively, it is a small extension to the Java programming language
+that uses annotations embedded in special comments to formally express
+properties of a Java class or interface.
+
+JML is used at two levels.  At a high level one uses JML to describe a
+mathematical model-based specification (the ``Modeling'' of
+J\textbf{M}L) of a software system system.  JML models are functional,
+executable, formally specified and verified constructs like sets,
+sequences, bags, maps, etc.  At a lower level JML is used to describe
+a concrete software architecture with familiar constructs like
+invariants, preconditions, postconditions, etc.
+
+To connect these two levels, a specifier describes a functional or
+relational refinement relating the high level model-based specification
+and the low level, contract-based, description of the implementation.
+
+ 
+
+ 
+
+%=====================================================================
+\section{Conclusions}
+\label{sec:conclusions}
+
+ 
+
+%=====================================================================
+\section{Acknowledgments}
+
+This work is being supported by the European Project Mobius within the IST 6th
+Framework. This paper reflects only the authors' views and the Community is 
+not liable for any use that may be made of the information contained therein.
+
+%=====================================================================
+\section{Availability}
+
+The KOA system's home page is found at
+{\url{secure.ucd.ie/products/opensource/KOA}}
+
+%======================================================================
+%% \nocite{ex1,ex2}
+% \bibliographystyle{latex8}
+{\footnotesize \bibliographystyle{acm}
+  \bibliography{abbrev,ads,category,complexity,hypertext,icsr,knowledge,languages,linguistics,meta,metrics,misc,modeling,modeltheory,reuse,rewriting,softeng,specification,ssr,technology,theory,web,upcoming,upcoming_conferences,conferences,workshops,verification,escjava,jml,nijmegen,paper}
+}
+
+%\theendnotes
+
+%======================================================================
+% Fin
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

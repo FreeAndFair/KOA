@@ -1,0 +1,24 @@
+<jboss>
+  <enterprise-beans>  
+    <session>
+      <ejb-name>KOASchedulerEJB</ejb-name>
+      <jndi-name>SchedulerSession</jndi-name>
+      <resource-ref>
+       <res-ref-name>jdbc/KOA01</res-ref-name>
+        <jndi-name>java:DefaultDS</jndi-name>
+      </resource-ref>
+	   <ejb-ref>
+			<ejb-ref-name>KOASchedulerEJB</ejb-ref-name>
+			<jndi-name>SchedulerEntity</jndi-name>
+		</ejb-ref>
+    </session>
+	 <entity>
+      <ejb-name>KOASchedulerEJB</ejb-name>
+      <jndi-name>SchedulerEntity</jndi-name>
+      <resource-ref>
+       <res-ref-name>jdbc/KOA01</res-ref-name>
+        <jndi-name>java:DefaultDS</jndi-name>
+      </resource-ref>
+    </entity>
+   </enterprise-beans>    
+</jboss>

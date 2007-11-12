@@ -1,0 +1,194 @@
+/*
+ * @(#)Signature.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.security.spec.AlgorithmParameterSpec;
+import java.util.*;
+import java.io.*;
+import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
+
+public abstract class Signature extends SignatureSpi
+{
+   protected final static int UNINITIALIZED;
+   protected final static int SIGN;
+   protected final static int VERIFY;
+
+   /*@ public invariant
+     @    UNINITIALIZED != SIGN &&
+     @    UNINITIALIZED != VERIFY &&
+     @    SIGN != VERIFY;
+    */
+
+   protected int state;
+
+   /*@ public invariant
+     @    state == UNINITIALIZED ||
+     @    state == SIGN ||
+     @    state == VERIFY;
+    */
+
+   /*@ public behavior
+     @    ensures state == UNINITIALIZED;
+    */
+   protected Signature(String algorithm);
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures \result.state == UNINITIALIZED;
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static Signature getInstance(String algorithm)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result.state == UNINITIALIZED;
+     @    signals (NoSuchAlgorithmException) true;
+     @    signals (NoSuchProviderException) true;
+    */
+   public static Signature getInstance(String algorithm, String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result.state == UNINITIALIZED;
+     @    signals (NoSuchProviderException) true;
+    */
+   public static Signature getInstance(String algorithm, Provider provider)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+    */
+   public final Provider getProvider();
+
+   /*@ public behavior
+     @    requires publicKey != null;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void initVerify(PublicKey publicKey)
+   throws InvalidKeyException;
+
+   /*@ public behavior
+     @    requires certificate != null;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void initVerify(Certificate certificate)
+   throws InvalidKeyException;
+
+   /*@ public behavior
+     @    requires privateKey != null;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void initSign(PrivateKey privateKey)
+   throws InvalidKeyException;
+
+   /*@ public behavior
+     @    requires privateKey != null;
+     @    requires random != null;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void initSign(PrivateKey privateKey, SecureRandom random)
+   throws InvalidKeyException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+     @    signals (SignatureException) true;
+    */
+   public final byte[] sign() throws SignatureException;
+
+   /*@ public behavior
+     @    requires outbuf != null &&
+     @             (offset + len) <= outbuf.length;
+     @    ensures \result == len;
+     @    signals (SignatureException) true;
+    */
+   public final int sign(byte[] outbuf, int offset, int len)
+   throws SignatureException;
+
+   /*@ public behavior
+     @    requires signature != null;
+     @    signals (SignatureException) true;
+    */
+   public final boolean verify(byte[] signature) throws SignatureException;
+
+   /*@ public behavior
+     @    requires signature != null &&
+     @             (offset + length) <= signature.length;
+     @    signals (SignatureException) true;
+    */
+   public final boolean verify(byte[] signature, int offset, int length)
+   throws SignatureException;
+
+   /*@ public behavior
+     @    signals (SignatureException) true;
+    */
+   public final void update(byte b) throws SignatureException;
+
+   /*@ public behavior
+     @    requires data != null;
+     @    signals (SignatureException) true;
+    */
+   public final void update(byte[] data) throws SignatureException;
+
+   /*@ public behavior
+     @    requires data != null &&
+     @             (off + len) <= data.length;
+     @    signals (SignatureException) true;
+    */
+   public final void update(byte[] data, int off, int len)
+   throws SignatureException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+    */
+   public final /*@ pure */ String getAlgorithm();
+
+   /*@ also
+     @ public behavior
+     @    ensures \result != null;
+    */
+   public /*@ pure */ String toString();
+
+   /*@ public behavior
+     @    requires param != null;
+     @    requires value != null;
+     @    signals (InvalidParameterException) true;
+    */
+   public final void setParameter(String param, Object value)
+   throws InvalidParameterException;
+
+   /*@ public behavior
+     @    requires params != null;
+     @    signals (InvalidAlgorithmParameterException) true;
+    */
+   public final void setParameter(AlgorithmParameterSpec params)
+   throws InvalidAlgorithmParameterException;
+
+   public final AlgorithmParameters getParameters();
+
+   /*@ public behavior
+     @    requires param != null;
+    */
+   public final /*@ pure */ Object getParameter(String param)
+   throws InvalidParameterException;
+
+   /*@ also
+     @ public behavior
+     @    ensures \result != null;
+     @    signals (CloneNotSupportedException) true;
+    */
+   public /*@ pure */ Object clone() throws CloneNotSupportedException;
+}
+

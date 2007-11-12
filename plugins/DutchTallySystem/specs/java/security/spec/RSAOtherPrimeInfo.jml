@@ -1,0 +1,32 @@
+/*
+ * @(#)RSAOtherPrimeInfo.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+import java.math.BigInteger;
+
+public class RSAOtherPrimeInfo
+{
+   /*@ public behavior
+     @    requires prime != null;
+     @    requires primeExponent != null;
+     @    requires crtCoefficient != null;
+    */
+   public RSAOtherPrimeInfo(BigInteger prime,
+                            BigInteger primeExponent,
+                            BigInteger crtCoefficient);
+
+   public final /*@ pure non_null */ BigInteger getPrime();
+
+   public final /*@ pure non_null */ BigInteger getExponent();
+
+   public final /*@ pure non_null */ BigInteger getCrtCoefficient();
+}
+

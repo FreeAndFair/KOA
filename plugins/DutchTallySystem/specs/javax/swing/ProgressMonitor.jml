@@ -1,0 +1,108 @@
+/*
+ * @(#)ProgressMonitor.jml
+ *
+ * @version $$
+ *
+ * @author Fintan Fairmichael
+ * @author Joe Kiniry
+ *
+ * @todo kiniry 16 Aug 2005 - This specification still needs a bit of
+ * work wrt initial note values of null.
+ */
+
+package javax.swing;
+
+import java.io.*;
+import java.awt.BorderLayout;
+import java.awt.Frame;
+import java.awt.Component;
+import java.awt.Container;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class ProgressMonitor extends Object
+{
+  //@ public model String my_note;
+  //@ public model int min, max, progress;
+
+  /*@ normal_behavior
+    @   requires min <= max;
+    @   ensures getNote() == note;
+    @   ensures getMinimum() == min;
+    @   ensures getMaximum() == max;
+    @*/
+  /*@ pure @*/ public ProgressMonitor(Component parentComponent,
+                                      Object message,
+                                      String note,
+                                      int min,
+                                      int max);
+
+  /*@ normal_behavior
+    @   requires min <= max;
+    @   ensures getNote() == note;
+    @   ensures getMinimum() == min;
+    @   ensures getMaximum() == max;
+    @*/
+  /*@ pure @*/ private ProgressMonitor(Component parentComponent,
+                                       Object message,
+                                       String note,
+                                       int min,
+                                       int max,
+                                       ProgressMonitor group);
+
+  /*
+   * @review kiniry/fairmichael - There is no check to ensure new 
+   * max is greater than 0 in the actual code.
+   */
+  /*@ normal_behavior
+    @   assignable max;
+    @   ensures max == m;
+    @*/
+  public void setMaximum(int m);
+
+  /*@ normal_behavior
+    @   assignable \nothing;
+    @   ensures \result == max;
+    @*/
+  public /*@ pure @*/ int getMaximum();
+
+  /*@ normal_behavior
+    @   assignable \nothing;
+    @   ensures \result == min;
+    @*/
+  public /*@ pure @*/ int getMinimum();
+
+  /*@ normal_behavior
+    @   assignable min;
+    @   ensures min == m;
+    @*/
+  public void setMinimum(int m);
+
+  public /*@ pure @*/ void setMillisToPopup(int millisToPopup);
+
+  public /*@ pure @*/ void setMillisToDecideToPopup(int millisToDecideToPopup);
+
+  /*@ normal_behavior
+    @   assignable my_note;
+    @   ensures getNote() == note;
+    @*/
+  public void setNote(String note);
+
+  /*@ normal_behavior
+    @   ensures \result == my_note;
+    @*/
+  public /*@ pure @*/ String getNote();
+
+  /*@ normal_behavior
+    @   requires getMinimum() <= nv && nv <= getMaximum();
+    @   assignable progress;
+    @*/
+  public void setProgress(int nv);
+
+  
+  public /*@ pure @*/ boolean isCanceled();
+
+  public /*@ pure @*/ void close();
+}

@@ -1,0 +1,71 @@
+/*
+ * @(#)CipherInputStream.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.io.*;
+
+public class CipherInputStream extends FilterInputStream
+{
+   public CipherInputStream(InputStream inputstream, Cipher cipher);
+
+   /*@ public behavior
+     @    requires is != null;
+    */
+   protected CipherInputStream(InputStream is);
+
+   /*@ also
+     @ public behavior
+     @    signals(IOException) true;
+    */
+   public int read() throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    signals(IOException) true;
+    */
+   public int read(byte abyte0[]) throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    requires off >= 0;
+     @    requires len >= 0;
+     @    requires b != null;
+     @    requires (off + len) <= b.length;
+     @    signals(IOException) true;
+    */
+   public int read(byte[] b, int off, int len) throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    requires n >= 0;
+     @    signals(IOException) true;
+    */
+   public long skip(long n) throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    signals(IOException) true;
+    */
+   public int available() throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    signals(IOException) true;
+    */
+   public void close() throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    ensures \result == false;
+    */
+   public /*@ pure */ boolean markSupported();
+}
+

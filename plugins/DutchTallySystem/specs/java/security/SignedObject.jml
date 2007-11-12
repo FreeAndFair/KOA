@@ -1,0 +1,50 @@
+/*
+ * @(#)SignedObject.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.io.*;
+
+public final class SignedObject implements Serializable
+{
+   /*@ public behavior
+     @    requires object != null;
+     @    requires signingKey != null;
+     @    requires signingEngine != null;
+     @    signals(IOException) true;
+     @    signals(InvalidKeyException) true;
+     @    signals(SignatureException) true;
+    */
+   public SignedObject(Serializable object, PrivateKey signingKey,
+                       Signature signingEngine)
+   throws IOException, InvalidKeyException, SignatureException;
+
+   /*@ public behavior
+     @    signals(IOException) true;
+     @    signals(ClassNotFoundException) true;
+    */
+   public /*@ pure */ Object getObject()
+   throws IOException, ClassNotFoundException;
+
+   public /*@ pure */ byte[] getSignature();
+
+   public /*@ pure non_null */ String getAlgorithm();
+
+   /*@ public behavior
+     @    requires verificationKey != null;
+     @    requires verificationEngine != null;
+     @    signals(InvalidKeyException) true;
+     @    signals(SignatureException) true;
+    */
+   public boolean verify(PublicKey verificationKey,
+                         Signature verificationEngine)
+   throws InvalidKeyException, SignatureException;
+}
+

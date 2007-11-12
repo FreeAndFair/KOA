@@ -1,0 +1,94 @@
+/*
+ * @(#)KeyFactory.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.security.spec.KeySpec;
+import java.security.spec.InvalidKeySpecException;
+
+public class KeyFactory {
+
+   /*@ public behavior
+     @    requires keyFacSpi != null;
+     @    requires provider != null;
+     @    requires algorithm != null;
+     @    ensures getAlgorithm().equals(algorithm);
+    */
+   protected KeyFactory(KeyFactorySpi keyFacSpi, Provider provider,
+                        String algorithm);
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures \result != null;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static KeyFactory getInstance(String algorithm)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals (NoSuchAlgorithmException) true;
+     @    signals (NoSuchProviderException) true;
+    */
+   public static KeyFactory getInstance(String algorithm, String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    ensures \result.getProvider().equals(provider);
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static KeyFactory getInstance(String algorithm, Provider provider)
+   throws NoSuchAlgorithmException;
+
+   public final /*@ pure non_null */ Provider getProvider();
+
+   public final /*@ pure non_null */ String getAlgorithm();
+
+   /*@ public behavior
+     @    requires keySpec != null;
+     @    ensures \result != null;
+     @    signals (InvalidKeySpecException) true;
+    */
+   public final PublicKey generatePublic(KeySpec keySpec)
+   throws InvalidKeySpecException;
+
+   /*@ public behavior
+     @    requires keySpec != null;
+     @    ensures \result != null;
+     @    signals (InvalidKeySpecException) true;
+    */
+   public final PrivateKey generatePrivate(KeySpec keySpec)
+   throws InvalidKeySpecException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    requires keySpec != null;
+     @    ensures \result != null;
+     @    signals (InvalidKeySpecException) true;
+    */
+   public final KeySpec getKeySpec(Key key, Class keySpec)
+   throws InvalidKeySpecException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    ensures \result != null;
+     @    signals (InvalidKeySpecException) true;
+    */
+   public final Key translateKey(Key key) throws InvalidKeyException;
+}
+

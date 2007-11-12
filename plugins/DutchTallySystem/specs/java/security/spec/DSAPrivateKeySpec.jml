@@ -1,0 +1,50 @@
+/*
+ * @(#)DSAPrivateKeySpec.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+import java.math.BigInteger;
+
+public class DSAPrivateKeySpec implements KeySpec
+{
+   /*@ public behavior
+     @    requires x != null;
+     @    requires p != null;
+     @    requires q != null;
+     @    requires g != null;
+     @    ensures this.x.equals(x);
+     @    ensures this.p.equals(p);
+     @    ensures this.q.equals(q);
+     @    ensures this.g.equals(g);
+    */
+   public DSAPrivateKeySpec(BigInteger x, BigInteger p, BigInteger q,
+			     BigInteger g);
+
+   /*@ public behavior
+     @    ensures \result.equals(x);
+    */
+   public /*@ pure non_null */ BigInteger getX();
+
+   /*@ public behavior
+     @    ensures \result.equals(p);
+    */
+   public /*@ pure non_null */ BigInteger getP();
+
+   /*@ public behavior
+     @    ensures \result.equals(q);
+    */
+   public /*@ pure non_null */ BigInteger getQ();
+
+   /*@ public behavior
+     @    ensures \result.equals(g);
+    */
+   public /*@ pure non_null */ BigInteger getG();
+}
+

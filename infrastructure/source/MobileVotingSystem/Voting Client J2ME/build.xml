@@ -1,0 +1,165 @@
+<!-- This file controls the build process.                    -->
+<!-- The most important target is the j2mepolish-target,      -->
+<!-- which controls for what devices the application should   -->
+<!-- be created and so on.                                    -->
+<!--                                                          -->
+<!-- Important: when you have no Wireless Toolkit installed   -->
+<!-- you need to define the "preverify"-attribute             -->
+<!-- of the <build>-element of the J2ME Polish task.          -->
+<!--                                                          -->
+<!-- When you call Ant from the command-line, you can         -->
+<!-- call "ant test j2mepolish" to skip the obfuscation       -->
+<!-- and to build the example for fewer handsets.             -->
+<!-- The default target builds and obfuscates the example.    -->
+<!--                                                          -->
+<!-- The full documentation can be found at                   -->
+<!-- http://www.j2mepolish.org                                -->
+<!--                                                          -->
+<!-- Have fun!                                                -->
+<project 
+	name="Client" 
+	default="j2mepolish">
+	
+<!-- The wtk.home property should point to the directory      -->
+<!-- containing the Wireless Toolkit.                         -->
+<property name="wtk.home" value="C:\WTK22" />
+<!-- The polish.home property should point to the directory   -->
+<!-- containing the J2ME Polish installation.                 -->
+<property name="polish.home" value="C:\Program Files\J2ME-Polish" />
+	
+<!-- The siemens.home, nokia.home and motorola.home-          -->
+<!-- properties can be necessary when their emulators         -->
+<!-- should be started.                                       -->
+<!-- The directory which contains the Siemens-SMTK
+	<property name="siemens.home" value="C:\siemens" />
+-->
+<!-- The directory which contains the Nokia-emulators
+	<property name="nokia.home" value="C:\Nokia" />
+-->
+<!-- The path to the Sony-Ericsson SDK
+	<property name="sony-ericsson.home" value="C:\SonyEricsson\J2ME_SDK" />
+-->
+<!-- The directory which contains the Motorola-emulators
+	<property name="motorola.home" value="C:\Program Files\Motorola\SDK v4.3 for J2ME" />
+-->
+	
+<!-- Definition of the J2ME Polish task:                      -->
+<taskdef name="j2mepolish" 
+	classname="de.enough.polish.ant.PolishTask" 
+	classpath="${polish.home}/import/enough-j2mepolish-build.jar:${polish.home}/import/jdom.jar:${polish.home}/import/proguard.jar:${polish.home}/yguard-lib.jar:${wtk.home}/wtklib/kenv.zip"/>
+
+	
+<!-- build targets, each target can be called via "ant [name]", 
+	 e.g. "ant clean", "ant test j2mepolish" or just "ant" for calling the default-target -->
+
+<target name="setdeploy" 
+	description="Call this target first to set the OTA download-URL, e.g. ant setdeploy j2mepolish"
+	>
+	<property name="deploy-url" value="http://www.company.com/download/" />
+</target>
+	
+<target name="test" 
+	description="Call this target first to skip the obfuscation step, e.g. ant test j2mepolish"
+	>
+	<property name="test" value="true" />
+	<property name="dir.work" value="build/test" />
+</target>
+		
+<target name="init">
+  	<property name="test" value="false" />
+	<property name="dir.work" value="build/real" />
+	<property name="deploy-url" value="" />
+</target>
+ 
+<!-- In this target the J2ME Polish task is used.             -->
+<!-- It has 3 sections:                                       -->
+<!--    1. The info-section defines some general information  -->
+<!--    2. The deviceRequirements-section chooses the devices -->
+<!--       for which the application is optimized.            -->
+<!--    3. The build-section controls the actual build        -->
+<!--       process.                                           -->	
+<target name="j2mepolish" 
+		depends="init"
+		description="This is the controller for the J2ME build process." 
+		>
+	<j2mepolish>
+	    <!-- general settings, these settings basically form the JAD-attributes. -->
+	    <!-- Have a look at the <jad>-section for setting specialised attributes.
+	         You can also define localized attributes in the resources/messages.txt files 
+	         In this example we are setting the profile and configuration regardless
+	         of the capabilities of the target-devices, since we want to use one
+	         build for all devices.
+	         -->
+		<info
+			license="GPL"
+			copyright="Copyright 2004, 2005 Grimo Software, Enough Software and Mark Schrijver. All rights reserved." 
+			description="Mobile GPRS Voting" 
+			icon="dot.png" 
+			infoUrl="" 
+			jarName="votingClient65.jar" 
+			jarUrl="${deploy-url}${polish.jarName}" 
+			name="Client" 
+			vendorName="Liam Whelan" 
+			version="2.0"
+			profile="MIDP-2.0"
+			configuration="CLDC-1.1"
+		/>
+		<!-- selection of the target device Siemens/CX65-->
+		<deviceRequirements>
+			<requirement name="Identifier" value="Generic/jtwi"/>
+		</deviceRequirements>
+	    <!-- build settings -->
+		<!-- 
+		 -->
+		<build
+            usePolishGui="true"
+			workDir="${dir.work}"
+		>
+			<!-- midlets definition -->
+				<midlet class="ClientMIDlet" name="Client"/>
+
+				
+			<variables includeAntProperties="true" >
+			<variable name="polish.ChoiceGroup.suppressSelectCommand" value="true"/>
+				</variables>
+			<resources>
+				<localization locale="en" />
+			</resources>
+			<jad>
+				<filter>
+					MIDlet-Name, MIDlet-Version, 
+					MIDlet-Vendor, MIDlet-Jar-URL, MIDlet-Jar-Size, 
+					MIDlet-Description?, MIDlet-Icon?, MIDlet-Info-URL?,
+					MIDlet-Data-Size?, MIDlet-*, *
+				</filter>
+ 			</jad>
+			<manifestFilter>
+				Manifest-Version, MIDlet-Name, 
+				MIDlet-1, MIDlet-2?, MIDlet-3?, MIDlet-4?, MIDlet-5?, 
+				MIDlet-Version, MIDlet-Vendor,
+				MicroEdition-Profile, MicroEdition-Configuration,
+				MIDlet-Data-Size?
+			</manifestFilter>
+			<!-- obfuscator settings: do not obfuscate when the test-property is true -->
+			<obfuscator name="ProGuard" useDefaultPackage="true" unless="test" >
+
+			</obfuscator>
+			<!-- debug settings: only include debug setting when the test-property is true -->
+			<debug level="error" showLogOnError="true" verbose="true" if="test">
+				<filter level="debug" package=""/>
+			</debug>
+		</build>
+		
+		<!-- execution of emulator(s) -->
+		<emulator />	
+	</j2mepolish>
+</target>
+
+
+<target name="clean" 
+  		description="allows a clean build. You should call [ant clean] whenever you made changes to devices.xml, vendors.xml or groups.xml">
+	<delete dir="build" />
+	<delete dir="dist" />
+</target>
+
+</project>

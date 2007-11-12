@@ -1,0 +1,33 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package java.security;
+
+public /*@ pure @*/ class PrivilegedActionException
+    extends Exception
+{
+    //@ public model Exception _exception; in objectState;
+    //@ public represents _exception <- getException();
+    private Exception exception; //@ in objectState;
+
+    /*@ public normal_behavior
+      @   ensures getException() == exception;
+      @*/
+    public PrivilegedActionException(Exception exception);
+
+    /*@ public normal_behavior
+      @   ensures \result == _exception;
+      @*/
+    public /*@ pure @*/ Exception getException();
+
+    /*@ also
+      @ public normal_behavior
+      @   ensures \result == _exception;
+      @*/
+    public Throwable getCause();
+}
+

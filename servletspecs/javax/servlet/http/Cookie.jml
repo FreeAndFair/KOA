@@ -1,0 +1,57 @@
+/*
+ * @(#)Cookie.jml
+ *
+ * @version $Id: Cookie.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet.http;
+
+public class Cookie implements Cloneable
+{
+   public Cookie(/*@ non_null */ String name, /*@ non_null */ String value);
+
+   /*@
+     @ ensures
+     @    0 <= \result || \result == -1;
+    */
+   public /*@ pure */ int getMaxAge();
+
+   /*@
+     @ ensures
+     @    \result == 0 || \result == 1;
+    */
+   public /*@ pure */ int getVersion();
+
+   public /*@ pure */ boolean getSecure();
+
+   public void setMaxAge(int expiry);
+
+   /*@
+     @ requires
+     @    v == 0 || v == 1;
+    */
+   public void setVersion(int v);
+
+   public void setSecure(boolean flag);
+
+   public Object clone();
+
+   public /*@ pure */ String getComment();
+
+   public /*@ pure non_null */ String getDomain();
+
+   public /*@ pure non_null */ String getName();
+
+   public /*@ pure non_null */ String getPath();
+
+   public /*@ pure non_null */ String getValue();
+
+   public void setComment(/*@ non_null */ String purpose);
+
+   public void setDomain(/*@ non_null */ String pattern);
+
+   public void setPath(/*@ non_null */ String uri);
+
+   public void setValue(/*@ non_null */ String newValue);
+}
+

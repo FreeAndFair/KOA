@@ -1,0 +1,21 @@
+/*
+ * @(#)ServletConfig.jml
+ *
+ * @version $Id: ServletConfig.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet;
+
+import java.util.Enumeration;
+
+public interface ServletConfig
+{
+   public /*@ pure non_null */ String getServletName();
+
+   public /*@ pure */ Enumeration getInitParameterNames();
+
+   public /*@ pure non_null */ ServletContext getServletContext();
+
+   public /*@ pure */ String getInitParameter(/*@ non_null */ String name);
+}
+

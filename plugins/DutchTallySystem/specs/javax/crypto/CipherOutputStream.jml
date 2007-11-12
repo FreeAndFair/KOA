@@ -1,0 +1,63 @@
+/*
+ * @(#)CipherOutputStream.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.io.*;
+
+public class CipherOutputStream extends FilterOutputStream
+{
+   /*@ public behavior
+     @    requires os != null;
+     @    requires c != null;
+    */
+   public CipherOutputStream(OutputStream os, Cipher c);
+
+   /*@ public behavior
+     @    requires os != null;
+    */
+   protected CipherOutputStream(OutputStream os);
+
+   /*@ also
+     @ public behavior
+     @    signals (IOException) true;
+    */
+   public void write(int b) throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    requires b != null;
+     @    signals(IOException) true;
+    */
+   public void write(byte[] b) throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    requires b != null;
+     @    requires off >= 0;
+     @    requires len >= 0;
+     @    requires (off + len) <= b.length;
+     @    signals(IOException) true;
+    */
+   public void write(byte[] b, int off, int len) throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    signals(IOException) true;
+    */
+   public void flush() throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    signals(IOException) true;
+    */
+   public void close() throws IOException;
+}
+

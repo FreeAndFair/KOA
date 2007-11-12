@@ -1,0 +1,35 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package java.security;
+
+public /*@ pure @*/ class AccessControlException
+    extends SecurityException
+{
+    //@ public model Permission _permission;
+    //@ public represents _permission <- getPermission();
+
+    /*@ public normal_behavior
+      @   ensures getMessage() == s;
+      @*/
+    public AccessControlException(String s);
+
+    /*@ public normal_behavior
+      @   ensures _permission == p;
+      @   ensures getMessage() == s;
+      @ implies_that
+      @ public normal_behavior
+      @   ensures getPermission() == p;
+      @*/
+    public AccessControlException(String s, Permission p);
+
+    /*@ public normal_behavior
+      @   ensures \result == _permission;
+      @*/
+    public Permission getPermission();
+}
+

@@ -1,0 +1,23 @@
+/*
+ * @(#)SAXNotSupportedException.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Engelbert Hubbers (hubbers@cs.kun.nl)
+ */
+
+package org.xml.sax;
+
+
+public class SAXNotSupportedException extends SAXException
+{
+
+
+  /*@ public behavior
+    @    ensures getMessage().equals(message);
+    @*/
+  /*@ pure @*/ public SAXNotSupportedException(String message);
+
+}

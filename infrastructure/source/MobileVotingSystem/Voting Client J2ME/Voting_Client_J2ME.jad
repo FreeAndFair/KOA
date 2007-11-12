@@ -1,0 +1,8 @@
+MIDlet-Version: 2.0
+MIDlet-Vendor: Liam Whelan
+MIDlet-Jar-URL: Voting_Client_J2ME.jar
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-2: SMSRelay,,SMSRelay
+MicroEdition-Profile: MIDP-2.0
+MIDlet-1: Client,,ClientMIDlet
+MIDlet-Name: Voting Client J2ME Midlet Suite

@@ -1,0 +1,72 @@
+/*
+ * @(#)SealedObject.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.io.*;
+import java.security.*;
+
+public class SealedObject implements Serializable
+{
+   protected byte[] encodedParams;
+
+   /*@ public behavior
+     @    requires object != null;
+     @    requires c != null;
+     @    ensures getAlgorithm().equals(c.getAlgorithm());
+     @    signals(IOException) true;
+     @    signals(IllegalBlockSizeException) true;
+    */
+   public SealedObject(Serializable object, Cipher c)
+   throws IOException, IllegalBlockSizeException;
+
+   /*@ public behavior
+     @    requires so != null;
+    */
+   protected SealedObject(SealedObject so);
+
+   public final /*@ pure non_null */ String getAlgorithm();
+
+   /*@ public behavior
+     @    requires key != null;
+     @    signals(IOException) true;
+     @    signals(ClassNotFoundException) true;
+     @    signals(NoSuchAlgorithmException) true;
+     @    signals(InvalidKeyException) true;
+    */
+   public final Object getObject(Key key)
+   throws IOException, ClassNotFoundException, NoSuchAlgorithmException,
+          InvalidKeyException;
+
+   /*@ public behavior
+     @    requires c != null;
+     @    signals(IOException) true;
+     @    signals(ClassNotFoundException) true;
+     @    signals(IllegalBlockSizeException) true;
+     @    signals(BadPaddingException) true;
+    */
+   public final Object getObject(Cipher c)
+   throws IOException, ClassNotFoundException, IllegalBlockSizeException,
+          BadPaddingException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    requires provider != null;
+     @    signals(IOException) true;
+     @    signals(ClassNotFoundException) true;
+     @    signals(NoSuchAlgorithmException) true;
+     @    signals(NoSuchProviderException) true;
+     @    signals(InvalidKeyException) true;
+    */
+   public final Object getObject(Key key, String provider)
+   throws IOException, ClassNotFoundException, NoSuchAlgorithmException,
+          NoSuchProviderException, InvalidKeyException;
+}
+

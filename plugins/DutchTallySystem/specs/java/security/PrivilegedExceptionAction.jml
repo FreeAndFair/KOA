@@ -1,0 +1,21 @@
+/*
+ * @(#)PrivilegedExceptionAction.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public interface PrivilegedExceptionAction {
+
+   /*@ public behavior
+     @    ensures \result != null;
+     @    signals(Exception) true;
+    */
+   Object run() throws Exception;
+}
+

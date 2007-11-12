@@ -1,0 +1,41 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package java.security.interfaces;
+
+import java.math.BigInteger;
+
+public /*@ pure @*/ interface DSAParams
+{
+  //@ public non_null instance model BigInteger _prime, _subprime, _base;
+  //@ public represents _prime <- getP();
+  //@ public represents _subprime <- getQ();
+  //@ public represents _base <- getG();
+
+  /*@ public normal_behavior
+    @  ensures \result == _prime;
+    @  ensures \result.isProbablePrime(Integer.MAX_VALUE);
+    @  ensures (\forall int i; 2 <= i &&
+    @           (new BigInteger(Integer.toString(i))).compareTo(_prime) < 0;
+    @           !_prime.mod(new BigInteger(Integer.toString(i))).equals(BigInteger.ZERO));
+    @*/
+  public BigInteger getP();
+
+  /*@ public normal_behavior
+    @  ensures \result == _subprime;
+    @  ensures \result.isProbablePrime(Integer.MAX_VALUE);
+    @  ensures (\forall int i; 2 <= i &&
+    @           (new BigInteger(Integer.toString(i))).compareTo(_subprime) < 0;
+    @           !_subprime.mod(new BigInteger(Integer.toString(i))).equals(BigInteger.ZERO));
+    @*/
+  public BigInteger getQ();
+
+  /*@ public normal_behavior
+    @  ensures \result == _base;
+    @*/
+  public BigInteger getG();
+}

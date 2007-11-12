@@ -1,0 +1,67 @@
+/*
+ * @(#)ServletResponseWrapper.jml
+ *
+ * @version $Id: ServletResponseWrapper.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Locale;
+
+/**
+ * Javadoc API doc spec claims this is a decorator (or wrapper) pattern.
+ * How to specify this in JML?
+ */
+public class ServletResponseWrapper implements ServletResponse
+{
+   public ServletResponseWrapper(/*@ non_null */ ServletResponse response);
+
+   /*@ also
+     @ ensures
+     @    \result >= 0;
+    */
+   public /*@ pure */ int getBufferSize();
+
+   public void flushBuffer() throws IOException;
+
+   public void reset();
+
+   public void resetBuffer();
+
+   public /*@ pure */ boolean isCommitted();
+
+   /*@ also
+     @ requires
+     @    size >= 0;
+    */
+   public void setBufferSize(int size);
+
+   /*@ also
+     @ requires
+     @    len >= 0;
+    */
+   public void setContentLength(int len);
+
+   public /*@ pure non_null */ PrintWriter getWriter() throws IOException;
+
+   public /*@ pure non_null */ String getCharacterEncoding();
+
+   public /*@ pure non_null */ String getContentType();
+
+   public void setCharacterEncoding(/*@ non_null */ String charset);
+
+   public void setContentType(/*@ non_null */ String type);
+
+   public /*@ pure non_null */ Locale getLocale();
+
+   public void setLocale(/*@ non_null */ Locale loc);
+
+   public /*@ pure non_null */ ServletOutputStream getOutputStream() throws IOException;
+
+   public /*@ pure non_null */ ServletResponse getResponse();
+
+   public void setResponse(/*@ non_null */ ServletResponse response);
+}
+

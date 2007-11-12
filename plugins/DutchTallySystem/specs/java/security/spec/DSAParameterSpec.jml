@@ -1,0 +1,46 @@
+/*
+ * @(#)DSAParameterSpec.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+import java.math.BigInteger;
+
+public class DSAParameterSpec implements AlgorithmParameterSpec,
+java.security.interfaces.DSAParams
+{
+   /*@ public behavior
+     @    requires p != null;
+     @    requires q != null;
+     @    requires g != null;
+     @    ensures this.p.equals(p);
+     @    ensures this.q.equals(q);
+     @    ensures this.g.equals(g);
+    */
+   public DSAParameterSpec(BigInteger p, BigInteger q, BigInteger g);
+
+   /*@ also
+     @ public behavior
+     @    ensures \result.equals(p);
+    */
+   public /*@ pure non_null */ BigInteger getP();
+
+   /*@ also
+     @ public behavior
+     @    ensures \result.equals(q);
+    */
+   public /*@ pure non_null */ BigInteger getQ();
+
+   /*@ also
+     @ public behavior
+     @    ensures \result.equals(g);
+    */
+   public /*@ pure non_null */ BigInteger getG();
+}
+

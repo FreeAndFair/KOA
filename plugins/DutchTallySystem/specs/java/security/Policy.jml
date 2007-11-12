@@ -1,0 +1,50 @@
+/*
+ * @(#)Policy.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.io.*;
+import java.lang.RuntimePermission;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Vector;
+import java.util.StringTokenizer;
+import java.util.PropertyPermission;
+
+public abstract class Policy
+{
+   public static /*@ non_null */ Policy getPolicy();
+
+   /*@ public behavior
+     @    requires policy != null;
+    */
+   public static void setPolicy(Policy policy);
+
+   /*@ public behavior
+     @    requires codesource != null;
+    */
+   public abstract PermissionCollection getPermissions(CodeSource codesource);
+
+   /*@ public behavior
+     @    requires domain != null;
+    */
+   public PermissionCollection getPermissions(ProtectionDomain domain);
+
+   /*@ public behavior
+     @    requires domain != null;
+     @    requires permission != null;
+    */
+   public /*@ pure */ boolean implies(ProtectionDomain domain, Permission permission);
+
+   public abstract void refresh();
+}
+

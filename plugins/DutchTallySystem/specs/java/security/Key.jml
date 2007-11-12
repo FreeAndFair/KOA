@@ -1,0 +1,39 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package java.security;
+
+public interface Key
+  extends java.io.Serializable
+{
+  /*@ public normal_behavior
+    @   ensures (\result != null && \result.length() > 0) &&
+    @           (\result.equalsIgnoreCase("MD2") ||
+    @            \result.equalsIgnoreCase("MD5") ||
+    @            \result.equalsIgnoreCase("SHA-1") ||
+    @            \result.equalsIgnoreCase("SHA-256") ||
+    @            \result.equalsIgnoreCase("SHA-384") ||
+    @            \result.equalsIgnoreCase("SHA-512") ||
+    @            \result.equalsIgnoreCase("DSA") ||
+    @            \result.equalsIgnoreCase("RSA") ||
+    @            \result.equalsIgnoreCase("MD2withRSA") ||
+    @            \result.equalsIgnoreCase("MD5withRSA") ||
+    @            \result.equalsIgnoreCase("SHA1withDSA") ||
+    @            \result.equalsIgnoreCase("SHA1withRSA") ||
+    @            \result.equalsIgnoreCase("SHA1PRNG") ||
+    @            true);
+    @*/
+  public /*@ pure @*/ String getAlgorithm();
+
+  /*@ public normal_behavior
+    @   ensures \result != null ==> \result.length() > 0;
+    @*/
+  public /*@ pure @*/ String getFormat();
+
+  public byte[] getEncoded();
+}
+

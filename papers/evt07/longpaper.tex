@@ -1,0 +1,1153 @@
+%
+% $Id: paper.tex $
+%
+
+\documentclass[11pt, twocolumn]{article}
+
+%\usepackage{latex8}
+\usepackage{times}
+\usepackage{ifpdf}
+%% \usepackage{a4wide}
+
+\ifpdf \usepackage[pdftex]{graphicx} \else
+\usepackage{graphicx}
+\fi
+
+% \usepackage{html}
+% \usepackage{url}
+\usepackage{xspace}
+%\usepackage{doublespace}
+\usepackage{tabularx}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{eucal}
+% \ifpdf
+% \usepackage[centredisplay]{diagrams}
+% \else
+% \usepackage[centredisplay,PostScript=dvips]{diagrams}man
+% \fi
+\usepackage{float}
+
+\ifpdf \usepackage[pdftex,bookmarks=false,a4paper=false, 
+plainpages=false,naturalnames=true, colorlinks=true,pdfstartview=FitV, 
+linkcolor=blue,citecolor=blue,urlcolor=blue, pdfauthor="Joseph R. 
+Kiniry"]{hyperref} \else 
+\usepackage[dvips,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref} \fi
+
+\newcommand{\todo}{\textbf{TODO:}}
+\newcommand{\tablesize}{\footnotesize}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\etc}{etc.\xspace}
+% \newcommand{\myhref}[2]{\ifpdf\href{#1}{#2}\else\htmladdnormallinkfoot{#2}{#1}\fi}
+\newcommand{\myhref}[2]{\emph{#2}}
+\newcommand{\NL}{the Netherlands\xspace}
+\newcommand{\Votail}{Vot{\'a}il\xspace}
+
+%---------------------------------------------------------------------
+% New commands, macros, etc.
+%---------------------------------------------------------------------
+
+%% \input{kt}
+
+%=====================================================================
+
+\begin{document}
+
+% Tweaks of page setup from Erik.
+%% \setlength{\textwidth}{17.0cm}
+%% \topmargin=-.75cm
+%% \evensidemargin=0mm
+%% \oddsidemargin=0mm
+%% \headheight=0mm
+%% \headsep=0mm
+%% \footskip=0mm
+
+% Omit page numbers and running heads.
+% take the % away on next line to produce the final camera-ready version
+\pagestyle{empty}
+
+% --- Author Metadata here ---
+%\conferenceinfo{EVT}{2007 USENIX/ACCURATE Electronic Voting Technology Workshop}
+%\setpagenumber{50}
+%\CopyrightYear{2007Ä}
+%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
+
+\title{Verification-Centric Realization of Electronic Vote Counting}
+
+\author{Joseph R.~Kiniry, Dermot Cochran, and Patrick Tierney\\
+School of Computer Science and Informatics\\
+University College Dublin\\
+Belfield, Dublin 4, Ireland}
+
+\maketitle
+
+%======================================================================
+\thispagestyle{empty}
+\begin{abstract}
+  Activist computer scientists, including one of the authors of this
+  paper, have been working against the adoption of commercial,
+  proprietary, insecure, poorly designed and implemented voting
+  systems by governments the world-over.  
+%  And, while we mainly work to
+%  accomplish our goals by educating citizens and communicating with
+%  the press, we also must propose solutions to the problems of
+%  trustworthy e-voting.  
+  If a computer-based voting system is to ever
+  be adopted, that system must be of extremely high quality.  This
+  paper discusses a methodology and a set of tools we have used to
+  implement an experimental computer-based voting system using applied
+  formal methods.
+\end{abstract}
+
+%=====================================================================
+\section{Introduction}
+
+Regardless of the input of experts and activists, governments are
+adopting computer-based technology for e-voting.  Researchers and
+activists concerned about this situation fall in two overlapping
+camps: researchers that are struggling against the adoption of poor
+process, technology, and implementation in computer-based voting, and
+researchers that are proposing new techniques, theories, technologies
+to solve some of the challenges computer-based voting challenges.  Our
+work falls broadly into both of these camps, but this work in
+particular focuses on the latter, as we propose a concrete software
+platform and software engineering process for trustworthy e-voting
+research.
+
+Computer-based voting, from a mathematical and computer science
+point-of-view, is full of interesting algorithmic
+challenges---challenges that are sometimes radically different than
+those that we understand in other domains.  For example, in
+many voting systems the anonymity of the voter must be preserved, but
+we must guarantee that the legitimate ballot of the voter is counted.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Motivation}
+
+If a computer-based technology is used in trustworthy voting, then the
+software system must be of extremely high quality.  There are a
+variety of techniques for constructing a very high quality system,
+e.g., model-based design, rigorous unit testing, and formal
+verification, to name a few.  Therefore, usable, practical
+best-practices in rigorous software development, especially as applied
+to a real, concrete, trustworthy computer-based voting system, are
+very relevant today.
+
+The work described in this article is useful to researchers because it
+provides a concrete foundation for future trustworthy voting
+experimentation.  On the other hand, this research is useful to
+governments and their experts because it provides concrete evidence
+that modern verification-centric software development with formal
+methods is achievable without significant cost or time.  
+
+%
+%Consequently,
+%if a government spends a large amount of money on a commercial voting
+%system, and that system is not of at least the same quality of this
+%work (work performed by a handful of academics part time), then there
+%is a \emph{serious} problem with the decision-making procedures of
+%that government and the realization of its computer-based voting
+%mandates.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{e-Voting Activism and Research}
+% 
+% Over the past four years we have been wearing two contrary hats when
+% it comes to voting.
+% 
+% Wearing our ``computer security consultant'' hat, we have been working
+% with groups like the Free Software Foundation Europe, the Irish
+% Citizens for Trustworthy Evoting, and the FREE e-democracy project in
+% the U.K., advocating against the adoption of existing computer-based
+% voting technologies.  This work includes cracking a Dutch remote
+% voting pilot project (discussed below), performing security audits of
+% voting systems, writing the aforementioned report on e-voting for the
+% Dutch parliament, and implementing a formally verified tally system
+% for the Dutch government.
+% 
+% Meanwhile, wearing our ``applied formal methods researcher'' hat, and
+% working with students in our research group here in CSI at UCD (in
+% particular, Alan Morkan, Dermot Cochran, Fintan Fairmichael, and
+% Patrick Tierney) and our previous research group at the Security of
+% Systems Group at Radboud University Nijmegen (with Bart Jacobs, Wolter
+% Pieters, Martijn Oostdijk, and Engelbert Hubbers), we has been leading
+% the development a new Open Source software platform for computer-based
+% voting research.  This software platform is called KOA (``Kiezen op
+% Afstand'', or ``remote voting'' in Dutch) and is based upon a software
+% platform developed for, and released by (on recommendation of the
+% aforementioned report), the Dutch government under the GPLv2 license
+% in 2004.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{KOA: A (Remote, Trustworthy) Voting Architecture for Voting Research}
+
+This software system, KOA, is usable both as a standard kiosk-based
+computer-based voting system as well as a remote telephone and
+internet-based voting system.  It has a general-purpose voting
+system-independent core an a ``plugin'' model for supporting various
+voting systems like the list-based system of Holland or Ireland's
+STV-based system~\cite{KiniryEtAl06}.
+
+As mentioned previously, this software system is only meant to provide
+a very high-quality, extensible research platform for computer-based
+voting; it is not meant to be used in any state, or national
+elections.  To highlight this extensibility, as well as to provide
+evidence that a verification-centric software engineering methodology
+results in a software system of unparalleled quality, the Irish voting
+system has been formally specified and verified using the Java
+Modeling Language and a number of formal tools.
+%, several of which we
+%are partly responsible.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% \subsection{Aside: Criticisms of trustworthy computer-based
+%   voting---SERVE and similar reports}
+% 
+% The SERVE report points out a number of general challenges in
+% internet-based voting, and a number of specific problems with the
+% U.S. Department of Defense's Federal Voting Assistance Program in
+% 2004~\cite{SERVE}.  The \emph{Beveiligingsanalyse van
+%   Internetstembureau.nl} report, co-written by one of the authors
+% (Kiniry) of this paper in 2003~\cite{BVI03}, contains comparable
+% content and criticisms of a Dutch remote voting system.
+% 
+% Thus, we are well aware of the challenges inherent in trustworthy
+% computer-based voting, and particularly in remote voting over a public
+% network.  The point of this work is to provide a quality software
+% architecture in which other researchers can begin to address the
+% challenges identified in these, and other similar, reports.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%\subsection{Tools of the Trade}
+
+As trustworthy electronic voting system must be both secure and
+correct, ballots must be collected and counted accurately and
+precisely as specified by electoral law.  
+
+%Researchers agree that
+%neither manual inspection of source code, nor manual testing can find
+%all of, or perhaps even most of, the errors in the source code or
+%system design.  On the other hand, most practicianers believe that
+%formal specification and verification is unrealistic, unattainable,
+%and too expensive.  Unfortunately, this attitude is rarely based upon
+%personal experience, especially using modern languages, tools, and
+%techniques.
+
+%Our research group focuses on \emph{applied} formal methods: the
+%creation and evolution of new \emph{theories}, \emph{tools},
+%\emph{processes}, and \emph{techniques} for developing \emph{real},
+%\emph{concrete}, \emph{industry-scale} software systems.  The ``tools
+%of the trade'' are thus more than just software tools.  Choosing the
+%right concepts, ensuring a consistent design style, and following a
+%(mathematically) rigorous but flexible process has as much (or more)
+%to do with the quality of a software system as one's choice of
+%programming language or operating system.
+
+The rest of the paper is organized as follows.  In section 2 we describe the 
+software modeling and verification  used.  In sections 3 and 4 we describe 
+KOA's architecture, and our verification-centric
+methodology for the analysis, design, specification, implementation,
+testing, and verification of trustworthy computer-based vote counting.
+As a case study, we have developed a plugin, called \emph{\Votail},
+for the KOA system that specializes it in the Irish context.  Finally,
+the paper concludes by reflecting on the state of e-voting research in
+computer science and mathematics.
+
+%=====================================================================
+\section{Verification-Centric\\Software Development}
+
+The following summary is organized from a process-centric
+point-of-view.  Each stage in the (mostly linear) development process
+is described in some detail.  After describing the various aspects of
+our verification-centric process we discuss the Irish voting case
+study which uses this methodology.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Analysis}
+
+The first stage of our process is to perform domain analysis.  The
+distinct core concepts of the domain that we are trying to model are
+identified, usually while interacting as a group, and sometimes with
+domain experts present.  Considering input from several parties
+elucidates different perspectives on the system and helps the group
+find agreement on which concepts are core, how to define these
+concepts, and how these concepts relate to one another.
+
+\paragraph{Extended BON.}
+
+We use a language called ``Extended BON'' (or EBON for short) to
+describe our system at this early stage.  EBON is a system
+specification language akin to UML that differs in several key
+respects.  Contrary to UML, BON has a relatively small number of
+charts and diagrams, a simple semantics, a graphical and
+human-readable textual syntax, and it is easy to maintain consistency
+between a BON specification and a concrete realization of that
+specification.
+
+EBON is based upon BON, which was created by Walden and
+Nerson~\cite{WaldenNerson95} in the mid-1990s.  EBON was created by
+Kiniry by adding \emph{semantic properties} to
+BON~\cite{Kiniry04-R0420,Kiniry02-PhDThesis}.  Semantic properties are
+formally specified domain-specific constructs that are added to a
+general-purpose like BON.  For example, semantic properties are used
+to describe code ownership, software licenses, feature and bug
+tracking, code reviews, concurrency requirements, etc.
+
+The key constructs in EBON that we use in this work are class
+dictionaries and several kinds of informal charts, (system, cluster,
+class, creation, and event charts), which describe concepts using
+structured natural language.
+
+\paragraph{Class Dictionaries.}
+
+In BON, domain constructs are known as \emph{classes}, not in a
+concrete object-oriented sense, but rather ``classifiers'' in a
+generic sense.  In our process, a name and a single sentence
+definition is agreed upon for each class \emph{completely
+  independently of design and implementation considerations}.  When
+writing a definition one uses only classes that are defined in the
+model under analysis or classes from models on which the domain
+depends.
+
+\paragraph{Informal Charts.}
+
+Due to space constraints, we will only describe class charts in detail
+here.  In short, a system chart enumerates a system's purpose and
+major subsystems (clusters, in the BON vernacular), a cluster chart
+explains the purpose of a subsystem and, in turn, what subsystems and
+classes it contains, and event charts identify important external and
+internal events (state transitions) in a subsystem.
+
+Each class is described, again in English, using a class chart.  A
+class chart contains four sections: a \emph{description},
+\emph{queries}, \emph{commands}, and \emph{constraints}.  Queries and
+commands are, collectively, known as features.
+
+The description of a class is an expanded version of the
+aforementioned class's definition.  Within our process, the first
+sentence of the of the description is the definition, thus the formal
+refinement between the description and the definition is simply a
+prefix.
+
+Queries are operations that do not change the class's state, whereas
+commands are operations that do change a class's state.  Constraints
+are restrictions on a class's state and behavior.
+
+\begin{figure}
+\footnotesize
+\begin{verbatim}
+class BALLOT
+description
+  "A ballot paper in an Irish election."
+query
+  "What is the location of this ballot \
+   in the current count?"
+  "What is the count number for the last \
+   transfer of this ballot?"
+  "Is this ballot non-transferable?"
+  "What is the first preference of this \
+   ballot?"
+  "To which candidate is this ballot \
+   assigned?"
+  "What is the next preference candidate?"
+  "What is this ballot's ID number?"
+  "Is this ballot paper assigned to a \
+   given candidate?"
+  "How many preferences remain on this \
+   ballot?"
+  "Is this ballot on top of a given \
+   different ballot?"
+command
+  "Set this ballot's candidate list."
+  "Transfer this ballot to the next \
+   preference candidate."
+constraint
+  "No two ballots have the same ballot ID."
+  "A ballot must be assigned to a \
+   candidate that is on its candidate \
+   list."
+  "No two preferences given to \
+   candidates on this ballot may be \
+   identical."
+  "Preferences expressed on this ballot \
+   must start with 1, monotonicaly \
+   increase, and grow no larger than the \
+   number of candidates available \
+   on this ballot."
+  "If this ballot is transferred, the \
+   count number at which this ballot \
+   was last transferred must be positive."
+end
+\end{verbatim}
+\normalsize
+\caption{An EBON class chart.}
+\label{fig:EBON_class_chart_example}
+\end{figure}
+
+An example class chart for the class \emph{BALLOT} is in
+Figure~\ref{fig:EBON_class_chart_example}.  Notice how queries are all
+written as questions, commands as imperative sentences, and
+constraints only use features introduced by queries and constraints.
+
+We also must describe how classes relate to one another with respect
+to how classes come into being.  A creation chart summarizes these
+relationships.  With respect to a verification-centric approach, our
+goal in defining such relations is to minimize the exposure of a
+class's creation and to identify ownership relations between classes.
+The former goal reduces the amount of reasoning we must do about
+object allocation and aliasing and the latter supports the use of
+ownership type systems to support modular reasoning.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Design}
+
+After high-level analysis is complete, we move on to defining
+medium-level contracts using EBON.  During this design stage, we
+identify inheritance relationships between classes, client-supplier
+relationships between classes, specify the formal semantics of
+features and constraints, and identify interesting scenarios in which
+classes interact.
+
+Because we specify classes with invariants and assertions like pre-
+and postconditions, we are following a strict design-by-contract
+approach to program construction.  This methodology is further
+emphasized below when we discuss our implementation strategy.
+
+Each of these constructs helps in a different way with respect to a
+verification-centric methodology.  For example, identifying
+inheritance relationships helps identify behavioral inheritance (which
+is useful for feature reuse and necessary for modular reasoning)
+versus code inheritance (which is useful for code reuse, and,
+potentially, for reducing verification burden).  Likewise, elucidating
+client-supplier relationships helps identify how interdependent an
+architecture is (and thus, how fragile verification results are) and
+better understand how weak or strong feature preconditions must be.
+
+Scenarios, which are similar to UML's use cases, identify interesting
+interactions between classes.  Scenarios are used to concretely
+identify and create module- and subsystem-level unit tests during
+implementation and testing.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Specification}
+
+Next, our medium-level specifications are made concrete in a popular
+specification language called the Java Modeling Language (JML).
+
+\paragraph{The Java Modeling Language.}
+
+The Java Modeling Language (JML) is a formal behavioral specification
+language for Java~\cite{LeavensBakerRuby99,LeavensBakerRuby-Prelim}.
+Effectively, it is a small extension to the Java programming language
+that uses annotations embedded in special comments to formally express
+properties of a Java class or interface.
+
+JML is used at two levels.  At a high level one uses JML to describe a
+mathematical model-based specification (the ``Modeling'' of
+J\textbf{M}L) of a software system system.  JML models are functional,
+executable, formally specified and verified constructs like sets,
+sequences, bags, maps, etc.  At a lower level JML is used to describe
+a concrete software architecture with familiar constructs like
+invariants, preconditions, postconditions, etc.
+
+To connect these two levels, a specifier describes a functional or
+relational refinement relating the high level model-based specification
+and the low level, contract-based, description of the implementation.
+
+We use JML not just because of our local expertise and involvement in
+the JML community, but because there is a large range of powerful
+tools that understand JML, some of which we discuss
+below~\cite{BurdyEtal05-STTT,Leavens-etal03b}.
+
+For example, we compile JML specification into runtime checks, we
+generate (tens of thousands of) unit tests from JML specifications,
+and we formally verify that Java method implementations fulfill their
+contracts expressed in JML.
+
+\paragraph{Refinement between EBON and JML.}
+
+At the present time we initially refine from EBON specifications to
+JML by hand, translating EBON classes into concrete Java primitive
+types, pre-provided JML model classes, new JML models, and concrete
+Java modules (classes and interfaces).  We maintain the connection
+between the specification layers by using a combination of simple
+scripts and a development process that emphasizes manual inspection
+and specification conformance checking.
+
+During this refinement phase concrete choices of data representation
+are made by identifying which EBON classes should be full-fledged Java
+types, and how these Java types should relate to each other (i.e., if two
+classes inherit from each other in EBON, then they must inherit from
+each other in the JML/Java architecture).  
+
+%To refine EBON classes to Java types, each EBON feature is mapped to a
+%single method or, in the case of an EBON query with no associated
+%constraint, a read-only field.  In particular, each query is mapped to
+%a \emph{pure} method, each command is mapped to a non-pure method, and
+%each constraint is mapped to one or more class or object invariants.
+%When performing this refinement, each informal class or feature
+%description is literally cut-and-pasted into the Javadoc documentation
+%of the corresponding Java construct.  This means that the results of
+%our analysis not only helps us understand the system at a high-level,
+%but supports documentation reuse.  Consequently, when Javadocs are
+%updated in later stages of development, high-level charts are
+%regenerated automatically with the aforementioned scripts.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Implementation}
+
+After a model-based specification is written in JML, and medium-level
+EBON contracts are refined into JML contracts on a Java modules, the
+implementation of the system commences.  Because we use JML, our
+specification are formal and executable, and our implementation is
+testable against, and verifiable with respect to, the JML
+specification, using tools such as the JML tool suite and
+ESC/Java2~\cite{KiniryCok04,ChalinEtal06} (discussed below).  This
+combination of tools and techniques provides a high level of
+confidence that the software system implements the requirements
+correctly.
+
+Our implementation strategy is, generally, to implement the
+constructors, factories, and initializers first, as these features let
+one focus on invariants and the initial state of objects.  Next, we
+focus on the easiest/smallest ``leaf'' methods---methods like basic
+getters and setters, overridden base methods from
+\texttt{java.lang.Object}, etc.  We then move up the chain of methods,
+aiming to tackle less complex methods before more complex ones,
+implementing methods deeper in the expected call stack of the
+application.
+
+It is important to note that we do not need to implement the whole
+system, or even a whole class, before checking the correctness of
+method implementations.  Firstly, we unit test methods early and
+independently as soon as we have constructors and factories
+implemented.  And secondly, extended static checking is modular, as
+each method body is checked independently of any other method body.
+Thus, unit tests and ESC/Java2 are run very frequently, typically
+after only a few new lines of code are written.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Testing}
+
+Testing includes manual development of automated tests at the method,
+class, component, and subsystem levels, and automatic generation of
+tests at the method and constructor level.
+
+\paragraph{JML-JUnit.}
+
+The JML-JUnit tool is used to generate test cases from the JML
+specification~\cite{Cheon-Leavens02}.  This testing methodology uses
+method specifications as test oracles and focuses on unit testing
+methods and constructors independently.  Test data generators are
+written for all types in the system by manually identifying
+``interesting'' data values in the whole system-under-test.  
+
+%For a method with a signature of $m(t_0, \ldots, t_n)$ and a set of
+%``interesting'' data values for each formal parameter type, the
+%JML-JUnit tool automatically generates sufficient tests to execute $m$
+%with every possible combination of values appropriate for the types of
+%the parameters.  Thus, if there are only two interesting values for
+%each type in the signature of $m$, then up to $2^n$ tests are
+%generated.  Obviously, this test generation methodology results in
+%extensive tests that need not be written or maintained by hand and
+%leads to very good test coverage.
+
+%Tests are also written manually for specific scenarios which are
+%interesting, e.g., where three lowest continuing candidates have equal
+%votes.  Many of these tests are motivated by events and scenarios
+%identified during analysis and design.  In fact, we aim to have at
+%least one class- or component-level test for each and every event and
+%scenario.
+
+%Additionally, existing subsystem and system-level test data is used
+%when available.  For example, as discussed below in our case study,
+%the ballot data that had been used by the Irish CEV to test the
+%current, now discredited, electronic voting system is being used in
+%testing our verification-centric implementation.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Verification}
+
+In addition to the testing, the implementation is verified with
+respect to the JML specifications.  Whereas testing covers a finite
+number of data values, verification is used to prove check the logical
+consistency of the implementation.
+
+\paragraph{The Extended Static Checking for Java.}
+
+ESC/Java2 is a modular static verification tool that checks for common
+runtime errors and verifies that a Java method implementation conforms
+to its JML specification.  ESC/Java2 translates program source and its
+specifications into verification conditions that are passed to one of
+several automated and interactive theorem prover, which in turn either
+verify that no problems are found or generate a counterexample
+indicating a potential bug.  The tool and its built-in provers operate
+automatically with reasonable performance---most methods are checked
+in less than a handful of seconds.
+
+Now that we have reviewed the our verification-centric process and
+methodology, a case study focusing on the Irish voting system is
+discussed.
+
+%=====================================================================
+\section{A Case Study:\\The Irish Voting System} 
+
+The Irish voting system represents an interesting case study for
+applied formal methods because Ireland's PRSTV voting system is
+non-trivial and, given we are working in an Irish university, it has
+local relevance.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Informal Analysis and Specification}
+
+A voting system consists of several interrelated concepts.  There is
+one or more position to be filled by election or outcome to be decided
+by referendum.  This case study is concerned with the voting system
+for Irish general elections.  
+
+In Irish elections, there are a number of seats to be filled in each
+constituency.  There are almost always more candidates than seats, and
+there are a large number of registered voters.  Each voter casts a
+ballot using the PRSTV system, and those ballot papers are counted
+using an process (an algorithm) that is defined by Irish law.  The
+voting algorithm is iterative, requiring that a decision is made at
+each iteration either to deem a candidate elected or to eliminate a
+candidate with lowest votes received.
+
+These concepts are represented by EBON classes or Java types in the
+specification: \emph{Ballot}, \emph{Ballot Box}, \emph{Candidate},
+\emph{Decision}, \emph{Election Algorithm}, \emph{Election Details},
+and \emph{Election Results}.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Formal Specification}
+
+\Votail is the Irish word for Voting.  The \Votail specification is a
+JML specification for the Irish vote counting system~\cite{Cochran06}.
+This formal specification is derived from the complete functional
+specification for the D{\'a}il election count
+algorithm~\cite{CEV00,CEV02}.
+
+Thirty nine formal assertions were identified in the Commentary on
+Count Rules published by the Irish Department of Environment and Local
+Government.  Each assertion expressed in JML was identified by a
+Javadoc comment.  In addition, a state machine was specified so as to
+link all of the assertions together.  Java classes were specified
+for the vote counting algorithm, e.g., to represent the ballot papers
+and to represent the candidates.  Concrete examples of how the
+methodology was applied will clarify this work.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Detailed Examples}
+
+We summarize a few detailed examples of specifications of various
+methods in \Votail.  Each method is specified with English by using
+both an extended version of Javadoc, used to encode the EBON informal
+specifications, and JML to express detailed formal specifications.
+JML specification encode not only functional behavior, but also safety
+and progress properties of the voting system.
+
+%---------------------------------------------------------------------
+\paragraph{Example of a simple requirement.}  
+
+\begin{figure}
+\footnotesize
+\begin{verbatim}
+/**
+ * Minimum number of votes needed to 
+ * guarantee an election.
+ */
+ //@ public model long quota;
+ //@ public invariant 0 <= quota;
+ //@ public invariant quota <= totalVotes;
+ /**
+  * @see requirement 3, section 3, 
+  *      item 3, page 13
+  */
+ /*@ public invariant (PRECOUNT < state) ==> 
+   @  quota == 1 + (totalVotes / (seats + 1));
+   @*/
+\end{verbatim}
+\normalsize
+\caption{JML invariant for calculating a quota.}
+\label{fig:JMLSimpleExample}
+\end{figure}
+
+First we will start with a simple requirement in \Votail.  The
+specification for calculating a quota is shown in
+Figure~\ref{fig:JMLSimpleExample}, encoded in EBON and JML.
+
+Note how the specification summarizes the EBON constraint in the
+Javadoc comment, the EBON class is encoded in a JML model field with
+appropriate formal invariants, and the requirement is traced back to
+the original legal documentation with a cross-reference.  Each and
+every requirement is expressed in a similar manner.
+
+%---------------------------------------------------------------------
+\paragraph{Example of a moderately complicated requirement.}  
+ 
+For an example of a more complicated requirement, we look to Section
+ 7, item 3.2 on page 25 of the \emph{Count Requirements and Commentary
+   on Count Rules}~\cite{CEV00} which states:
+ \begin{quote}
+   As a first step, a transfer factor is calculated, viz. the number of
+   votes in the surplus is divided by the total number of transferable
+   votes in the last set of votes. This transfer factor is multiplied
+   in turn by the total number of votes in each sub-set of next
+   available preferences for continuing candidates (note that the
+   transfer factor is not applied to the sub-set of non-transferable
+   votes in the set of votes).
+ \end{quote}
+ 
+ The requirement is translated into formal natural language in EBON as
+ follows:
+ \begin{quote}
+   The number of votes in the surplus is divided by the total number of
+   transferable votes in the last set of votes. This transfer factor is
+   multiplied in turn by the total number of votes in each sub-set of
+   next available preferences for continuing candidates.
+ \end{quote}
+ 
+ \begin{figure*}
+ \footnotesize
+ \begin{verbatim}
+   /** 
+    * Distribute the surplus votes.
+    * 
+    * @param candidateWithSurplus the candidate whose surplus is to be distributed.
+    * @design The highest surplus must be distributed if the total surplus could 
+    *         save the deposit of a candidate or change the relative position of
+    *         the two lowest continuing candidates, or would be enough to elect the
+    *         highest continuing candidate.
+    * @see requirements 14-18, section 5, item 2, page 18
+    * @see requirement 8, section 4, item 2, page 15    */
+   /*@ requires getSurplus(candidateWithSurplus) > 0;
+     @ requires state == COUNTING;
+     @ requires numberOfContinuingCandidates > remainingSeats;
+     @ requires (numberOfContinuingCandidates > remainingSeats + 1) ||
+     @          (sumOfSurpluses + lowestContinuingVote > nextHighestVote) ||
+     @          (numberOfEqualLowestContinuing > 1);
+     @ requires remainingSeats > 0;
+     @ requires (remainingSeats > 1) ||
+     @          ((highestContinuingVote < 
+     @            sumOfOtherContinuingVotes + sumOfSurpluses) &&
+     @          (numberOfEqualHighestContinuing == 1));
+     @ requires getSurplus (candidateWithSurplus) == highestSurplus;
+     @ requires (sumOfSurpluses + highestContinuingVote >= quota) ||
+     @   (sumOfSurpluses + lowestContinuingVote > nextHighestVote) ||
+     @   (numberOfEqualLowestContinuing > 1) ||
+     @   ((sumOfSurpluses + lowestContinuingVote >= depositSavingThreshold) &&
+     @      (lowestContinuingVote < depositSavingThreshold));
+     @ ensures getSurplus (candidateWithSurplus) == 0;
+     @*/
+   /** @see requirement 9, section 4, item 3, page 16 */
+   /*@ ensures countNumber == \old (countNumber) + 1;
+     @ ensures (state == COUNTING) || (state == FINISHED);
+     @*/
+   /** @see requirement 2, section 3, item 3, page 12 */
+   /*@
+     @ ensures totalVotes == nonTransferableVotes + 
+     @   (\sum int i; 0 <= i && i < totalCandidates; 
+     @   candidateList[i].getTotalVote());
+     @*/
+   protected void distributeSurplus(/*@ non_null @*/ 
+             ie.koa.Candidate candidateWithSurplus);
+ \end{verbatim}
+ \caption{JML Specification of the \texttt{distributeSurplus} method.}
+ \label{fig:JMLModerateExample}
+ \end{figure*}                           
+ 
+ Finally, this formal natural language is formally specified in the
+ architecture as a JML postcondition for the \texttt{distributeSurlus}
+ method shown in Figure~\ref{fig:JMLModerateExample}.
+ 
+ Note again how each high-level requirement or constraint is specified
+ both in formal natural language and in one or more formal assertions.
+ 
+%---------------------------------------------------------------------
+% \paragraph{Example of a very complicated requirement.}  
+% 
+% It is worth noting that the semi-formal documents from which the
+% requirements were extracted contain both declarative and imperative
+% statements.  In contrast, JML is a declarative language, whereas Java
+% is an imperative language.  The procedure for rounding of fractional
+% vote transfers in the Irish STV system, for example, is imperative in
+% nature and not easy to specify in a declarative way.  This raises the
+% difficulty of writing a specification directly from a non-trivial
+% functional requirement.  An alternative approach is to restate the
+% requirement in a declarative way, perhaps using a domain specific
+% language.
+% 
+% The procedure for rounding of fractional votes has the following two
+% invariants:
+% \begin{enumerate}
+% \item the total number of transferable votes must not be altered by
+%   the rounding of votes, and
+% \item for each set of fractions to be rounded, there is a threshold
+%   such that fractions greater than that threshold are rounded up, and
+%   fractions below that threshold are rounded down.
+% \end{enumerate}
+% 
+% \begin{figure}
+% \footnotesize
+% \begin{verbatim}
+%   /**
+%    * Determine actual number of votes to 
+%    * transfer to this candidate, excluding 
+%    * rounding up of fractional transfers
+%    * 
+%    * @see requirement 21, 
+%    *      section 7, item 3.1, page 24
+%    * @see requirement 22, 
+%    *      section 7, item 3.2, page 25
+%    * 
+%    * @design The votes in a surplus are 
+%    * transfered in proportion to the number 
+%    * of transfers available throughout the 
+%    * candidates ballot stack. The calculations 
+%    * are made using integer values because 
+%    * there is no concept of fractional votes 
+%    * or fractional transfer of votes, in the 
+%    * existing manual counting system.  If 
+%    * not all transferable votes are 
+%    * accounted for the highest remainders 
+%    * for each continuing candidate need 
+%    * to be examined.
+%    * 
+%    * @param fromCandidate 
+%    *        the candidate from which to 
+%    *        count the transfers.
+%    * @param toCandidate 
+%    *        the continuing candidate 
+%    *        eligible to receive 
+%    *        votes.
+%    * @return the number of votes to 
+%    *         be transfered, 
+%    *         excluding fractional 
+%    *         transfers.
+%    */
+%    \end{verbatim}
+% \caption{Java Method Comment of the \texttt{getActualTransfers} method.}
+% \label{fig:JavaMethodCommentExample}
+% \end{figure}
+% \normalsize
+% 
+% \begin{figure}
+% \footnotesize
+% \begin{verbatim}
+%   /*@ requires (state == COUNTING);
+%     @ requires (fromCandidate.getStatus() 
+%     @          == Candidate.ELECTED) ||
+%     @          (fromCandidate.getStatus() 
+%     @          == Candidate.ELIMINATED);
+%     @ requires toCandidate.getStatus() 
+%     @          == Candidate.CONTINUING;
+%     @ ensures ((fromCandidate.getStatus() 
+%     @         == Candidate.ELECTED) && 
+%     @         (getSurplus(fromCandidate) < 
+%     @         getTotalTransferableVotes(
+%     @         fromCandidate)))
+%     @   ==>   (\result == 
+%     @         (getSurplus (fromCandidate) * 
+%     @         getPotentialTransfers (
+%     @         fromCandidate, 
+%     @         toCandidate.getCandidateID()) 
+%     @         /
+%     @         getTotalTransferableVotes (
+%     @         fromCandidate)));
+%     @ ensures ((fromCandidate.getStatus() 
+%     @         == Candidate.ELIMINATED) ||
+%     @         (getTotalTransferableVotes(
+%     @         fromCandidate) 
+%     @         <= getSurplus 
+%     @         (fromCandidate)))
+%     @   ==>   (\result == 
+%     @         (\num_of int j; 
+%     @         0 <= j && j < totalVotes;
+%     @         ballotsToCount[j]
+%     @         .isAssignedTo(
+%     @         fromCandidate
+%     @         .getCandidateID()) 
+%     @         &&
+%     @         getNextContinuingPreference(
+%     @         ballotsToCount[j]) == 
+%     @         toCandidate.
+%     @         getCandidateID()));
+%     @*/
+%   protected /*@ pure @*/  
+%       int getActualTransfers (
+%           /*@ non_null @*/ Candidate fromCandidate, 
+%           /*@ non_null @*/ Candidate toCandidate);
+% \end{verbatim}
+% \caption{JML Specification of the \texttt{getActualTransfers} method.}
+% \label{fig:JMLExampleGetActualTransfers}
+% \end{figure}
+% 
+% \begin{figure}
+% \footnotesize
+% \begin{verbatim}
+%   /**
+%    * Determine the rounded value of a 
+%    * fractional transfer.
+%    * 
+%    * @design This depends on the shortfall 
+%    * and the relative size of the other 
+%    * fractional transfers.
+%    * 
+%    * @see requirements 23-25, 
+%    *      section 7, item 3.2, page 25
+%    *
+%    * @param fromCandidate
+%    *        Elected candidate from 
+%    *        which to distribute surplus
+%    *        
+%    * @param toCandidate
+%    *        Continuing candidate 
+%    *        potentially eligible to 
+%    *        receive transfers
+%    *        
+%    * @return 
+%    *     <code>1</code> if the fractional 
+%    *                    vote is to 
+%    *                    be rounded up
+%    *     <code>0</code> if the fractional 
+%    *                    vote is to 
+%    *                    be rounded down
+%    */
+%   /*@ requires state == COUNTING;
+%     @ requires isElected (fromCandidate); 
+%     @ requires toCandidate.getStatus() 
+%     @     == ie.koa.Candidate.CONTINUING;
+%     @ requires getSurplus(fromCandidate) 
+%     @     < getTotalTransferableVotes
+%     @     (fromCandidate);
+%     @ ensures (
+%     @ getCandidateOrderByHighestRemainder 
+%     @    (fromCandidate, toCandidate) <=
+%     @    getTransferShortfall 
+%     @    (fromCandidate))
+%     @   ==> \result == 1;
+%     @ ensures (
+%     @ getCandidateOrderByHighestRemainder 
+%     @    (fromCandidate, toCandidate) >
+%     @    getTransferShortfall 
+%     @    (fromCandidate))
+%     @   ==> \result == 0;
+%     @*/
+%   protected /*@ pure @*/ long 
+%     getRoundedFractionalVote (
+%     /*@ non_null @*/ 
+%     Candidate fromCandidate, 
+%     /*@ non_null @*/ 
+%     Candidate toCandidate);
+% 
+% \end{verbatim}
+% \caption{JML Specification of the \texttt{getRoundedFractionalVote} method.}
+% \label{fig:JMLComplexExample}
+% \end{figure}
+% \normalsize
+% 
+% The Java method comment encoding these requirements is shown in
+% Figure-\ref{fig:JavaMethodCommentExample}.  The JML postconditions for
+% the rounding of fractional vote transfers are shown in
+% Figure-\ref{fig:JMLExampleGetActualTransfers} and
+% Figure-\ref{fig:JMLComplexExample}.
+
+The \Votail specification was typechecked and checked for consistency
+using ESC/Java2.
+
+%=====================================================================
+\section{Testing the Design Specification by Partial Implementation}
+
+As is already obvious, we follow a strict design by contract approach
+to system design and development~\cite{Meyer92b}.  Thus, we have a
+fairly strict set of programming style standards and a process that
+restricts a programmer's ability to make changes to the system that
+are not tested, verified, and properly specified.
+
+%We should note that the implementation of this trustworthy e-voting
+%system is being written by an undergraduate student (Patrick Tierney)
+%with only a few months of experience with JML and these tools and
+%techniques.  The comments on the implementation below are from the
+%point-of-view of a programmer with less experience that a typical
+%programmer in industry that might be working on this kind of system.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Implementation Strategy}
+
+%During the implementation of this system was written to stay as close
+%to the specifications as possible.  This is not always possible as
+%certain alterations must be made so ensure the system functions
+%properly.  Changes made must have justification and must be documented
+%accordingly.  Each change to the specification is explained so the
+%change is understood by other developers.  As this project adheres to
+%the KindSoftware Coding Standard, code reviews are also
+%mandatory~\cite{KS-CodeStandard05}.
+
+\paragraph{Incremental extended static checking.}
+
+%At the start of the implementation, various small methods in both the
+%\texttt{Ballot} and \texttt{Candidate} classes, such as
+%\texttt{declareElected()} and \texttt{getFirstPreference()}, were
+%written first to provide a simple start to learning the ESC/Java2 and
+%JML tools.  A good understanding of the tools is vital in order to
+%implement each method correctly, especially in the cases of the more
+%difficult methods.
+
+ESC/Java2 was used to ensure that the specifications for each class,
+method, and field were strictly adhered to.  Recall that ESC/Java2 is
+reasoning about all code paths simultaneously, modularly, and
+statically.
+
+%ESC/Java2 is excellent at discovering sections of the code that
+%violated the specification.  As a programmer, it increases your
+%knowledge of Java and improves your programming immensely.  ESC/Java2
+%does have some faults, as it does not cater for some operators in JML
+%used in this specification (e.g., the generalized quantifier
+%\texttt{\\sum} is not supported).  Also, while ESC/Java2 does
+%typecheck an ownership type system (the universes type system), it
+%does not yet generate verification conditions that leverage such
+%specifications.  Thus, we sometimes struggle with reasoning about
+%aliasing, particularly with respect to class invariants.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Testing Strategy}
+
+As discussed earlier, JML-JUnit automatically generates an extensive
+unit test suite.
+
+Many of the ``interesting'' data values necessary for testing were
+identified quickly due to the fact that arrays are used frequently in
+the system.  Therefore, values like $0$, $1$ and the length of each
+array were very useful.  Other values that were used were already
+specified in the contracts, such as maximum possible rounds of
+counting.  Some other values identified were the maximum values of
+Java primitive types like integers and longs.
+
+For each value added to the test data, the number of tests increases
+by between 100 to 1000 tests depending on the complexity and size
+method being tested.  For example, by adding one extra data value
+while testing the method \texttt{Ballot.load()}, the number of tests
+increased by over 700 tests.
+
+JML-JUnit has been very useful and provided extensive information
+about how the system works and performs.  The fact that the JML
+specifications are also tested adds precision to the testing and helps
+us identify problems with both the implementation and the
+specifications.  By continually adding particular data values, we aim
+to have 100\% test coverage of the system.  Although it is difficult
+to master the test data generation at first, JML-JUnit is simple to
+use after some experience.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Errors Discovered in the Specification}
+
+The main errors in specifications that have been discovered were
+concentrated on arrays that had no upper bounds specified for them.
+Also, we have discovered that some specifications were too weak.  To
+solve these problems we corrected and strengthened specifications, and
+sometimes helper methods (methods that need not maintain class
+invariants) had to be introduced.
+
+One of the invariants in the system specifies the uniqueness of a
+variable, \texttt{randomNumber}.  The invariant for this variable,
+which is part of both the \texttt{Candidate} and \texttt{Ballot}
+classes, was the source of many errors with ESC/Java2.
+
+%Most of the specification faults we have discovered using this
+%verification-centric methodology, other than the array bounds errors,
+%would have been very difficult to foresee, and therefore probably
+%could not of been avoided.
+
+\footnotesize
+\begin{verbatim}
+//@ public constraint
+//@   \old(lastSetAddedCountNumber) <
+//@   lastSetAddedCountNumber;
+\end{verbatim}
+\normalsize
+
+For example, there was a bug in this constraint assertion, as it must
+hold for all methods (pure or otherwise), and the JML reference manual
+indicates that constraints generally are reflexive and transitive, and
+`\texttt{<}' is not reflexive.  To correct this constraint, the
+`\texttt{<}' operator had to be replaced by `\texttt{<=}'.
+
+As another example, the \texttt{addVote()} and \texttt{removeVote()}
+methods were missing the following precondition:
+\footnotesize
+\begin{verbatim}
+//@ requires 0 <= numberOfVotes;
+\end{verbatim}
+\normalsize
+This precondition was added to set a lower bound on the variable
+\texttt{numberOfVotes} to ensure that the invariant
+\footnotesize
+\begin{verbatim}
+//@ public invariant
+//@   (\forall int i; 0 < i && i < MAXCOUNT;
+//@    0 <= votesAdded[i]);  
+\end{verbatim}
+\normalsize
+is always valid.
+
+%=====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+Because computer-based voting (a) is full of interesting algorithmic
+and security challenges, (b) is an application area ripe for the use
+of formal methods, and (c) is having a dramatic broad impact on
+society today, we have chosen to work with governments and
+independently on a computer-based voting system.  We believe that
+governments should use our work as a benchmark against which to
+compare other trustworthy voting system.  We offer researchers a
+well-documented verification-centric process, a set of techniques and
+tools for rigorously developing quality software, and, as a case study
+and foundation for future research, an open source trustworthy voting
+system developed with these tools and techniques.
+
+While integrating the \Votail subsystem into the KOA system, and prior
+to/during the new full FLOSS foundation release of KOA, a number of
+new pieces of English documentation and functional specification must
+be written.  We hope that the availability of such documentation and
+specification will provide additional motivation for electronic and
+remote voting researchers and developers to seriously consider the KOA
+system as a foundation for their work.
+
+We intend for KOA to be the first formally specified and verified
+remote and local voting system available in the world, and furthermore
+it will be available under the GPL license.  It is unclear how to
+compare such a system to the current commercial and FLOSS voting
+systems being proposed by others, given that none of them, to our
+knowledge, even write formal specifications, let alone perform
+verification.  We hope that this work will inspire and challenge other
+groups working on trustworthy voting.
+
+%=====================================================================
+\section{Acknowledgments}
+
+This work is being supported by the European Project Mobius within the
+frame of IST 6th Framework, national grants from the Science
+Foundation Ireland and Enterprise Ireland, and by the Irish Research
+Council for Science, Engineering and Technology.  This paper reflects
+only the authors' views and the Community is not liable for any use
+that may be made of the information contained therein.
+
+%======================================================================
+%% \nocite{ex1,ex2}
+\bibliographystyle{plain}
+\bibliography{abbrev,ads,category,complexity,hypertext,icsr,knowledge,languages,linguistics,meta,metrics,misc,modeling,modeltheory,reuse,rewriting,softeng,specification,ssr,technology,theory,web,upcoming,upcoming_conferences,conferences,workshops,verification,escjava,jml,nijmegen,paper}
+%======================================================================
+% Fin
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

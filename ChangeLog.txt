@@ -1,0 +1,2061 @@
+------------------------------------------------------------------------
+r2620 | dcochran | 2007-08-24 11:39:20 +0100 (Fri, 24 Aug 2007) | 1 line
+
+Removed duplicate source code
+------------------------------------------------------------------------
+r2619 | dcochran | 2007-08-24 11:35:53 +0100 (Fri, 24 Aug 2007) | 1 line
+
+Renamed root folder for the release files
+------------------------------------------------------------------------
+r2618 | dcochran | 2007-08-24 11:32:49 +0100 (Fri, 24 Aug 2007) | 1 line
+
+Updated change log
+------------------------------------------------------------------------
+r2617 | dcochran | 2007-08-24 11:31:26 +0100 (Fri, 24 Aug 2007) | 1 line
+
+Added cleaning of zip and gz files
+------------------------------------------------------------------------
+r2616 | dcochran | 2007-08-24 11:24:42 +0100 (Fri, 24 Aug 2007) | 1 line
+
+Added release builder
+------------------------------------------------------------------------
+r2615 | dcochran | 2007-08-24 10:44:51 +0100 (Fri, 24 Aug 2007) | 1 line
+
+Removing synbolic link
+------------------------------------------------------------------------
+r2578 | dcochran | 2007-08-23 18:10:13 +0100 (Thu, 23 Aug 2007) | 1 line
+
+Renamed Stemdienst as WebVotingSystem
+------------------------------------------------------------------------
+r2577 | dcochran | 2007-08-23 18:07:30 +0100 (Thu, 23 Aug 2007) | 1 line
+
+Renamed Stemdienst as WebVotingSystem
+------------------------------------------------------------------------
+r2576 | dcochran | 2007-08-23 17:57:12 +0100 (Thu, 23 Aug 2007) | 1 line
+
+Moved Dutch Tally System to plugins folder
+------------------------------------------------------------------------
+r2575 | dcochran | 2007-08-23 17:48:02 +0100 (Thu, 23 Aug 2007) | 1 line
+
+Renamed Radbound Tally Snapshot as Dutch Tally System
+------------------------------------------------------------------------
+r2574 | dcochran | 2007-08-23 17:45:40 +0100 (Thu, 23 Aug 2007) | 1 line
+
+Renamed Radbound Tally Snapshot as Dutch Tally System
+------------------------------------------------------------------------
+r2572 | dcochran | 2007-08-23 17:04:11 +0100 (Thu, 23 Aug 2007) | 1 line
+
+Removed duplicate source code
+------------------------------------------------------------------------
+r2565 | dcochran | 2007-08-23 14:38:45 +0100 (Thu, 23 Aug 2007) | 1 line
+
+Added missing JARs
+------------------------------------------------------------------------
+r2564 | dcochran | 2007-08-23 14:36:11 +0100 (Thu, 23 Aug 2007) | 1 line
+
+Fixed compiler errors
+------------------------------------------------------------------------
+r2560 | dcochran | 2007-08-23 09:40:19 +0100 (Thu, 23 Aug 2007) | 1 line
+
+Changed URL from secure.ucd.ie to kind.ucd.ie
+------------------------------------------------------------------------
+r2554 | dcochran | 2007-08-22 17:39:22 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Fixed ESC/Java2 path
+------------------------------------------------------------------------
+r2553 | dcochran | 2007-08-22 17:07:57 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Modified release process
+------------------------------------------------------------------------
+r2552 | dcochran | 2007-08-22 16:37:31 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Changed build instructions to require a clean build
+------------------------------------------------------------------------
+r2551 | dcochran | 2007-08-22 16:35:46 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Added missing semicolon to JML annotation for main method
+------------------------------------------------------------------------
+r2550 | dcochran | 2007-08-22 16:34:21 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Fixed makefile for Irish tally system
+------------------------------------------------------------------------
+r2549 | dcochran | 2007-08-22 16:33:12 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Fixed makefile for Dutch Tally system
+------------------------------------------------------------------------
+r2548 | dcochran | 2007-08-22 16:31:54 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Updated release process
+------------------------------------------------------------------------
+r2547 | dcochran | 2007-08-22 16:04:00 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Updated release notes with features added and known issues
+------------------------------------------------------------------------
+r2546 | dcochran | 2007-08-22 15:06:13 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Updated documentation folder
+------------------------------------------------------------------------
+r2545 | dcochran | 2007-08-22 15:03:22 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Fixed build, source_docs and distr targets in Makefile for Votail 
+------------------------------------------------------------------------
+r2544 | dcochran | 2007-08-22 15:02:04 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Added manifest for Votail.jar
+------------------------------------------------------------------------
+r2543 | dcochran | 2007-08-22 15:00:53 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Removed Java 5 version of Bouncy Castle from the classpath
+------------------------------------------------------------------------
+r2542 | dcochran | 2007-08-22 14:59:30 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Added main method for testing and demonstration - not implemented yet
+------------------------------------------------------------------------
+r2541 | dcochran | 2007-08-22 14:43:23 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Added placeholders for 2008 research papers
+------------------------------------------------------------------------
+r2540 | dcochran | 2007-08-22 14:41:06 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Updated release instructions
+------------------------------------------------------------------------
+r2539 | dcochran | 2007-08-22 14:39:50 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Updated build instructions
+------------------------------------------------------------------------
+r2537 | dcochran | 2007-08-22 12:32:53 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Added change log
+------------------------------------------------------------------------
+r2536 | dcochran | 2007-08-22 11:47:47 +0100 (Wed, 22 Aug 2007) | 1 line
+
+First draft of release notes
+------------------------------------------------------------------------
+r2534 | dcochran | 2007-08-22 11:35:06 +0100 (Wed, 22 Aug 2007) | 1 line
+
+Added top level ReadMe file
+------------------------------------------------------------------------
+r2531 | dcochran | 2007-08-21 17:53:26 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Added builder configurations
+------------------------------------------------------------------------
+r2530 | dcochran | 2007-08-21 17:52:44 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Added builder configurations
+------------------------------------------------------------------------
+r2529 | dcochran | 2007-08-21 17:34:42 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Added builder configurations
+------------------------------------------------------------------------
+r2528 | dcochran | 2007-08-21 17:33:48 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Added builder configurations
+------------------------------------------------------------------------
+r2527 | dcochran | 2007-08-21 17:33:11 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Added builder configurations
+------------------------------------------------------------------------
+r2526 | dcochran | 2007-08-21 17:22:14 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Fixed up documentation
+------------------------------------------------------------------------
+r2525 | dcochran | 2007-08-21 17:21:30 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Fixed up documentation
+------------------------------------------------------------------------
+r2524 | dcochran | 2007-08-21 17:20:42 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Fixed up documentation
+------------------------------------------------------------------------
+r2522 | dcochran | 2007-08-21 16:11:18 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Removed classfiles from repository
+------------------------------------------------------------------------
+r2521 | dcochran | 2007-08-21 15:59:00 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Fixed link to jmlunit executable
+------------------------------------------------------------------------
+r2520 | dcochran | 2007-08-21 15:33:24 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Added builder configurations
+------------------------------------------------------------------------
+r2519 | dcochran | 2007-08-21 15:31:57 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Added builder configurations
+------------------------------------------------------------------------
+r2518 | dcochran | 2007-08-21 15:31:22 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Fixed up mismatch between Java code and JML specifications
+------------------------------------------------------------------------
+r2517 | dcochran | 2007-08-21 15:29:54 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Fixed up mismatch between Java code and JML specifications
+------------------------------------------------------------------------
+r2516 | dcochran | 2007-08-21 15:13:38 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Added builder configurations
+------------------------------------------------------------------------
+r2513 | dcochran | 2007-08-21 14:54:10 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Cleaning up unit tests
+------------------------------------------------------------------------
+r2512 | dcochran | 2007-08-21 14:53:22 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Cleaning up unit tests
+------------------------------------------------------------------------
+r2511 | dcochran | 2007-08-21 13:44:25 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Moving KOA folder up to top level
+------------------------------------------------------------------------
+r2510 | dcochran | 2007-08-21 13:35:07 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Moved up top level shared folders
+------------------------------------------------------------------------
+r2509 | dcochran | 2007-08-21 13:31:23 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Removing dead branches and tags
+------------------------------------------------------------------------
+r2508 | dcochran | 2007-08-21 13:30:36 +0100 (Tue, 21 Aug 2007) | 1 line
+
+Removing dead branches and tags
+------------------------------------------------------------------------
+r1067 | kiniry | 2007-08-19 20:35:28 +0100 (Sun, 19 Aug 2007) | 1 line
+
+Deleting duplicate file with same name in different case.
+------------------------------------------------------------------------
+r1066 | kiniry | 2007-08-19 20:34:31 +0100 (Sun, 19 Aug 2007) | 1 line
+
+Deleting duplicate file with same name in different case.
+------------------------------------------------------------------------
+r1065 | kiniry | 2007-08-19 20:31:31 +0100 (Sun, 19 Aug 2007) | 1 line
+
+Deleting duplicate file with same name in different case.
+------------------------------------------------------------------------
+r942 | kiniry | 2007-08-06 13:42:38 +0100 (Mon, 06 Aug 2007) | 1 line
+
+Corrected specification syntax errors to ensure ESC/Java2 runs on dependent code.
+------------------------------------------------------------------------
+r941 | kiniry | 2007-08-06 13:35:55 +0100 (Mon, 06 Aug 2007) | 8 lines
+
+Revising build of usermanual documents to ensure everything builds
+properly.  Converted all eps files into pdf files and put in
+repository even though most, but not all, developers will have 
+ps2pdf or similar installed.  Added jml-listings.tex file for
+JML listing support.  Changed Makefile from a file to a link to
+the parent Makefile for better maintainability, now that we are
+in an svn repository.
+
+------------------------------------------------------------------------
+r940 | Dermot Cochran | 2007-08-03 17:04:15 +0100 (Fri, 03 Aug 2007) | 1 line
+
+Updated notes
+------------------------------------------------------------------------
+r939 | Dermot Cochran | 2007-08-03 16:03:57 +0100 (Fri, 03 Aug 2007) | 1 line
+
+Translated most of the menu panel buttons into English.
+------------------------------------------------------------------------
+r938 | Dermot Cochran | 2007-08-03 13:56:53 +0100 (Fri, 03 Aug 2007) | 1 line
+
+Sixth draft of slides for EVT07
+------------------------------------------------------------------------
+r937 | Dermot Cochran | 2007-08-03 12:34:48 +0100 (Fri, 03 Aug 2007) | 1 line
+
+Fixed reference to jmlc
+------------------------------------------------------------------------
+r936 | Dermot Cochran | 2007-08-03 12:27:40 +0100 (Fri, 03 Aug 2007) | 1 line
+
+Removed duplicate builder files
+------------------------------------------------------------------------
+r935 | Dermot Cochran | 2007-08-03 12:26:14 +0100 (Fri, 03 Aug 2007) | 1 line
+
+Added Tally System classfiles to build path
+------------------------------------------------------------------------
+r934 | Dermot Cochran | 2007-08-03 12:25:16 +0100 (Fri, 03 Aug 2007) | 2 lines
+
+Fixed reference to jmlc
+
+------------------------------------------------------------------------
+r933 | Dermot Cochran | 2007-08-03 10:24:17 +0100 (Fri, 03 Aug 2007) | 1 line
+
+Change cvs to svn
+------------------------------------------------------------------------
+r932 | Dermot Cochran | 2007-08-03 10:18:48 +0100 (Fri, 03 Aug 2007) | 1 line
+
+Make sure that the autobuilders just use the build target instead of all or default.
+------------------------------------------------------------------------
+r931 | Dermot Cochran | 2007-08-03 09:58:16 +0100 (Fri, 03 Aug 2007) | 1 line
+
+Cleaned up annotations
+------------------------------------------------------------------------
+r930 | Dermot Cochran | 2007-08-02 16:57:42 +0100 (Thu, 02 Aug 2007) | 1 line
+
+Updated project builders
+------------------------------------------------------------------------
+r929 | Dermot Cochran | 2007-08-02 16:56:31 +0100 (Thu, 02 Aug 2007) | 1 line
+
+Updated project builders
+------------------------------------------------------------------------
+r928 | Dermot Cochran | 2007-08-02 16:12:54 +0100 (Thu, 02 Aug 2007) | 1 line
+
+Updated makefile to match the defaults in the Dutch tally system
+------------------------------------------------------------------------
+r927 | Dermot Cochran | 2007-08-02 16:11:24 +0100 (Thu, 02 Aug 2007) | 1 line
+
+Updated makefile to match the defaults in the Dutch tally system
+------------------------------------------------------------------------
+r926 | Dermot Cochran | 2007-08-02 16:09:14 +0100 (Thu, 02 Aug 2007) | 1 line
+
+Updated Makefile and fixed reported errors
+------------------------------------------------------------------------
+r925 | Dermot Cochran | 2007-08-02 14:15:11 +0100 (Thu, 02 Aug 2007) | 1 line
+
+Added release process, similar to ESCJava/2 process
+------------------------------------------------------------------------
+r924 | Dermot Cochran | 2007-08-02 09:33:33 +0100 (Thu, 02 Aug 2007) | 1 line
+
+Updated build path
+------------------------------------------------------------------------
+r923 | Dermot Cochran | 2007-08-01 17:56:46 +0100 (Wed, 01 Aug 2007) | 1 line
+
+Updated project builders
+------------------------------------------------------------------------
+r922 | Dermot Cochran | 2007-08-01 17:52:52 +0100 (Wed, 01 Aug 2007) | 1 line
+
+Updated project name and classpath
+------------------------------------------------------------------------
+r921 | Dermot Cochran | 2007-08-01 17:51:24 +0100 (Wed, 01 Aug 2007) | 1 line
+
+Added older version of JUnit for backward compatability
+------------------------------------------------------------------------
+r920 | Dermot Cochran | 2007-08-01 16:01:39 +0100 (Wed, 01 Aug 2007) | 1 line
+
+Fixed any compile time errors caused by mismatch with the specs
+------------------------------------------------------------------------
+r919 | Dermot Cochran | 2007-08-01 15:29:28 +0100 (Wed, 01 Aug 2007) | 1 line
+
+Changed variable name from rep to report to avoid collision with rep keyword.
+------------------------------------------------------------------------
+r918 | Dermot Cochran | 2007-08-01 15:28:22 +0100 (Wed, 01 Aug 2007) | 1 line
+
+Added missing JML semicolns
+------------------------------------------------------------------------
+r917 | Dermot Cochran | 2007-08-01 15:27:03 +0100 (Wed, 01 Aug 2007) | 1 line
+
+Added JMLSPECS to the build class path.
+------------------------------------------------------------------------
+r916 | Dermot Cochran | 2007-08-01 15:19:34 +0100 (Wed, 01 Aug 2007) | 1 line
+
+Fixed JML comment 
+------------------------------------------------------------------------
+r915 | dcochran | 2007-08-01 15:06:19 +0100 (Wed, 01 Aug 2007) | 1 line
+
+Adding snapshot of JML specs
+------------------------------------------------------------------------
+r914 | dcochran | 2007-08-01 09:51:41 +0100 (Wed, 01 Aug 2007) | 1 line
+
+Configured builders for KOA/2 project
+------------------------------------------------------------------------
+r913 | Dermot Cochran | 2007-07-31 17:24:36 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Updated makefile
+------------------------------------------------------------------------
+r912 | dcochran | 2007-07-31 17:18:24 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Fixed build problems
+------------------------------------------------------------------------
+r910 | dcochran | 2007-07-31 16:34:33 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Removed corrupt files
+------------------------------------------------------------------------
+r909 | dcochran | 2007-07-31 16:30:44 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Adding in uncorrupted version
+------------------------------------------------------------------------
+r908 | dcochran | 2007-07-31 16:21:40 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Removed corrupt files
+------------------------------------------------------------------------
+r907 | dcochran | 2007-07-31 16:18:50 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Updated top level build files
+------------------------------------------------------------------------
+r906 | dcochran | 2007-07-31 15:16:55 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Assume generic /usr/local links or paths for JML and ESCJava2
+------------------------------------------------------------------------
+r905 | dcochran | 2007-07-31 14:21:17 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Assume a more generic home directory for jBoss
+------------------------------------------------------------------------
+r904 | dcochran | 2007-07-31 12:19:44 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Reconfigured as a JBOSS IDE J2EE 1.4 project in Eclipse
+------------------------------------------------------------------------
+r903 | dcochran | 2007-07-31 12:12:29 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Reconfigured as a JBOSS IDE J2EE 1.4 project in Eclipse
+------------------------------------------------------------------------
+r902 | dcochran | 2007-07-31 11:59:02 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Reconfigured as a JBOSS IDE J2EE 1.4 project in Eclipse
+------------------------------------------------------------------------
+r901 | dcochran | 2007-07-31 11:55:53 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Reconfigured as a JBOSS IDE J2EE 1.4 project in Eclipse
+------------------------------------------------------------------------
+r900 | Dermot Cochran | 2007-07-31 10:13:41 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Moved tally system from infrastructure to plugins
+------------------------------------------------------------------------
+r899 | Dermot Cochran | 2007-07-31 10:06:49 +0100 (Tue, 31 Jul 2007) | 1 line
+
+Second draft
+------------------------------------------------------------------------
+r898 | Dermot Cochran | 2007-07-27 14:47:23 +0100 (Fri, 27 Jul 2007) | 1 line
+
+Third revision of first draft
+------------------------------------------------------------------------
+r897 | Dermot Cochran | 2007-07-27 14:01:04 +0100 (Fri, 27 Jul 2007) | 1 line
+
+Second revision of the first draft
+------------------------------------------------------------------------
+r896 | Dermot Cochran | 2007-07-26 17:44:00 +0100 (Thu, 26 Jul 2007) | 1 line
+
+Configured builders for KOA infrastructure and for vote counting plugins.
+------------------------------------------------------------------------
+r895 | Dermot Cochran | 2007-07-26 17:34:23 +0100 (Thu, 26 Jul 2007) | 1 line
+
+Added several slides to first draft of EVT07 talk
+------------------------------------------------------------------------
+r894 | Dermot Cochran | 2007-07-26 12:42:29 +0100 (Thu, 26 Jul 2007) | 1 line
+
+Removed merge comment
+------------------------------------------------------------------------
+r893 | Dermot Cochran | 2007-07-25 17:30:59 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Updates make files and jar files
+------------------------------------------------------------------------
+r892 | Dermot Cochran | 2007-07-25 15:21:41 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Updated list of JML jar files required for a build
+------------------------------------------------------------------------
+r891 | Dermot Cochran | 2007-07-25 15:20:16 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Updated list of JML jar files required for a build
+------------------------------------------------------------------------
+r890 | Dermot Cochran | 2007-07-25 15:19:09 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Moved makefile to top level
+------------------------------------------------------------------------
+r889 | Dermot Cochran | 2007-07-25 15:03:45 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Adding in Patrick Tierney's implementation of Votail
+------------------------------------------------------------------------
+r888 | Dermot Cochran | 2007-07-25 14:55:12 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Updated list of JML jar files required for a build
+------------------------------------------------------------------------
+r887 | Dermot Cochran | 2007-07-25 14:33:36 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Created top levels folders for plugins and for shared infrastructure
+------------------------------------------------------------------------
+r886 | Dermot Cochran | 2007-07-25 14:18:14 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Updated all jar files to latest version and moved to a central folder, so that these libraries are shared by the subsystems of KOA, in anticipation of a product line architecture.
+------------------------------------------------------------------------
+r885 | Dermot Cochran | 2007-07-25 14:17:46 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Updated all jar files to latest version and moved to a central folder, so that these libraries are shared by the subsystems of KOA, in anticipation of a product line architecture.
+------------------------------------------------------------------------
+r884 | Dermot Cochran | 2007-07-25 13:47:54 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Created top levels folders for plugins and for shared infrastructure
+------------------------------------------------------------------------
+r883 | Dermot Cochran | 2007-07-25 13:44:34 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Updated all jar files to latest version and moved to a central folder, so that these libraries are shared by the subsystems of KOA, in anticipation of a product line architecture.
+------------------------------------------------------------------------
+r882 | Dermot Cochran | 2007-07-25 13:35:59 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Created top levels folders for plugins and for shared infrastructure
+------------------------------------------------------------------------
+r881 | Dermot Cochran | 2007-07-25 13:03:35 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Updated location of basedir to include infrastructure folder
+------------------------------------------------------------------------
+r880 | Dermot Cochran | 2007-07-25 12:52:31 +0100 (Wed, 25 Jul 2007) | 2 lines
+
+Created top levels folders for plugins and for shared infrastructure
+
+------------------------------------------------------------------------
+r879 | Dermot Cochran | 2007-07-25 11:46:29 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Updated all jar files to latest version and moved to a central folder, so that these libraries are shared by the subsystems of KOA, in anticipation of a product line architecture.
+------------------------------------------------------------------------
+r878 | Dermot Cochran | 2007-07-25 10:47:29 +0100 (Wed, 25 Jul 2007) | 1 line
+
+Cleanup the build path for Votail plugin
+------------------------------------------------------------------------
+r877 | Dermot Cochran | 2007-07-24 17:12:27 +0100 (Tue, 24 Jul 2007) | 1 line
+
+Set java_home to match the applictaion server
+------------------------------------------------------------------------
+r876 | Dermot Cochran | 2007-07-24 17:06:53 +0100 (Tue, 24 Jul 2007) | 1 line
+
+Updated jboss.home in build.properties
+------------------------------------------------------------------------
+r875 | Dermot Cochran | 2007-07-24 16:41:00 +0100 (Tue, 24 Jul 2007) | 1 line
+
+Updated jboss.home in build.properties
+------------------------------------------------------------------------
+r874 | Dermot Cochran | 2007-07-24 16:30:02 +0100 (Tue, 24 Jul 2007) | 1 line
+
+Updated the build.properties to assume a remote folder for the application server
+------------------------------------------------------------------------
+r873 | dcochran | 2007-07-24 12:58:36 +0100 (Tue, 24 Jul 2007) | 1 line
+
+Updated top level build files
+------------------------------------------------------------------------
+r872 | dcochran | 2007-07-24 12:30:26 +0100 (Tue, 24 Jul 2007) | 1 line
+
+Adding top level and higher level build files
+------------------------------------------------------------------------
+r871 | Dermot Cochran | 2007-07-24 12:12:26 +0100 (Tue, 24 Jul 2007) | 1 line
+
+Set JDK 1.4.2 as the default VM for the KOA project
+------------------------------------------------------------------------
+r870 | dcochran | 2007-07-24 11:46:41 +0100 (Tue, 24 Jul 2007) | 1 line
+
+Removed duplicate samples folder 
+------------------------------------------------------------------------
+r869 | dcochran | 2007-07-24 11:13:42 +0100 (Tue, 24 Jul 2007) | 1 line
+
+Changed KOA project nature to be a Java project
+------------------------------------------------------------------------
+r868 | dcochran | 2007-07-11 15:18:22 +0100 (Wed, 11 Jul 2007) | 2 lines
+
+First draft of slides for EVT07 workshop
+
+------------------------------------------------------------------------
+r867 | Dermot Cochran | 2007-07-06 11:59:17 +0100 (Fri, 06 Jul 2007) | 1 line
+
+Updated JBOSS environment
+------------------------------------------------------------------------
+r866 | Dermot Cochran | 2007-07-06 11:26:23 +0100 (Fri, 06 Jul 2007) | 1 line
+
+Added original KOA class diagram from ESC/Java2 documentation
+------------------------------------------------------------------------
+r865 | Dermot Cochran | 2007-07-06 11:24:42 +0100 (Fri, 06 Jul 2007) | 1 line
+
+Added folder for VoteID 2007 paper, with title 'Formally Specified Security Properties for a Remote Voting System'
+------------------------------------------------------------------------
+r864 | Dermot Cochran | 2007-06-29 12:06:48 +0100 (Fri, 29 Jun 2007) | 1 line
+
+Added PDF into archive file
+------------------------------------------------------------------------
+r863 | Dermot Cochran | 2007-06-29 11:56:27 +0100 (Fri, 29 Jun 2007) | 1 line
+
+Updated final draft for sending to EVT07
+------------------------------------------------------------------------
+r862 | Dermot Cochran | 2007-06-29 10:04:58 +0100 (Fri, 29 Jun 2007) | 1 line
+
+Have reflected most of Peter Ryan's final comments.  These changes may be too late for the confernence but will be available on the KindSoft website.
+------------------------------------------------------------------------
+r861 | kiniry | 2007-06-27 18:42:16 +0100 (Wed, 27 Jun 2007) | 1 line
+
+Snapshot of submitted paper.
+------------------------------------------------------------------------
+r860 | Dermot Cochran | 2007-06-27 18:08:25 +0100 (Wed, 27 Jun 2007) | 1 line
+
+Changed passive to active verb.
+------------------------------------------------------------------------
+r859 | Dermot Cochran | 2007-06-27 18:02:09 +0100 (Wed, 27 Jun 2007) | 1 line
+
+Changes to the final draft.
+------------------------------------------------------------------------
+r858 | Dermot Cochran | 2007-06-27 14:59:58 +0100 (Wed, 27 Jun 2007) | 1 line
+
+Fixed spellings
+------------------------------------------------------------------------
+r857 | Dermot Cochran | 2007-06-27 14:08:59 +0100 (Wed, 27 Jun 2007) | 1 line
+
+Fixed spelling
+------------------------------------------------------------------------
+r856 | Dermot Cochran | 2007-06-27 13:55:01 +0100 (Wed, 27 Jun 2007) | 1 line
+
+Added in Patrick's change from diffs with latest version in repository.
+------------------------------------------------------------------------
+r855 | Dermot Cochran | 2007-06-27 13:44:03 +0100 (Wed, 27 Jun 2007) | 1 line
+
+Fixed typo
+------------------------------------------------------------------------
+r854 | Dermot Cochran | 2007-06-27 13:22:40 +0100 (Wed, 27 Jun 2007) | 1 line
+
+Incorporated Peter's comments but not yet Patrick's changes.
+------------------------------------------------------------------------
+r853 | kiniry | 2007-06-27 08:40:38 +0100 (Wed, 27 Jun 2007) | 1 line
+
+merged changes
+------------------------------------------------------------------------
+r852 | Dermot Cochran | 2007-06-26 17:26:26 +0100 (Tue, 26 Jun 2007) | 1 line
+
+Second pass on jointly revised paper
+------------------------------------------------------------------------
+r851 | Dermot Cochran | 2007-06-26 16:06:47 +0100 (Tue, 26 Jun 2007) | 1 line
+
+Found the extract from the count rules that matches the list of requirements for the distributeSurplus method.
+------------------------------------------------------------------------
+r850 | Dermot Cochran | 2007-06-26 15:44:55 +0100 (Tue, 26 Jun 2007) | 1 line
+
+Make sure that KOA is capitalised in the references.
+------------------------------------------------------------------------
+r849 | Dermot Cochran | 2007-06-26 14:58:06 +0100 (Tue, 26 Jun 2007) | 1 line
+
+First pass corrections to the joinly revised paper
+------------------------------------------------------------------------
+r848 | Dermot Cochran | 2007-06-26 12:46:41 +0100 (Tue, 26 Jun 2007) | 1 line
+
+No need for this file; paper.tex is the short version of the paper.
+------------------------------------------------------------------------
+r847 | kiniry | 2007-06-26 12:37:13 +0100 (Tue, 26 Jun 2007) | 4 lines
+
+Jointly-revised and shrunk version to fit in 6 pages.  Formatted
+according to USENIX standards.  Foundation for last rewrite by
+each author.
+
+------------------------------------------------------------------------
+r846 | kiniry | 2007-06-26 11:48:29 +0100 (Tue, 26 Jun 2007) | 1 line
+
+reformatted according to USENIX guidelines and merged Dermot's changes thus far
+------------------------------------------------------------------------
+r845 | Dermot Cochran | 2007-06-26 11:00:28 +0100 (Tue, 26 Jun 2007) | 1 line
+
+Reduced to 8 pages so far.  Needs to be 6 pages.
+------------------------------------------------------------------------
+r844 | Dermot Cochran | 2007-06-26 10:33:12 +0100 (Tue, 26 Jun 2007) | 1 line
+
+Saved the original longer version of the paper to its own file so that the paper can be cut down to 6 pages; taking out the sections or comments which were disputed by the reviewers.
+------------------------------------------------------------------------
+r843 | Dermot Cochran | 2007-06-26 09:54:58 +0100 (Tue, 26 Jun 2007) | 1 line
+
+Added back the missing example of moerate complexity JML
+------------------------------------------------------------------------
+r842 | Dermot Cochran | 2007-06-22 15:56:51 +0100 (Fri, 22 Jun 2007) | 1 line
+
+Added extra invariant suggested by Greg Dennis
+------------------------------------------------------------------------
+r841 | Dermot Cochran | 2007-06-22 15:56:05 +0100 (Fri, 22 Jun 2007) | 1 line
+
+Shortened the paper a bit more
+------------------------------------------------------------------------
+r840 | Dermot Cochran | 2007-06-19 17:36:50 +0100 (Tue, 19 Jun 2007) | 1 line
+
+Shortened the paper by commenting out the last, most complex, example of JML.
+------------------------------------------------------------------------
+r839 | kiniry | 2007-06-18 14:14:06 +0100 (Mon, 18 Jun 2007) | 1 line
+
+snapshot of submitted paper
+------------------------------------------------------------------------
+r838 | kiniry | 2007-06-18 14:13:32 +0100 (Mon, 18 Jun 2007) | 1 line
+
+bib tweak
+------------------------------------------------------------------------
+r837 | dcochran | 2007-05-09 17:28:27 +0100 (Wed, 09 May 2007) | 1 line
+
+
+------------------------------------------------------------------------
+r836 | Dermot Cochran | 2007-05-03 10:31:14 +0100 (Thu, 03 May 2007) | 1 line
+
+Added an extra postcondition to the count() method to ensure that the count is actually started; i.e. there must be at least one round of counting.
+------------------------------------------------------------------------
+r835 | Dermot Cochran | 2007-05-01 10:00:46 +0100 (Tue, 01 May 2007) | 1 line
+
+Adding refines clause; not adding Patrick's code yet.
+------------------------------------------------------------------------
+r834 | Dermot Cochran | 2007-04-30 12:39:22 +0100 (Mon, 30 Apr 2007) | 1 line
+
+Adding in code changes made by Patrick
+------------------------------------------------------------------------
+r833 | dcochran | 2007-04-30 12:09:10 +0100 (Mon, 30 Apr 2007) | 1 line
+
+Adding code and test cases
+------------------------------------------------------------------------
+r832 | dcochran | 2007-04-30 12:07:40 +0100 (Mon, 30 Apr 2007) | 1 line
+
+Adding interim report
+------------------------------------------------------------------------
+r831 | dcochran | 2007-04-27 16:01:42 +0100 (Fri, 27 Apr 2007) | 1 line
+
+Fix duplicate filename - this causes problems on MacOS
+------------------------------------------------------------------------
+r830 | dcochran | 2007-04-27 14:54:05 +0100 (Fri, 27 Apr 2007) | 1 line
+
+Fix duplicate filename - this causes problems on MacOS
+------------------------------------------------------------------------
+r829 | dcochran | 2007-04-27 14:11:31 +0100 (Fri, 27 Apr 2007) | 1 line
+
+Fix duplicate filename - this causes problems on MacOS
+------------------------------------------------------------------------
+r828 | kiniry | 2007-04-23 01:45:49 +0100 (Mon, 23 Apr 2007) | 3 lines
+
+Submitted version of the paper plus a receipt from the USENIX
+submission system.  We are submission E27 and our password is "koa".
+
+------------------------------------------------------------------------
+r827 | kiniry | 2007-04-23 01:34:06 +0100 (Mon, 23 Apr 2007) | 3 lines
+
+Wrote an abstract, did a spellcheck, and made an editing pass on the
+paper.
+
+------------------------------------------------------------------------
+r826 | kiniry | 2007-04-23 01:05:34 +0100 (Mon, 23 Apr 2007) | 2 lines
+
+Moved commented-out sections to a junk document.
+
+------------------------------------------------------------------------
+r825 | kiniry | 2007-04-23 01:01:15 +0100 (Mon, 23 Apr 2007) | 3 lines
+
+New fully-revised draft ready for some final revisions.  Adding
+missing citations to the local bibliography.
+
+------------------------------------------------------------------------
+r824 | dcochran | 2007-04-22 21:03:03 +0100 (Sun, 22 Apr 2007) | 2 lines
+
+Updated sections 2 and 3, including layout of JML specs.
+
+------------------------------------------------------------------------
+r823 | kiniry | 2007-04-22 13:28:48 +0100 (Sun, 22 Apr 2007) | 3 lines
+
+New draft with most of the early sections complete.  Revised makefile
+to reduce amount of TeX processing.  Renamed bib file.
+
+------------------------------------------------------------------------
+r822 | kiniry | 2007-04-21 12:07:14 +0100 (Sat, 21 Apr 2007) | 1 line
+
+category snapshot
+------------------------------------------------------------------------
+r821 | kiniry | 2007-04-20 14:12:46 +0100 (Fri, 20 Apr 2007) | 2 lines
+
+Continued revisions to outline; new introduction.
+
+------------------------------------------------------------------------
+r820 | kiniry | 2007-04-18 08:43:17 +0100 (Wed, 18 Apr 2007) | 3 lines
+
+Added Makefile and temporary bib and Dermot's new revisions.  I will
+revise today.
+
+------------------------------------------------------------------------
+r819 | kiniry | 2007-04-05 16:11:18 +0100 (Thu, 05 Apr 2007) | 23 lines
+
+I have rearranged some of the votail directory to prepare it for use
+in Eclipse/Mobius PVE.  To show how I want things arranged, I did
+the following to the first three classes.  We all should follow
+this model:
+ o I duplicated all of the specs under KOA/votail/ie/koa to be .spec
+   files.  The only thing that should go in a spec file is the class's
+   type signature, all non-private JML specifications, and all design
+   notes (i.e., @design, @review that pertains to specifications,
+   etc.).
+
+ o I removed all specs and design notes from the Java source files.
+   All of that information should only be in the spec files.
+
+I'm going to let you guys cleanup the other Java and spec files as
+appropriate.
+
+Patrick, you can then put all of your code under there as well by
+copying in each method body.  I do suggest doing this by hand because
+it will give you another opportunity to ensure you have completed what
+you think you have, review the code you have written and the state of
+each class, and ensure that the code conforms to our coding standard
+(which is enforced by the PVE).
+
+------------------------------------------------------------------------
+r818 | kiniry | 2007-03-21 20:20:47 +0000 (Wed, 21 Mar 2007) | 2 lines
+
+Added first draft from Dermot.
+
+------------------------------------------------------------------------
+r817 | dcochran | 2007-03-15 00:13:45 +0000 (Thu, 15 Mar 2007) | 1 line
+
+Adding folder to hold draft paper for EVT07
+------------------------------------------------------------------------
+r816 | dcochran | 2007-03-14 23:40:10 +0000 (Wed, 14 Mar 2007) | 1 line
+
+Working branch for Dermot Cochran
+------------------------------------------------------------------------
+r815 | kiniry | 2006-12-06 18:58:00 +0000 (Wed, 06 Dec 2006) | 2 lines
+
+Adding derivative files to ignore list.
+
+------------------------------------------------------------------------
+r814 | kiniry | 2006-12-06 18:52:52 +0000 (Wed, 06 Dec 2006) | 2 lines
+
+Submitted version.
+
+------------------------------------------------------------------------
+r813 | kiniry | 2006-12-06 18:51:51 +0000 (Wed, 06 Dec 2006) | 7 lines
+
+All final corrections to paper including typos, spelling errors,
+consistency of URLs in footnotes, use of abbreviations, font use for
+filenames and class names, hyphenation of non-English identifiers,
+ensuring all text fits in hboxes without warnings, etc.  I also added
+back in paragraph challenging assumptions about hacking of an
+Internet-based voting system.
+
+------------------------------------------------------------------------
+r812 | kiniry | 2006-12-06 18:49:34 +0000 (Wed, 06 Dec 2006) | 3 lines
+
+Fixed all month entries---always use the 3 letter abbreviation for the
+month field of a BibTeX entry!
+
+------------------------------------------------------------------------
+r811 | kiniry | 2006-12-06 18:48:29 +0000 (Wed, 06 Dec 2006) | 2 lines
+
+Added paper.pdf dependency on koa.bib.
+
+------------------------------------------------------------------------
+r810 | kiniry | 2006-12-06 18:33:01 +0000 (Wed, 06 Dec 2006) | 2 lines
+
+Added "view" build rule to automatically run TeXniscope.app on OS X.
+
+------------------------------------------------------------------------
+r809 | dcochran | 2006-11-01 21:51:34 +0000 (Wed, 01 Nov 2006) | 1 line
+
+second draft
+------------------------------------------------------------------------
+r808 | dcochran | 2006-11-01 21:50:14 +0000 (Wed, 01 Nov 2006) | 1 line
+
+second draft
+------------------------------------------------------------------------
+r807 | dcochran | 2006-11-01 21:46:39 +0000 (Wed, 01 Nov 2006) | 1 line
+
+second draft
+------------------------------------------------------------------------
+r806 | dcochran | 2006-10-31 22:25:23 +0000 (Tue, 31 Oct 2006) | 1 line
+
+Slides for TGC06 - first draft for comments from co-authors
+------------------------------------------------------------------------
+r805 | dcochran | 2006-10-31 22:20:08 +0000 (Tue, 31 Oct 2006) | 1 line
+
+Slides for TGC06 - first draft for comments from co-authors
+------------------------------------------------------------------------
+r804 | dcochran | 2006-10-31 22:18:32 +0000 (Tue, 31 Oct 2006) | 1 line
+
+Slides for TGC06 - first draft for comments from co-authors
+------------------------------------------------------------------------
+r803 | dcochran | 2006-10-31 22:17:52 +0000 (Tue, 31 Oct 2006) | 1 line
+
+Slides for TGC06 - first draft for comments from co-authors
+------------------------------------------------------------------------
+r802 | kiniry | 2006-10-13 12:41:07 +0100 (Fri, 13 Oct 2006) | 1 line
+
+Responding to reviewer comments, adding some materials that Alan asked for, small edits for typos and presentation, etc.  Still needs a read/review by other authors before submission.
+------------------------------------------------------------------------
+r801 | alanm | 2006-10-12 16:32:59 +0100 (Thu, 12 Oct 2006) | 1 line
+
+Some more slight changes to the paper.
+------------------------------------------------------------------------
+r800 | alanm | 2006-10-12 16:14:09 +0100 (Thu, 12 Oct 2006) | 1 line
+
+Some more slight changes to the paper.
+------------------------------------------------------------------------
+r799 | alanm | 2006-10-12 16:13:53 +0100 (Thu, 12 Oct 2006) | 1 line
+
+Some more slight changes to the paper.
+------------------------------------------------------------------------
+r798 | alanm | 2006-10-11 12:34:51 +0100 (Wed, 11 Oct 2006) | 1 line
+
+Updated version taking into consideration most of the reviewers comments
+------------------------------------------------------------------------
+r797 | dcochran | 2006-10-07 15:17:01 +0100 (Sat, 07 Oct 2006) | 1 line
+
+Fixed incorrect capitalisation of the words nine and Irish.
+------------------------------------------------------------------------
+r796 | alanm | 2006-09-14 00:02:37 +0100 (Thu, 14 Sep 2006) | 1 line
+
+
+------------------------------------------------------------------------
+r795 | alanm | 2006-09-13 01:55:33 +0100 (Wed, 13 Sep 2006) | 1 line
+
+added some more lightweight specs
+------------------------------------------------------------------------
+r794 | alanm | 2006-09-12 12:12:50 +0100 (Tue, 12 Sep 2006) | 1 line
+
+Added some more lightweight specifications
+------------------------------------------------------------------------
+r793 | alanm | 2006-08-30 19:01:17 +0100 (Wed, 30 Aug 2006) | 1 line
+
+added some more lightweight specs
+------------------------------------------------------------------------
+r792 | alanm | 2006-08-29 15:48:09 +0100 (Tue, 29 Aug 2006) | 1 line
+
+
+------------------------------------------------------------------------
+r791 | alanm | 2006-08-29 11:04:10 +0100 (Tue, 29 Aug 2006) | 1 line
+
+Added some more lightweight specs.
+------------------------------------------------------------------------
+r790 | alanm | 2006-08-14 17:37:00 +0100 (Mon, 14 Aug 2006) | 1 line
+
+
+------------------------------------------------------------------------
+r789 | alanm | 2006-08-07 14:39:02 +0100 (Mon, 07 Aug 2006) | 1 line
+
+Fixed some typos from the submitted version.
+------------------------------------------------------------------------
+r788 | alanm | 2006-08-04 17:36:02 +0100 (Fri, 04 Aug 2006) | 1 line
+
+First Final version. Added the appropriate LNCS formatting files.
+------------------------------------------------------------------------
+r787 | alanm | 2006-07-31 17:01:44 +0100 (Mon, 31 Jul 2006) | 1 line
+
+more updates
+------------------------------------------------------------------------
+r786 | alanm | 2006-07-28 17:28:23 +0100 (Fri, 28 Jul 2006) | 1 line
+
+further update
+------------------------------------------------------------------------
+r785 | alanm | 2006-07-26 19:05:49 +0100 (Wed, 26 Jul 2006) | 1 line
+
+added in new folder for the TGC06 version of the summary KOA paper
+------------------------------------------------------------------------
+r784 | alanm | 2006-06-28 22:51:03 +0100 (Wed, 28 Jun 2006) | 1 line
+
+
+------------------------------------------------------------------------
+r783 | alanm | 2006-06-28 22:45:45 +0100 (Wed, 28 Jun 2006) | 1 line
+
+Tertiary refactoring of source code directory structure of Stemdienst
+------------------------------------------------------------------------
+r782 | alanm | 2006-06-28 22:31:55 +0100 (Wed, 28 Jun 2006) | 1 line
+
+Secondary refactoring of source code directory structure of Stemdienst
+------------------------------------------------------------------------
+r781 | alanm | 2006-06-28 22:22:59 +0100 (Wed, 28 Jun 2006) | 1 line
+
+Initial refactoring of source code directory structure of Stemdienst
+------------------------------------------------------------------------
+r780 | alanm | 2006-06-28 22:07:03 +0100 (Wed, 28 Jun 2006) | 1 line
+
+File that shouldn't be there.
+------------------------------------------------------------------------
+r779 | alanm | 2006-06-28 22:06:52 +0100 (Wed, 28 Jun 2006) | 1 line
+
+File that shouldn't be there.
+------------------------------------------------------------------------
+r778 | greenrd | 2006-06-28 17:37:40 +0100 (Wed, 28 Jun 2006) | 2 lines
+
+start of reorg
+
+------------------------------------------------------------------------
+r777 | greenrd | 2006-06-28 17:21:33 +0100 (Wed, 28 Jun 2006) | 2 lines
+
+Delete junk directories
+
+------------------------------------------------------------------------
+r776 | alanm | 2006-04-25 20:21:48 +0100 (Tue, 25 Apr 2006) | 2 lines
+
+Import of Liam Whelan's Mobile Voting System. Includes the archive, source code and report. Also imported Fintand and Alan's final year reports into the documents section.
+
+------------------------------------------------------------------------
+r775 | alanm | 2006-04-15 14:45:44 +0100 (Sat, 15 Apr 2006) | 2 lines
+
+*** empty log message ***
+
+------------------------------------------------------------------------
+r774 | alanm | 2006-04-14 17:42:21 +0100 (Fri, 14 Apr 2006) | 2 lines
+
+*** empty log message ***
+
+------------------------------------------------------------------------
+r773 | (no author) | 2006-04-13 22:57:53 +0100 (Thu, 13 Apr 2006) | 1 line
+
+This commit was manufactured by cvs2svn to create tag 'evt06'.
+------------------------------------------------------------------------
+r771 | (no author) | 2006-04-13 22:57:52 +0100 (Thu, 13 Apr 2006) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'srg'.
+------------------------------------------------------------------------
+r770 | alanm | 2006-04-13 22:57:52 +0100 (Thu, 13 Apr 2006) | 2 lines
+
+Initial revision
+
+------------------------------------------------------------------------
+r769 | alanm | 2006-04-05 23:39:35 +0100 (Wed, 05 Apr 2006) | 2 lines
+
+replacing package accidentally removed
+
+------------------------------------------------------------------------
+r768 | alanm | 2006-04-05 23:08:38 +0100 (Wed, 05 Apr 2006) | 2 lines
+
+restoring after accidental removal
+
+------------------------------------------------------------------------
+r767 | alanm | 2006-04-05 22:05:51 +0100 (Wed, 05 Apr 2006) | 2 lines
+
+*** empty log message ***
+
+------------------------------------------------------------------------
+r766 | alanm | 2006-04-05 21:58:09 +0100 (Wed, 05 Apr 2006) | 3 lines
+
+Changed the name of the packages to reflect Open Source foundations.
+Added skeleton javadoc and lightweight JML annotations to missing pieces.
+
+------------------------------------------------------------------------
+r765 | alanm | 2006-04-05 21:46:57 +0100 (Wed, 05 Apr 2006) | 3 lines
+
+Changed the name of the packages to reflect Open Source foundations.
+Added skeleton javadoc and lightweight JML annotations to missing pieces.
+
+------------------------------------------------------------------------
+r764 | alanm | 2006-04-04 03:51:21 +0100 (Tue, 04 Apr 2006) | 2 lines
+
+final tweaks
+
+------------------------------------------------------------------------
+r763 | alanm | 2006-04-04 03:51:01 +0100 (Tue, 04 Apr 2006) | 2 lines
+
+*** empty log message ***
+
+------------------------------------------------------------------------
+r762 | alanm | 2006-04-04 02:35:46 +0100 (Tue, 04 Apr 2006) | 2 lines
+
+more tweaks
+
+------------------------------------------------------------------------
+r761 | alanm | 2006-04-04 02:18:19 +0100 (Tue, 04 Apr 2006) | 2 lines
+
+more tweaks
+
+------------------------------------------------------------------------
+r760 | alanm | 2006-04-04 02:05:23 +0100 (Tue, 04 Apr 2006) | 2 lines
+
+more tweaks, especially to the beginning of the section entitled "Kiezen op Afstand"
+
+------------------------------------------------------------------------
+r759 | alanm | 2006-04-04 01:41:44 +0100 (Tue, 04 Apr 2006) | 2 lines
+
+small tweaks
+
+------------------------------------------------------------------------
+r758 | alanm | 2006-04-04 01:00:49 +0100 (Tue, 04 Apr 2006) | 2 lines
+
+Various syntactic improvements
+
+------------------------------------------------------------------------
+r757 | jkiniry | 2006-04-04 00:45:25 +0100 (Tue, 04 Apr 2006) | 2 lines
+
+Added Mobius blah blah at end.
+
+------------------------------------------------------------------------
+r756 | jkiniry | 2006-04-04 00:41:58 +0100 (Tue, 04 Apr 2006) | 4 lines
+
+Reviewed and cleaned up Engelbert's section, added some more labels,
+rewrote some bits of Dermot's section and made his example code fit in
+a two column format, wrote the future work section.
+
+------------------------------------------------------------------------
+r755 | jkiniry | 2006-04-04 00:39:37 +0100 (Tue, 04 Apr 2006) | 2 lines
+
+Added PCC and MOBIUS cites and reformatted the whole bib for clarity.
+
+------------------------------------------------------------------------
+r754 | hubbers | 2006-04-04 00:23:59 +0100 (Tue, 04 Apr 2006) | 2 lines
+
+Replaces some blah blah by less literally blah blah.
+
+------------------------------------------------------------------------
+r753 | hubbers | 2006-04-04 00:09:17 +0100 (Tue, 04 Apr 2006) | 3 lines
+
+Section 3.1 should be ready now.
+Added bib-entries.
+
+------------------------------------------------------------------------
+r752 | jkiniry | 2006-04-03 23:35:51 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+Slightly tweaked this entry but Alan will have to finish it off.
+
+------------------------------------------------------------------------
+r751 | jkiniry | 2006-04-03 23:31:23 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+Fixed Alan's merge and integrated some of my conclusion stuff.
+
+------------------------------------------------------------------------
+r750 | alanm | 2006-04-03 23:14:48 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+changes
+
+------------------------------------------------------------------------
+r749 | jkiniry | 2006-04-03 22:45:17 +0100 (Mon, 03 Apr 2006) | 6 lines
+
+Fixed up the author list, added several more \labels, changed a few
+section titlees, wrote an intro to the Radboud section, added
+citations for JML and ESC/Java2, wrote the intro to the UCD section,
+rewrote the intro to the generalisation section and bits of that
+subsection, and rewrote some of the academic current work.
+
+------------------------------------------------------------------------
+r748 | jkiniry | 2006-04-03 22:42:24 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+Added JMLUnit paper, Irish CEV documents, and JML STTT paper.
+
+------------------------------------------------------------------------
+r747 | jkiniry | 2006-04-03 22:40:36 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+Ignoring generated files.
+
+------------------------------------------------------------------------
+r746 | jkiniry | 2006-04-03 22:38:56 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+IEEE latex8 bibliography style.
+
+------------------------------------------------------------------------
+r745 | alanm | 2006-04-03 22:18:21 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+Adding citation Patrice used
+
+------------------------------------------------------------------------
+r744 | alanm | 2006-04-03 22:17:52 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+Added initial draft of work carried out at Concordia
+
+------------------------------------------------------------------------
+r743 | martijno | 2006-04-03 21:22:29 +0100 (Mon, 03 Apr 2006) | 4 lines
+
+- In "At Radboud.."/process:
+  * some remarks about using ESC/Java 2 and specs for APIs.
+  * some remarks about JMLRAC.
+
+------------------------------------------------------------------------
+r742 | alanm | 2006-04-03 21:09:53 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+Fixed errata in "Voting Machines in the Netherlands"
+
+------------------------------------------------------------------------
+r741 | alanm | 2006-04-03 20:59:36 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+Fixed errata in Abstract and Introduction
+
+------------------------------------------------------------------------
+r740 | hubbers | 2006-04-03 20:16:35 +0100 (Mon, 03 Apr 2006) | 3 lines
+
+Some lines by EHU.
+Some more will follow later today.
+
+------------------------------------------------------------------------
+r739 | martijno | 2006-04-03 19:37:40 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+- Some blah on structure, methodology, process.
+
+------------------------------------------------------------------------
+r738 | martijno | 2006-04-03 18:54:19 +0100 (Mon, 03 Apr 2006) | 3 lines
+
+- Some blah on the Radboud application and how the functional spec we
+  got influenced our design.
+
+------------------------------------------------------------------------
+r737 | alanm | 2006-04-03 18:48:29 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+Initial draft of Fintan's section
+
+------------------------------------------------------------------------
+r736 | jkiniry | 2006-04-03 16:19:17 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+Added introduction and much of the KOA system and rewrote abstract.
+
+------------------------------------------------------------------------
+r735 | jkiniry | 2006-04-03 16:19:00 +0100 (Mon, 03 Apr 2006) | 3 lines
+
+Made subsequent executions of processing commands dependent on prior
+executions succeeding.
+
+------------------------------------------------------------------------
+r734 | alanm | 2006-04-03 15:34:15 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+adding bibliography for paper
+
+------------------------------------------------------------------------
+r733 | alanm | 2006-04-03 15:13:48 +0100 (Mon, 03 Apr 2006) | 2 lines
+
+*** empty log message ***
+
+------------------------------------------------------------------------
+r732 | alanm | 2006-03-29 21:16:18 +0100 (Wed, 29 Mar 2006) | 2 lines
+
+some refactoring. wrote an abstract.
+
+------------------------------------------------------------------------
+r731 | (no author) | 2006-03-28 21:55:37 +0100 (Tue, 28 Mar 2006) | 2 lines
+
+This commit was manufactured by cvs2svn to create tag
+'dissertation-final-version'.
+------------------------------------------------------------------------
+r730 | dcochran | 2006-03-28 21:55:37 +0100 (Tue, 28 Mar 2006) | 2 lines
+
+Updated tags for requirements
+
+------------------------------------------------------------------------
+r729 | dcochran | 2006-03-28 21:51:40 +0100 (Tue, 28 Mar 2006) | 2 lines
+
+Added example of methodology for writing a formal specification.
+
+------------------------------------------------------------------------
+r728 | dcochran | 2006-03-28 21:29:30 +0100 (Tue, 28 Mar 2006) | 2 lines
+
+Further updated subsection on Irish voting.
+
+------------------------------------------------------------------------
+r727 | dcochran | 2006-03-28 21:17:46 +0100 (Tue, 28 Mar 2006) | 2 lines
+
+Added to subsections about Irish Voting.
+
+------------------------------------------------------------------------
+r726 | alanm | 2006-03-28 21:07:32 +0100 (Tue, 28 Mar 2006) | 2 lines
+
+fixed bug in "return to homepage" button. it needed to be placed outside the "form".
+
+------------------------------------------------------------------------
+r725 | alanm | 2006-03-28 15:04:55 +0100 (Tue, 28 Mar 2006) | 2 lines
+
+style document to be used with this paper
+
+------------------------------------------------------------------------
+r724 | alanm | 2006-03-28 00:24:46 +0100 (Tue, 28 Mar 2006) | 2 lines
+
+changing username from "amorkan" to "srg"
+
+------------------------------------------------------------------------
+r723 | alanm | 2006-03-27 23:38:55 +0100 (Mon, 27 Mar 2006) | 2 lines
+
+Initial draft of Alan's sections
+
+------------------------------------------------------------------------
+r722 | alanm | 2006-03-27 21:48:03 +0100 (Mon, 27 Mar 2006) | 2 lines
+
+fixed some problems with URLs
+
+------------------------------------------------------------------------
+r721 | alanm | 2006-03-27 21:42:56 +0100 (Mon, 27 Mar 2006) | 2 lines
+
+Importing the style document being used.
+
+------------------------------------------------------------------------
+r720 | dcochran | 2006-03-27 21:27:05 +0100 (Mon, 27 Mar 2006) | 2 lines
+
+Added first paragraph about the Irish voting system and Votail.
+
+------------------------------------------------------------------------
+r719 | alanm | 2006-03-27 13:55:12 +0100 (Mon, 27 Mar 2006) | 2 lines
+
+Fixed some bugs in the title.
+
+------------------------------------------------------------------------
+r718 | alanm | 2006-03-27 12:01:52 +0100 (Mon, 27 Mar 2006) | 2 lines
+
+*** empty log message ***
+
+------------------------------------------------------------------------
+r717 | jkiniry | 2006-03-27 11:48:15 +0100 (Mon, 27 Mar 2006) | 2 lines
+
+EVT06 paper outline and Makefile.
+
+------------------------------------------------------------------------
+r716 | alanm | 2006-03-20 17:42:46 +0000 (Mon, 20 Mar 2006) | 2 lines
+
+changing variables called "enum" to "enumer" so they don't clash with the keyword "enum".
+
+------------------------------------------------------------------------
+r715 | alanm | 2006-03-20 17:35:36 +0000 (Mon, 20 Mar 2006) | 2 lines
+
+updated ant build file and retranslated jsp files into english
+
+------------------------------------------------------------------------
+r714 | dcochran | 2006-03-07 21:46:06 +0000 (Tue, 07 Mar 2006) | 2 lines
+
+Tagged requirements 8-16 of 39.
+
+------------------------------------------------------------------------
+r713 | dcochran | 2006-03-05 20:11:28 +0000 (Sun, 05 Mar 2006) | 2 lines
+
+Tagged first 7 out of 39 functional requirements.
+
+------------------------------------------------------------------------
+r712 | (no author) | 2006-03-04 17:02:51 +0000 (Sat, 04 Mar 2006) | 2 lines
+
+This commit was manufactured by cvs2svn to create tag
+'dissertation-working-version'.
+------------------------------------------------------------------------
+r711 | dcochran | 2006-03-04 17:02:51 +0000 (Sat, 04 Mar 2006) | 2 lines
+
+Fixed up usage of long and int.
+
+------------------------------------------------------------------------
+r710 | dcochran | 2006-03-04 11:17:00 +0000 (Sat, 04 Mar 2006) | 2 lines
+
+Issue with long types in quantified expressions
+
+------------------------------------------------------------------------
+r709 | dcochran | 2006-03-02 22:54:07 +0000 (Thu, 02 Mar 2006) | 2 lines
+
+Changed all int types to long.
+
+------------------------------------------------------------------------
+r708 | jkiniry | 2006-03-01 15:06:40 +0000 (Wed, 01 Mar 2006) | 2 lines
+
+Performed spec review.
+
+------------------------------------------------------------------------
+r707 | (no author) | 2006-02-28 21:21:00 +0000 (Tue, 28 Feb 2006) | 2 lines
+
+This commit was manufactured by cvs2svn to create tag
+'dissertation-working-draft'.
+------------------------------------------------------------------------
+r706 | dcochran | 2006-02-28 21:21:00 +0000 (Tue, 28 Feb 2006) | 2 lines
+
+Moved the other invariants and constraints to be near one of the model fields.
+
+------------------------------------------------------------------------
+r705 | dcochran | 2006-02-27 20:41:05 +0000 (Mon, 27 Feb 2006) | 2 lines
+
+Moved most invariants and constraints nearer to one of the model variables.
+
+------------------------------------------------------------------------
+r704 | dcochran | 2006-02-25 11:11:19 +0000 (Sat, 25 Feb 2006) | 2 lines
+
+Moved inner classes out into their own files.
+
+------------------------------------------------------------------------
+r703 | dcochran | 2006-02-24 22:14:58 +0000 (Fri, 24 Feb 2006) | 2 lines
+
+Almost finished the lightweight specification.
+
+------------------------------------------------------------------------
+r702 | dcochran | 2006-02-21 21:49:02 +0000 (Tue, 21 Feb 2006) | 2 lines
+
+Added specification for decisions taken during the counting of votes.
+
+------------------------------------------------------------------------
+r701 | dcochran | 2006-02-20 21:57:06 +0000 (Mon, 20 Feb 2006) | 2 lines
+
+Added specification for random selection between equal candidates.
+
+------------------------------------------------------------------------
+r700 | dcochran | 2006-02-19 21:03:15 +0000 (Sun, 19 Feb 2006) | 2 lines
+
+Added specification for drawing of lots to choose between equal candidates.
+
+------------------------------------------------------------------------
+r699 | dcochran | 2006-02-18 16:19:00 +0000 (Sat, 18 Feb 2006) | 2 lines
+
+Added specification for rounding of fractional transfers.
+
+------------------------------------------------------------------------
+r698 | dcochran | 2006-02-17 21:54:26 +0000 (Fri, 17 Feb 2006) | 3 lines
+
+Added specification for distribution of surplus and number of votes transfered toeach continuing candidate.
+
+------------------------------------------------------------------------
+r697 | dcochran | 2006-02-16 22:21:43 +0000 (Thu, 16 Feb 2006) | 2 lines
+
+Almost specified the concept of next preference for a continuing candidate.
+
+------------------------------------------------------------------------
+r696 | dcochran | 2006-02-13 22:38:24 +0000 (Mon, 13 Feb 2006) | 2 lines
+
+Normal behavior specification completed for Candidate class
+
+------------------------------------------------------------------------
+r695 | dcochran | 2006-02-11 15:44:38 +0000 (Sat, 11 Feb 2006) | 2 lines
+
+Specified methods for cross-checking the number of votes assigned to a candidate and the potential number of transfers between one candidate and another.
+
+------------------------------------------------------------------------
+r694 | dcochran | 2006-02-10 22:27:11 +0000 (Fri, 10 Feb 2006) | 2 lines
+
+Added upper and lower bounds for model variables.
+
+------------------------------------------------------------------------
+r693 | dcochran | 2006-02-10 16:10:00 +0000 (Fri, 10 Feb 2006) | 2 lines
+
+Added preconditions for exclusion of multiple candidates in the same count.
+
+------------------------------------------------------------------------
+r692 | dcochran | 2006-02-09 22:28:18 +0000 (Thu, 09 Feb 2006) | 2 lines
+
+Further look at review comments and added two JMLDataGroups.
+
+------------------------------------------------------------------------
+r691 | dcochran | 2006-02-08 21:57:05 +0000 (Wed, 08 Feb 2006) | 2 lines
+
+Started to look at review comments.
+
+------------------------------------------------------------------------
+r690 | jkiniry | 2006-02-08 14:56:38 +0000 (Wed, 08 Feb 2006) | 2 lines
+
+Performed a code and spec review for Dermot.
+
+------------------------------------------------------------------------
+r689 | dcochran | 2006-02-06 22:45:50 +0000 (Mon, 06 Feb 2006) | 2 lines
+
+Tidied up layout of JML annotations and removed one duplicate method.
+
+------------------------------------------------------------------------
+r688 | dcochran | 2006-02-04 22:21:14 +0000 (Sat, 04 Feb 2006) | 2 lines
+
+Complete specification for Ballot class
+
+------------------------------------------------------------------------
+r687 | dcochran | 2006-02-04 19:46:45 +0000 (Sat, 04 Feb 2006) | 2 lines
+
+Added all preconditions for distribution of surpluses.
+
+------------------------------------------------------------------------
+r686 | dcochran | 2006-02-03 22:12:06 +0000 (Fri, 03 Feb 2006) | 2 lines
+
+Added SETUP and PRECOUNT states.
+
+------------------------------------------------------------------------
+r685 | dcochran | 2006-02-03 17:25:31 +0000 (Fri, 03 Feb 2006) | 2 lines
+
+Updated Candidate class and conditions that depend upon it.
+
+------------------------------------------------------------------------
+r684 | dcochran | 2006-02-03 12:59:16 +0000 (Fri, 03 Feb 2006) | 2 lines
+
+Added placeholders for input and output data.  Changed internal methods to protected visibility.  Ensure that all methods are using JML assert false, for now.
+
+------------------------------------------------------------------------
+r683 | dcochran | 2006-02-03 09:24:32 +0000 (Fri, 03 Feb 2006) | 2 lines
+
+Removed dependency on MAXCOUNTS constant
+
+------------------------------------------------------------------------
+r682 | dcochran | 2006-02-01 22:34:04 +0000 (Wed, 01 Feb 2006) | 2 lines
+
+Removed any assumptions regarding fixed length arrays.
+
+------------------------------------------------------------------------
+r681 | dcochran | 2006-02-01 21:58:49 +0000 (Wed, 01 Feb 2006) | 2 lines
+
+Simplified the specification so as to try and eliminate logic errors ... but ESCJava2 still fails.
+
+------------------------------------------------------------------------
+r680 | dcochran | 2006-01-30 21:26:35 +0000 (Mon, 30 Jan 2006) | 2 lines
+
+Simplified the specification so as to find the logical flaw or unsoundness.
+
+------------------------------------------------------------------------
+r679 | dcochran | 2006-01-28 16:50:37 +0000 (Sat, 28 Jan 2006) | 2 lines
+
+Hiding universal quantifiers from ESCJava2 using +@ notation, until  source of error is found.
+
+------------------------------------------------------------------------
+r678 | dcochran | 2006-01-28 13:25:15 +0000 (Sat, 28 Jan 2006) | 2 lines
+
+Revised and edited some of the documentation comments.
+
+------------------------------------------------------------------------
+r677 | dcochran | 2006-01-27 20:06:57 +0000 (Fri, 27 Jan 2006) | 2 lines
+
+Added constructor for Candidate class and other utility methods used by ElectionAlgorithm class
+
+------------------------------------------------------------------------
+r676 | dcochran | 2006-01-27 12:42:39 +0000 (Fri, 27 Jan 2006) | 2 lines
+
+Added fixed length arrays to the Ballot class and added methods to ElectionAlgorithm class for state machine transitions.
+
+------------------------------------------------------------------------
+r675 | dcochran | 2006-01-26 21:36:15 +0000 (Thu, 26 Jan 2006) | 2 lines
+
+Added a PRELOADING state; candidate details need to be loaded first, so that ballots can be validated against the candidate list as they are loaded.
+
+------------------------------------------------------------------------
+r674 | dcochran | 2006-01-26 18:57:46 +0000 (Thu, 26 Jan 2006) | 2 lines
+
+Refinement sequence requires that all files have the same prefix.
+
+------------------------------------------------------------------------
+r673 | dcochran | 2006-01-26 16:43:28 +0000 (Thu, 26 Jan 2006) | 2 lines
+
+Fixed all ESCJava2 issues in the model so far.
+
+------------------------------------------------------------------------
+r672 | dcochran | 2006-01-26 15:21:10 +0000 (Thu, 26 Jan 2006) | 2 lines
+
+Fixed most of the current issues found by ESC/Java2.  There is a still a type conversion issue with some of the quantifiers.
+
+------------------------------------------------------------------------
+r671 | dcochran | 2006-01-26 10:46:26 +0000 (Thu, 26 Jan 2006) | 2 lines
+
+Simple model of Candidate class
+
+------------------------------------------------------------------------
+r670 | dcochran | 2006-01-25 22:22:49 +0000 (Wed, 25 Jan 2006) | 2 lines
+
+Some aspects of the Model need to be applied to the Ballot and Candidate classes e.g. integrity of vote transfer between preferences
+
+------------------------------------------------------------------------
+r669 | dcochran | 2006-01-24 22:34:02 +0000 (Tue, 24 Jan 2006) | 2 lines
+
+The model value for non transferable votes is now an array with values at each round of counting.
+
+------------------------------------------------------------------------
+r668 | dcochran | 2006-01-24 21:42:02 +0000 (Tue, 24 Jan 2006) | 2 lines
+
+Further regrouping of constraints and invariants
+
+------------------------------------------------------------------------
+r667 | dcochran | 2006-01-23 22:38:05 +0000 (Mon, 23 Jan 2006) | 2 lines
+
+Regrouped all invariants and constraints according to activity state.
+
+------------------------------------------------------------------------
+r666 | dcochran | 2006-01-21 22:37:47 +0000 (Sat, 21 Jan 2006) | 2 lines
+
+Added methods for distribution of highest surplus and elimination of lowest continuing candidate.
+
+------------------------------------------------------------------------
+r665 | dcochran | 2006-01-21 21:53:24 +0000 (Sat, 21 Jan 2006) | 2 lines
+
+Added counting of first preferences and uniqueness of candidate identifiers
+
+------------------------------------------------------------------------
+r664 | dcochran | 2006-01-21 15:25:50 +0000 (Sat, 21 Jan 2006) | 2 lines
+
+Simplified down to three Java classes and one model class
+
+------------------------------------------------------------------------
+r663 | dcochran | 2006-01-20 22:03:56 +0000 (Fri, 20 Jan 2006) | 2 lines
+
+Replaced some model methods with model variables and invariants
+
+------------------------------------------------------------------------
+r662 | dcochran | 2006-01-17 22:27:42 +0000 (Tue, 17 Jan 2006) | 2 lines
+
+Updated model constraints for state machine
+
+------------------------------------------------------------------------
+r661 | dcochran | 2006-01-16 21:58:57 +0000 (Mon, 16 Jan 2006) | 2 lines
+
+Added more detail for Initialisation state
+
+------------------------------------------------------------------------
+r660 | dcochran | 2006-01-14 22:50:10 +0000 (Sat, 14 Jan 2006) | 2 lines
+
+Added more detail to state machine
+
+------------------------------------------------------------------------
+r659 | dcochran | 2006-01-13 22:11:40 +0000 (Fri, 13 Jan 2006) | 2 lines
+
+Added high level design and model for election algorithm state machine
+
+------------------------------------------------------------------------
+r658 | dcochran | 2006-01-12 22:16:54 +0000 (Thu, 12 Jan 2006) | 2 lines
+
+General restructuring as discussed at meeting.  Not yet ready for review.
+
+------------------------------------------------------------------------
+r657 | dcochran | 2006-01-07 14:17:11 +0000 (Sat, 07 Jan 2006) | 2 lines
+
+Minor syntax changes
+
+------------------------------------------------------------------------
+r656 | jkiniry | 2006-01-01 13:52:06 +0000 (Sun, 01 Jan 2006) | 5 lines
+
+Review of several classes.  I have reformatted to match SRG coding
+convensions, rewritten some comments, transformed some informal specs
+into formal ones, etc.  Please review and rollback any changes you do
+not like.
+
+------------------------------------------------------------------------
+r655 | dcochran | 2005-12-29 20:55:30 +0000 (Thu, 29 Dec 2005) | 2 lines
+
+Resolved compilation errors
+
+------------------------------------------------------------------------
+r654 | alanm | 2005-11-30 11:16:16 +0000 (Wed, 30 Nov 2005) | 2 lines
+
+update of encryption values by reverse-engineering from Radboud KOA Tally Application values
+
+------------------------------------------------------------------------
+r653 | lcoyle | 2005-11-17 14:37:02 +0000 (Thu, 17 Nov 2005) | 2 lines
+
+Changed the property of the KOA jars from ASCII to binary
+
+------------------------------------------------------------------------
+r652 | dcochran | 2005-11-16 21:42:48 +0000 (Wed, 16 Nov 2005) | 2 lines
+
+Fixed up some of the issues reported by ESCJava2, but not all
+
+------------------------------------------------------------------------
+r651 | dcochran | 2005-11-09 21:38:11 +0000 (Wed, 09 Nov 2005) | 2 lines
+
+Minor changes
+
+------------------------------------------------------------------------
+r650 | dcochran | 2005-11-05 16:27:48 +0000 (Sat, 05 Nov 2005) | 2 lines
+
+Added specification for calculating the sum of surpluses
+
+------------------------------------------------------------------------
+r649 | dcochran | 2005-11-02 21:43:59 +0000 (Wed, 02 Nov 2005) | 2 lines
+
+Added criteria for filling of last seats
+
+------------------------------------------------------------------------
+r648 | dcochran | 2005-10-29 21:54:40 +0100 (Sat, 29 Oct 2005) | 2 lines
+
+Updated the JML syntax
+
+------------------------------------------------------------------------
+r647 | dcochran | 2005-10-29 17:41:19 +0100 (Sat, 29 Oct 2005) | 2 lines
+
+Added more detailed JML to the ElectionAlgorithm, including model fields.  This has yet to be reviewed and checked by a JML expert :-)
+
+------------------------------------------------------------------------
+r646 | dcochran | 2005-10-28 23:03:51 +0100 (Fri, 28 Oct 2005) | 2 lines
+
+Added JML specs for part of the election count algorithm
+
+------------------------------------------------------------------------
+r645 | dcochran | 2005-10-26 22:29:34 +0100 (Wed, 26 Oct 2005) | 2 lines
+
+Added a JML spec for the ballot box
+
+------------------------------------------------------------------------
+r644 | dcochran | 2005-10-26 21:53:08 +0100 (Wed, 26 Oct 2005) | 2 lines
+
+Rewrote ElectionFacade.jml
+
+------------------------------------------------------------------------
+r643 | dcochran | 2005-10-25 22:04:07 +0100 (Tue, 25 Oct 2005) | 2 lines
+
+Renamed VoteSet as BallotBox
+
+------------------------------------------------------------------------
+r642 | dcochran | 2005-10-24 21:59:03 +0100 (Mon, 24 Oct 2005) | 2 lines
+
+Renamed Facade class as ElectionFacade and added more detail to the JML specification
+
+------------------------------------------------------------------------
+r641 | dcochran | 2005-10-24 20:42:18 +0100 (Mon, 24 Oct 2005) | 2 lines
+
+Renamed .spec files as .jml for conistency  with their imlementation java files.
+
+------------------------------------------------------------------------
+r640 | dcochran | 2005-10-22 17:06:06 +0100 (Sat, 22 Oct 2005) | 2 lines
+
+Added a little more detail to the JML models
+
+------------------------------------------------------------------------
+r639 | dcochran | 2005-10-22 13:56:57 +0100 (Sat, 22 Oct 2005) | 2 lines
+
+Removal of duplicate classes
+
+------------------------------------------------------------------------
+r638 | dcochran | 2005-10-22 13:43:54 +0100 (Sat, 22 Oct 2005) | 2 lines
+
+Added first few JML models and refactoring of class names for consistency
+
+------------------------------------------------------------------------
+r637 | dcochran | 2005-10-21 23:23:05 +0100 (Fri, 21 Oct 2005) | 2 lines
+
+Added two new utility type classes.
+
+------------------------------------------------------------------------
+r636 | dcochran | 2005-10-21 23:01:17 +0100 (Fri, 21 Oct 2005) | 2 lines
+
+This is a text based file type.
+
+------------------------------------------------------------------------
+r635 | dcochran | 2005-10-21 22:55:28 +0100 (Fri, 21 Oct 2005) | 2 lines
+
+Added package for JML specs
+
+------------------------------------------------------------------------
+r634 | dcochran | 2005-10-18 21:05:27 +0100 (Tue, 18 Oct 2005) | 2 lines
+
+Moved to Votail
+
+------------------------------------------------------------------------
+r633 | dcochran | 2005-10-18 20:55:00 +0100 (Tue, 18 Oct 2005) | 2 lines
+
+Added stubs for API and unit tests
+
+------------------------------------------------------------------------
+r632 | jkiniry | 2005-10-12 16:57:20 +0100 (Wed, 12 Oct 2005) | 2 lines
+
+Converted all Java assertions into JML assertions.
+
+------------------------------------------------------------------------
+r631 | dcochran | 2005-10-11 22:31:14 +0100 (Tue, 11 Oct 2005) | 2 lines
+
+Renamed IrishElections module as Vot?\239?\191?\189?\239?\191?\189il
+
+------------------------------------------------------------------------
+r630 | dcochran | 2005-10-11 22:11:35 +0100 (Tue, 11 Oct 2005) | 2 lines
+
+Added more detail.
+
+------------------------------------------------------------------------
+r629 | dcochran | 2005-10-11 22:06:55 +0100 (Tue, 11 Oct 2005) | 2 lines
+
+Refactored and simplified design of IrishElections module into single source package called 'ie.koa'.
+
+------------------------------------------------------------------------
+r628 | alanm | 2005-10-11 16:20:39 +0100 (Tue, 11 Oct 2005) | 2 lines
+
+Change of variable name "enum" as it is a keyword from Java 1.5
+
+------------------------------------------------------------------------
+r627 | dcochran | 2005-10-08 22:08:47 +0100 (Sat, 08 Oct 2005) | 2 lines
+
+BallotPaper is renamed as either OnlineVote or TestVote depending on the context.  A TestVote is equivalent to a BallotPaper in the Coyle-Doyle algorithm.
+
+------------------------------------------------------------------------
+r626 | dcochran | 2005-10-07 21:49:49 +0100 (Fri, 07 Oct 2005) | 2 lines
+
+Removed EMF annotation
+
+------------------------------------------------------------------------
+r625 | dcochran | 2005-10-07 21:48:37 +0100 (Fri, 07 Oct 2005) | 2 lines
+
+For security reasons, we need to know exactly which vote loader is used to load each ballot paper, so as not to mix in test votes with real votes.
+
+------------------------------------------------------------------------
+r624 | dcochran | 2005-10-07 21:12:15 +0100 (Fri, 07 Oct 2005) | 2 lines
+
+Refactored VoteLoader so that votes can be loaded either from KOA itself or from the CoyleDoyle testing datasets.
+
+------------------------------------------------------------------------
+r623 | dcochran | 2005-10-07 21:00:45 +0100 (Fri, 07 Oct 2005) | 2 lines
+
+Organised into packages.
+
+------------------------------------------------------------------------
+r622 | dcochran | 2005-10-07 20:37:27 +0100 (Fri, 07 Oct 2005) | 2 lines
+
+Removed for refactoring
+
+------------------------------------------------------------------------
+r621 | dcochran | 2005-10-07 20:31:19 +0100 (Fri, 07 Oct 2005) | 2 lines
+
+Moved to new location.
+
+------------------------------------------------------------------------
+r620 | dcochran | 2005-10-07 20:30:48 +0100 (Fri, 07 Oct 2005) | 2 lines
+
+New location for Irish Internet Voting module within KOA
+
+------------------------------------------------------------------------
+r619 | dcochran | 2005-10-05 20:20:34 +0100 (Wed, 05 Oct 2005) | 2 lines
+
+Removed from CVS
+
+------------------------------------------------------------------------
+r618 | dcochran | 2005-10-05 20:06:13 +0100 (Wed, 05 Oct 2005) | 2 lines
+
+Not using EMF; preparing to use JML
+
+------------------------------------------------------------------------
+r617 | dcochran | 2005-10-04 21:56:00 +0100 (Tue, 04 Oct 2005) | 2 lines
+
+EMF models based on Coyle Doyle data structures for election count algorithm
+
+------------------------------------------------------------------------
+r616 | dcochran | 2005-10-03 20:17:03 +0100 (Mon, 03 Oct 2005) | 2 lines
+
+Removed test folder and added a stub for the build file.
+
+------------------------------------------------------------------------
+r615 | dcochran | 2005-10-03 20:13:36 +0100 (Mon, 03 Oct 2005) | 2 lines
+
+List of dependencies for this module.
+
+------------------------------------------------------------------------
+r614 | dcochran | 2005-09-28 23:22:21 +0100 (Wed, 28 Sep 2005) | 2 lines
+
+Updated ArgoUML models, but still not able to generate code or add JML annotations to the class diagrams.
+
+------------------------------------------------------------------------
+r613 | dcochran | 2005-09-27 21:58:35 +0100 (Tue, 27 Sep 2005) | 2 lines
+
+HelloWord model for test purposes; but not enough detail for ArgoUML to proceed with code generation.
+
+------------------------------------------------------------------------
+r612 | dcochran | 2005-09-22 23:19:31 +0100 (Thu, 22 Sep 2005) | 2 lines
+
+Generic build file for Mac OS X - assumes that {jboss} and {system.library} are predefined.
+
+------------------------------------------------------------------------
+r611 | dcochran | 2005-09-22 22:10:43 +0100 (Thu, 22 Sep 2005) | 2 lines
+
+MAC OS X settings
+
+------------------------------------------------------------------------
+r610 | jkiniry | 2005-08-16 17:29:34 +0100 (Tue, 16 Aug 2005) | 29 lines
+
+o Added @todo to makefile about getting rid of separate, unnecessary
+  jmlc_junit rule.
+
+o Modified BOOTCP, jdksrcpath, and escjava makefile variables to make
+  my current environment.  Eventually, these should be made generic
+  and documented appropriately.
+
+o Removed purity checking in jmlc for now is annotations for such are
+  in a state of flux post-Fintan.  Removed used of --junit switch from
+  rule to eventually delete (see point one above) as the rule no longer
+  exists.
+
+o Added Task to set of classes to focus upon.
+
+o Commented out header checking in checkstyle spec as we do not have
+  a uniform header in this project given its varying licenses.
+
+o Removed final from model field declarations in ExemptionMechanism
+  as final models are no longer permitted.
+
+o Added @todo about ProgressMonitor's specification.  Also filled
+  out the spec for ProgressMonitor quite a bit for checking.
+
+o Reindented a few source files per the code standard (2 spaces, not
+  3 are used).
+
+o Corrected/augmented a few specs in these same classes, particularly
+  a couple of tiny tweaks to Task.
+
+------------------------------------------------------------------------
+r609 | warnier | 2005-03-09 16:07:51 +0000 (Wed, 09 Mar 2005) | 4 lines
+
+
+* Chapter 3 is now translated.
+* Some small fixes in Chapter 1 and 2.
+
+------------------------------------------------------------------------
+r608 | warnier | 2005-02-22 08:44:47 +0000 (Tue, 22 Feb 2005) | 9 lines
+
+
+Initial translation of the first two chapters of the functional
+specification of the KOA (distant voting) system.
+
+files:
+FunctionalSpecification.pdf - The translation (at this moment
+			      only the first two chapters)
+tex/			    - LaTeX sources for the document
+
+------------------------------------------------------------------------
+r607 | fintan2 | 2005-02-17 14:34:21 +0000 (Thu, 17 Feb 2005) | 2 lines
+
+*** empty log message ***
+
+------------------------------------------------------------------------
+r606 | fintan2 | 2005-02-17 14:07:02 +0000 (Thu, 17 Feb 2005) | 7 lines
+
+First commit of Task from me.
+
+Quite a few changes - changes to method specs and some constraints added.
+This class will most likely need some changes in the future - especially as I look at its subclasses.
+
+Current ESC/Java2 results: 3 errors (all simplify crashes).
+
+------------------------------------------------------------------------
+r605 | (no author) | 2005-02-16 11:52:37 +0000 (Wed, 16 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create tag 'Translated'.
+------------------------------------------------------------------------
+r603 | (no author) | 2005-02-16 11:52:24 +0000 (Wed, 16 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'alanm'.
+------------------------------------------------------------------------
+r602 | alanm | 2005-02-16 11:52:24 +0000 (Wed, 16 Feb 2005) | 2 lines
+
+Initial revision
+
+------------------------------------------------------------------------
+r601 | alanm | 2005-02-16 11:52:24 +0000 (Wed, 16 Feb 2005) | 3 lines
+
+This commit was generated by cvs2svn to compensate for changes in r44,
+which included commits to RCS files with non-trunk default branches.
+
+------------------------------------------------------------------------
+r600 | alanm | 2005-02-16 11:52:24 +0000 (Wed, 16 Feb 2005) | 2 lines
+
+Translated JSPs - 2nd Import
+
+------------------------------------------------------------------------
+r599 | fintan2 | 2005-02-14 17:01:00 +0000 (Mon, 14 Feb 2005) | 2 lines
+
+First update
+
+------------------------------------------------------------------------
+r598 | fintan2 | 2005-02-14 16:46:24 +0000 (Mon, 14 Feb 2005) | 2 lines
+
+Added this file so that it is possible to reason about ProgressMonitor.max and adds specs to the methods setMaximum and getMaximum.
+
+------------------------------------------------------------------------
+r597 | fintan2 | 2005-02-14 16:26:37 +0000 (Mon, 14 Feb 2005) | 4 lines
+
+Added constraints and modified some method specs.
+6 methods are causing the ESC/Java2 simplify crash, but the rest pass successfully.
+Current ESC/Java2 results: 6 errors (all simplify crashes).
+
+------------------------------------------------------------------------
+r596 | (no author) | 2005-02-09 16:54:51 +0000 (Wed, 09 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create tag 'update'.
+------------------------------------------------------------------------
+r595 | alanm | 2005-02-09 16:54:51 +0000 (Wed, 09 Feb 2005) | 3 lines
+
+This commit was generated by cvs2svn to compensate for changes in r38,
+which included commits to RCS files with non-trunk default branches.
+
+------------------------------------------------------------------------
+r594 | alanm | 2005-02-09 16:54:51 +0000 (Wed, 09 Feb 2005) | 2 lines
+
+First Commit
+
+------------------------------------------------------------------------
+r593 | (no author) | 2005-02-09 16:53:49 +0000 (Wed, 09 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'amorkan'.
+------------------------------------------------------------------------
+r592 | alanm | 2005-02-09 16:53:49 +0000 (Wed, 09 Feb 2005) | 2 lines
+
+Initial revision
+
+------------------------------------------------------------------------
+r591 | alanm | 2005-02-09 16:53:40 +0000 (Wed, 09 Feb 2005) | 3 lines
+
+This commit was generated by cvs2svn to compensate for changes in r34,
+which included commits to RCS files with non-trunk default branches.
+
+------------------------------------------------------------------------
+r590 | alanm | 2005-02-09 16:53:40 +0000 (Wed, 09 Feb 2005) | 2 lines
+
+First Commit
+
+------------------------------------------------------------------------
+r589 | (no author) | 2005-02-09 16:53:40 +0000 (Wed, 09 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'alanm'.
+------------------------------------------------------------------------
+r588 | (no author) | 2005-02-09 16:53:40 +0000 (Wed, 09 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'amorkan'.
+------------------------------------------------------------------------
+r587 | alanm | 2005-02-09 16:47:15 +0000 (Wed, 09 Feb 2005) | 2 lines
+
+Initial revision
+
+------------------------------------------------------------------------
+r586 | alanm | 2005-02-09 16:46:14 +0000 (Wed, 09 Feb 2005) | 2 lines
+
+First Commit
+
+------------------------------------------------------------------------
+r585 | (no author) | 2005-02-08 11:37:41 +0000 (Tue, 08 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create tag 'init'.
+------------------------------------------------------------------------
+r584 | (no author) | 2005-02-08 11:37:41 +0000 (Tue, 08 Feb 2005) | 2 lines
+
+This commit was manufactured by cvs2svn to create tag
+'Nijmegen_Snapshot'.
+------------------------------------------------------------------------
+r582 | (no author) | 2005-02-08 11:37:41 +0000 (Tue, 08 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'amorkan'.
+------------------------------------------------------------------------
+r581 | (no author) | 2005-02-08 11:37:31 +0000 (Tue, 08 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'KUN_RU_tally'.
+------------------------------------------------------------------------
+r580 | jkiniry | 2005-02-08 11:37:31 +0000 (Tue, 08 Feb 2005) | 2 lines
+
+Initial revision
+
+------------------------------------------------------------------------
+r579 | jkiniry | 2005-02-08 11:35:32 +0000 (Tue, 08 Feb 2005) | 2 lines
+
+Snapshot of tally application from KUN/RU.
+
+------------------------------------------------------------------------
+r578 | jkiniry | 2005-02-06 23:44:44 +0000 (Sun, 06 Feb 2005) | 2 lines
+
+Removed files used for demo.
+
+------------------------------------------------------------------------
+r577 | (no author) | 2005-02-06 20:25:27 +0000 (Sun, 06 Feb 2005) | 2 lines
+
+This commit was manufactured by cvs2svn to create tag
+'original_snapshot_from_NL_Gov'.
+------------------------------------------------------------------------
+r574 | (no author) | 2005-02-06 20:25:04 +0000 (Sun, 06 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'amorkan'.
+------------------------------------------------------------------------
+r573 | jkiniry | 2005-02-06 20:25:04 +0000 (Sun, 06 Feb 2005) | 2 lines
+
+Initial revision
+
+------------------------------------------------------------------------
+r571 | (no author) | 2005-02-06 20:16:41 +0000 (Sun, 06 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'amorkan'.
+------------------------------------------------------------------------
+r570 | jkiniry | 2005-02-06 20:16:40 +0000 (Sun, 06 Feb 2005) | 2 lines
+
+Initial revision
+
+------------------------------------------------------------------------
+r569 | jkiniry | 2005-02-06 20:14:23 +0000 (Sun, 06 Feb 2005) | 2 lines
+
+Unpacked source direct from NL government.
+
+------------------------------------------------------------------------
+r566 | (no author) | 2005-02-06 19:59:20 +0000 (Sun, 06 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'amorkan'.
+------------------------------------------------------------------------
+r565 | (no author) | 2005-02-06 19:59:20 +0000 (Sun, 06 Feb 2005) | 2 lines
+
+This commit was manufactured by cvs2svn to create branch
+'LogicaCMG_KUN'.
+------------------------------------------------------------------------
+r564 | jkiniry | 2005-02-06 19:59:20 +0000 (Sun, 06 Feb 2005) | 2 lines
+
+Initial revision
+
+------------------------------------------------------------------------
+r563 | jkiniry | 2005-02-04 11:46:57 +0000 (Fri, 04 Feb 2005) | 2 lines
+
+COMP 3013 demonstration
+
+------------------------------------------------------------------------
+r561 | (no author) | 2005-02-02 17:21:13 +0000 (Wed, 02 Feb 2005) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'jkiniry'.
+------------------------------------------------------------------------
+r560 | jkiniry | 2005-02-02 17:21:13 +0000 (Wed, 02 Feb 2005) | 2 lines
+
+Initial revision
+
+------------------------------------------------------------------------
+r559 | jkiniry | 2005-02-02 17:20:49 +0000 (Wed, 02 Feb 2005) | 2 lines
+
+
+
+------------------------------------------------------------------------
+r558 | root | 2005-02-01 16:20:02 +0000 (Tue, 01 Feb 2005) | 1 line
+
+initial checkin
+------------------------------------------------------------------------
+r557 | (no author) | 2005-02-01 16:20:02 +0000 (Tue, 01 Feb 2005) | 1 line
+
+New repository initialized by cvs2svn.
+------------------------------------------------------------------------
+r556 | kiniry | 2007-08-19 18:46:11 +0100 (Sun, 19 Aug 2007) | 1 line
+
+Directory for importing existing svn data into new repository.
+------------------------------------------------------------------------
