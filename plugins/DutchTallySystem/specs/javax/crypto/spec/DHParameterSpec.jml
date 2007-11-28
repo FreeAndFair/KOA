@@ -1,0 +1,81 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package javax.crypto.spec;
+
+import java.math.BigInteger;
+import java.security.spec.AlgorithmParameterSpec;
+
+public class DHParameterSpec implements AlgorithmParameterSpec
+{
+    // The prime modulus
+//     private BigInteger p;
+
+    // The base generator
+//     private BigInteger g;
+
+    // The size in bits of the random exponent (private value) (optional)
+//     private int l;
+
+    /**
+     * Constructs a parameter set for Diffie-Hellman, using a prime modulus
+     * <code>p</code> and a base generator <code>g</code>.
+     *
+     * @param p the prime modulus
+     * @param g the base generator
+     */
+    public DHParameterSpec(BigInteger p, BigInteger g) {
+	this.p = p;
+	this.g = g;
+	this.l = 0;
+    }
+
+    /**
+     * Constructs a parameter set for Diffie-Hellman, using a prime modulus
+     * <code>p</code>, a base generator <code>g</code>,
+     * and the size in bits, <code>l</code>, of the random exponent
+     * (private value).
+     *
+     * @param p the prime modulus
+     * @param g the base generator
+     * @param l the size in bits of the random exponent (private value)
+     */
+    public DHParameterSpec(BigInteger p, BigInteger g, int l) {
+	this.p = p;
+	this.g = g;
+	this.l = l;
+    }
+
+    /**
+     * Returns the prime modulus <code>p</code>.
+     *
+     * @return the prime modulus <code>p</code>
+     */
+    public BigInteger getP() {
+	return this.p;
+    }
+
+    /**
+     * Returns the base generator <code>g</code>.
+     *
+     * @return the base generator <code>g</code>
+     */
+    public BigInteger getG() {
+	return this.g;
+    }
+
+    /**
+     * Returns the size in bits, <code>l</code>, of the random exponent
+     * (private value).
+     *
+     * @return the size in bits, <code>l</code>, of the random exponent
+     * (private value), or 0 if this size has not been set
+     */
+    public int getL() {
+	return this.l;
+    }
+}

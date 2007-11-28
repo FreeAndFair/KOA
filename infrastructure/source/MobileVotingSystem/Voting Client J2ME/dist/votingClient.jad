@@ -1,0 +1,9 @@
+MIDlet-Name: Client
+MIDlet-Version: 2.0
+MIDlet-Vendor: Liam Whelan
+MIDlet-Jar-URL: votingClient.jar
+MIDlet-Jar-Size: 33095
+MIDlet-Description: A localized sample project
+MIDlet-Icon: /dot.png
+MIDlet-Info-URL: 
+MIDlet-1: Client,/dot.png,ClientMIDlet

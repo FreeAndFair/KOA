@@ -1,0 +1,148 @@
+/*
+ * @(#)SAXParser.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Engelbert Hubbers (hubbers@cs.kun.nl)
+ */
+
+package javax.xml.parsers;
+
+import org.xml.sax.Parser;
+import org.xml.sax.XMLReader;
+import org.xml.sax.SAXException;
+import org.xml.sax.HandlerBase;
+import org.xml.sax.InputSource;
+import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
+
+import java.io.File;
+import java.io.InputStream;
+import java.io.IOException;
+
+public abstract class SAXParser extends Object {
+
+
+/*@ spec_public @*/ protected SAXParser();
+
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(InputStream is,
+                  HandlerBase hb)
+           throws SAXException,
+                  IOException,
+                  IllegalArgumentException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(InputStream is,
+                  HandlerBase hb,
+                  String systemId)
+           throws SAXException,
+                  IOException,
+                  IllegalArgumentException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(InputStream is,
+                  DefaultHandler dh)
+           throws SAXException,
+                  IOException,
+                  IllegalArgumentException;
+
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(InputStream is,
+                  DefaultHandler dh,
+                  String systemId)
+           throws SAXException,
+                  IOException,
+                  IllegalArgumentException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(String uri,
+                  HandlerBase hb)
+           throws SAXException,
+                  IOException,
+                  IllegalArgumentException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(String uri,
+                  DefaultHandler dh)
+           throws SAXException,
+                  IOException,
+                  IllegalArgumentException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(File f,
+                  HandlerBase hb)
+           throws SAXException,
+                  IOException,
+                  IllegalArgumentException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(File f,
+                  DefaultHandler dh)
+           throws SAXException,
+                  IOException,
+                  IllegalArgumentException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(InputSource is,
+                  HandlerBase hb)
+           throws SAXException,
+                  IOException,
+                  IllegalArgumentException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(InputSource is,
+                  DefaultHandler dh)
+           throws SAXException,
+                  IOException,
+                  IllegalArgumentException;
+
+/*@ pure @*/ public abstract Parser getParser()
+                          throws SAXException;
+
+/*@ pure @*/ public abstract XMLReader getXMLReader()
+                                throws SAXException;
+
+/*@ pure @*/ public abstract boolean isNamespaceAware();
+
+/*@ pure @*/ public abstract boolean isValidating();
+
+/*@
+  @ assignable objectState;
+  @*/
+public abstract void setProperty(String name,
+                                 Object value)
+                          throws SAXNotRecognizedException,
+                                 SAXNotSupportedException;
+
+/*@ pure @*/ public abstract Object getProperty(String name)
+                            throws SAXNotRecognizedException,
+                                   SAXNotSupportedException;
+
+
+}

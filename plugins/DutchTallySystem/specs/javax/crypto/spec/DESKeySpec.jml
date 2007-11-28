@@ -1,0 +1,80 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package javax.crypto.spec;
+
+import java.security.InvalidKeyException;
+
+public /*@ pure @*/ class DESKeySpec
+  implements java.security.spec.KeySpec
+{
+  //@ public invariant DES_KEY_LEN == 8;
+
+  //@ public model byte[] _key;
+  //@ public represents _key <- getKey();
+
+  /*@ public normal_behavior
+    @   requires key != null;
+    @   requires key.length >= 24;
+    @   ensures (\forall int i; 0 <= i && i < DES_KEY_LEN; _key[i] == key[i]);
+    @ also
+    @ public exceptional_behavior
+    @   requires key != null;
+    @   requires key.length < 24;
+    @   signals (InvalidKeyException) true;
+    @*/
+  public DESKeySpec(byte[] key) throws InvalidKeyException;
+
+  /*@ public normal_behavior
+    @   requires key != null;
+    @   requires key.length >= DES_KEY_LEN + offset;
+    @   ensures (\forall int i; 0 <= i && i < DES_KEY_LEN; _key[i] == key[i + offset]);
+    @ also
+    @ public exceptional_behavior
+    @   requires key != null;
+    @   requires (key.length - offset) < DES_KEY_LEN;
+    @   signals (InvalidKeyException) true;
+    @*/
+  public DESKeySpec(byte[] key, int offset) throws InvalidKeyException;
+
+  /*@ public normal_behavior
+    @   ensures (\forall int i; 0 <= i && i < DES_KEY_LEN; _key[i] == \result[i]);
+    @*/ 
+  public byte[] getKey();
+
+  /*@ public normal_behavior
+    @   requires key != null;
+    @   requires key.length >= DES_KEY_LEN + offset;
+    @ also
+    @ public exceptional_behavior
+    @   requires key != null;
+    @   requires (key.length - offset) < DES_KEY_LEN;
+    @   signals (InvalidKeyException) true;
+    @ also
+    @ public exceptional_behavior
+    @   requires key == null;
+    @   signals (InvalidKeyException) true;
+    @*/
+  public static boolean isParityAdjusted(byte[] key, int offset)
+    throws InvalidKeyException;
+
+  /*@ public normal_behavior
+    @   requires key != null;
+    @   requires key.length >= DES_KEY_LEN + offset;
+    @ also
+    @ public exceptional_behavior
+    @   requires key != null;
+    @   requires (key.length - offset) < DES_KEY_LEN;
+    @   signals (InvalidKeyException) true;
+    @ also
+    @ public exceptional_behavior
+    @   requires key == null;
+    @   signals (InvalidKeyException) true;
+    @*/
+  public static boolean isWeak(byte[] key, int offset)
+    throws InvalidKeyException;
+}

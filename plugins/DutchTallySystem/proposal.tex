@@ -1,0 +1,263 @@
+% $Id$ 
+\documentclass{article}
+
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+   \pdffalse     % no PDFLaTeX
+\else
+   \pdfoutput=1  % PDFLaTeX
+   \pdftrue
+\fi
+
+\ifpdf
+\usepackage[pdftex,bookmarks=false,
+            plainpages=false,naturalnames=true,
+            colorlinks=true,pdfstartview=FitV,
+            linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\else
+\usepackage[dvips]{hyperref}
+\fi
+
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{eurosym}
+
+\title{Proposal for `Hertelapplicatie'}
+\author{Security of Systems Group, University of Nijmegen \\
+Contact person: Engelbert Hubbers \\
+Email: {\tt hubbers@cs.kun.nl}}
+
+\newcommand{\myhref}[2]{\ifpdf\href{#1}{#2}\else\texttt{#2}\fi}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\etc}{etc.\xspace}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+We propose to design and implement the `Hertelapplicatie'
+vote-counting system as specified in the call for proposals \cite{CFPBZK}
+in a rigorous fashion.  Our
+methodology guarantees that the system is correct, that it fulfills
+the specification of the Ministry of the Interior and Kingdom Relations (BZK), and that it is better specified and
+documented than any system designed and implemented by competing
+companies.
+
+\subsection*{Motivation}
+We have a two-fold reason for making this proposal in this fashion.
+
+The first reason is that our research group has an interest (both
+scientific and societal) in systems for electronic voting, as can be
+seen from the
+publications~\cite{Breunesse_Jacobs_Oostdijk:02voting,Jacobs:03inaug},
+and from our earlier involvement in a black-box security test of this
+particular electronic voting system.
+
+The second reason is that we would like to use this opportunity to use
+our extensive experience in formal methods in software design (i.e.,
+rigorous software construction) for an application which is to be
+used in practice.  Since the correctness of this application is of the
+utmost importance, we want to use the latest proven technology to show
+that our solution is superior.
+
+\vspace{0.5cm}
+\noindent Note that, because of the international character of our group, we
+have written this proposal in English.
+
+\section{Our Proposal}
+
+\subsection{General Information}
+
+In the rest of this proposal we refer to the `Hertelapplicatie' by
+calling it `the application'.
+
+We will implement the application in Java.  More precisely, we will
+use Sun's Java 2 Platform, Standard Edition (J2SE), version
+1.4~\cite{SUNj2se}.  We will also use the `Design by Contract'
+methodology to design and construct the system, by using the JML
+specification language~\cite{JMLurl}.
+
+JML stands for ``Java Modeling Language''.  JML provides an extension
+to the Java language with which one can write formal specifications.
+Each core component of a system is formalized by writing
+specifications which identify the key properties the final system must
+have.  For example, one might specify that the total number of votes
+must be a specific value.  
+
+Using specialized tools we can formally verify whether a given
+implementation matches the original formal contract\footnote{Note that
+  this is only interesting for the calculation engine of the
+  application.  We do not have the expertise to fully formally verify
+  the system modules relating to the graphical user interface.}.  For
+example, one of the tools we will use is the ESC/Java2 tool, which is a
+static checker~\cite{ESCurl}.  ESC/Java2 does not need any test input
+for its verification process.
+
+In the recently finished European VerifiCard project we gained
+significant expertise in this type of work, particularly in the area
+of Java-based smart cards~\cite{VERurl}. We have extensive experience
+with Java and with its Java Cryptography Extensions (JCEs), which is
+used, for instance, in the computer security courses that we teach to
+our Masters students.  For this application we intend to use the open
+source JCE implementation by Bouncy Castle~\cite{BCurl}.
+
+Since we are employees of a university, being able to refer to this work
+for publication is desirable, possibly in a scientific context, but
+also perhaps in a public relations context (for instance, for new
+students).  We will thus ask, in due course, for permission to do so,
+in accordances with the general conditions of BZK listed in \cite{AVODIBZK}.
+The fact that the application is intended to be made Open Source makes
+it more attractive for us, since we can then refer to it publicly.
+
+\subsection{Our Proposal's Strengths}
+
+The unique selling point of our proposal obviously lies in the use of
+formal techniques for ensuring correctness via the specification
+language JML and our set of tools. Our JML specifications will be
+included as special comments in the source code, which facilitates
+code inspection by third parties.
+
+The extra costs for writing down these specificiations will be
+balanced by the fact that our testing methology is greatly reduced
+compared to alternative approaches.  Also, the resulting system is
+much better documented and easier to maintain.
+
+\subsection{Planning}
+
+The call for proposals states that it is the intention of BZK that on
+5~March it will become clear which party will implement the
+application.  Since the application should be ready by 2~April, this
+leaves a period of approximately four weeks to do the job.  We propose
+a plan whose goal is to have the software ready within three weeks.
+
+\begin{tabular}{|l|r@{.\ }p{9.5cm}|}
+\hline
+Week &\multicolumn{2}{l|}{Task} \\ \hline
+11   & 1& Study system specification and related materials provided by BZK \\
+     & 2& Write a high-level technical design of the system \\
+     & 3& Search for and choose Open Source libraries for decryption, XML and PDF routines \\
+     & 4& Write formal contracts for the main module \\
+     & 5& Implement the main module \\
+     & 6& Verify the implementation with respect to the specifications \\
+     & 7& Implement the helper methods for connecting to the libraries \\
+     & 8& Design the graphical user interface \\ \hline
+12   & 1& Implement the graphical user interface \\
+     & 2& Integrate the GUI with the main module and the helper modules \\
+     & 3& Perform functional testing on the application \\
+     & 4& Check performance figures for heavy load \\ \hline
+13   & 1& Implement installation kit \\
+     & 2& Test kit both on Windows and Linux systems \\
+     & 3& Write user manual \\
+     & 4& Write supplimentary technical documentation \\ \hline
+14   &\multicolumn{2}{l|}{Release application} \\ \hline
+TBD  &\multicolumn{2}{l|}{Support for acceptance test} \\ \hline
+24   &\multicolumn{2}{l|}{On-site support} \\
+\hline
+\end{tabular}
+
+\subsection{Time Estimate}
+
+We estimate that this project will take three person weeks at 80\% time.
+This is a total of 288 hours.
+
+\subsection{Deliverables}
+
+Because the project is supposed to run only three weeks, we do not
+plan on providing any intermediate deliverables.  The final
+deliverables will be:
+\begin{itemize}
+\item An application conforming to the specification put forth
+  in the call for proposals~\cite{PVEBZK}.
+\item An installer. We develop the application on the Linux platform.
+  Since it will be written in Java, it is easy to provide multiple
+  installers.  We will provide installers for at least the Linux and
+  Windows operating systems.
+\item A user manual written in Dutch. This will be a PDF document.
+\item Technical documentation in English. This documentation will
+  comprise detailed Javadoc- and JML-based documentation for the core
+  system describing all its modules.
+\item Source code. Apart from the source code of the application
+  itself, we will also include the source code of all Open Source
+  libraries used.
+\item On-site support limited to a few hours.
+\end{itemize}
+
+\subsection{Testing and Performance Evaluation}
+
+As specified before, the testing process will be divided into two
+parts: a functional test and a performance test.  
+
+Obviously, the functional test will resemble the steps specified
+in~\cite{PVEBZK}.  In order to perform such a test we will need to
+have sample input files.  This includes files with candidate lists,
+encrypted export files and, of course, the corresponding key pairs.
+
+For this reason we intend to write an encryption module to generate
+these export files.  However, since we will probably use a different
+JCE implementation than the KOA application, it would be necessary for
+us to be given additional sample files actually generated by the
+latter.
+
+The performance test will be performed on a desktop machine
+approximating the specifications put forth in the call for proposals.
+
+\subsection{Requirements}
+
+Given the extremely aggressive schedule of this project, we put the
+following requirements on BZK:
+\begin{itemize}
+\item A reasonable amount of test data generated by the KOA system
+  must be made available \emph{prior to our beginning of the project}.
+  We cannot be expected to rigorously design and construct a system
+  that is this data-depended without a comparable rigorous
+  specification of the data.
+\item The design of the GUI specified at the start of the project is
+  \emph{not} subject to revisions.  If BZK wants a more refined
+  user interface beyond that which is stipulated by the current call
+  for proposals, it is the responsibility of BZK to separately
+  contract such revisions (either with us or with another party) only
+  \emph{after} this contract has ended.
+\item We offer only basic installation and initial usage help for this
+  system.  If BZK needs more extensive assistance at a later point in
+  time, it must be covered under a separate contract.
+\end{itemize}
+
+\subsection{Insurance}
+
+Since we are not a commercial company, our work is {\em not} covered
+by an appropriate insurance as stated in~\cite[article 25]{AVODIBZK}.
+However, given our earlier track record, and given the limited size
+(and cost) of the application, we do not foresee problems.  We do, of
+course, accept the liability clauses.
+
+\subsection{Team Members}
+
+The work will be accomplished by the following staff of the Security
+of Systems group at the University of Nijmegen:
+\begin{itemize}
+\item Dr.~Engelbert Hubbers, URL: \myhref{http://www.cs.kun.nl/~hubbers/}{http://www.cs.kun.nl/$\sim$hubbers}
+
+\item Dr.~Joseph Kiniry, URL: \myhref{http://www.cs.kun.nl/~kiniry/}{http://www.cs.kun.nl/$\sim$kiniry}
+
+\item Dr.~Martijn Oostdijk, URL: \myhref{http://www.cs.kun.nl/~martijno/}{http://www.cs.kun.nl/$\sim$martijno}
+\end{itemize}
+
+\noindent The general supervision is in the hands of the group's
+leader, Prof.~dr.~Bart Jacobs.
+
+All three team members are currently employed as postdoctoral scholars
+in the Security of Systems group.  The tariff for a post-doc on a
+commercial project such as this one is set to \euro{85} per hour per
+person.
+
+\subsection{Total Cost}
+Based upon the number of hours presented above, this proposal implies a
+total estimated cost of \euro{24.480} including tax.
+
+\bibliographystyle{plain}
+\bibliography{proposal}
+
+\end{document}
+
+

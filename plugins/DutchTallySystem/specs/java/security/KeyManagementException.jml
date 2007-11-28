@@ -1,0 +1,20 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package java.security;
+
+public /*@ pure @*/ class KeyManagementException
+    extends KeyException
+{
+    public KeyManagementException();
+
+    /*@ public normal_behavior
+      @   ensures getMessage() == msg;
+      @*/
+    public KeyManagementException(String msg);
+}
+

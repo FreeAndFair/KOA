@@ -1,0 +1,71 @@
+/*
+ * @(#)Level.jml
+ *
+ * @version $Id:Level.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package java.util.logging;
+
+import java.io.Serializable;
+import java.util.ResourceBundle;
+
+public class Level implements Serializable
+{
+   public static final /*@ non_null */ Level SEVERE;
+   public static final /*@ non_null */ Level WARNING;
+   public static final /*@ non_null */ Level INFO;
+   public static final /*@ non_null */ Level CONFIG;
+   public static final /*@ non_null */ Level FINE;
+   public static final /*@ non_null */ Level FINER;
+   public static final /*@ non_null */ Level FINEST;
+
+   public static final /*@ non_null */ Level OFF;
+   public static final /*@ non_null */ Level ALL;
+
+   /*@ invariant SEVERE.intValue() >= WARNING.intValue() &&
+     @           WARNING.intValue() >= INFO.intValue() &&
+     @           INFO.intValue() >= CONFIG.intValue() &&
+     @           CONFIG.intValue() >= FINE.intValue() &&
+     @           FINE.intValue() >= FINER.intValue() &&
+     @           FINER.intValue() >= FINEST.intValue();
+    */
+
+   protected Level(/*@ non_null */ String name, int value);
+
+   protected Level(/*@ non_null */ String name, int value,
+                   /*@ non_null */ String resourceBundleName);
+
+   public /*@ pure */ String getResourceBundleName();
+
+   /*@
+     @ ensures
+     @    toString().equals(\result);
+    */
+   public /*@ pure non_null */ String getName() ;
+
+   public /*@ pure non_null */ String getLocalizedName();
+
+   public final /*@ pure non_null */ String toString();
+
+   public final /*@ pure */ int intValue();
+
+   /*@
+     @ ensures
+     @    name.equals("SEVERE") ==> \result.equals(SEVERE) &&
+     @    name.equals("WARNING") ==> \result.equals(WARNING) &&
+     @    name.equals("INFO") ==> \result.equals(INFO) &&
+     @    name.equals("CONFIG") ==> \result.equals(CONFIG) &&
+     @    name.equals("FINE") ==> \result.equals(FINE) &&
+     @    name.equals("FINER") ==> \result.equals(FINER) &&
+     @    name.equals("FINEST") ==> \result.equals(FINEST) &&
+     @    name.equals("OFF") ==> \result.equals(OFF) &&
+     @    name.equals("ALL") ==> \result.equals(ALL);
+    */
+   public static synchronized Level parse(/*@ non_null */ String name)
+   throws IllegalArgumentException;
+
+   public /*@ pure */ boolean equals(Object ox);
+
+   public /*@ pure */ int hashCode();
+}
+

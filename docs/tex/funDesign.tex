@@ -1,0 +1,102 @@
+\documentclass[11pt]{book}
+
+%% PACKAGES %%
+
+\usepackage[american]{babel}
+\usepackage{verbatim}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{epic}
+\usepackage{url}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{alltt}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{float} %% for better placeing floats
+\usepackage{a4}
+\usepackage[sectionbib]{bibunits}
+
+
+%% Use hyperef last
+\usepackage[pdftitle={Kiezen op Afstand},colorlinks=true]{hyperref}
+
+\begin{document}
+
+\begin{titlepage}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\hspace{2pt}
+\vspace{120pt}
+\begin{center}
+{\LARGE {\bf Kiezen op Afstand}\\
+	{\normalsize (English: Distant Voting)}\\
+	{\bf Specification of the Functional Requirements}\\
+	\smallskip}
+	This functional design document is made by LogicaCMG BV 
+        for the Dutch ministry of internal affairs\\
+\vspace{20pt}
+English translation by {\bf Martijn Warnier}\footnote{
+\url{http://www.cs.ru.nl/~warnier}\hspace{10pt}
+Email:mwarnier@dds.nl} \textcopyright 2005 \\
+\today
+\end{center}
+\vspace{3cm}
+\begin{center}
+{\LARGE Initial {\bf DRAFT} \\
+\vspace{1cm}
+not for distribution}
+\end{center}
+\end{titlepage} 
+
+\noindent \textbf{About the translation}\\ 
+\\ 
+\noindent Abreviations have not been
+translated, when deemed useful additional translations are given in
+footnotes. Footnotes added by the translator are marked with MW
+(Martijn Warnier).
+
+\noindent For the moment pictures are only translated if they are 
+absolutely necessary for the understanding of the main text. Otherwise
+the original (Dutch) pictures are used.
+
+\noindent This translation is released under the 
+GNU Genral Public Lincence (GPL).\\
+\vspace{2cm}
+
+\noindent{Typeset in \LaTeXe.}\\
+
+\tableofcontents
+
+\listoffigures    
+
+\include{ch1}
+\include{ch2}
+\include{ch3}
+\include{ch4}
+\include{ch5}
+\include{ch6}
+\include{ch7}
+\include{ch8}
+\include{ch9}
+\include{ch10}
+
+\appendix
+
+\include{a}
+\include{b}
+\include{c}
+\include{d}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+

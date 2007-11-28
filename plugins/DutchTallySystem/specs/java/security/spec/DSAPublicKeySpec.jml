@@ -1,0 +1,50 @@
+/*
+ * @(#)DSAPublicKeySpec.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+import java.math.BigInteger;
+
+public class DSAPublicKeySpec implements KeySpec
+{
+   /*@ public behavior
+     @    requires y != null;
+     @    requires p != null;
+     @    requires q != null;
+     @    requires g != null;
+     @    ensures this.y.equals(y);
+     @    ensures this.p.equals(p);
+     @    ensures this.q.equals(q);
+     @    ensures this.g.equals(g);
+    */
+   public DSAPublicKeySpec(BigInteger y, BigInteger p, BigInteger q,
+                           BigInteger g);
+
+   /*@ public behavior
+     @    ensures \result.equals(y);
+    */
+   public /*@ pure non_null */ BigInteger getY();
+
+   /*@ public behavior
+     @    ensures \result.equals(p);
+    */
+   public /*@ pure non_null */ BigInteger getP();
+
+   /*@ public behavior
+     @    ensures \result.equals(q);
+    */
+   public /*@ pure non_null */ BigInteger getQ();
+
+   /*@ public behavior
+     @    ensures \result.equals(g);
+    */
+   public /*@ pure non_null */ BigInteger getG();
+}
+

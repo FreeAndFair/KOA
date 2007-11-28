@@ -1,0 +1,174 @@
+% $Id$ 
+\documentclass{article}
+
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+   \pdffalse     % no PDFLaTeX
+\else
+   \pdfoutput=1  % PDFLaTeX
+   \pdftrue
+\fi
+
+\ifpdf
+\usepackage[pdftex,bookmarks=false,
+            plainpages=false,naturalnames=true,
+            colorlinks=true,pdfstartview=FitV,
+            linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\else
+\usepackage[dvips]{hyperref}
+\fi
+
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{eurosym}
+
+\title{Design document for `Hertelapplicatie'}
+\author{Security of Systems Group, University of Nijmegen \\
+Contact person: Engelbert Hubbers \\
+Email: {\tt hubbers@cs.kun.nl}}
+
+\newcommand{\myhref}[2]{\ifpdf\href{#1}{#2}\else\texttt{#2}\fi}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\etc}{etc.\xspace}
+
+\makeatletter
+
+\newtheorem{question}{Question}
+\newenvironment{que}{\begin{question}\addcontentsline{lof}{figure}{Question~\thequestion}}{\end{question}}
+\begin{document}
+\maketitle
+
+
+
+\section{Introduction}
+This document reflects our interpretation of the documents `Programma van Eisen Hertelprogrammatuur Kiezen op Afstand' \cite{PVEBZK} and `Kiezen op Afstand Hertellen stemmen' \cite{KOALOG}.
+Because right now not everything is completely clear, it involves both questions and design proposals. Obviously we may need to adjust these proposals based upon the answers we get.
+
+\section{Graphical User Interface}
+In \cite[\S 2.2]{PVEBZK}the main menu is listed. These are the functions
+\begin{itemize}
+\item Wissen gegevens
+\item Importeren Kandidatenbestand
+\item Impoteren Export stembus
+\item Importeren sleutel
+\item Ontsleutelen
+\item Tellen
+\item Rapportage
+\end{itemize}
+
+\begin{que}
+Are we allowed to change these labels into similar but more consistent ones?
+\end{que}
+
+\subsection{Wissen gegevens}
+This option wants us to delete all information from memory and from disk.
+It starts with an 'are you sure' dialog.
+It ends with a information message stating that everything is clear.
+
+\begin{que}
+Are we only allowed to call this function after startup of the program and before executing the other steps? Or are we allowed to call this function anytime during operation in order to start all over again?
+\end{que}
+\begin{que}
+Which files do we need to erase? Only all intermediate files? This would imply that directly after startup there are no files to be removed. Or is the program allowed to write the final reports to file and do not delete these files after closing the program, hence making them available to be viewed with Acrobat Reader outside of this application?
+\end{que}
+\subsubsection{What do we need}
+\begin{itemize}
+\item We need a simple yes/no dialog.
+\item 
+The application needs to be able to remove files from disk. Can we do this using only Java commands in order to preserve platform independency.
+\item We need to be able to check whether the operations succeeded or not.
+\end{itemize}
+\subsection{Importeren Kandidatenbestand}
+A standard filebrowser dialog will ask for the location of the file.
+After the user pointed to the correct file the system will check whether the file is a valid XML file.
+\begin{que}
+This is equivalent to saying that this file is valid with respect to the DTD of {\em Retour bestand kandidaat-gegevens} form \cite[\S C.2]{KOALOG}?
+\end{que}
+Furthermore the header should be checked.
+\begin{que}
+What is considered to be the header of this XML document? The XML declaration, \ie a line like
+\begin{verbatim}
+<?xml version="1.0" encoding="UTF-8"?>
+\end{verbatim}
+\end{que}
+\begin{que}
+Will the XML files contain a document type declaration, \ie a line like
+\begin{verbatim}
+<!DOCTYPE result SYSTEM "result.dtd">
+\end{verbatim}
+\end{que}
+Note that the example XML document in \cite[\S 3.1]{KOALOG} does not have such a declaration.
+
+The application now needs to determine the number of lists and the number of candidates for each list and show this to the user.
+\begin{que}
+In particular we do not need to show the user the names of the lists, but only its number of candidates?
+\end{que}
+The application now asks the user to confirm reading this file.
+\begin{que}
+So first we have to deduce information from this file and then we have to ask the user whether we need to read the complete file into memory? Hence we have to parse this file at least twice?
+\end{que}
+After reading the complete information another dialog screen is shown where the user is asked whether he wants to view the list of candidates and their codes on the screen.
+\begin{que}
+Should this report be a PDF file viewed by an external Acrobat Reader?
+\end{que}
+\begin{que}
+Is there a formal definition of this report available? Or can we design our own report?
+\end{que}
+\subsubsection{What do we need}
+\begin{itemize}
+\item We need a standard file browser.
+\item We need an XML parser for the DTD \verb+result.dtd+.
+\item We need a module to create PDF files.
+\item We need to be able to launch Acrobat Reader.
+\end{itemize}
+\subsection{Importeren Export stembus}
+The idea is the same, it justs reads an XML file that conforms to a different DTD: \verb+report.dtd+ as defined in \cite[\S C.3]{KOALOG}.
+Obviously the same questions arise here as well concerning the validity of the file and the header and the number of records to be shown before asking confirmation from the user to read the whole file.
+\subsubsection{What do we need}
+\begin{itemize}
+\item We need an XML parser for the DTD \verb+report.dtd+.
+\end{itemize}
+\subsection{Importeren sleutel}
+First the RSA private key is imported. The dialog screen contains a file browser and a passphrase field.
+\begin{que}
+In which format will these keys be available?
+\end{que}
+The application checks the validity of the key and the validity of the passphrase. The passphrase is encrypted using MD5 and DES.
+
+The same steps are repeated for the RSA public key.
+
+When both private and public keys are imported, the application checks whether they form a proper pair by encrypting something with the public key and decrypting it again with the private key and compare the output with the input.
+\subsubsection{What do we need}
+\begin{itemize}
+\item Something to read the keys. Since \verb+PBEWithMD5AndDES+ doesn't seem to be available as an algorithm in Bouncy Castle's JCE implementation, we might need to build this ourselves.
+\end{itemize}
+\subsection{Ontsleutelen}
+\subsection{Tellen}
+\subsection{Rapportage}
+
+\section{Classes}
+For the time being we start with one package \verb+sos.koa+.
+The names listed here give just a brief overview of the kind of classes we expect to implement.
+\begin{itemize}
+\item All kinds of GUI related classes.
+\item \verb+Crypto+, used to implement the methods needed for the RSA encryption and decryption as well as the 3DES decryption. Also needed for creating the finger print on the binary votes.
+\item \verb+XMLResultParser+, used to parse the XML file with the candidate lists.
+\item \verb+XMLReportParser+, used to parse the XML file with the votes.
+\item \verb+PDFReportGenerator+, used to create all types of PDF reports.
+\item \verb+AuditLog+, used to log timestamps and events during the process.
+\item \verb+CandidateList+, used to store candidates, their codes and their votes.
+\item \verb+VoteList+, used to store both the encrypted blobs as well as the decrypted votes.
+\end{itemize}
+
+{
+\renewcommand{\listfigurename}{List of Questions}
+\listoffigures
+}
+
+\bibliographystyle{plain}
+\bibliography{design}
+
+\end{document}
+
+

@@ -1,0 +1,23 @@
+/*
+ * @(#)ShortBufferException.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.security.GeneralSecurityException;
+
+public class ShortBufferException extends GeneralSecurityException
+{
+    public ShortBufferException();
+
+    /*@ public behavior
+      @    ensures getMessage().equals(msg);
+     */
+    public ShortBufferException(String msg);
+}

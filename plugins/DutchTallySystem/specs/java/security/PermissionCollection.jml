@@ -1,0 +1,35 @@
+/*
+ * @(#)PermissionCollection.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.util.*;
+
+public abstract class PermissionCollection implements java.io.Serializable
+{
+   /*@ public behavior
+     @    requires permission != null;
+    */
+   public abstract void add(Permission permission);
+
+   /*@ public behavior
+     @    requires permission != null;
+    */
+   public abstract /*@ pure */ boolean implies(Permission permission);
+
+   public abstract Enumeration elements();
+
+   public void setReadOnly();
+
+   public /*@ pure */ boolean isReadOnly();
+
+   public /*@ pure non_null */ String toString();
+}
+

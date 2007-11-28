@@ -1,0 +1,49 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package javax.crypto.spec;
+
+import java.security.spec.AlgorithmParameterSpec;
+
+public /*@ pure @*/ class IvParameterSpec
+  implements AlgorithmParameterSpec
+{
+  //@ public model byte[] _iv;
+  //@ public represents _iv <- getIV();
+  //@ public invariant _iv != null;
+
+  /*@ public normal_behavior
+    @   ensures (\forall int i; 0 <= i && i < 8; iv[i] == getIV()[i]);
+    @ also
+    @ public exceptional_behavior
+    @   requires iv == null;
+    @   signals (IllegalArgumentException) true;
+    @*/
+  public IvParameterSpec(byte[] iv) {
+    this(iv, 0, iv.length);
+  }
+
+  /*@ public normal_behavior
+    @   requires iv.length >= len + offset;
+    @   ensures (\forall int i; 0 <= i && i < 8; iv[i+offset] == getIV()[i]);
+    @ also
+    @ public exceptional_behavior
+    @   requires iv == null;
+    @   signals (IllegalArgumentException) true;
+    @ also
+    @ public exceptional_behavior
+    @   requires iv.length - offset < len;
+    @   signals (IllegalArgumentException) true;
+    @*/
+  public IvParameterSpec(byte[] iv, int offset, int len);
+
+  /*@ public normal_behavior
+    @   ensures \result != null;
+    @   ensures (\forall int i; 0 <= i && i < 8; _iv[i] == \result[i]);
+    @*/
+  public byte[] getIV();
+}

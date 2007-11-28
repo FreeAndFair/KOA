@@ -1,0 +1,26 @@
+/*
+ * @(#)GuardedObject.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public class GuardedObject implements java.io.Serializable
+{
+   /*@ public behavior
+     @    requires object != null;
+     @    requires guard != null;
+    */
+   public GuardedObject(Object object, Guard guard);
+
+   /*@ public behavior
+     @    signals(SecurityException) true;
+    */
+   public /*@ pure non_null */ Object getObject() throws SecurityException;
+}
+

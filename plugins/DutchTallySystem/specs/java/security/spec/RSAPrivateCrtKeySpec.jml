@@ -1,0 +1,48 @@
+/*
+ * @(#)RSAPrivateCrtKeySpec.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+import java.math.BigInteger;
+
+public class RSAPrivateCrtKeySpec extends RSAPrivateKeySpec
+{
+   /*@ public behavior
+     @    requires modulus != null;
+     @    requires publicExponent != null;
+     @    requires privateExponent != null;
+     @    requires primeP != null;
+     @    requires primeQ != null;
+     @    requires primeExponentP != null;
+     @    requires primeExponentQ != null;
+     @    requires crtCoefficient != null;
+    */
+   public RSAPrivateCrtKeySpec(BigInteger modulus,
+                               BigInteger publicExponent,
+                               BigInteger privateExponent,
+                               BigInteger primeP,
+                               BigInteger primeQ,
+                               BigInteger primeExponentP,
+                               BigInteger primeExponentQ,
+                               BigInteger crtCoefficient);
+
+   public /*@ pure non_null */ BigInteger getPublicExponent();
+
+   public /*@ pure non_null */ BigInteger getPrimeP();
+
+   public /*@ pure non_null */ BigInteger getPrimeQ();
+
+   public /*@ pure non_null */ BigInteger getPrimeExponentP();
+
+   public /*@ pure non_null */ BigInteger getPrimeExponentQ();
+
+   public /*@ pure non_null */ BigInteger getCrtCoefficient();
+}
+

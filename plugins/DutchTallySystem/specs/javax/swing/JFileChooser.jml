@@ -1,0 +1,367 @@
+/*
+ * @(#)JFileChooser.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Engelbert Hubbers (hubbers@cs.kun.nl)
+ */
+
+package javax.swing;
+
+import javax.accessibility.Accessible;
+import javax.accessibility.AccessibleContext;
+import javax.swing.filechooser.FileView;
+import javax.swing.filechooser.FileSystemView;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.plaf.FileChooserUI;
+import java.awt.HeadlessException;
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+public class JFileChooser extends JComponent implements Accessible
+{
+
+public static final int OPEN_DIALOG;
+
+public static final int SAVE_DIALOG;
+
+public static final int CUSTOM_DIALOG;
+
+public static final int CANCEL_OPTION;
+
+public static final int APPROVE_OPTION;
+
+public static final int ERROR_OPTION;
+
+public static final int FILES_ONLY;
+
+public static final int DIRECTORIES_ONLY;
+
+public static final int FILES_AND_DIRECTORIES;
+
+public static final String CANCEL_SELECTION;
+
+public static final String APPROVE_SELECTION;
+
+public static final String APPROVE_BUTTON_TEXT_CHANGED_PROPERTY;
+
+public static final String APPROVE_BUTTON_TOOL_TIP_TEXT_CHANGED_PROPERTY;
+
+public static final String APPROVE_BUTTON_MNEMONIC_CHANGED_PROPERTY;
+
+public static final String CONTROL_BUTTONS_ARE_SHOWN_CHANGED_PROPERTY;
+
+public static final String DIRECTORY_CHANGED_PROPERTY;
+
+public static final String SELECTED_FILE_CHANGED_PROPERTY;
+
+public static final String SELECTED_FILES_CHANGED_PROPERTY;
+
+public static final String MULTI_SELECTION_ENABLED_CHANGED_PROPERTY;
+
+public static final String FILE_SYSTEM_VIEW_CHANGED_PROPERTY;
+
+public static final String FILE_VIEW_CHANGED_PROPERTY;
+
+public static final String FILE_HIDING_CHANGED_PROPERTY;
+
+public static final String FILE_FILTER_CHANGED_PROPERTY;
+
+public static final String FILE_SELECTION_MODE_CHANGED_PROPERTY;
+
+public static final String ACCESSORY_CHANGED_PROPERTY;
+
+public static final String ACCEPT_ALL_FILE_FILTER_USED_CHANGED_PROPERTY;
+
+public static final String DIALOG_TITLE_CHANGED_PROPERTY;
+
+public static final String DIALOG_TYPE_CHANGED_PROPERTY;
+
+public static final String CHOOSABLE_FILE_FILTER_CHANGED_PROPERTY;
+
+protected AccessibleContext accessibleContext;
+
+/*@ pure @*/ public JFileChooser();
+
+/*@ pure @*/ public JFileChooser(String currentDirectoryPath);
+
+/*@ pure @*/ public JFileChooser(File currentDirectory);
+
+/*@ pure @*/ public JFileChooser(FileSystemView fsv);
+
+/*@ pure @*/ public JFileChooser(File currentDirectory,
+                    FileSystemView fsv);
+
+/*@ pure @*/ public JFileChooser(String currentDirectoryPath,
+                    FileSystemView fsv);
+
+/*@
+  @ assignable objectState;
+  @*/
+protected void setup(FileSystemView view);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setDragEnabled(boolean b) throws HeadlessException;
+
+/*@ pure @*/ public boolean getDragEnabled();
+
+/*@ pure @*/ public File getSelectedFile();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setSelectedFile(File file);
+
+/*@ pure @*/ public File[] getSelectedFiles();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setSelectedFiles(File[] selectedFiles);
+
+/*@ pure @*/ public File getCurrentDirectory();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setCurrentDirectory(File dir);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void rescanCurrentDirectory();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void ensureFileIsVisible(File f);
+
+/*@ ensures \result == JFileChooser.CANCEL_OPTION ||
+  @         \result == JFileChooser.APPROVE_OPTION ||
+  @         \result == JFileChooser.ERROR_OPTION;
+  @*/
+/*@ pure @*/ public int showOpenDialog(Component parent)
+                   throws HeadlessException;
+
+/*@ ensures \result == JFileChooser.CANCEL_OPTION ||
+  @         \result == JFileChooser.APPROVE_OPTION ||
+  @         \result == JFileChooser.ERROR_OPTION;
+  @*/
+/*@ pure @*/ public int showSaveDialog(Component parent)
+                   throws HeadlessException;
+
+/*@ ensures \result == JFileChooser.CANCEL_OPTION ||
+  @         \result == JFileChooser.APPROVE_OPTION ||
+  @         \result == JFileChooser.ERROR_OPTION;
+  @*/
+/*@ pure @*/ public int showDialog(Component parent,
+                      String approveButtonText)
+               throws HeadlessException;
+
+/*@
+  @ assignable objectState;
+  @*/
+protected JDialog createDialog(Component parent)
+                        throws HeadlessException;
+
+/*@ pure @*/ public boolean getControlButtonsAreShown();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setControlButtonsAreShown(boolean b);
+
+/*@ ensures \result == JFileChooser.OPEN_DIALOG ||
+  @         \result == JFileChooser.SAVE_DIALOG ||
+  @         \result == JFileChooser.CUSTOM_DIALOG;
+  @*/
+/*@ pure @*/ public int getDialogType();
+
+/*@ requires dialogType == JFileChooser.OPEN_DIALOG ||
+  @          dialogType == JFileChooser.SAVE_DIALOG ||
+  @          dialogType == JFileChooser.CUSTOM_DIALOG;
+  @ assignable objectState;
+  @*/
+public void setDialogType(int dialogType) throws IllegalArgumentException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setDialogTitle(String dialogTitle);
+
+/*@ pure @*/ public String getDialogTitle();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setApproveButtonToolTipText(String toolTipText);
+
+/*@ pure @*/ public String getApproveButtonToolTipText();
+
+/*@ pure @*/ public int getApproveButtonMnemonic();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setApproveButtonMnemonic(int mnemonic);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setApproveButtonMnemonic(char mnemonic);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setApproveButtonText(String approveButtonText);
+
+/*@ pure @*/ public String getApproveButtonText();
+
+/*@ pure @*/ public FileFilter[] getChoosableFileFilters();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void addChoosableFileFilter(FileFilter filter);
+
+/*@
+  @ assignable objectState;
+  @*/
+public boolean removeChoosableFileFilter(FileFilter f);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void resetChoosableFileFilters();
+
+/*@ pure @*/ public FileFilter getAcceptAllFileFilter();
+
+public boolean isAcceptAllFileFilterUsed();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setAcceptAllFileFilterUsed(boolean b);
+
+/*@ pure @*/ public JComponent getAccessory();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setAccessory(JComponent newAccessory);
+
+/*@ requires mode == JFileChooser.FILES_ONLY ||
+  @          mode == JFileChooser.DIRECTORIES_ONLY ||
+  @          mode == JFileChooser.FILES_AND_DIRECTORIES;
+  @ assignable objectState;
+  @*/
+public void setFileSelectionMode(int mode) throws IllegalArgumentException;
+
+/*@ ensures \result == JFileChooser.FILES_ONLY ||
+  @         \result == JFileChooser.DIRECTORIES_ONLY ||
+  @         \result == JFileChooser.FILES_AND_DIRECTORIES;
+  @*/
+/*@ pure @*/ public int getFileSelectionMode();
+
+/*@ pure @*/ public boolean isFileSelectionEnabled();
+
+/*@ pure @*/ public boolean isDirectorySelectionEnabled();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setMultiSelectionEnabled(boolean b);
+
+/*@ pure @*/ public boolean isMultiSelectionEnabled();
+
+/*@ pure @*/ public boolean isFileHidingEnabled();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setFileHidingEnabled(boolean b);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setFileFilter(FileFilter filter);
+
+/*@ pure @*/ public FileFilter getFileFilter();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setFileView(FileView fileView);
+
+/*@ pure @*/ public FileView getFileView();
+
+/*@ pure @*/ public String getName(File f);
+
+/*@ pure @*/ public String getDescription(File f);
+
+/*@ pure @*/ public String getTypeDescription(File f);
+
+/*@ pure @*/ public Icon getIcon(File f);
+
+/*@ pure @*/ public boolean isTraversable(File f);
+
+/*@
+  @ assignable objectState;
+  @*/
+public boolean accept(File f);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setFileSystemView(FileSystemView fsv);
+
+/*@ pure @*/ public FileSystemView getFileSystemView();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void approveSelection();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void cancelSelection();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void addActionListener(ActionListener l);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void removeActionListener(ActionListener l);
+
+/*@ pure @*/ public ActionListener[] getActionListeners();
+
+/*@
+  @ assignable objectState;
+  @*/
+protected void fireActionPerformed(String command);
+
+/*@
+  @ also
+  @ assignable objectState;
+  @*/
+public void updateUI();
+
+/*@ pure @*/ public String getUIClassID();
+
+/*@ pure @*/ public FileChooserUI getUI();
+
+protected String paramString();
+
+/*@ pure @*/ public AccessibleContext getAccessibleContext();
+
+}
+

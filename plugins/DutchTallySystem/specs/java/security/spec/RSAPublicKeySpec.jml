@@ -1,0 +1,35 @@
+/*
+ * @(#)RSAPublicKeySpec.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+import java.math.BigInteger;
+
+public class RSAPublicKeySpec implements KeySpec
+{
+   /*@ public behavior
+     @    requires modulus != null;
+     @    requires publicExponent != null;
+     @    ensures this.modulus.equals(modulus);
+     @    ensures this.publicExponent.equals(publicExponent);
+    */
+   public RSAPublicKeySpec(BigInteger modulus, BigInteger publicExponent);
+
+   /*@ public behavior
+     @    ensures \result.equals(modulus);
+    */
+   public /*@ pure non_null */ BigInteger getModulus();
+
+   /*@ public behavior
+     @    ensures \result.equals(publicExponent);
+    */
+   public /*@ pure non_null */ BigInteger getPublicExponent();
+}
+

@@ -1,0 +1,56 @@
+/*
+ * @(#)SAXParserFactory.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Engelbert Hubbers (hubbers@cs.kun.nl)
+ */
+
+package javax.xml.parsers;
+
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
+
+public abstract class SAXParserFactory extends Object {
+
+
+/*@ spec_public @*/ protected SAXParserFactory();
+
+public static /*@ pure non_null @*/ SAXParserFactory newInstance() throws FactoryConfigurationError;
+
+public abstract /*@ pure non_null @*/ SAXParser newSAXParser()
+                                throws ParserConfigurationException,
+                                       SAXException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setNamespaceAware(boolean awareness);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setValidating(boolean validating);
+
+/*@ pure @*/ public boolean isNamespaceAware();
+
+/*@ pure @*/ public boolean isValidating();
+
+/*@
+  @ assignable objectState;
+  @*/
+public abstract void setFeature(String name,
+                                boolean value)
+                         throws ParserConfigurationException,
+                                SAXNotRecognizedException,
+                                SAXNotSupportedException;
+
+/*@ pure @*/ public abstract boolean getFeature(String name)
+                            throws ParserConfigurationException,
+                                   SAXNotRecognizedException,
+                                   SAXNotSupportedException;
+
+}

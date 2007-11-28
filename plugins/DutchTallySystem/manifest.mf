@@ -1,0 +1,3 @@
+Main-Class: sos.koa.MenuPanel
+Class-Path: lib/bcprov-jdk14-123.jar lib/fop.jar lib/avalon-framework.jar lib/batik.jar
+VMOptions: -Xms250M -Xmx256M

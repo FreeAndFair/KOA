@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT result (metadata, kieskring+)>
+<!ATTLIST result
+    action CDATA #FIXED "replace"
+    contenttype CDATA #FIXED "kieslijst"
+>
+
+<!ELEMENT metadata (requestreference, responsereference, creationtime, kieskringcount, districtcount, kieslijstcount, positiecount)>
+<!ELEMENT requestreference (#PCDATA)>
+<!ELEMENT responsereference (#PCDATA)>
+<!ELEMENT creationtime (#PCDATA)>
+<!ELEMENT kieskringcount (#PCDATA)>
+<!ELEMENT districtcount (#PCDATA)>
+<!ELEMENT kieslijstcount (#PCDATA)>
+<!ELEMENT positiecount (#PCDATA)>
+<!ELEMENT kieskring (district+, kieslijst+)>
+<!ATTLIST kieskring
+    nummer CDATA #REQUIRED
+    naam CDATA #REQUIRED
+>
+
+<!ELEMENT district EMPTY>
+<!ATTLIST district
+    nummer CDATA #REQUIRED
+    naam CDATA #REQUIRED
+>
+
+<!ELEMENT kieslijst (positie+)>
+<!ATTLIST kieslijst
+    nummer CDATA #REQUIRED
+    groepering CDATA #REQUIRED
+>
+
+<!ELEMENT positie (code+)>
+<!ATTLIST positie
+    nummer CDATA #REQUIRED
+    achternaam CDATA #REQUIRED
+    voorletters CDATA #REQUIRED
+    roepnaam CDATA #REQUIRED
+    geslacht (M | V) #REQUIRED
+    woonplaats CDATA #REQUIRED
+>
+
+<!ELEMENT code (#PCDATA)>

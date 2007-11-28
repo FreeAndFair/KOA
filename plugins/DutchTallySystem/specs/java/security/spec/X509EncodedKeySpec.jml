@@ -1,0 +1,24 @@
+/*
+ * @(#)X509EncodedKeySpec.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+public class X509EncodedKeySpec extends EncodedKeySpec
+{
+    /*@ public behavior
+      @    requires encodedKey != null;
+     */
+    public X509EncodedKeySpec(byte[] encodedKey);
+
+    public /*@ pure non_null */ byte[] getEncoded();
+
+    public final /*@ pure non_null */ String getFormat();
+}
+

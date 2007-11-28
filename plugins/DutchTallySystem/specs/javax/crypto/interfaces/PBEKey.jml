@@ -1,0 +1,22 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package javax.crypto.interfaces;
+
+public /*@ pure @*/ interface PBEKey
+  extends javax.crypto.SecretKey
+{
+  //@ todo kiniry 19 March 2004 - Add models to this interface.
+
+  public char[] getPassword();
+
+  public byte[] getSalt();
+
+  //@ public normal_behavior
+  //@   ensures \result >= 0;
+  public int getIterationCount();
+}

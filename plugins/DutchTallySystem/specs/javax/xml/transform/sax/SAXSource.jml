@@ -1,0 +1,51 @@
+/*
+ * @(#)SAXSource.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Engelbert Hubbers (hubbers@cs.kun.nl)
+ */
+
+package javax.xml.transform.sax;
+
+import javax.xml.transform.Source;  
+import org.xml.sax.*;  
+
+public class SAXSource extends Object implements Source
+{
+
+public static final String FEATURE;
+
+/*@ pure @*/ public SAXSource();
+
+/*@ pure @*/ public SAXSource(XMLReader reader, InputSource inputSource);
+
+/*@ pure @*/ public SAXSource(InputSource inputSource);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setXMLReader(XMLReader reader);
+
+/*@ pure @*/ public XMLReader getXMLReader();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setInputSource(InputSource inputSource);
+
+/*@ pure @*/ public InputSource getInputSource();
+
+/*@
+  @ also
+  @ assignable objectState;
+  @*/
+public void setSystemId(String systemId);
+
+/*@ pure @*/ public String getSystemId();
+
+/*@ pure @*/ public static InputSource sourceToInputSource(Source source);
+
+}

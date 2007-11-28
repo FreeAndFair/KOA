@@ -1,0 +1,208 @@
+/*
+ * @(#)HttpServletRequestWrapper.jml
+ *
+ * @version $Id:HttpServletRequestWrapper.jml 775 2006-04-15 13:45:44Z alanm $
+ *
+ * The interface on which this JML specification is based was extracted from
+ * source code with the following license:
+ *
+ * ==
+ *
+ * Copyright 2004 The Apache Software Foundation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package javax.servlet.http;
+
+import java.util.Enumeration;
+import javax.servlet.ServletRequestWrapper;
+
+/**
+ *
+ * Provides a convenient implementation of the HttpServletRequest interface that
+ * can be subclassed by developers wishing to adapt the request to a Servlet.
+ * This class implements the Wrapper or Decorator pattern. Methods default to
+ * calling through to the wrapped request object.
+ *
+ * @see    javax.servlet.http.HttpServletRequest
+ *
+ * @since   v 2.3
+ */
+public class HttpServletRequestWrapper extends ServletRequestWrapper
+implements HttpServletRequest
+{
+   /**
+    * Constructs a request object wrapping the given request.
+    *
+    * @throws IllegalArgumentException if the request is null
+    */
+   /*@
+     @ signals (IllegalArgumentException iae) \old(request) == null;
+    */
+   public HttpServletRequestWrapper(HttpServletRequest request);
+
+   /**
+    * The default behavior of this method is to return getAuthType()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getAuthType();
+
+   /**
+    * The default behavior of this method is to return getCookies()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ Cookie[] getCookies();
+
+   /**
+    * The default behavior of this method is to return
+    * getDateHeader(String name) on the wrapped request object.
+    */
+   /*@ also
+     @ ensures \result >= 0;
+    */
+   public /*@ pure */ long getDateHeader(/*@ non_null */ String name);
+
+   /**
+    * The default behavior of this method is to return getHeader(String name)
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getHeader(/*@ non_null */ String name);
+
+   /**
+    * The default behavior of this method is to return getHeaders(String name)
+    * on the wrapped request object.
+    */
+   public /*@ pure */ Enumeration getHeaders(/*@ non_null */ String name);
+
+   /**
+    * The default behavior of this method is to return getHeaderNames()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ Enumeration getHeaderNames();
+
+   /**
+    * The default behavior of this method is to return
+    * getIntHeader(String name) on the wrapped request object.
+    */
+   public /*@ pure */ int getIntHeader(/*@ non_null */ String name);
+
+   /**
+    * The default behavior of this method is to return getMethod()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getMethod();
+
+   /**
+    * The default behavior of this method is to return getPathInfo()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getPathInfo();
+
+   /**
+    * The default behavior of this method is to return getPathTranslated()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getPathTranslated();
+
+   /**
+    * The default behavior of this method is to return getContextPath()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getContextPath();
+
+   /**
+    * The default behavior of this method is to return getQueryString()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getQueryString();
+
+   /**
+    * The default behavior of this method is to return getRemoteUser()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getRemoteUser();
+
+   /**
+    * The default behavior of this method is to return isUserInRole(String role)
+    * on the wrapped request object.
+    */
+   public /*@ pure */ boolean isUserInRole(/*@ non_null */ String role);
+
+   /**
+    * The default behavior of this method is to return getUserPrincipal()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ java.security.Principal getUserPrincipal();
+
+   /**
+    * The default behavior of this method is to return getRequestedSessionId()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getRequestedSessionId();
+
+   /**
+    * The default behavior of this method is to return getRequestURI()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getRequestURI();
+
+   /**
+    * The default behavior of this method is to return getRequestURL()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ StringBuffer getRequestURL();
+
+   /**
+    * The default behavior of this method is to return getServletPath()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getServletPath();
+
+   /**
+    * The default behavior of this method is to return
+    * getSession(boolean create) on the wrapped request object.
+    */
+   public /*@ pure */ HttpSession getSession(boolean create);
+
+   /**
+    * The default behavior of this method is to return getSession()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ HttpSession getSession();
+
+   /**
+    * The default behavior of this method is to return
+    * isRequestedSessionIdValid() on the wrapped request object.
+    */
+   public /*@ pure */ boolean isRequestedSessionIdValid();
+
+   /**
+    * The default behavior of this method is to return
+    * isRequestedSessionIdFromCookie() on the wrapped request object.
+    */
+   public /*@ pure */ boolean isRequestedSessionIdFromCookie();
+
+   /**
+    * The default behavior of this method is to return
+    * isRequestedSessionIdFromURL() on the wrapped request object.
+    */
+   public /*@ pure */ boolean isRequestedSessionIdFromURL();
+
+   /**
+    * The default behavior of this method is to return
+    * isRequestedSessionIdFromUrl() on the wrapped request object.
+    */
+   public /*@ pure */ boolean isRequestedSessionIdFromUrl();
+}
+

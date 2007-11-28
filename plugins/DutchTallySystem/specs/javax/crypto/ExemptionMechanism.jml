@@ -1,0 +1,153 @@
+/*
+ * @(#)ExemptionMechanism.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.security.*;
+import java.security.spec.AlgorithmParameterSpec;
+
+public class ExemptionMechanism
+{
+   /*@ model static int _UNINITIALIZED; */
+   /*@ model static int _INITIALIZED; */
+
+   /*@ invariant _UNINITIALIZED != _INITIALIZED;
+    */
+
+   /*@ model int _state; */
+
+   /*@ public behavior
+     @    requires exmechSpi != null;
+     @    requires provider != null;
+     @    requires mechanism != null;
+     @    ensures _state == _UNINITIALIZED;
+     @    ensures getProvider().equals(provider);
+     @    ensures getName().equals(mechanism);
+    */
+   protected ExemptionMechanism(ExemptionMechanismSpi exmechSpi,
+                                Provider provider, String mechanism);
+
+   public final /*@ pure non_null */ String getName();
+
+   /*@ public behavior
+     @    requires mechanism != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getName().equals(mechanism);
+     @    signals(NoSuchAlgorithmException) true;
+    */
+   public static final ExemptionMechanism getInstance(String mechanism)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getName().equals(mechanism);
+     @    signals(NoSuchAlgorithmException) true;
+     @    signals(NoSuchProviderException) true;
+    */
+   public static final ExemptionMechanism getInstance(String mechanism,
+                                                      String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException;
+
+   /*@ public behavior
+     @    requires mechanism != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getName().equals(mechanism);
+     @    ensures \result.getProvider().equals(provider);
+     @    signals(NoSuchAlgorithmException) true;
+    */
+   public static final ExemptionMechanism getInstance(String mechanism,
+                                                      Provider provider)
+   throws NoSuchAlgorithmException;
+
+   public final /*@ pure non_null */ Provider getProvider();
+
+   /*@ public behavior
+     @    requires key != null;
+     @    signals(ExemptionMechanismException) true;
+    */
+   public final boolean isCryptoAllowed(Key key)
+   throws ExemptionMechanismException;
+
+   /*@ public behavior
+     @    requires inputLen >= 0;
+     @    ensures \result >= 0;
+     @    signals(IllegalStateException) _state == _UNINITIALIZED;
+    */
+   public final /*@ pure */ int getOutputSize(int inputLen)
+   throws IllegalStateException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    signals(InvalidKeyException) true;
+     @    signals(ExemptionMechanismException) true;
+    */
+   public final void init(Key key)
+   throws InvalidKeyException, ExemptionMechanismException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    requires params != null;
+     @    signals(InvalidKeyException) true;
+     @    signals(InvalidAlgorithmParameterException) true;
+     @    signals(ExemptionMechanismException) true;
+    */
+   public final void init(Key key, AlgorithmParameterSpec params)
+   throws InvalidKeyException, InvalidAlgorithmParameterException,
+          ExemptionMechanismException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    requires params != null;
+     @    signals(InvalidKeyException) true;
+     @    signals(InvalidAlgorithmParameterException) true;
+     @    signals(ExemptionMechanismException) true;
+    */
+   public final void init(Key key, AlgorithmParameters params)
+   throws InvalidKeyException, InvalidAlgorithmParameterException,
+          ExemptionMechanismException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+     @    assignable _state;
+     @    signals(IllegalStateException) \old(_state) == _UNINITIALIZED;
+     @    signals(ExemptionMechanismException) true;
+    */
+   public final byte[] genExemptionBlob()
+   throws IllegalStateException, ExemptionMechanismException;
+
+   /*@ public behavior
+     @    requires output != null;
+     @    assignable _state;
+     @    signals(IllegalStateException) \old(_state) == _UNINITIALIZED;
+     @    signals(ShortBufferException) true;
+     @    signals(ExemptionMechanismException) true;
+    */
+   public final int genExemptionBlob(byte[] output)
+   throws IllegalStateException, ShortBufferException,
+          ExemptionMechanismException;
+
+   /*@ public behavior
+     @    requires output != null;
+     @    requires outputOffset >= 0;
+     @    assignable _state;
+     @    signals(IllegalStateException) \old(_state) == _UNINITIALIZED;
+     @    signals(ShortBufferException) true;
+     @    signals(ExemptionMechanismException) true;
+    */
+   public final int genExemptionBlob(byte[] output, int outputOffset)
+   throws IllegalStateException, ShortBufferException, ExemptionMechanismException;
+
+   protected void finalize();
+}
+

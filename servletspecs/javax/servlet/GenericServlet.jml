@@ -1,0 +1,57 @@
+/*
+ * @(#)GenericServlet.jml
+ *
+ * @version $Id:GenericServlet.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Enumeration;
+
+/**
+ * From the Javadoc specs:
+ *
+ *    GenericServlet makes writing servlets easier. It provides simple
+ *    versions of the lifecycle methods init and destroy and of the methods
+ *    in the ServletConfig interface. GenericServlet also implements the log
+ *    method, declared in the ServletContext interface.
+ */
+public abstract class GenericServlet
+implements Servlet, ServletConfig, Serializable
+{
+   /*@
+     @ ensures
+     @    _state == _CONSTRUCTED;
+    */
+   public GenericServlet();
+
+   public void destroy();
+
+   public void init() throws ServletException;
+
+   public /*@ non_null pure */ String getServletInfo();
+
+   public /*@ non_null pure */ String getServletName();
+
+   public void log(/*@ non_null */ String msg);
+
+   public /*@ pure non_null */ Enumeration getInitParameterNames();
+
+   public /*@ pure non_null*/ ServletConfig getServletConfig();
+
+   public void init(/*@ non_null */ ServletConfig config)
+      throws ServletException;
+
+   public /*@ pure non_null */ ServletContext getServletContext();
+
+   public /*@ pure non_null */ String getInitParameter(/*@ non_null */ String name);
+
+   public void log(/*@ non_null */ String message, /*@ non_null */ Throwable t);
+
+   public abstract void service(/*@ non_null */ ServletRequest req,
+                               /*@ non_null */ ServletResponse res)
+      throws ServletException, IOException;
+}
+

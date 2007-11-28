@@ -1,0 +1,17 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package javax.crypto.interfaces;
+
+public /*@ pure @*/ interface DHKey
+{
+  //@ todo kiniry 19 March 2004 - Add models to this interface.
+
+  //@ public normal_behavior
+  //@   ensures \result != null;
+  public javax.crypto.spec.DHParameterSpec getParams();
+}

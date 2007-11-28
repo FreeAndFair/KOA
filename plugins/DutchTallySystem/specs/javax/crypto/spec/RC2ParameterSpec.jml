@@ -1,0 +1,79 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package javax.crypto.spec;
+
+import java.security.spec.AlgorithmParameterSpec;
+
+public /*@ pure @*/ class RC2ParameterSpec 
+  implements AlgorithmParameterSpec
+{
+  //@ public model byte[] _iv;
+  //@ public represents _iv <- getIV();
+  //@ public invariant _iv != null ==>_iv.length >= 8;
+
+  //@ public model int _effectiveKeyBits;
+  //@ public represents _effectiveKeyBits <- getEffectiveKeyBits();
+  //@ public invariant _effectiveKeyBits > 0;
+
+  /*@ public normal_behavior
+    @   requires effectiveKeyBits > 0;
+    @   ensures getEffectiveKeyBits() == effectiveKeyBits;
+    @*/
+  public RC2ParameterSpec(int effectiveKeyBits);
+
+  /*@ public normal_behavior
+    @   requires effectiveKeyBits > 0;
+    @   requires iv.length >= 8;
+    @   ensures getEffectiveKeyBits() == effectiveKeyBits;
+    @   ensures (\forall int i; 0 <= i && i < 8; iv[i] == getIV()[i]);
+    @ also
+    @ public exceptional_behavior
+    @   requires iv == null;
+    @   signals (IllegalArgumentException) true;
+    @ also
+    @ public exceptional_behavior
+    @   requires iv.length < 8;
+    @   signals (IllegalArgumentException) true;
+    @*/
+  public RC2ParameterSpec(int effectiveKeyBits, byte[] iv);
+
+  /*@ public normal_behavior
+    @   requires effectiveKeyBits > 0;
+    @   requires iv.length >= 8;
+    @   ensures getEffectiveKeyBits() == effectiveKeyBits;
+    @   ensures (\forall int i; 0 <= i && i < 8; iv[i+offset] == getIV()[i]);
+    @ also
+    @ public exceptional_behavior
+    @   requires iv == null;
+    @   signals (IllegalArgumentException) true;
+    @ also
+    @ public exceptional_behavior
+    @   requires iv.length < 8;
+    @   signals (IllegalArgumentException) true;
+    @*/
+  public RC2ParameterSpec(int effectiveKeyBits, byte[] iv, int offset);
+
+  /*@ public normal_behavior
+    @   ensures \result == _effectiveKeyBits;
+    @*/
+  public int getEffectiveKeyBits();
+
+  /*@ public normal_behavior
+    @   requires _iv != null;
+    @   ensures \result != null;
+    @   ensures (\forall int i; 0 <= i && i < 8; _iv[i] == \result[i]);
+    @ also
+    @   requires _iv == null;
+    @   ensures \result == null;
+    @*/
+  public byte[] getIV();
+
+  public boolean equals(Object obj);
+
+  public int hashCode();
+}

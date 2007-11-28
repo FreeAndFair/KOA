@@ -1,0 +1,21 @@
+/*
+ * @(#)RequestDispatcher.jml
+ *
+ * @version $Id:RequestDispatcher.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet;
+
+import java.io.IOException;
+
+public interface RequestDispatcher
+{
+   public void forward(/*@ non_null */ ServletRequest request,
+                       /*@ non_null */ ServletResponse response)
+   throws ServletException, IOException;
+
+   public void include(/*@ non_null */ ServletRequest request,
+                       /*@ non_null */ ServletResponse response)
+   throws ServletException, IOException;
+}
+

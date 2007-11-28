@@ -1,0 +1,118 @@
+/*
+ * @(#)KeyGenerator.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.security.*;
+import java.security.spec.AlgorithmParameterSpec;
+
+public class KeyGenerator
+{
+   /*@ model static final int _UNINITIALIZED; */
+   /*@ model static final int _INITIALIZED; */
+
+   /*@ invariant _UNINITIALIZED != _INITIALIZED;
+    */
+
+   /*@ model int _state; */
+
+   /*@ invariant _state == _UNINITIALIZED ||
+     @           _state == _INITIALIZED;
+    */
+
+   /*@ public behavior
+     @    requires keyGenSpi != null;
+     @    requires provider != null;
+     @    requires algorithm != null;
+     @    ensures _state == _UNINITIALIZED;
+    */
+   protected KeyGenerator(KeyGeneratorSpi keyGenSpi, Provider provider,
+                          String algorithm);
+
+   public final /*@ pure non_null */ String getAlgorithm();
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+    */
+   public static final KeyGenerator getInstance(String algorithm)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+    */
+   public static final KeyGenerator getInstance(String algorithm,
+                                                String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    ensures \result.getProvider().equals(provider);
+    */
+   public static final KeyGenerator getInstance(String algorithm,
+                                                Provider provider)
+   throws NoSuchAlgorithmException;
+
+   public final /*@ pure non_null */ Provider getProvider();
+
+   /*@ public behavior
+     @    requires random != null;
+     @    assignable _state;
+     @    ensures _state == _INITIALIZED;
+    */
+   public final void init(SecureRandom random);
+
+   /*@ public behavior
+     @    requires params != null;
+     @    assignable _state;
+     @    ensures _state == _INITIALIZED;
+    */
+   public final void init(AlgorithmParameterSpec params)
+   throws InvalidAlgorithmParameterException;
+
+   /*@ public behavior
+     @    requires params != null;
+     @    requires random != null;
+     @    assignable _state;
+     @    ensures _state == _INITIALIZED;
+    */
+   public final void init(AlgorithmParameterSpec params, SecureRandom random)
+   throws InvalidAlgorithmParameterException;
+
+   /*@ public behavior
+     @    requires keysize >= 0;
+     @    ensures _state == _INITIALIZED;
+    */
+   public final void init(int keysize);
+
+   /*@ public behavior
+     @    requires keysize >= 0;
+     @    requires random != null;
+     @    assignable _state;
+     @    ensures _state == _INITIALIZED;
+    */
+   public final void init(int keysize, SecureRandom random);
+
+   /*@ public behavior
+     @    requires _state == _INITIALIZED;
+     @    ensures \result != null;
+    */
+   public final SecretKey generateKey();
+}
+

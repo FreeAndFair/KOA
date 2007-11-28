@@ -1,0 +1,21 @@
+/*
+ * @(#)Guard.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public interface Guard
+{
+   /*@ public behavior
+     @    requires object != null;
+     @    signals (SecurityException) true;
+    */
+   void checkGuard(Object object) throws SecurityException;
+}
+

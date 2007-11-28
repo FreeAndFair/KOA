@@ -1,0 +1,105 @@
+/*
+ * @(#)AlgorithmParameters.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.io.*;
+import java.security.spec.AlgorithmParameterSpec;
+import java.security.spec.InvalidParameterSpecException;
+
+public class AlgorithmParameters
+{
+   /*@ public behavior
+     @    requires paramSpi != null;
+     @    requires provider != null;
+     @    requires algorithm != null;
+     @    ensures getProvider().equals(provider);
+     @    ensures getAlgorithm().equals(algorithm);
+    */
+   protected AlgorithmParameters(AlgorithmParametersSpi paramSpi,
+                                 Provider provider, String algorithm);
+
+   public final /*@ pure non_null */ String getAlgorithm();
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals(NoSuchAlgorithmException) true;
+    */
+   public static AlgorithmParameters getInstance(String algorithm)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals(NoSuchAlgorithmException) true;
+     @    signals(NoSuchProviderException) true;
+    */
+   public static AlgorithmParameters getInstance(String algorithm,
+                                                 String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    ensures \result.getProvider().equals(provider);
+     @    signals(NoSuchAlgorithmException) true;
+    */
+   public static AlgorithmParameters getInstance(String algorithm,
+                                                 Provider provider)
+   throws NoSuchAlgorithmException;
+
+   public final /*@ pure non_null */ Provider getProvider();
+
+   /*@ public behavior
+     @    requires paramSpec != null;
+     @    signals(InvalidParameterSpecException) true;
+    */
+   public final void init(AlgorithmParameterSpec paramSpec)
+   throws InvalidParameterSpecException;
+
+   /*@ public behavior
+     @    requires params != null;
+     @    signals(IOException) true;
+    */
+   public final void init(byte[] params) throws IOException;
+
+   /*@ public behavior
+     @    requires params != null;
+     @    requires format != null;
+     @    signals(IOException) true;
+    */
+   public final void init(byte[] params, String format) throws IOException;
+
+   /*@ public behavior
+     @    requires paramSpec != null;
+     @    signals(InvalidParameterSpecException) true;
+    */
+   public final AlgorithmParameterSpec getParameterSpec(Class paramSpec)
+   throws InvalidParameterSpecException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+     @    signals(IOException) true;
+    */
+   public final byte[] getEncoded() throws IOException;
+
+   /*@ public behavior
+     @    requires format != null;
+     @    ensures \result != null;
+     @    signals(IOException) true;
+    */
+   public final byte[] getEncoded(String format) throws IOException;
+
+   public final /*@ pure non_null */ String toString();
+}
+

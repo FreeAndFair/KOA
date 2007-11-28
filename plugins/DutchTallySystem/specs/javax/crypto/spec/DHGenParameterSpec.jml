@@ -1,0 +1,53 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package javax.crypto.spec;
+
+import java.math.BigInteger;
+import java.security.spec.AlgorithmParameterSpec;
+
+public class DHGenParameterSpec implements AlgorithmParameterSpec
+{
+    // The size in bits of the prime modulus
+//     private int primeSize;
+
+    // The size in bits of the random exponent (private value)
+//     private int exponentSize;
+
+    /**
+     * Constructs a parameter set for the generation of Diffie-Hellman
+     * (system) parameters. The constructed parameter set can be used to
+     * initialize an
+     * {@link AlgorithmParameterGenerator <code>AlgorithmParameterGenerator</code>}
+     * object for the generation of Diffie-Hellman parameters.
+     *
+     * @param primeSize the size (in bits) of the prime modulus.
+     * @param exponentSize the size (in bits) of the random exponent.
+     */
+    public DHGenParameterSpec(int primeSize, int exponentSize) {
+	this.primeSize = primeSize;
+	this.exponentSize = exponentSize;
+    }
+
+    /**
+     * Returns the size in bits of the prime modulus.
+     *
+     * @return the size in bits of the prime modulus
+     */
+    public int getPrimeSize() {
+	return this.primeSize;
+    }
+
+    /**
+     * Returns the size in bits of the random exponent (private value).
+     *
+     * @return the size in bits of the random exponent (private value)
+     */
+    public int getExponentSize() {
+	return this.exponentSize;
+    }
+}

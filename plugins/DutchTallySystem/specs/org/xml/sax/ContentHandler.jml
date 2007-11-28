@@ -1,0 +1,88 @@
+/*
+ * @(#)ContentHandler.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Engelbert Hubbers (hubbers@cs.kun.nl)
+ */
+
+package org.xml.sax;
+
+public interface ContentHandler {
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setDocumentLocator(Locator locator);
+
+/*@
+  @ assignable objectState;
+  @*/
+public void startDocument() throws SAXException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void endDocument() throws SAXException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void startPrefixMapping(String prefix,
+                               String uri)
+                        throws SAXException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void endPrefixMapping(String prefix) throws SAXException;
+
+
+/*@
+  @ assignable objectState;
+  @*/
+public void startElement(String namespaceURI,
+                         String localName,
+                         String qName,
+                         Attributes atts)
+                  throws SAXException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void endElement(String namespaceURI,
+                       String localName,
+                       String qName)
+                throws SAXException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void characters(char[] ch,
+                       int start,
+                       int length)
+                throws SAXException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void ignorableWhitespace(char[] ch,
+                                int start,
+                                int length)
+                         throws SAXException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void processingInstruction(String target,
+                                  String data)
+                           throws SAXException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void skippedEntity(String name) throws SAXException;
+
+}

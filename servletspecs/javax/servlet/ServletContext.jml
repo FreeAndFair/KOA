@@ -1,0 +1,92 @@
+/*
+ * @(#)ServletContext.jml
+ *
+ * @version $Id:ServletContext.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet;
+
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.Set;
+
+public interface ServletContext
+{
+   /*@
+     @ ensures
+     @    \result >= 1;
+    */
+   public /*@ pure */ int getMajorVersion();
+
+   /*@
+     @ ensures
+     @    \result >= 1;
+    */
+   public /*@ pure */ int getMinorVersion();
+
+   public /*@ pure non_null */ String getServerInfo();
+
+   public /*@ pure non_null */ String getServletContextName();
+
+   public void log(/*@ non_null */ String msg);
+
+   public void removeAttribute(/*@ non_null */ String name);
+
+   public /*@ pure */ Enumeration getAttributeNames();
+
+   public /*@ pure non_null */ Enumeration getInitParameterNames();
+
+   public /*@ pure non_null */ Enumeration getServletNames();
+
+   /**
+    * This method is deprecated and always returns an empty Enumeration.
+    */
+   /*@
+     @ ensures
+     @    !\result.hasMoreElements();
+    */
+   public /*@ pure non_null */ Enumeration getServlets();
+
+   public /*@ pure */ InputStream getResourceAsStream(/*@ non_null */ String path);
+
+   public /*@ pure non_null */ Object getAttribute(/*@ non_null */ String name);
+
+   public void setAttribute(/*@ non_null */ String name,
+                            /*@ non_null */ Object object);
+
+   public void log(/*@ non_null */ Exception exception,
+                   /*@ non_null */ String msg);
+
+   public /*@ pure */ String getInitParameter(/*@ non_null */ String name);
+
+   public /*@ pure */ String getMimeType(/*@ non_null */ String file);
+
+   public /*@ pure */ String getRealPath(/*@ non_null */ String path);
+
+   public void log(/*@ non_null */ String message,
+                   /*@ non_null */ Throwable throwable);
+
+   public /*@ pure */ URL getResource(/*@ non_null */ String path)
+   throws MalformedURLException;
+
+   public /*@ pure non_null */ Set getResourcePaths(/*@ non_null */ String path);
+
+   public /*@ pure */ RequestDispatcher getNamedDispatcher(/*@ non_null */ String name);
+
+   public /*@ pure non_null */ RequestDispatcher getRequestDispatcher(/*@ non_null */ String path);
+
+   /**
+    * This method is deprecated and always returns null.
+    */
+   /*@
+     @ ensures
+     @    \result == null;
+    */
+   public /*@ pure */ Servlet getServlet(/*@ non_null */ String name)
+   throws ServletException;
+
+   public /*@ pure */ ServletContext getContext(/*@ non_null */ String uripath);
+}
+

@@ -1,0 +1,89 @@
+/*
+ * @(#)XMLReader.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Engelbert Hubbers (hubbers@cs.kun.nl)
+ */
+
+package org.xml.sax;
+
+import java.io.IOException;
+
+public interface XMLReader {
+
+/*@ pure @*/ public boolean getFeature(String name) 
+                   throws SAXNotRecognizedException,
+                          SAXNotSupportedException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setFeature(String name,
+                       boolean value)
+                throws SAXNotRecognizedException,
+                       SAXNotSupportedException;
+
+/*@ pure @*/ public Object getProperty(String name)
+                   throws SAXNotRecognizedException,
+                          SAXNotSupportedException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setProperty(String name,
+                        Object value)
+                 throws SAXNotRecognizedException,
+                        SAXNotSupportedException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setEntityResolver(EntityResolver resolver);
+
+
+/*@ pure @*/ public EntityResolver getEntityResolver();
+
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setDTDHandler(DTDHandler handler);
+
+
+/*@ pure @*/ public DTDHandler getDTDHandler();
+
+
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setContentHandler(ContentHandler handler);
+
+
+/*@ pure @*/ public ContentHandler getContentHandler();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setErrorHandler(ErrorHandler handler);
+
+/*@ pure @*/ public ErrorHandler getErrorHandler();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void parse(InputSource input)
+           throws IOException,
+                  SAXException;
+
+/*@
+  @ assignable objectState;
+  @*/
+
+public void parse(String systemId)
+           throws IOException,
+                  SAXException;
+}

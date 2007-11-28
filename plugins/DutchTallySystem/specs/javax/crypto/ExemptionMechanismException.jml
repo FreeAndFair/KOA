@@ -1,0 +1,23 @@
+/*
+ * @(#)ExemptionMechanismException.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.security.GeneralSecurityException;
+
+public class ExemptionMechanismException extends GeneralSecurityException
+{
+    public ExemptionMechanismException();
+
+    /*@ public behavior
+      @    ensures getMessage().equals(msg);
+     */
+    public ExemptionMechanismException(String msg);
+}

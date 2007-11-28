@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report>
+  <globaal stembureau="DigitaalStembureau" voorzitter="Onbekend" state="Gesloten" verkiezing="Europese verkiezingen van 2004" periode_start="10 Mei 2004 9:00" periode_eind="10 Juni 2004 17:00" curtime="12-januari-2004 14:36:34">
+    <kieskringen>
+      <kieskring nummer="12" naam="'s-Gravenhage"/>
+    </kieskringen>
+  </globaal>
+  <table name="ENCRYPTEDESB">
+    <row stemnummer="483835783413760" stem="00000040382351488488F776A87E758485612CC10CF455AD448BE4E9BE187F42004C147571F0AAD F8E96382657F468FE7E0E2B899D7C961CE8B3EDEFF2B873E207CA64A6000000507C29B0217296AA9CE529 106ECB7E36BFE4D0682D4D453BA8C54DBF1CA22EF57D050953913F31F43F6CFA40904E179A820D617699C BF21A216AEA6CB4DA6E2D88ECEC45CD4660E9D0E05CFE52800288D8"/>
+  </table>
+</report>

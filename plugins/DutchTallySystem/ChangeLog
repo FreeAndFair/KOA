@@ -1,0 +1,1612 @@
+2005-02-17  Fintan D. Fairmichael  <fintanf@gmail.com>
+
+	* src/sos/koa/Task.java: First commit of Task from me.
+	Quite a few changes - changes to method specs and some constraints added.
+	This class will most likely need some changes in the future - especially as I look at its subclasses.
+	Current ESC/Java2 results: 3 errors (all simplify crashes).
+
+2005-02-14  Fintan D. Fairmichael <fintanf@gmail.com>
+
+	* src/sos/koa/AuditLog.java
+	Added constraints and modified some method specs. 
+	6 methods are causing the ESC/Java2 simplify crash, but the rest pass successfully.
+	Current ESC/Java2 results: 6 errors (all simplify crashes).
+
+	* specs/javax/swing/ProgressMonitor.jml
+	This is a very much incomplete spec for ProgressMonitor. It sets the variable max to be spec_public.
+
+2004-04-14  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/package.html:
+	First draft of overall system description, authors, summary of all
+	libraries and tools used, and overall systems design and
+	implementation methodology written.
+
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/AuditLogInputSource.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/SoundBite.java:
+	Added short class documentation summaries.
+
+	* Makefile:
+	Added appropriate html file dependencies to source documentation
+	generation targets.
+
+	* doc/overview.html: Wrote first draft of overview for documentation.
+
+2004-04-14  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* usermanual/*:
+	Latest version.
+
+	* src/sos/koa/ViewPdf.java:
+	Deleted explicit windows references for possible pdf-viewers.
+
+2004-04-14  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* Makefile: Added latest version of Bouncy castle.
+
+	* MANIFEST.MF: Added the latest version of Bouncy castle...
+
+	* src/sos/koa/MenuPanel.java, jars/bcprov-jdk14-123.jar:
+	*** empty log message ***
+
+2004-04-13  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* Makefile:
+	Added JDK source to documentation generation source path so that
+	documentation inheritance works.
+
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateListMetadata.java:
+	* src/sos/koa/KiesKring.java:
+	Finished revising javadocs and style issues on all core classes.
+
+	* Makefile, jars/checkstyle-all.jar, jars/checkstyle-optional.jar:
+	Added checkstyle jars to build repository and modified Makefile rule
+	accordingly.
+
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/VoteSet.java:
+	Final style reviews including many attribute and formal parameter name
+	changes, decomposition of long assertions, particularly invariants,
+	etc.
+
+	* Makefile:
+	Added the distr target as the last dependency of the all target.
+
+	* jmlunit/sos/koa/Candidate_JML_TestData.java:
+	Removed import of Hansel classes.
+
+	* ChangeLog: ChangeLog of all of our commit messages.
+
+	* src/sos/koa/ViewPdf.java:
+	Fixed support for opening PDF on Windows; thanks to Flavio and Cees
+	for their help.
+
+	* jmlunit/sos/koa/Candidate_JML_TestData.java:
+	Attempted to do some test-coverage analysis with Gretel; it didn't work.
+
+2004-04-13  cees-bart  <ceesb@cs.kun.nl>
+
+	* Makefile: koa.jar can now alloc 256mb heap
+
+2004-04-13  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* samples/stemmen.xml, samples/stemmen2.xml: Erroneous vote files.
+
+	* src/sos/koa/DecryptAdapter.java:
+	Added check on trailing characters in votes.
+
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/KOAConstants.java:
+	* src/sos/koa/Task.java:
+	Added functionality that if decryption or counting goes wrong for some
+	votes, the others will still be processed.
+	The error messages for these problematic votes can be viewed using the
+	'More Info' button.
+	For each vote, counting starts with checking whether decryption failed or not.
+	If it failed it just copies the error message from decryption.
+
+	Furthermore added some maximum lengths for parsing the encrypted vote.
+	It turned out that if there was rubbish in the vote.xml file, we could run
+	out of memory.
+	Please check whether the size I defined is reasonable in KOAConstants.
+
+2004-04-13  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/ImportKeyAdapter.java, src/sos/koa/ViewPdf.java:
+	Made field of ImportKeyAdapter private & spec_public.  Added special
+	handling for Windows in ViewPdf.
+
+2004-04-13  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* usermanual.bib, usermanual.tex:
+	Usermanual is now in its own directory.
+
+	* usermanual/*:
+	Usermanual.
+
+2004-04-13  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* MANIFEST.MF, Makefile: Added 'distr' target to Makefile.
+	MANIFEST.MF is used to make the auto-executable jar.
+
+2004-04-11  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java, src/sos/koa/ImportVotesAdapter.java:
+	Added a SAX based validity check to ImportCandidatesAdapter, similar
+	to the one in ImportVotesAdapter.
+
+2004-04-09  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ReportAdapter.java:
+	Dir for xslt files is now relative to classloader's base dir. Should solve
+	our problems with application being run from jar file...
+
+	* src/sos/koa/KOAConstants.java, src/sos/koa/ReportAdapter.java:
+	Some more cleaning up in ReportAdapter in order to make it easier to
+	find xslt files from jarred release...
+
+	* src/sos/koa/AuditLog2XML.java:
+	Removed AuditLog2XML since... well... I don't understand why it's here?!
+
+	* src/sos/koa/CandidateList.java:
+	Removed XML/PDF stuff from CandidateList.java...
+
+	* src/sos/koa/AuditLog2PDF.java:
+	* src/sos/koa/CandidateList2PDF.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/Task.java:
+	Rearranged some of the XML to PDF generation stuff. AuditLog2PDF.java and
+	CandidateList2PDF.java are now obsolete. The conversion is now a method in
+	ReportAdapter.java.
+
+2004-04-09  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/HelpAdapter.java: Modified some text.
+
+2004-04-09  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java, src/sos/koa/ImportVotesAdapter.java:
+	Added clear methods to some adapters..
+
+2004-04-09  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* usermanual.bib, usermanual.tex: Draft of User Manual.
+
+2004-04-09  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportKeyAdapter.java: *** empty log message ***
+
+2004-04-08  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* koa, src/sos/koa/MenuPanel.java, src/sos/koa/Task.java:
+	Made smurfs optional, need to pass "-s" option to MenuPanel to enable them.
+	Note that the main method is now in MenuPanel.
+
+	* src/sos/koa/Task.java, src/sos/koa/MainFrame.java, src/sos/koa/MenuPanel.java:
+	Moved the main method to MenuPanel...
+
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KOAException.java:
+	* src/sos/koa/MainFrame.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/RestartAdapter.java:
+	* src/sos/koa/Task.java:
+	Some renaming and Java Doc comments...
+
+	* src/sos/koa/FileNameFilter.java, src/sos/koa/Task.java:
+	*** empty log message ***
+
+2004-04-08  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/VoteSet.java:
+	New docs for KiesKring and more style reviews.
+
+2004-04-08  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportVotesAdapter.java: *** empty log message ***
+
+2004-04-08  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateListMetadata.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/VoteSet.java:
+	More style reviews including many attribute and formal parameter name
+	changes, decomposition of long assertions, particularly invariants,
+	made a couple of classes final, since everything in them was final, etc.
+
+	* src/sos/koa/AuditLog2XML.java:
+	* src/sos/koa/CandidateListXMLReader.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/XML2PDF.java:
+	Changed all System.out uses to System.err.
+
+	* Makefile: Added CandidateListMetadata to the set of core classes.
+
+	* sos-group.xml:
+	Increased the suggest maximum number of parameters to constructors and
+	methods to eight.
+
+2004-04-08  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/Task.java:
+	*** empty log message ***
+
+2004-04-08  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/package.html:
+	Added outline for package.html for the sos.koa package.
+
+2004-04-08  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/Task.java: Cleaned up some stuff in Task.java
+
+	* src/sos/koa/KOAConstants.java:
+	Added some dutch messages to KOAConstants...
+
+2004-04-08  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/ReportAdapter.java:
+	Fixed reference to renamed method Candidate.position_number().
+
+	* src/sos/koa/KiesKring.java, src/sos/koa/KiesLijst.java:
+	Fixed reference to renamed method Candidate.position_number().  Fixed
+	misuse of reference equality on strings in two contracts.
+
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	Fixed reference to renamed method Candidate.position_number().
+
+	* src/sos/koa/District.java:
+	Performed final pass on style review.  This entailed renaming some
+	parameters and some doc cleanup.
+
+	* src/sos/koa/CandidateListXMLReader.java:
+	Fixed reference to renamed method Candidate.position_number().
+
+	* src/sos/koa/CandidateList.java:
+	Performed partial style review.  Changed exposed types of Map-based
+	attributes (HashMap and TreeMap) to appropriate interface types (Map
+	and SortedMap) and fixed appropriate references to all other renamed
+	variables and methods.
+
+	* src/sos/koa/Candidate.java:
+	Performed full style review.  Renamed fields my_position to
+	my_position_number, my_cityOfResidence to my_city_of_residence,
+	voteCount to my_vote_count, and several constructor and method
+	parameters in corresponding fashion.  Removed unused districts()
+	method and definedComparison() model method.
+
+	* sos-group.xml:
+	Added @design tag to list of tags that flagged a review warning.
+
+	* Makefile:
+	Added checkstyle target to run CheckStyle on source.  Added Makefile
+	variable core_javafiles to indentify core ADT classes that are the
+	most important for verification.  Added Makefile variable
+	adapter_files that identifies all source files named
+	"...Adapter.java".
+
+2004-04-08  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/ShowCandidatesAdapter.java:
+	Obsolete because the work is done by ImportCandidatesAdapter.
+
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	"More info" now really means more info, and not the same info in a different
+	format.
+	This means that ShowCandidatesAdapter is obsolete.
+
+	* src/sos/koa/HelpAdapter.java:
+	Help is now displayed in a srcollable format.
+	Text regarding viewer is modified.
+
+	* src/sos/koa/CountAdapter.java:
+	The votes counted are determined locally.
+	Each time this adapter is called, the value will be reset to 0.
+
+2004-04-07  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/ViewPdf.java:
+	Implemented special support for OS X so that the "open" command is tried
+	as well to open the PDF reports.
+
+2004-04-07  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KOAConstants.java:
+	* src/sos/koa/Task.java:
+	Added 'More info' option to ImportCandidatesAdapter.
+
+2004-04-07  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* sos-group.xml: Added final miscellaneous and usage checks to style.
+
+	* src/sos/koa/District.java: Applied all SoS Group code convensions.
+
+	* src/sos/koa/ViewPdf.java:
+	Applied SoS code convensions.  Also fixed syntax error in private
+	constructor.
+
+	* sos-group.xml, sos.header: New CheckStyle style for the SoS Group.
+
+2004-04-07  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ViewPdf.java:
+	Changed ViewPDF in ViewPdf so that it compiles...
+
+2004-04-07  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/AuditLogXMLReader.java:
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateListMetadata.java:
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/ViewPdf.java:
+	* src/sos/koa/VoteSet.java:
+	Made remaining attributes of core data types private, if possible.
+
+	Canonicalized ordering of type annotations (e.g., visibility
+	specifiers, static, final, non_null, etc.).
+
+	Added some Javadocs to AuditLogXMLReader.
+
+	Added new ViewPdf class to handle automatic viewing of generated
+	reports.
+
+	* Makefile:
+	Added new viewpdf-test target for testing the new PDF viewer.
+
+2004-04-07  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/DecryptAdapter.java, src/sos/koa/Task.java:
+	Can now interrupt decrypting using 'cancel' button on progress bar...
+
+2004-04-07  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* jmlunit/sos/koa/Global_TestData.java:
+	Reset maximum number of test values for each type to their original,
+	moderate values.  Put back in static initializer for global data even
+	though the values are no longer used.  We should pull these parts out
+	before delivery.
+
+	* Makefile:
+	Decreased the amount of memory given to unit tests to 320MB max.
+
+	Made documentation generation a part of the all target.
+
+2004-04-07  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/DecryptAdapter.java, src/sos/koa/Task.java:
+	*** empty log message ***
+
+2004-04-06  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/ShowCandidatesAdapter.java:
+	Adapter to list all candidates on the screen.
+
+	* src/sos/koa/AuditLog2PDF.java, src/sos/koa/CandidateList2PDF.java:
+	Set log-level to DISABLED.
+
+2004-04-06  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KOAConstants.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/Task.java:
+	*** empty log message ***
+
+2004-04-06  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* Makefile:
+	* jmlunit/sos/koa/CandidateList_JML_TestData.java:
+	* jmlunit/sos/koa/Candidate_JML_TestData.java:
+	* jmlunit/sos/koa/District_JML_TestData.java:
+	* jmlunit/sos/koa/Global_TestData.java:
+	* jmlunit/sos/koa/KiesKring_JML_TestData.java:
+	* jmlunit/sos/koa/KiesLijst_JML_TestData.java:
+	* jmlunit/sos/koa/VoteSet_JML_TestData.java:
+	Increased the amount of memory given to unit tests to 512MB at max.
+
+	Started building with debugging code enabled (-g) so that I could use
+	a debugger.
+
+	Switched all unit test classes to using standard suggested static
+	method of constructing test examples.  I'm still relying upon the
+	factories in Global_TestData, but we are no longer using any of
+	its fancy features wrt instance caching &c.
+
+	It seems that there is some subtle problem when using static classes
+	with static initializers with anonymous classes that was causing the
+	previous OutOfMemoryErrors.
+
+2004-04-06  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/KOAConstants.java:
+	* src/sos/koa/Task.java:
+	*** empty log message ***
+
+2004-04-06  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/CandidateListXMLReader.java:
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/ExitAdapter.java:
+	* src/sos/koa/ReportAdapter.java:
+	Deal with registered voters.
+	Removing XML files on exit.
+
+2004-04-06  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KOAConstants.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/Task.java:
+	*** empty log message ***
+
+2004-04-06  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/MenuPanel.java: Added clear method.
+
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	Renamed my_count into my_kieslijst_count in KiesKring.
+	Added clear methods.
+
+	* src/sos/koa/District.java: Added clear method.
+
+	* src/sos/koa/ClearAdapter.java: Added memory clearing.
+
+	* src/sos/koa/CandidateListMetadata.java:
+	Changed 'Lisjst' into 'Lijst'.
+
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/AuditLog.java:
+	Added clear method.
+
+2004-04-05  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KOAConstants.java:
+	* src/sos/koa/ReportAdapter.java:
+	* xml/xslt/auditlog2pdf.xsl:
+	ClearAdapter clears files.
+	Decrypt and CountAdapter do logging and show results.
+
+2004-04-05  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/VoteSet.java:
+	Wrote javadoc comments on all fields of all core data structures.
+
+	Made as many of those fields private, spec_public as possible to
+	help with aliasing problems during verification.
+
+	Made sure all field invariants are specified just *after* field
+	declarations (convention).
+
+	Set owner fields of all constructed core objects at the appropriate
+	places to help reasoning about aliasing.
+
+	Fixed a few contracts as detected by escjava2.
+
+	* Makefile:
+	Removed bogus use of -specs switch from escjava2 invocation (using
+	this switch is like -classpath, if you use it you have to specify
+	*all* specs).
+
+	Added table summarizing the state of affairs of static checking.
+
+	Added new rule escjava2-core which runs escjava2 on the core datatypes
+	that I am working on.
+
+	* jmlunit/sos/koa/CandidateList_JML_TestData.java:
+	* jmlunit/sos/koa/Candidate_JML_TestData.java:
+	* jmlunit/sos/koa/District_JML_TestData.java:
+	* jmlunit/sos/koa/Global_TestData.java:
+	* jmlunit/sos/koa/KiesKring_JML_TestData.java:
+	* jmlunit/sos/koa/KiesLijst_JML_TestData.java:
+	* jmlunit/sos/koa/VoteSet_JML_TestData.java:
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateListMetadata.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/VoteSet.java:
+	Setup and ran unit tests for CandidateList and VoteSet.  This
+	highlighted another couple of spec and implementation errors.
+
+	Made AuditLog.hasKiesKring() pure.
+
+	Removed unused constructor in Candidate.
+
+	Added new global test data generators for CandidateList, Object,
+	and VoteSet.
+
+	Changed type of my_districtCount in CandidateListMetadata to int, as
+	that is necessary to represent the values up to
+	MAX_CANDIDATES_PER_KIESLIJST.
+
+	Fixed contract on KiesKring.addDistrict(); problem found by unit
+	testing.
+
+	* Makefile: Increased amount of memory unit tests are given to 320MB.
+
+	Reordered all target's dependencies to build, test, escjava.
+
+	Added unit test runs for CandidateList and VoteSet.
+
+	Added new rule jmlrac-tests-current so that one can focus
+	on one specific test.
+
+2004-04-05  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/KOAConstants.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/VoteSet.java:
+	New report dialog.
+
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	Spec changes.
+
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/VoteSet.java:
+	Fixed some jmlc problems.
+
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/CandidateListXMLReader.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/VoteSet.java:
+	New test for validateKiesKringNumber.
+
+2004-04-04  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* jmlunit/sos/koa/CandidateList_JML_TestData.java:
+	* jmlunit/sos/koa/KiesLijst_JML_TestData.java:
+	* jmlunit/sos/koa/VoteSet_JML_TestData.java:
+	KiesLijst_JML_TestData is done (at first pass).  The other two classes are just
+	skeletons ready to be filled in tomorrow.
+
+	* Makefile:
+	* jmlunit/sos/koa/Candidate_JML_TestData.java:
+	* jmlunit/sos/koa/District_JML_TestData.java:
+	* jmlunit/sos/koa/Global_TestData.java:
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/VoteSet.java:
+	Added junit.jar to UNIT_TEST_CLASSPATH as we don't often run inside of
+	jml-junit (which automatically adds the jar) and do often run in jmlrac (which
+	does not automatically add the jar).
+
+	Added new targets build, escjava, and test, each of which is a 2nd-level
+	target for building, static checking, and unit testing.  The top-most all
+	target now depends upon these three targets.
+
+	Made sure the executing unit tests compiles normal source as well as jmlrac/
+	unit test source.
+
+	Changed Candidate_JML_TestData's ObjectStrategy to randomly return an
+	instance of Candidate, KiesKring, or KiesLijst.  This will test, for example,
+	what happens when one passes a KiesKring to Candidate's equals() method.
+
+	Stopped using LimitedTestSuite in District_JML_TestData as an experiment.  I
+	don't know if I will do the same for all others until I have completed more
+	testing.
+
+	Reduced total tests to 10, and broaded possilble values for all base types
+	in Global_TestData to make sure we violate some preconditions during testing.
+
+	Added several methods to randomly generate a base type value in a specified
+	range.  These are used to more efficiently generate legit instances for testing.
+	These methods are: getByte(byte, byte), getShort(short, short), getInt(int, int),
+	and getString(int).  Modified all object factories in this class to use
+	these new generators.
+
+2004-04-03  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/MenuPanel.java, src/sos/koa/Task.java:
+	The app now 'remembers' the last succesfully accessed directory when popping
+	up file browsers.
+
+2004-04-03  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* jmlunit/sos/koa/Global_TestData.java:
+	Tightened up maximum length of random strings.  Added a new method getString(int)
+	that returns a string shorter than a specified length.  This helps construct
+	Candidates more quickly as their maximum initials length is very small compared
+	to the full space of possible strings.  This should help performance of unit
+	testing Candidate considerably.
+
+	* Makefile: Fixed use of new patterns in a few rules.
+
+	* jmlunit/sos/koa/Global_TestData.java:
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	Changed Global_TestData.getChar() to only return one of the three
+	special chars in the KOA app.  See javadocs on why this was done.
+	Switched to 2nd Candidate constructor; the first one does not
+	preserve the invariant on woonplats and I don't think is ever
+	used and should be removed.  I stuck in an "assert false" to find
+	out.  Removed a few invariants that were not useful.  Fixed (?)
+	the size of the KiesLijsten cache.  Made all formal parameters
+	of KiesLijst's methods final.
+
+	* Makefile:
+	Added variables to represent patterns of files so that compilation is over
+	directories and not pre-existing files: since files are now created and
+	destroyed on-the-fly with jmlunit.  Added variables for VM memory use
+	in various scenarios.  Added jmlrac-based tests for Candidate, District,
+	KiesKring, and KiesLijst.
+
+	* src/sos/koa/KiesLijst.java:
+	Fixed erroneous postcondition and use of cache on constructor, both of
+	which were identified by unit tests.
+
+	* jmlunit/sos/koa/Candidate_JML_TestData.java:
+	* jmlunit/sos/koa/District_JML_TestData.java:
+	* jmlunit/sos/koa/Global_TestData.java:
+	* jmlunit/sos/koa/KiesKring_JML_TestData.java:
+	Switched to using LimitedTestSuite in Candidate, District, and KiesKring
+	tests, with a fixed number of tests per class, as specified by
+	Global_TestData.TOTAL_TESTS.
+
+	* src/sos/koa/KiesKring.java:
+	Fixed KiesKring caching - should only return the cached value if it is
+	in fact the right one!
+
+	* jmlunit/sos/koa/Candidate_JML_TestData.java:
+	* jmlunit/sos/koa/Global_TestData.java:
+	Implemented test data framework for Candidate class.  Modified global test
+	data generators to guarantee that new object generators do not throw
+	precondition exceptions.  Tighted up ranges on types to make test
+	generation more efficient.
+
+	* jmlunit/sos/koa/District_JML_TestData.java:
+	* jmlunit/sos/koa/KiesKring_JML_TestData.java:
+	First two sets of test data.
+
+2004-04-03  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/CandidateList2PDF.java: Nothing really...
+
+2004-04-02  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/CandidateListXMLReader.java:
+	* src/sos/koa/HelpAdapter.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/VoteSet.java:
+	This commit should get a correct run through jmlrac.
+
+2004-04-02  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/KiesKring.java: *** empty log message ***
+
+	* jmlunit/sos/koa/Global_TestData.java:
+	Added generator for KiesLijsten.
+
+	* Makefile:
+	Added a few more clean and phony rules and unit testing as an all target.
+
+	* Makefile:
+	* jmlunit/sos/koa/Global_TestData.java:
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateListXMLReader.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/KiesKring.java, src/sos/koa/KiesLijst.java:
+	Cleaned up Makefile some more so that timestamps are only generated
+	when their complementary command succeeds.  Fixed spec on District's
+	constructor.  Reordered "final static" to "static final" in some
+	more specs.
+
+	* jmlunit/sos/koa/Global_TestData.java:
+	Initial implementation of global test data generator.  Basic random
+	coverage of types byte, short, int, String, District, and KiesKring
+	are done.  Still need to add critical data values to generators.
+
+2004-04-02  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/AuditLog2PDF.java:
+	* src/sos/koa/AuditLogXMLReader.java:
+	* src/sos/koa/KOAConstants.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/VoteSet.java:
+	Latest updates from Barcelona.
+
+2004-04-01  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* .cvsignore, Makefile, jars/jmljunitruntime.jar, jars/jmlruntime.jar:
+	Massive Makefile restructuring to support timestamp generations of
+	compilation options (e.g., javac, jmlc, junit, etc.).  Dependency
+	analysis is complete as is full inter-stage analysis.  If you build
+	with "make all" then all Java source files are compiled with javac,
+	jmlc, junit test files are generated with jmlunit and their dependent
+	jmlc compile is done, and the resulting tests are compiled with javac,
+	and finally the specs are typechecked with escjava2.  Static checking
+	with escjava2 is not yet done, nor is the app or the unit tests run
+	automatically, though there are rules for such as well.
+
+2004-03-31  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/District.java:
+	Made attributes package-level again; the protection levels and specs are
+	just too much a pain to deal with.
+
+	* src/sos/koa/District.java:
+	Wrote initial class javadoc comment.  Reordered "final static" declarations to
+	more conventional "static final".  Made attributes private and declared all
+	formal parameters as final as well.
+
+2004-03-31  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/HelpAdapter.java:
+	Small changes to dehubbification method.
+
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/HelpAdapter.java:
+	* src/sos/koa/KOAConstants.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/Task.java:
+	Cleaned up report adapter and help adapter. Cleaned up menu panel specs.
+
+2004-03-31  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* Makefile, jars/junit.jar:
+	Added unit test framework generation to Makefile with new jmlunit target.
+
+	* Makefile:
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateListMetadata.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/VoteSet.java:
+	Adjusted all array-related invariants to account for the counting-from-1
+	nature of the datafiles for this project.  This means that all invariants
+	state that indexes run from *0* to the maximum value of the index, inclusive.
+	I am including 0 because they do not stipulate that 0 is illegal anywhere
+	in their specs that I can see.  Added a BLANCO constant to KiesLijst and
+	adjusted specs appropriately.  Also, removed bogus preconditions on
+	addKiesLijst() wrt BLANCO --- we need to discuss this when Engelbert is
+	back.
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/MenuPanel.java:
+	Added new UNKNOWN (undocumented) gender to Candidate.  Corrected all
+	array-related invariants to account for counting-by-1 nature of data.
+	Added systemIsCleared flag intialization - but no clearing is actually
+	happening yet!  Renamed kiesKring to my_kiesKring for consistency.
+	Changed use of ArrayList in KiesKring back to an array.  Merged
+	MenuPanel; Martijn will reevaluate it after this commit.
+
+	* src/sos/koa/KiesKring.java, src/sos/koa/KiesLijst.java:
+	Fixed a few specs for the new use of arrays.
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateList2PDF.java:
+	* src/sos/koa/CandidateListInputSource.java:
+	* src/sos/koa/CandidateListXMLReader.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	Added in Hubber's missing classes and re-incorporated factories
+	into KiesLijst and KiesKring.  P.S. Cees and Martijn sez "Hubbers
+	is a N00B."
+
+2004-03-31  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/ReportAdapter.java, src/sos/koa/VoteSet.java:
+	New ReportAdapter.
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	Changes for report generation.
+
+	* xml/xslt/recount2pdf.xsl: New .xsl files for report generation.
+
+2004-03-30  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KOAConstants.java:
+	* src/sos/koa/MainFrame.java:
+	* src/sos/koa/Task.java:
+	Small changes.
+
+	* src/sos/koa/KOAConstants.java: *** empty log message ***
+
+2004-03-30  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* Makefile:
+	* specs/javax/crypto/SecretKeyFactory.jml:
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	Added two new targets to the Makefile: main and main-jmlrac.  The first runs the
+	app with the normal classfiles, the latter with jmlrac.  Fixed spec bug in
+	SecretKeyFactory and reformatted according to SoS conventions.  Added back in
+	factory methods for KiesKring and KiesLijst.  ArrayLists are used to cache
+	instances of each.
+
+2004-03-30  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/Task.java: *** empty log message ***
+
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ExitAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/RestartAdapter.java:
+	* src/sos/koa/Task.java:
+	Some more refactoring and cleaning up...
+
+	* src/sos/koa/CandidateFileFilter.java:
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ExitAdapter.java:
+	* src/sos/koa/FileNameFilter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KeyFileFilter.java:
+	* src/sos/koa/MainFrame.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/RestartAdapter.java:
+	* src/sos/koa/Task.java:
+	* src/sos/koa/VoteFileFilter.java:
+	Refactored some of the adapters so that they extend Task.  Removed
+	all those FileFilters and replaced them by FileNameFilter
+	instances.
+
+2004-03-30  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/Candidate.java, src/sos/koa/KiesLijst.java:
+	Corrected part of Candidate's constructor precondition (wrong constant was used).
+	Made sure that the candidate list in KiesLijst was big enough for the maximum
+	number of possible candidates.  Changed use of .add() [which shifts contents
+	right, according to the docs], to set() [which simply inserts the value] in
+	KiesLijst as well.
+
+2004-03-30  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/DecryptAdapter.java: Added progress bar for decryption.
+
+2004-03-30  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* Makefile:
+	* specs/javax/crypto/SecretKey.jml:
+	* specs/javax/crypto/SecretKeyFactory.jml:
+	* src/sos/koa/Candidate.java:
+	Merged work tweaks.
+
+	* Makefile:
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/KiesLijst.java:
+	Switched to using normal escjava2 (2.0a6, as installed on all machines
+	at work of relevance) in Makefile.  Removed method
+	KiesLijst.incrementCandidateCount() and added methods addCandidate(Candidate)
+	and candidates() to KiesLijst.  KiesLijst now contains an ArrayList of
+	all of its Candidates. This list can easily be iterated over with a for loop.
+	Modified equals() and toString() methods of KiesLijst to account for new
+	data.
+
+2004-03-26  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	Removed last factory methods and replaced their use by constructors.
+
+	* specs/java/security/interfaces/DSAParams.jml:
+	Added strong primality spec.
+
+2004-03-26  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/DecryptAdapter.java: *** empty log message ***
+
+2004-03-26  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* Makefile: Added specs to classpath, as necessary for jmlc.  Added
+	escjava2-typecheck and jmlc to default target.
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/VoteSet.java:
+	Removed unused char[]-based constructors from Candidate, KiesLijst,
+	and KiesKring.  Added modifies clause to heavyweight specs that needed
+	them.  Added necessary caches for make() factories in KiesKring,
+	KiesLijst, and District.  I am unsure if they are correct though,
+	given the interdependencies of these three datatypes---will review
+	with Martijn.
+
+2004-03-26  cees-bart  <ceesb@cs.kun.nl>
+
+	* src/sos/koa/SoundBite.java: *** empty log message ***
+
+2004-03-25  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	Renamed KiesLijst.kiesLijstCount() to count().
+
+2004-03-25  cees-bart  <ceesb@cs.kun.nl>
+
+	* src/sos/koa/SoundBite.java: *** empty log message ***
+
+2004-03-25  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/MenuPanel.java:
+	*** empty log message ***
+
+2004-03-25  cees-bart  <ceesb@cs.kun.nl>
+
+	* src/sos/koa/SoundBite.java:
+	* fluit.wav: *** empty log message ***
+
+2004-03-25  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/VoteSet.java:
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KOAException.java:
+	* src/sos/koa/XMLParseException.java:
+	* src/sos/koa/XMLUtil.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/DecryptAdapter.java:
+	*** empty log message ***
+
+2004-03-25  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* Makefile: Rearrange Makefile for clarity.
+
+	* doc/koa.css, doc/overview.html:
+	Stylesheet used by generated javadoc and jmldoc documentation.  Overview
+	should provide a short summary of the application for the docs as well.
+
+	* Makefile, src/sos/koa/MenuPanel.java, src/sos/koa/VoteSet.java:
+	Added Makefile targets for documentation generation with javadoc and
+	jmldoc.  Added appropriate clean targets as well.
+
+2004-03-25  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/AuditLog2PDF.java: *** empty log message ***
+
+2004-03-25  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* Makefile, koa: *** empty log message ***
+
+2004-03-25  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* koa:
+	* src/sos/koa/AbstractObjectReader.java:
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/AuditLog2PDF.java:
+	* src/sos/koa/AuditLog2XML.java:
+	* src/sos/koa/AuditLogInputSource.java:
+	* src/sos/koa/AuditLogXMLReader.java:
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/EasyGenerationContentHandlerProxy.java:
+	* src/sos/koa/ExitAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/RestartAdapter.java:
+	* xml/xslt/auditlog2pdf.xsl:
+	Generate AuditLog report in PDF.
+
+2004-03-25  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/MainFrame.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/MenuPanel.java:
+	*** empty log message ***
+
+2004-03-24  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/ExitAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/KiesKring.java:
+	Show candidate info in dialog.
+
+2004-03-24  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportVotesAdapter.java: *** empty log message ***
+
+	* src/sos/koa/MenuPanel.java: Made setGUIState public :p
+
+2004-03-24  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/CountAdapter.java, src/sos/koa/RestartAdapter.java:
+	AuditLog.
+
+	* src/sos/koa/DecryptAdapter.java: *** empty log message ***
+
+2004-03-24  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportVotesAdapter.java:
+	SAX beats DOM wrt memory usage...
+
+2004-03-24  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/VoteSet.java:
+	Added candidateCount() and incrementCandidateCount() to KiesLijst.  Made several
+	more methods final.  Wrote specifications and implementations for CandidateList's
+	finalizeVote(), addVote(), and voteCount() methods.
+
+2004-03-24  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java, src/sos/koa/ImportKeyAdapter.java:
+	*** empty log message ***
+
+2004-03-24  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/VoteSet.java:
+	Sketched out interface for voteCount(String) and voteCount(int) in
+	VoteSet.
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/VoteSet.java:
+	Made Candidate.voteCount spec_public.  Added methods
+	incrementVoteCount() and voteCount() to Candidate.  Rewrote
+	postcondition of CandidateList's constructor to not use constructors.
+	Fixed scope of specs of updateGUIState() and setEnabled() in
+	MenuPanel.  Removed model variable and unused base class and
+	interfaces from VoteSet.  Wrote specification and implementation for
+	VoteSet's addVote(int) and addVote(String).
+
+2004-03-24  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/ExitAdapter.java:
+	AuditLog stuff.
+
+2004-03-24  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateListMetadata.java:
+	* src/sos/koa/MenuPanel.java:
+	*** empty log message ***
+
+2004-03-24  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/VoteSet.java:
+	Added specification and implementation for constructor and the
+	validateRedundantInfo and validateKiesKringNumber methods.
+
+2004-03-24  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	Storing info into AuditLog.
+
+2004-03-24  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/VoteSet.java:
+	Working around bugs in javac v-v assert false & return statements.
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/VoteSet.java:
+	Beginning to sketch out interface for VoteSet.
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateListMetadata.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/VoteSet.java:
+	Moved MAX_CANDIDATES_PER_KIESLIJST to KiesLijst class.  Removed all
+	references to districts from Candidate, but for the related getter
+	method.  Properly capitalized kiesList and kiesKring everywhere.
+	Added cityOfResidence to Candidate.  Wrote specs and implementation
+	for the remainder of CandidateList.  Wrote specs for remainder
+	of CandidateListMetadata.  Ensured that all MAX_-related invariants
+	had proper (< rather than <=) upper bounds.  Double-checked many
+	attribute references and replaced them by getter method use so that
+	we can check invariants more frequently.  Corrected reference to
+	state constant in MenuPanel.
+
+2004-03-24  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java: *** empty log message ***
+
+2004-03-24  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/AuditLog.java:
+	* src/sos/koa/HelpAdapter.java:
+	* src/sos/koa/RestartAdapter.java:
+	Adding the AuditLog class.
+
+2004-03-24  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/XMLUtil.java:
+	* src/sos/koa/MenuPanel.java:
+	*** empty log message ***
+
+2004-03-24  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/CandidateListMetadata.java:
+	Refined types for fields and wrote stronger invariants and preconditions
+	for their values.
+
+2004-03-24  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* koa:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/MainFrame.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* Makefile:
+	*** empty log message ***
+
+2004-03-23  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* jars/bcprov-jdk14-118.jar:
+	Added bouncy castle, not sure if this is the latest release though...
+
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/MenuPanel.java:
+	*** empty log message ***
+
+2004-03-23  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateListMetadata.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/KiesKring.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/KieskRing.java:
+	Renamed KieskRing to KiesKring.  Added interrelated references between core classes.
+	Wrote metadata class.
+
+2004-03-23  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/HelpAdapter.java:
+	* src/sos/koa/ImportKeyAdapter.java:
+	* src/sos/koa/ImportKeyPairAdapter.java:
+	* src/sos/koa/KeyFileFilter.java:
+	* src/sos/koa/KeyPairFileFilter.java:
+	* src/sos/koa/MainFrame.java:
+	* src/sos/koa/MenuPanel.java:
+	*** empty log message ***
+
+	* src/sos/koa/MenuPanel.java: Stomme Hub. Ik was bezig met die file.
+
+2004-03-23  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/sos/koa/HelpAdapter.java, src/sos/koa/MenuPanel.java:
+	Show some context sensitive text on the screen.
+
+2004-03-23  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* Makefile:
+	* src/sos/koa/Candidate.java:
+	* src/sos/koa/CandidateInfo.java:
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/KiesLijst.java:
+	* src/sos/koa/KieskRing.java:
+	* src/sos/koa/SoundBite.java:
+	Added .PHONY declarations to Makefile and made all target depend upon javac,
+	escjava2-typecheck, and jmlc.
+
+	Added factory methods to all key datastructures to perform smart caching.
+	Made real constructors private.  Strengthened all contracts according to
+	currently known information.
+
+	Renamed CandidateInfo to Candidate.
+
+	Added KiesLijst class.
+
+	Sketched out interface for CandidateList.
+
+2004-03-23  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/RestartAdapter.java: *** empty log message ***
+
+2004-03-22  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/KeyPairFileFilter.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/RestartAdapter.java:
+	*** empty log message ***
+
+2004-03-22  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* src/sos/koa/CandidateList.java:
+	* src/sos/koa/CandidateInfo.java:
+	* src/sos/koa/District.java:
+	* src/sos/koa/KieskRing.java:
+	Some refactoring of CandidateInfo to account for discrepencies between
+	the documentation and the example XML file(s).  District and KieskRing
+	(Precinct?) information is being moved into separate classes to avoid
+	redundancy.  A CandidateList class is next on the agenda.
+
+	* samples/KOA_kandidaatcodes-emacs.xml:
+	A bit of syntax cleanup of the first element.
+
+2004-03-22  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/MenuPanel.java:
+	*** empty log message ***
+
+2004-03-22  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* Makefile:
+	Added new rules to run jmlc and ESC/Java2 in various ways.  escjava2-cvs is
+	installed only on cs.kun.nl at this time.
+
+	* src/sos/koa/CandidateInfo.java:
+	Initial data-structure for holding candidate information; with full specs.
+
+2004-03-22  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ImportVotesAdapter.java, src/sos/koa/XMLParseException.java:
+	Small changes to XML parsing of vote files...
+
+2004-03-19  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* specs/javax/crypto/interfaces/DHKey.jml:
+	* specs/javax/crypto/interfaces/DHPrivateKey.jml:
+	* specs/javax/crypto/interfaces/DHPublicKey.jml:
+	* specs/javax/crypto/interfaces/PBEKey.jml:
+	First-pass on specs for a another bunch of interfaces in javax.crypto.-
+	interfaces.  Models still have to be written for these specs.
+
+	* specs/java/security/interfaces/DSAKey.jml:
+	* specs/java/security/interfaces/DSAKeyPairGenerator.jml:
+	* specs/java/security/interfaces/DSAParams.jml:
+	* specs/java/security/interfaces/DSAPrivateKey.jml:
+	* specs/java/security/interfaces/DSAPublicKey.jml:
+	* specs/java/security/interfaces/RSAKey.jml:
+	* specs/java/security/interfaces/RSAMultiPrimePrivateCrtKey.jml:
+	* specs/java/security/interfaces/RSAPrivateCrtKey.jml:
+	* specs/java/security/interfaces/RSAPrivateKey.jml:
+	* specs/java/security/interfaces/RSAPublicKey.jml:
+	* specs/javax/crypto/spec/DHGenParameterSpec.jml:
+	* specs/javax/crypto/spec/DHParameterSpec.jml:
+	* specs/javax/crypto/spec/DHPrivateKeySpec.jml:
+	* specs/javax/crypto/spec/DHPublicKeySpec.jml:
+	* specs/javax/crypto/spec/IvParameterSpec.jml:
+	* specs/javax/crypto/spec/PBEKeySpec.jml:
+	* specs/javax/crypto/spec/PBEParameterSpec.jml:
+	* specs/javax/crypto/spec/RC2ParameterSpec.jml:
+	* specs/javax/crypto/spec/RC5ParameterSpec.jml:
+	* specs/javax/crypto/spec/SecretKeySpec.jml:
+	First-pass on specs for a another bunch of interfaces in java.security.-
+	interfaces.  Corrected a number of specs in javax.crypto.spec to account
+	for new spec inheritance (now that more specs are available higher up in
+	the inheritance hierarchy), made sure models in interfaces were instance
+	models, and fixed a few places where I wrote ensures rather than signals
+	in an exceptional spec.  Also commented out private fields in placeholder
+	implementations to get everything to run through jml & escjava2 for now.
+
+	* specs/java/security/AccessControlException.jml:
+	* specs/java/security/Certificate.jml:
+	* specs/java/security/DigestException.jml:
+	* specs/java/security/GeneralSecurityException.jml:
+	* specs/java/security/InvalidAlgorithmParameterException.jml:
+	* specs/java/security/InvalidKeyException.jml:
+	* specs/java/security/InvalidParameterException.jml:
+	* specs/java/security/Key.jml:
+	* specs/java/security/KeyException.jml:
+	* specs/java/security/KeyManagementException.jml:
+	* specs/java/security/KeyStoreException.jml:
+	* specs/java/security/NoSuchAlgorithmException.jml:
+	* specs/java/security/NoSuchProviderException.jml:
+	* specs/java/security/Principal.jml:
+	* specs/java/security/PrivateKey.jml:
+	* specs/java/security/PrivilegedAction.jml:
+	* specs/java/security/PrivilegedActionException.jml:
+	* specs/java/security/PrivilegedExceptionAction.jml:
+	* specs/java/security/ProviderException.jml:
+	* specs/java/security/PublicKey.jml:
+	* specs/java/security/SignatureException.jml:
+	* specs/java/security/UnrecoverableKeyException.jml:
+	* specs/javax/crypto/spec/DESKeySpec.jml:
+	* specs/javax/crypto/spec/DESedeKeySpec.jml:
+	* specs/javax/crypto/spec/DHGenParameterSpec.jml:
+	* specs/javax/crypto/spec/DHParameterSpec.jml:
+	* specs/javax/crypto/spec/DHPrivateKeySpec.jml:
+	* specs/javax/crypto/spec/DHPublicKeySpec.jml:
+	* specs/javax/crypto/spec/IvParameterSpec.jml:
+	* specs/javax/crypto/spec/PBEKeySpec.jml:
+	* specs/javax/crypto/spec/PBEParameterSpec.jml:
+	* specs/javax/crypto/spec/RC2ParameterSpec.jml:
+	* specs/javax/crypto/spec/RC5ParameterSpec.jml:
+	* specs/javax/crypto/spec/SecretKeySpec.jml:
+	First-pass on specs for a whole bunch of java.security and javax.crypto
+	that we'll need to build the app.  Not all of the specs in javax.crypto.spec
+	are completed, but everything else commmitted is done and checks with jml
+	and escjava2.
+
+2004-03-17  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* samples/KOA_kandidaatcodes-emacs.xml:
+	Because KOA_kandidaatcodes.xml was not valid XML we have put a valid
+	'copy' of this file here.
+	It contains UTF-8 characters.
+
+2004-03-16  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* samples/KOA_export_versleutelde_stembus.xml:
+	* samples/KOA_kandidaatcodes.xml:
+	* samples/KOA_privatekoakey.key:
+	* samples/KOA_publickoakey.key:
+	* samples/KOA_rapport.pdf:
+	The files in this directory starting with KOA are the files we got from
+	Joost.
+
+	* xml/xml/auditlog.xml:
+	* xml/xml/recount.xml:
+	* xml/xslt/auditlog2pdf.xsl:
+	* xml/xslt/recount2pdf.xsl:
+	* Makefile:
+	* design/design.bib:
+	* jars/avalon-framework.jar:
+	* jars/batik.jar:
+	* jars/fop.jar:
+	* koa2pdf:
+	* src/sos/koa/XML2PDF.java:
+	Added files for creating PDF from XML.
+
+2004-03-15  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ExitAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyPairAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/ReportAdapter.java:
+	*** empty log message ***
+
+2004-03-12  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/SoundBite.java: *** empty log message ***
+
+2004-03-12  cees-bart  <ceesb@cs.kun.nl>
+
+	* src/sos/koa/SoundBite.java:
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/MenuPanel.java:
+	*** empty log message ***
+
+2004-03-12  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* failure.wav:
+	* koffie.wav:
+	* smurf.wav:
+	* success.wav:
+	* sure.wav:
+	* welcome.wav:
+	*** empty log message ***
+
+2004-03-11  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* samples/candidates.xml:
+	* samples/import.dtd:
+	* samples/report.dtd:
+	* samples/result.dtd:
+	* samples/votes.xml:
+	Some handmade sample files.
+
+2004-03-11  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/CandidateFileFilter.java:
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ExitAdapter.java:
+	* src/sos/koa/HelpAdapter.java:
+	* src/sos/koa/Hex.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyPairAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KeyPairFileFilter.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/VoteFileFilter.java:
+	* src/sos/koa/XMLParseException.java:
+	* src/sos/koa/XMLUtil.java:
+	*** empty log message ***
+
+2004-03-10  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/CandidateFileFilter.java:
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ExitAdapter.java:
+	* src/sos/koa/HelpAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyPairAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KeyPairFileFilter.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/VoteFileFilter.java:
+	*** empty log message ***
+
+2004-03-10  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* design/design.tex: Classes added.
+
+	* design/design.tex: Deleted proposal stuff.
+
+	* design/Makefile, design/design.bib, design/design.tex:
+	Design documents.
+
+2004-03-10  Martijn Oostdijk  <martijno@cs.kun.nl>
+
+	* src/sos/koa/CandidateFileFilter.java:
+	* src/sos/koa/ClearAdapter.java:
+	* src/sos/koa/CountAdapter.java:
+	* src/sos/koa/DecryptAdapter.java:
+	* src/sos/koa/ExitAdapter.java:
+	* src/sos/koa/HelpAdapter.java:
+	* src/sos/koa/ImportCandidatesAdapter.java:
+	* src/sos/koa/ImportKeyPairAdapter.java:
+	* src/sos/koa/ImportVotesAdapter.java:
+	* src/sos/koa/KeyPairFileFilter.java:
+	* src/sos/koa/MainFrame.java:
+	* src/sos/koa/MenuPanel.java:
+	* src/sos/koa/ReportAdapter.java:
+	* src/sos/koa/VoteFileFilter.java:
+	* smurf.gif:
+	* Makefile:
+	* koa:
+	* src/sos/koa/MenuFrame.java:
+	*** empty log message ***
+
+2004-03-09  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* src/com/logicacmg/koa/security/GenerateKeyPair.java:
+	* src/com/logicacmg/koa/security/KOAEncryptionUtil.java:
+	* src/com/logicacmg/koa/security/import.dtd:
+	* src/com/logicacmg/koa/security/report.dtd:
+	* src/com/logicacmg/koa/security/result.dtd:
+	* src/com/logicacmg/koa/security/vb.xml:
+	source
+
+2004-03-08  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* doc/040204_(JB)_PvE_Hertelprogrammatuur_D10,_bijlage_1.pdf:
+	* doc/040213_uitnodigingsbrief_aan_Univ_Nijmegen.pdf:
+	* doc/45.ECF2651.001.Hertellen_stemmen_A(3),_bijlage_1A.pdf:
+	* doc/AVODI,_bijlage_2.pdf, doc/Geheimhoudingsverklaring,_bijlage_3.pdf:
+	Docs added.
+
+2004-02-25  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* proposal.tex: Made all URLs clickable.
+
+2004-02-25  Bart Jacobs  <bart@cs.kun.nl>
+
+	* proposal.tex: *** empty log message ***
+
+2004-02-25  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* proposal.bib, proposal.tex: EHU's changes.
+
+2004-02-25  Joseph R. Kiniry  <kiniry@cs.kun.nl>
+
+	* .cvsignore, Makefile, proposal.bib, proposal.tex: Revisions by Joe.
+
+2004-02-25  Bart Jacobs  <bart@cs.kun.nl>
+
+	* proposal.tex: *** empty log message ***
+
+2004-02-24  Engelbert Hubbers  <hubbers@cs.kun.nl>
+
+	* Makefile, proposal.bib, proposal.tex:
+	Initial version. You need eurosym and url package for this document.
+

@@ -1,0 +1,20 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package java.security.interfaces;
+
+public /*@ pure @*/ interface RSAPrivateKey
+  extends java.security.PrivateKey, RSAKey
+{
+  //@ public non_null instance model java.math.BigInteger _privateExponent;
+  //@ public represents _modulus <- getPrivateExponent();
+
+  /*@ public normal_behavior
+    @   ensures \result == _privateExponent;
+    @*/ 
+  public java.math.BigInteger getPrivateExponent();
+}

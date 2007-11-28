@@ -1,0 +1,165 @@
+/*
+ * @(#)Mac.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.security.*;
+import java.security.spec.AlgorithmParameterSpec;
+
+public class Mac implements Cloneable
+{
+   /*@ model static final int _UNINITIALIZED; */
+   /*@ model static final int _INITIALIZED; */
+   /*@ model static final int _IN_PROGRESS; */
+
+   /*@ invariant
+     @    _UNINITIALIZED != _INITIALIZED &&
+     @    _UNINITIALIZED != _IN_PROGRESS &&
+     @    _INITIALIZED != _IN_PROGRESS;
+    */
+
+   /*@ model int _state; */
+
+   /*@ invariant
+     @    _state == _UNINITIALIZED ||
+     @    _state == _INITIALIZED ||
+     @    _state == _IN_PROGRESS;
+    */
+
+   /*@ public behavior
+     @    requires macSpi != null;
+     @    requires provider != null;
+     @    requires algorithm != null;
+     @    ensures _state == _UNINITIALIZED;
+     @    ensures getProvider().equals(provider);
+     @    ensures getAlgorithm().equals(algorithm);
+    */
+   protected Mac(MacSpi macSpi, Provider provider, String algorithm);
+
+   public final /*@ pure non_null */ String getAlgorithm();
+
+   /*@ public behavior
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    ensures \result._state == _UNINITIALIZED;
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static final Mac getInstance(String algorithm)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static final Mac getInstance(String algorithm, String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    ensures \result.getProvider().equals(provider);
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static final Mac getInstance(String algorithm, Provider provider)
+   throws NoSuchAlgorithmException;
+
+   public final /*@ pure non_null */ Provider getProvider();
+
+   /*@ public behavior
+     @    ensures \result >= 0;
+    */
+   public final /*@ pure */ int getMacLength();
+
+   /*@ public behavior
+     @    requires key != null;
+     @    ensures _state == _INITIALIZED;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void init(Key key) throws InvalidKeyException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    requires params != null;
+     @    ensures _state == _INITIALIZED;
+     @    signals (InvalidKeyException) true;
+     @    signals (InvalidAlgorithmParameterException) true;
+    */
+   public final void init(Key key, AlgorithmParameterSpec params)
+   throws InvalidKeyException, InvalidAlgorithmParameterException;
+
+   /*@ public behavior
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+    */
+   public final void update(byte input)
+   throws IllegalStateException;
+
+   /*@ public behavior
+     @    requires input != null;
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+    */
+   public final void update(byte[] input)
+   throws IllegalStateException;
+
+   /*@ public behavior
+     @    requires input != null;
+     @    requires offset >= 0;
+     @    requires len >= 0;
+     @    requires (offset + len) <= input.length;
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+    */
+   public final void update(byte[] input, int offset, int len)
+   throws IllegalStateException;
+
+   /*@ public behavior
+     @    assignable _state;
+     @    signals (IllegalStateException) \old(_state) == _UNINITIALIZED;
+    */
+   public final byte[] doFinal()
+   throws IllegalStateException;
+
+   /*@ public behavior
+     @    requires output != null;
+     @    requires outOffset >= 0;
+     @    assignable _state;
+     @    signals (ShortBufferException)
+     @       outOffset + \old(getMacLength()) >= output.length;
+     @    signals (IllegalStateException) \old(_state) == _UNINITIALIZED;
+    */
+   public final void doFinal(byte[] output, int outOffset)
+   throws ShortBufferException, IllegalStateException;
+
+   /*@ public behavior
+     @    requires input != null;
+     @    assignable _state;
+     @    signals (IllegalStateException) \old(_state) == _UNINITIALIZED;
+    */
+   public final byte[] doFinal(byte[] input)
+   throws IllegalStateException;
+
+   /*@ public behavior
+     @    assignable _state;
+     @    ensures _state == _INITIALIZED;
+    */
+   public final void reset();
+
+   /*@ also
+     @ public behavior
+     @    ensures \result != null;
+     @    ensures (\result instanceof Mac);
+     @    ensures ((Mac)\result)._state == _state;
+     @    ensures ((Mac)\result).getAlgorithm().equals(getAlgorithm());
+     @    ensures ((Mac)\result).getProvider().equals(getProvider());
+     @    signals (CloneNotSupportedException) true;
+    */
+   public final /*@ pure */ Object clone() throws CloneNotSupportedException;
+}
+

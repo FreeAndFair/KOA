@@ -1,0 +1,48 @@
+/*
+ * @(#)Permission.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public abstract class Permission implements Guard, java.io.Serializable
+{
+   public Permission(String name);
+
+   /*@ also
+     @ public behavior
+     @    requires object != null;
+     @    signals(SecurityException) true;
+    */
+   public void checkGuard(Object object) throws SecurityException;
+
+   /*@ public behavior
+     @    requires permission != null;
+    */    
+   public abstract /*@ pure */ boolean implies(Permission permission);
+
+   /*@ also
+     @ public behavior
+     @    ensures \result <==>
+     @            ((obj instanceof Permission) &&
+     @            implies((Permission)obj) &&
+     @            ((Permission)obj).implies(this));
+    */
+   public abstract /*@ pure */ boolean equals(Object obj);
+
+   public abstract /*@ pure */ int hashCode();
+
+   public final /*@ pure non_null */ String getName();
+
+   public abstract /*@ pure non_null */ String getActions();
+
+   public /*@ pure non_null */ PermissionCollection newPermissionCollection();
+
+   public /*@ pure non_null */ String toString();
+}
+

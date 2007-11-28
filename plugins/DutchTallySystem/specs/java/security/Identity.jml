@@ -1,0 +1,94 @@
+/*
+ * @(#)Identity.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.io.Serializable;
+
+public abstract class Identity implements Principal, Serializable
+{
+   protected Identity();
+
+   /*@ public behavior
+     @    requires name != null;
+     @    requires scope != null;
+     @    ensures getName().equals(name);
+     @    ensures getScope().equals(scope);
+     @    signals(KeyManagementException) true;
+    */
+   public Identity(String name, IdentityScope scope)
+   throws KeyManagementException;
+
+   /*@ public behavior
+     @    requires name != null;
+     @    ensures getName().equals(name);
+    */
+   public Identity(String name);
+
+   public final /*@ pure non_null */ String getName();
+
+   public final /*@ pure */ IdentityScope getScope();
+
+   public /*@ pure non_null */ PublicKey getPublicKey();
+
+   /*@ public behavior
+     @    requires key != null;
+     @    signals(KeyManagementException) true;
+    */
+   public void setPublicKey(PublicKey key) throws KeyManagementException;
+
+   /*@ public behavior
+     @    requires info != null;
+     @    ensures getInfo().equals(info);
+    */
+   public void setInfo(String info);
+
+   public /*@ pure non_null */ String getInfo();
+
+   /*@ public behavior
+     @    requires certificate != null;
+     @    signals(KeyManagementException) true;
+    */
+   public void addCertificate(Certificate certificate)
+   throws KeyManagementException;
+
+   /*@ public behavior
+     @    requires certificate != null;
+     @    signals(KeyManagementException) true;
+    */
+   public void removeCertificate(Certificate certificate)
+   throws KeyManagementException;
+
+   public Certificate[] certificates();
+
+   /*@ also
+     @ public behavior
+     @    requires identity != null;
+     @    ensures \result ==>
+     @       ((identity instanceof Identity) &&
+     @       ((Identity)identity).getName().equals(getName()));
+    */
+   public final boolean equals(Object identity);
+
+   /*@ public behavior
+     @    requires identity != null;
+     @    ensures \result ==> identity != null;
+     @    ensures \result ==> (identity instanceof Identity);
+     @    ensures \result ==> identity.getName().equals(getName());
+    */
+   protected boolean identityEquals(Identity identity);
+
+   public /*@ pure non_null */ String toString();
+
+   public /*@ pure non_null */ String toString(boolean detailed);
+
+   public /*@ pure */ int hashCode();
+}
+

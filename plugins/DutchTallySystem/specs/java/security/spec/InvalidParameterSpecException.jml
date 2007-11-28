@@ -1,0 +1,25 @@
+/*
+ * @(#)InvalidParameterSpecException.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security.spec;
+
+import java.security.GeneralSecurityException;
+
+public class InvalidParameterSpecException extends GeneralSecurityException
+{
+   public InvalidParameterSpecException();
+
+   /*@ public behavior
+     @    requires msg != null;
+     @    ensures getMessage().equals(msg);
+    */
+   public InvalidParameterSpecException(String msg);
+}
+

@@ -1,0 +1,19 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package java.security.interfaces;
+
+public /*@ pure @*/ interface RSAKey
+{
+  //@ public non_null instance model java.math.BigInteger _modulus;
+  //@ public represents _modulus <- getModulus();
+
+  /*@ public normal_behavior
+    @   ensures \result == _modulus;
+    @*/ 
+  public java.math.BigInteger getModulus();
+}

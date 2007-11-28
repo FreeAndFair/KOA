@@ -1,0 +1,258 @@
+/*
+ * @(#)ServletRequestWrapper.jml
+ *
+ * @version $Id:ServletRequestWrapper.jml 775 2006-04-15 13:45:44Z alanm $
+ *
+ * The interface on which this JML specification is based was extracted from
+ * source code with the following license:
+ *
+ * ==
+ *
+ * Copyright 2004 The Apache Software Foundation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package javax.servlet;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.Map;
+
+/**
+ * Provides a convenient implementation of the ServletRequest interface that
+ * can be subclassed by developers wishing to adapt the request to a Servlet.
+ * This class implements the Wrapper or Decorator pattern. Methods default to
+ * calling through to the wrapped request object.
+ *
+ * @since   v 2.3
+ *
+ * @see    javax.servlet.ServletRequest
+ */
+public class ServletRequestWrapper implements ServletRequest
+{
+   // private ServletRequest request;
+
+   /**
+    * Creates a ServletRequest adaptor wrapping the given request object.
+    *
+    * @throws java.lang.IllegalArgumentException if the request is null
+    */
+   public ServletRequestWrapper(/*@ non_null */ ServletRequest request);
+
+   /**
+    * Return the wrapped request object.
+    */
+   public /*@ pure */ ServletRequest getRequest();
+
+   /**
+    * Sets the request object being wrapped.
+    *
+    * @throws java.lang.IllegalArgumentException if the request is null.
+    */
+   /*@
+     @ signals (IllegalArgumentException iae) \old(request) == null;
+    */
+   public void setRequest(ServletRequest request);
+
+   /**
+    * The default behavior of this method is to call getAttribute(String name)
+    * on the wrapped request object.
+    */
+   public /*@ pure */ Object getAttribute(/*@ non_null */ String name);
+
+   /**
+    * The default behavior of this method is to return getAttributeNames()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ Enumeration getAttributeNames();
+
+   /**
+    * The default behavior of this method is to return getCharacterEncoding()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getCharacterEncoding();
+
+   /**
+    * The default behavior of this method is to set the character encoding
+    * on the wrapped request object.
+    */
+   public void setCharacterEncoding(/*@ non_null */ String enc)
+   throws UnsupportedEncodingException;
+
+
+   /**
+    * The default behavior of this method is to return getContentLength()
+    * on the wrapped request object.
+    */
+   /*@ also
+     @ ensures \result >= 0;
+    */
+   public /*@ pure */ int getContentLength();
+
+   /**
+    * The default behavior of this method is to return getContentType()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getContentType();
+
+   /**
+    * The default behavior of this method is to return getInputStream()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ ServletInputStream getInputStream() throws IOException;
+
+   /**
+    * The default behavior of this method is to return
+    * getParameter(String name) on the wrapped request object.
+    */
+   public /*@ pure */ String getParameter(/*@ non_null */ String name);
+
+   /**
+    * The default behavior of this method is to return getParameterMap()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ Map getParameterMap();
+
+   /**
+    * The default behavior of this method is to return getParameterNames()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ Enumeration getParameterNames();
+
+   /**
+    * The default behavior of this method is to return getParameterValues(String name)
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String[] getParameterValues(/*@ non_null */ String name);
+
+   /**
+    * The default behavior of this method is to return getProtocol()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getProtocol();
+
+   /**
+    * The default behavior of this method is to return getScheme()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getScheme();
+
+   /**
+    * The default behavior of this method is to return getServerName()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getServerName();
+
+   /**
+    * The default behavior of this method is to return getServerPort()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ int getServerPort();
+
+   /**
+    * The default behavior of this method is to return getReader()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ BufferedReader getReader() throws IOException;
+
+   /**
+    * The default behavior of this method is to return getRemoteAddr()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getRemoteAddr();
+
+   /**
+    * The default behavior of this method is to return getRemoteHost()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getRemoteHost();
+
+   /**
+    * The default behavior of this method is to return
+    * setAttribute(String name, Object o) on the wrapped request object.
+    */
+   public void setAttribute(/*@ non_null */ String name, Object o);
+
+   /**
+    * The default behavior of this method is to call
+    * removeAttribute(String name) on the wrapped request object.
+    */
+   public void removeAttribute(/*@ non_null */ String name);
+
+   /**
+    * The default behavior of this method is to return getLocale()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ Locale getLocale();
+
+   /**
+    * The default behavior of this method is to return getLocales()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ Enumeration getLocales();
+
+   /**
+    * The default behavior of this method is to return isSecure()
+    * on the wrapped request object.
+    */
+   public /*@ pure */ boolean isSecure();
+
+   /**
+    * The default behavior of this method is to return
+    * getRequestDispatcher(String path) on the wrapped request object.
+    */
+   public /*@ pure */ RequestDispatcher getRequestDispatcher(/*@ non_null */ String path);
+
+   /**
+    * The default behavior of this method is to return getRealPath(String path)
+    * on the wrapped request object.
+    */
+   public /*@ pure */ String getRealPath(/*@ non_null */ String path);
+
+   /**
+    * The default behavior of this method is to return
+    * getRemotePort() on the wrapped request object.
+    *
+    * @since 2.4
+    */
+   public /*@ pure */ int getRemotePort();
+
+   /**
+    * The default behavior of this method is to return
+    * getLocalName() on the wrapped request object.
+    *
+    * @since 2.4
+    */
+   public /*@ pure */ String getLocalName();
+
+   /**
+    * The default behavior of this method is to return
+    * getLocalAddr() on the wrapped request object.
+    *
+    * @since 2.4
+    */
+   public /*@ pure */ String getLocalAddr();
+
+   /**
+    * The default behavior of this method is to return
+    * getLocalPort() on the wrapped request object.
+    *
+    * @since 2.4
+    */
+   public /*@ pure */ int getLocalPort();
+}
+

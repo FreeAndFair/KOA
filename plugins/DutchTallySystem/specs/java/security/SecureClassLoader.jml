@@ -1,0 +1,38 @@
+/*
+ * @(#)SecureClassLoader.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public class SecureClassLoader extends ClassLoader
+{
+   /*@ public behavior
+     @    requires parent != null;
+    */
+   protected SecureClassLoader(ClassLoader parent);
+
+   protected SecureClassLoader();
+
+   /*@ public behavior
+     @    requires name != null;
+     @    requires b != null;
+     @    requires off >= 0;
+     @    requires len >= 0;
+     @    requires (off + len) <= b.length;
+     @    requires cs != null;
+    */
+   protected final Class defineClass(String name, byte[] b, int off, int len,
+                                     CodeSource cs);
+
+   /*@ public behavior
+     @    requires codesource != null;
+    */
+   protected PermissionCollection getPermissions(CodeSource codesource);
+}
+

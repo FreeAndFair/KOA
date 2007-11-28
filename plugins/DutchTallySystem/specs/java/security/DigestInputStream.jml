@@ -1,0 +1,55 @@
+/*
+ * @(#)DigestInputStream.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.io.IOException;
+import java.io.FilterInputStream;
+
+public class DigestInputStream extends FilterInputStream
+{
+   protected MessageDigest digest;
+
+   /*@ public behavior
+     @    requires stream != null;
+     @    requires digest != null;
+     @    ensures this.digest.equals(digest);
+    */
+   public DigestInputStream(InputStream stream, MessageDigest digest);
+
+   /*@ public behavior
+     @    ensures \result.equals(digest);
+    */
+   public MessageDigest getMessageDigest();
+
+   /*@ public behavior
+     @    requires digest != null;
+     @    assignable this.digest;
+     @    ensures this.digest.equals(digest);
+    */
+   public void setMessageDigest(MessageDigest digest);
+
+   public int read() throws IOException;
+
+   /*@ also
+     @ public behavior
+     @    requires b != null;
+     @    requires off >= 0;
+     @    requires len >= 0;
+     @    requires (off + len) <= b.length;
+     @    signals(IOException) true;
+    */
+   public int read(byte[] b, int off, int len) throws IOException;
+
+   public void on(boolean on);
+
+   public /*@ pure non_null */ String toString();
+}
+

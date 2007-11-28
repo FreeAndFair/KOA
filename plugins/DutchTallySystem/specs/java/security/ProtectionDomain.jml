@@ -1,0 +1,56 @@
+/*
+ * @(#)ProtectionDomain.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.util.Enumeration;
+import java.util.Vector;
+
+public class ProtectionDomain
+{
+   /*@ public behavior
+     @    requires codesource != null;
+     @    requires permissions != null;
+     @    ensures getCodeSource().equals(codesource);
+     @    ensures getPermissions().equals(permissions);
+    */
+   public ProtectionDomain(CodeSource codesource,
+                           PermissionCollection permissions);
+
+   /*@ public behavior
+     @    requires codesource != null;
+     @    requires permissions != null;
+     @    requires classloader != null;
+     @    requires principals != null;
+     @    ensures getCodeSource().equals(codesource);
+     @    ensures getPermissions().equals(permissions);
+     @    ensures getClassLoader().equals(classloader);
+    */
+   public ProtectionDomain(CodeSource codesource,
+                           PermissionCollection permissions,
+                           ClassLoader classloader,
+                           Principal[] principals);
+
+   public final /*@ pure */ CodeSource getCodeSource();
+
+   public final /*@ pure */ ClassLoader getClassLoader();
+
+   public final /*@ pure */ Principal[] getPrincipals();
+
+   public final /*@ pure */ PermissionCollection getPermissions();
+
+   /*@ public behavior
+     @    requires permission != null;
+    */
+   public /*@ pure */ boolean implies(Permission permission);
+
+   public /*@ pure non_null */ String toString();
+}
+

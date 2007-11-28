@@ -1,0 +1,64 @@
+/*
+ * @(#)EncryptedPrivateKeyInfo.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.security.AlgorithmParameters;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+
+public class EncryptedPrivateKeyInfo
+{
+   /*@ public behavior
+     @    requires encoded != null;
+     @    signals(IOException) true;
+    */
+   public EncryptedPrivateKeyInfo(byte[] encoded)
+   throws IOException;
+
+   /*@ public behavior
+     @    requires algName != null;
+     @    requires encryptedData != null;
+     @    signals(NoSuchAlgorithmException) true;
+    */
+   public EncryptedPrivateKeyInfo(String algName, byte[] encryptedData)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    requires algParams != null;
+     @    requires encryptedData != null;
+     @    signals(NoSuchAlgorithmException) true;
+    */
+   public EncryptedPrivateKeyInfo(AlgorithmParameters algParams,
+                                  byte[] encryptedData)
+   throws NoSuchAlgorithmException;
+
+   public /*@ pure non_null */ String getAlgName();
+
+   public /*@ pure non_null */ AlgorithmParameters getAlgParameters();
+
+   public /*@ pure non_null*/ byte[] getEncryptedData();
+
+   /*@ public behavior
+     @    requires c != null;
+     @    signals(InvalidKeySpecException) true;
+    */
+   public /*@ pure non_null */ PKCS8EncodedKeySpec getKeySpec(Cipher c)
+   throws InvalidKeySpecException;
+
+   /*@ public behavior
+     @    signals(IOException) true;
+    */
+   public /*@ pure */ byte[] getEncoded() throws IOException;
+}
+

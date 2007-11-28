@@ -1,0 +1,25 @@
+/*
+ * @(#)ServletInputStream.jml
+ *
+ * @version $Id:ServletInputStream.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet;
+
+import java.io.InputStream;
+import java.io.IOException;
+
+public abstract class ServletInputStream extends InputStream
+{
+   protected ServletInputStream();
+
+   /*@
+     @ requires
+     @    len <= b.length;
+     @ ensures
+     @    (0 <= \result && \result <= len) || \result == -1;
+    */
+   public int readLine(/*@ non_null */ byte[] b, int off, int len)
+   throws IOException;
+}
+

@@ -1,0 +1,77 @@
+/*
+ * @(#)Security.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.util.*;
+import java.io.*;
+import java.net.URL;
+import java.security.InvalidParameterException;
+
+public final class Security
+{
+   /*@ public behavior
+     @    requires algName != null;
+     @    requires propName != null;
+    */
+   public static String getAlgorithmProperty(String algName,
+                                             String propName);
+
+   /*@ public behavior
+     @    requires provider != null;
+     @    requires position >= 0;
+    */
+   public static synchronized int insertProviderAt(Provider provider,
+                                                   int position);
+
+   /*@ public behavior
+     @    requires provider != null;
+    */
+   public static int addProvider(Provider provider);
+
+   /*@ public behavior
+     @    requires name != null;
+    */
+   public static synchronized void removeProvider(String name);
+
+   public static /*@ pure non_null */ synchronized Provider[] getProviders();
+
+   /*@ public behavior
+     @    requires name != null;
+    */
+   public static synchronized Provider getProvider(String name);
+
+   /*@ public behavior
+     @    requires filter != null;
+    */
+   public static Provider[] getProviders(String filter);
+
+   /*@ public behavior
+     @    requires filter != null;
+    */
+   public static Provider[] getProviders(Map filter);
+
+   /*@ public behavior
+     @    requires key != null;
+    */
+   public static String getProperty(String key);
+
+   /*@ public behavior
+     @    requires key != null;
+     @    requires datum != null;
+    */
+   public static void setProperty(String key, String datum);
+
+   /*@ public behavior
+     @    requires serviceName != null;
+    */
+   public static Set getAlgorithms(String serviceName);
+}
+

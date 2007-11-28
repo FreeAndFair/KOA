@@ -1,0 +1,68 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package javax.crypto.spec;
+
+import java.security.InvalidKeyException;
+
+public /*@ pure @*/ class DESedeKeySpec
+  implements java.security.spec.KeySpec
+{
+  //@ public invariant DES_EDE_KEY_LEN == 24;
+  
+  //@ public model byte[] _key;
+  //@ public represents _key <- getKey();
+
+  /*@ public normal_behavior
+    @   requires key != null;
+    @   requires key.length >= DES_EDE_KEY_LEN;
+    @   ensures (\forall int i; 0 <= i && i < DES_EDE_KEY_LEN; _key[i] == key[i]);
+    @ also
+    @ public exceptional_behavior
+    @   requires key != null;
+    @   requires key.length < DES_EDE_KEY_LEN;
+    @   signals (InvalidKeyException) true;
+    @*/
+  public DESedeKeySpec(byte[] key) throws InvalidKeyException;
+
+  /*@ public normal_behavior
+    @   requires key != null;
+    @   requires key.length >= DES_EDE_KEY_LEN + offset;
+    @   ensures (\forall int i; 0 <= i && i < DES_EDE_KEY_LEN; _key[i] == key[i + offset]);
+    @ also
+    @ public exceptional_behavior
+    @   requires key != null;
+    @   requires (key.length - offset) < DES_EDE_KEY_LEN;
+    @   signals (InvalidKeyException) true;
+    @*/
+  public DESedeKeySpec(byte[] key, int offset) throws InvalidKeyException;
+
+  /*@ public normal_behavior
+    @   ensures (\forall int i; 0 <= i && i < DES_EDE_KEY_LEN; _key[i] == \result[i]);
+    @*/ 
+  public byte[] getKey();
+
+  /*@ public normal_behavior
+    @   requires key != null;
+    @   requires key.length >= DES_EDE_KEY_LEN + offset;
+    @   ensures (DESKeySpec.isParityAdjusted(key, offset) == false
+    @         || DESKeySpec.isParityAdjusted(key, offset + 8) == false
+    @         || DESKeySpec.isParityAdjusted(key, offset + 16) == false) ? 
+    @            !\result : \result;
+    @ also
+    @ public exceptional_behavior
+    @   requires key != null;
+    @   requires (key.length - offset) < DES_EDE_KEY_LEN;
+    @   signals (InvalidKeyException) true;
+    @ also
+    @ public exceptional_behavior
+    @   requires key == null;
+    @   signals (InvalidKeyException) true;
+    @*/
+  public static boolean isParityAdjusted(byte[] key, int offset)
+    throws InvalidKeyException;
+}

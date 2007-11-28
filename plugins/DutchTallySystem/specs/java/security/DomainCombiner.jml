@@ -1,0 +1,22 @@
+/*
+ * @(#)DomainCombiner.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public /*@ pure */ interface DomainCombiner
+{
+   /*@ public behavior
+     @    requires currentDomains != null;
+     @    requires assignedDomains != null;
+    */
+   ProtectionDomain[] combine(ProtectionDomain[] currentDomains,
+                              ProtectionDomain[] assignedDomains);
+}
+

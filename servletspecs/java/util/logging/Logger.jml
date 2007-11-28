@@ -1,0 +1,167 @@
+/*
+ * @(#)Logger.jml
+ *
+ * @version $Id:Logger.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package java.util.logging;
+
+import java.util.*;
+import java.security.*;
+import java.lang.ref.WeakReference;
+
+public class Logger {
+
+   public static final Logger global;
+
+   protected Logger(/*@ non_null */ String name,
+                    /*@ non_null */ String resourceBundleName);
+
+   public static synchronized /*@ non_null */ Logger getLogger(/*@ non_null */ String name);
+
+   public static synchronized /*@ non_null */ Logger getLogger(/*@ non_null */ String name,
+                                                               /*@ non_null */ String resourceBundleName);
+
+   public static synchronized /*@ non_null */ Logger getAnonymousLogger();
+
+   public static synchronized /*@ non_null */ Logger getAnonymousLogger(/*@ non_null */ String resourceBundleName);
+
+   public /*@ pure */ ResourceBundle getResourceBundle();
+
+   public /*@ pure */ String getResourceBundleName();
+
+   public void setFilter(/*@ non_null */ Filter newFilter)
+   throws SecurityException;
+
+   public /*@ pure */ Filter getFilter();
+
+   public void log(/*@ non_null */ LogRecord record);
+
+   public void log(/*@ non_null */ Level level,
+                   /*@ non_null */ String msg);
+
+   public void log(/*@ non_null */ Level level,
+                   /*@ non_null */ String msg,
+                   /*@ non_null */ Object param1);
+
+   public void log(/*@ non_null */ Level level,
+                   /*@ non_null */ String msg,
+                   /*@ non_null */ Object params[]);
+
+   public void log(/*@ non_null */ Level level,
+                   /*@ non_null */ String msg,
+                   /*@ non_null */ Throwable thrown);
+
+   public void logp(/*@ non_null */ Level level,
+                    /*@ non_null */ String sourceClass,
+                    /*@ non_null */ String sourceMethod,
+                    /*@ non_null */ String msg);
+
+   public void logp(/*@ non_null */ Level level,
+                    /*@ non_null */ String sourceClass,
+                    /*@ non_null */ String sourceMethod,
+                    /*@ non_null */ String msg,
+                    /*@ non_null */ Object param1);
+
+
+   public void logp(/*@ non_null */ Level level,
+                    /*@ non_null */ String sourceClass,
+                    /*@ non_null */ String sourceMethod,
+                    /*@ non_null */ String msg,
+                    /*@ non_null */ Object params[]);
+
+   public void logp(/*@ non_null */ Level level,
+                    /*@ non_null */ String sourceClass,
+                    /*@ non_null */ String sourceMethod,
+                    /*@ non_null */ String msg,
+                    /*@ non_null */ Throwable thrown);
+
+   public void logrb(/*@ non_null */ Level level,
+                     /*@ non_null */ String sourceClass,
+                     /*@ non_null */ String sourceMethod, 
+                     /*@ non_null */ String bundleName, String msg);
+
+   public void logrb(/*@ non_null */ Level level,
+                     /*@ non_null */ String sourceClass,
+                     /*@ non_null */ String sourceMethod,
+                     /*@ non_null */ String bundleName,
+                     /*@ non_null */ String msg,
+                     /*@ non_null */ Object param1);
+
+   public void logrb(/*@ non_null */ Level level,
+                     /*@ non_null */ String sourceClass,
+                     /*@ non_null */ String sourceMethod,
+                     /*@ non_null */ String bundleName,
+                     /*@ non_null */ String msg,
+                     /*@ non_null */ Object params[]);
+
+   public void logrb(/*@ non_null */ Level level,
+                     /*@ non_null */ String sourceClass,
+                     /*@ non_null */ String sourceMethod,
+                     /*@ non_null */ String bundleName,
+                     /*@ non_null */ String msg,
+                     /*@ non_null */ Throwable thrown);
+
+   public void entering(
+                     /*@ non_null */ String sourceClass,
+                     /*@ non_null */ String sourceMethod);
+
+   public void entering(/*@ non_null */ String sourceClass,
+                        /*@ non_null */ String sourceMethod,
+                        /*@ non_null */ Object param1);
+
+   public void entering(/*@ non_null */ String sourceClass,
+                        /*@ non_null */ String sourceMethod,
+                        /*@ non_null */ Object params[]);
+
+   public void exiting(/*@ non_null */ String sourceClass,
+                       /*@ non_null */ String sourceMethod);
+
+   public void exiting(/*@ non_null */ String sourceClass,
+                       /*@ non_null */ String sourceMethod,
+                       /*@ non_null */ Object result);
+
+   public void throwing(/*@ non_null */ String sourceClass,
+                        /*@ non_null */ String sourceMethod,
+                        /*@ non_null */ Throwable thrown);
+
+   public void severe(/*@ non_null */ String msg);
+
+   public void warning(/*@ non_null */ String msg);
+
+   public void info(/*@ non_null */ String msg);
+
+   public void config(/*@ non_null */ String msg);
+
+   public void fine(/*@ non_null */ String msg);
+
+   public void finer(/*@ non_null */ String msg);
+
+   public void finest(/*@ non_null */ String msg);
+
+   public void setLevel(/*@ non_null */ Level newLevel)
+   throws SecurityException;
+
+   public /*@ pure */ Level getLevel();
+
+   public /*@ pure */ boolean isLoggable(/*@ non_null */ Level level);
+
+   public /*@ pure */ String getName();
+
+   public synchronized void addHandler(/*@ non_null */ Handler handler)
+   throws SecurityException;
+
+   public synchronized void removeHandler(/*@ non_null */ Handler handler)
+   throws SecurityException;
+
+   public synchronized /*@ pure */ Handler[] getHandlers();
+
+   public synchronized void setUseParentHandlers(boolean useParentHandlers);
+
+   public synchronized /*@ pure */ boolean getUseParentHandlers();
+
+   public /*@ pure */ Logger getParent();
+
+   public void setParent(/*@ non_null */ Logger parent);
+}
+

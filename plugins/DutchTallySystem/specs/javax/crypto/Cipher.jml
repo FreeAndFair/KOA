@@ -1,0 +1,402 @@
+/*
+ * @(#)Cipher.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.lang.IllegalStateException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.Provider;
+import java.security.NoSuchProviderException;
+import java.security.AlgorithmParameters;
+import java.security.Key;
+import java.security.SecureRandom;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.Key;
+import java.security.cert.*;
+import java.security.spec.AlgorithmParameterSpec;
+import java.security.spec.InvalidParameterSpecException;
+import java.util.*;
+
+public class Cipher
+{
+   public static final int ENCRYPT_MODE;
+   public static final int DECRYPT_MODE;
+   public static final int WRAP_MODE;
+   public static final int UNWRAP_MODE;
+
+   /*@ public invariant
+     @    ENCRYPT_MODE != DECRYPT_MODE &&
+     @    ENCRYPT_MODE != WRAP_MODE &&
+     @    ENCRYPT_MODE != UNWRAP_MODE &&
+     @    DECRYPT_MODE != WRAP_MODE &&
+     @    DECRYPT_MODE != UNWRAP_MODE &&
+     @    WRAP_MODE != UNWRAP_MODE;
+    */
+
+   /*@ public model static int _UNINITIALIZED; */
+
+   /*@ public invariant
+     @    _UNINITIALIZED != ENCRYPT_MODE &&
+     @    _UNINITIALIZED != DECRYPT_MODE &&
+     @    _UNINITIALIZED != WRAP_MODE &&
+     @    _UNINITIALIZED != UNWRAP_MODE;
+    */
+
+   /*@ public model int _state; */
+
+   /*@ public invariant
+     @    _state == _UNINITIALIZED ||
+     @    _state == ENCRYPT_MODE ||
+     @    _state == DECRYPT_MODE ||
+     @    _state == WRAP_MODE ||
+     @    _state == UNWRAP_MODE;
+    */
+
+   public static final int PUBLIC_KEY;
+   public static final int PRIVATE_KEY;
+   public static final int SECRET_KEY;
+
+   /*@ public invariant
+     @    PUBLIC_KEY != PRIVATE_KEY &&
+     @    PUBLIC_KEY != SECRET_KEY &&
+     @    PRIVATE_KEY != SECRET_KEY;
+    */
+
+   /*@ public behavior
+     @    requires cipherSpi != null;
+     @    requires provider != null;
+     @    requires transformation != null;
+     @    ensures _state == _UNINITIALIZED;
+     @    ensures getProvider().equals(provider);
+    */
+   protected Cipher(CipherSpi cipherSpi, Provider provider,
+                    String transformation);
+
+   /*@ public behavior
+     @    requires transformation != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getAlgorithm().equals(transformation);
+     @    signals (NoSuchAlgorithmException) true;
+     @    signals (NoSuchPaddingException) true;
+    */
+   public static final Cipher getInstance(String transformation)
+   throws NoSuchAlgorithmException, NoSuchPaddingException;
+
+   /*@ public behavior
+     @    requires transformation != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getAlgorithm().equals(transformation);
+     @    signals (NoSuchProviderException) true;
+     @    signals (NoSuchAlgorithmException) true;
+     @    signals (NoSuchPaddingException) true;
+    */
+   public static final Cipher getInstance(String transformation,
+                                          String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException,
+          NoSuchPaddingException;
+
+   /*@ public behavior
+     @    requires transformation != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getAlgorithm().equals(transformation);
+     @    ensures \result.getProvider().equals(provider);
+     @    signals (NoSuchAlgorithmException) true;
+     @    signals (NoSuchPaddingException) true;
+    */
+   public static final Cipher getInstance(String transformation,
+                                          Provider provider)
+   throws NoSuchAlgorithmException, NoSuchPaddingException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+    */
+   public final /*@ pure */ Provider getProvider();
+
+   /*@ public behavior
+     @    ensures \result != null;
+    */
+   public final /*@ pure */ String getAlgorithm();
+
+   /*@ public behavior
+     @    ensures \result >= 0;
+    */
+   public final int getBlockSize();
+
+   /*@ public behavior
+     @    requires inputLen >= 0;
+     @    ensures \result >= 0;
+     @    signals (IllegalStateException) true;
+    */
+   public final int getOutputSize(int inputLen)
+   throws IllegalStateException;
+
+   public final byte[] getIV();
+
+   public final AlgorithmParameters getParameters();
+
+   public final ExemptionMechanism getExemptionMechanism();
+
+   /*@ public behavior
+     @    requires opmode == ENCRYPT_MODE || opmode == DECRYPT_MODE
+     @             || opmode == WRAP_MODE || opmode == UNWRAP_MODE;
+     @    requires key != null;
+     @    assignable _state;
+     @    ensures _state == opmode;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void init(int opmode, Key key)
+   throws InvalidKeyException;
+
+   /*@ public behavior
+     @    requires opmode == ENCRYPT_MODE || opmode == DECRYPT_MODE
+     @             || opmode == WRAP_MODE || opmode == UNWRAP_MODE;
+     @    requires key != null;
+     @    requires random != null;
+     @    assignable _state;
+     @    ensures _state == opmode;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void init(int opmode, Key key, SecureRandom random)
+   throws InvalidKeyException;
+
+   /*@ public behavior
+     @    requires opmode == ENCRYPT_MODE || opmode == DECRYPT_MODE
+     @             || opmode == WRAP_MODE || opmode == UNWRAP_MODE;
+     @    requires key != null;
+     @    requires params != null;
+     @    assignable _state;
+     @    ensures _state == opmode;
+     @    signals (InvalidKeyException) true;
+     @    signals (InvalidAlgorithmParameterException) true;
+    */
+   public final void init(int opmode, Key key, AlgorithmParameterSpec params)
+        throws InvalidKeyException, InvalidAlgorithmParameterException;
+
+   /*@ public behavior
+     @    requires opmode == ENCRYPT_MODE || opmode == DECRYPT_MODE
+     @             || opmode == WRAP_MODE || opmode == UNWRAP_MODE;
+     @    requires key != null;
+     @    requires params != null;
+     @    requires random != null;
+     @    assignable _state;
+     @    ensures _state == opmode;
+     @    signals (InvalidKeyException) true;
+     @    signals (InvalidAlgorithmParameterException) true;
+    */
+   public final void init(int opmode, Key key, AlgorithmParameterSpec params,
+                          SecureRandom random)
+   throws InvalidKeyException, InvalidAlgorithmParameterException;
+
+   /*@ public behavior
+     @    requires opmode == ENCRYPT_MODE || opmode == DECRYPT_MODE
+     @             || opmode == WRAP_MODE || opmode == UNWRAP_MODE;
+     @    requires key != null;
+     @    requires params != null;
+     @    assignable _state;
+     @    ensures _state == opmode;
+     @    signals (InvalidKeyException) true;
+     @    signals (InvalidAlgorithmParameterException) true;
+    */
+   public final void init(int opmode, Key key, AlgorithmParameters params)
+   throws InvalidKeyException, InvalidAlgorithmParameterException;
+
+   /*@ public behavior
+     @    requires opmode == ENCRYPT_MODE || opmode == DECRYPT_MODE
+     @             || opmode == WRAP_MODE || opmode == UNWRAP_MODE;
+     @    requires key != null;
+     @    requires params != null;
+     @    requires random != null;
+     @    assignable _state;
+     @    ensures _state == opmode;
+     @    signals (InvalidKeyException) true;
+     @    signals (InvalidAlgorithmParameterException) true;
+    */
+   public final void init(int opmode, Key key, AlgorithmParameters params,
+                          SecureRandom random)
+   throws InvalidKeyException, InvalidAlgorithmParameterException;
+
+   /*@ public behavior
+     @    requires opmode == ENCRYPT_MODE || opmode == DECRYPT_MODE
+     @             || opmode == WRAP_MODE || opmode == UNWRAP_MODE;
+     @    requires certificate != null;
+     @    assignable _state;
+     @    ensures _state == opmode;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void init(int opmode, Certificate certificate)
+   throws InvalidKeyException;
+
+   /*@ public behavior
+     @    requires opmode == ENCRYPT_MODE || opmode == DECRYPT_MODE
+     @             || opmode == WRAP_MODE || opmode == UNWRAP_MODE;
+     @    requires certificate != null;
+     @    requires random != null;
+     @    assignable _state;
+     @    ensures _state == opmode;
+     @    signals (InvalidKeyException) true;
+    */
+   public final void init(int opmode, Certificate certificate,
+                          SecureRandom random) throws InvalidKeyException;
+
+   /*@ public behavior
+     @    requires input != null;
+     @    ensures true;
+     @    signals (IllegalStateException) true;
+    */
+   public final byte[] update(byte[] input)
+   throws IllegalStateException;
+
+   /*@ public behavior
+     @    requires _state != _UNINITIALIZED;
+     @    requires input != null &&
+     @             inputOffset >= 0 &&
+     @             (inputOffset + inputLen) <= input.length;
+     @    ensures \result != null;
+     @    signals (IllegalStateException) true;
+    */
+   public final byte[] update(byte[] input, int inputOffset, int inputLen)
+   throws IllegalStateException;
+
+   /*@ public behavior
+     @    requires input != null &&
+     @             inputOffset >= 0 &&
+     @             (inputOffset + inputLen) <= input.length;
+     @    ensures \result == inputLen;
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+     @    signals (ShortBufferException) inputLen > output.length;
+    */
+   public final int update(byte[] input, int inputOffset, int inputLen,
+                           byte[] output)
+   throws IllegalStateException, ShortBufferException;
+
+   /*@ public behavior
+     @    requires input != null &&
+     @             output != null &&
+     @             inputOffset >= 0 &&
+     @             (inputOffset + inputLen) <= input.length;
+     @    ensures \result == inputLen;
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+     @    signals (ShortBufferException) inputLen > output.length;
+    */
+   public final int update(byte[] input, int inputOffset, int inputLen,
+                           byte[] output, int outputOffset)
+   throws IllegalStateException, ShortBufferException;
+
+   /*@ public behavior
+     @    ensures \result != null;
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+     @    signals (IllegalBlockSizeException) true;
+     @    signals (BadPaddingException) true;
+    */
+   public final byte[] doFinal()
+   throws IllegalStateException, IllegalBlockSizeException,
+          BadPaddingException;
+
+   /*@ public behavior
+     @    requires outputOffset >= 0;
+     @    ensures \result == (output.length - outputOffset);
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+     @    signals (IllegalBlockSizeException) true;
+     @    signals (ShortBufferException) outputOffset >= output.length;
+     @    signals (BadPaddingException) true;
+    */
+   public final int doFinal(byte[] output, int outputOffset)
+   throws IllegalStateException, IllegalBlockSizeException,
+          ShortBufferException, BadPaddingException;
+
+   /*@ public behavior
+     @    requires input != null;
+     @    ensures \result != null;
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+     @    signals (IllegalBlockSizeException) true;
+     @    signals (BadPaddingException) true;
+    */
+   public final byte[] doFinal(byte[] input)
+   throws IllegalStateException, IllegalBlockSizeException,
+          BadPaddingException;
+
+   /*@ public behavior
+     @    requires input != null &&
+     @             inputOffset >= 0 &&
+     @             (inputOffset + inputLen) <= input.length;
+     @    ensures \result != null;
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+     @    signals (IllegalBlockSizeException) true;
+     @    signals (BadPaddingException) true;
+    */
+   public final byte[] doFinal(byte[] input, int inputOffset, int inputLen)
+   throws IllegalStateException, IllegalBlockSizeException,
+          BadPaddingException;
+
+   /*@ public behavior
+     @    requires input != null && 
+     @             inputOffset >= 0 &&
+     @             (inputOffset + inputLen) <= input.length;
+     @    ensures \result == inputLen;
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+     @    signals (ShortBufferException) inputLen > output.length;
+     @    signals (IllegalBlockSizeException) true;
+     @    signals (BadPaddingException) true;
+    */
+   public final int doFinal(byte[] input, int inputOffset, int inputLen,
+                            byte[] output)
+   throws IllegalStateException, ShortBufferException,
+          IllegalBlockSizeException, BadPaddingException;
+
+   /*@ public behavior
+     @    requires input != null &&
+     @             inputOffset >= 0 &&
+     @             outputOffset >= 0 &&
+     @             (inputOffset + inputLen) <= input.length;
+     @    ensures \result == inputLen;
+     @    signals (IllegalStateException) _state == _UNINITIALIZED;
+     @    signals (ShortBufferException)
+     @               (outputOffset + inputLen) > output.length;
+     @    signals (IllegalBlockSizeException) true;
+     @    signals (BadPaddingException) true;
+    */
+   public final int doFinal(byte[] input, int inputOffset, int inputLen,
+                            byte[] output, int outputOffset)
+   throws IllegalStateException, ShortBufferException,
+          IllegalBlockSizeException, BadPaddingException;
+
+   /*@ public behavior
+     @    requires key != null;
+     @    ensures \result != null;
+     @    signals (IllegalStateException) _state != WRAP_MODE;
+     @    signals (IllegalBlockSizeException) true;
+     @    signals (InvalidKeyException) true;
+    */
+   public final byte[] wrap(Key key)
+   throws IllegalStateException, IllegalBlockSizeException,
+          InvalidKeyException;
+
+   /*@ public behavior
+     @    requires wrappedKey != null;
+     @    requires wrappedKeyAlgorithm != null;
+     @    requires wrappedKeyType == PUBLIC_KEY
+     @             || wrappedKeyType == PRIVATE_KEY
+     @             || wrappedKeyType == SECRET_KEY;
+     @    ensures \result != null;
+     @    signals (IllegalStateException) _state != UNWRAP_MODE;
+     @    signals (IllegalBlockSizeException) true;
+     @    signals (InvalidKeyException) true;
+    */
+   public final Key unwrap(byte[] wrappedKey, String wrappedKeyAlgorithm,
+                           int wrappedKeyType)
+   throws IllegalStateException, InvalidKeyException, NoSuchAlgorithmException;
+}
+

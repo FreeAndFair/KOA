@@ -1,0 +1,35 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package java.security.interfaces;
+
+import java.security.*;
+
+public interface DSAKeyPairGenerator
+{
+  /*@ public normal_behavior
+    @   requires params != null;
+    @   requires random != null;
+    @ also
+    @ public exceptional_behavior
+    @   requires params == null || random == null;
+    @   signals (InvalidParameterException) true;
+    @*/
+  public void initialize(DSAParams params, SecureRandom random)
+    throws InvalidParameterException;
+
+  /*@ public normal_behavior
+    @   requires 512 <= modlen && modlen <= 1024 && modlen % 8 == 0;
+    @   requires random != null;
+    @ also
+    @ public exceptional_behavior
+    @   requires modlen < 512 || 124 < modlen || modlen % 8 != 0;
+    @   signals (InvalidParameterException) true;
+    @*/ 
+  public void initialize(int modlen, boolean genParams, SecureRandom random)
+    throws InvalidParameterException;
+}

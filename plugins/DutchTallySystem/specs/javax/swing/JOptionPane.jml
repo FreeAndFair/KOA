@@ -1,0 +1,567 @@
+/*
+ * @(#)JOptionPane.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Engelbert Hubbers (hubbers@cs.kun.nl)
+ */
+
+package javax.swing;
+
+import javax.accessibility.Accessible;
+import javax.accessibility.AccessibleContext;
+import java.awt.HeadlessException;
+import java.awt.Component;
+import java.awt.Frame;
+import javax.swing.plaf.OptionPaneUI;
+
+public class JOptionPane extends JComponent implements Accessible
+{
+
+public static final Object UNINITIALIZED_VALUE;
+
+public static final int DEFAULT_OPTION;
+
+public static final int YES_NO_OPTION;
+
+public static final int YES_NO_CANCEL_OPTION;
+
+public static final int OK_CANCEL_OPTION;
+
+public static final int YES_OPTION;
+
+public static final int NO_OPTION;
+
+public static final int CANCEL_OPTION;
+
+public static final int OK_OPTION;
+
+public static final int CLOSED_OPTION;
+
+public static final int ERROR_MESSAGE;
+
+public static final int INFORMATION_MESSAGE;
+
+public static final int WARNING_MESSAGE;
+
+public static final int QUESTION_MESSAGE;
+
+public static final int PLAIN_MESSAGE;
+
+public static final String ICON_PROPERTY;
+
+public static final String MESSAGE_PROPERTY;
+
+public static final String VALUE_PROPERTY;
+
+public static final String OPTIONS_PROPERTY;
+
+public static final String INITIAL_VALUE_PROPERTY;
+
+public static final String MESSAGE_TYPE_PROPERTY;
+
+public static final String OPTION_TYPE_PROPERTY;
+
+public static final String SELECTION_VALUES_PROPERTY;
+
+public static final String INITIAL_SELECTION_VALUE_PROPERTY;
+
+public static final String INPUT_VALUE_PROPERTY;
+
+public static final String WANTS_INPUT_PROPERTY;
+
+protected transient Icon icon;
+
+protected transient Object message;
+
+protected transient Object[] options;
+
+protected transient Object initialValue;
+
+protected int messageType;
+
+protected int optionType;
+
+/*@ invariant optionType == DEFAULT_OPTION ||
+  @           optionType == YES_NO_OPTION ||
+  @           optionType == YES_NO_CANCEL_OPTION  ||
+  @           optionType == OK_CANCEL_OPTION;
+  @*/
+
+protected transient Object value;
+
+protected transient Object[] selectionValues;
+
+protected transient Object inputValue;
+
+protected transient Object initialSelectionValue;
+
+protected boolean wantsInput;
+
+/*@ pure @*/ public JOptionPane();
+
+/*@ pure @*/ public JOptionPane(Object message);
+
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @*/
+/*@ pure @*/ public JOptionPane(Object message,
+                   int messageType);
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @ requires optionType == DEFAULT_OPTION ||
+  @          optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION  ||
+  @          optionType == OK_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public JOptionPane(Object message,
+                   int messageType,
+                   int optionType);
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @ requires optionType == DEFAULT_OPTION ||
+  @          optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION  ||
+  @          optionType == OK_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public JOptionPane(Object message,
+                   int messageType,
+                   int optionType,
+                   Icon icon);
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @ requires optionType == DEFAULT_OPTION ||
+  @          optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION  ||
+  @          optionType == OK_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public JOptionPane(Object message,
+                   int messageType,
+                   int optionType,
+                   Icon icon,
+                   Object[] options);
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @ requires optionType == DEFAULT_OPTION ||
+  @          optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION  ||
+  @          optionType == OK_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public JOptionPane(Object message,
+                   int messageType,
+                   int optionType,
+                   Icon icon,
+                   Object[] options,
+                   Object initialValue);
+
+/*@ pure @*/ public static String showInputDialog(Object message)
+                              throws HeadlessException;
+
+/*@ pure @*/ public static String showInputDialog(Object message,
+                                     Object initialSelectionValue);
+
+/*@ pure @*/ public static String showInputDialog(Component parentComponent,
+                                     Object message)
+                              throws HeadlessException;
+
+/*@ pure @*/ public static String showInputDialog(Component parentComponent,
+                                     Object message,
+                                     Object initialSelectionValue);
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @*/
+/*@ pure @*/ public static String showInputDialog(Component parentComponent,
+                                     Object message,
+                                     String title,
+                                     int messageType)
+                              throws HeadlessException;
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @*/
+/*@ pure @*/ public static Object showInputDialog(Component parentComponent,
+                                     Object message,
+                                     String title,
+                                     int messageType,
+                                     Icon icon,
+                                     Object[] selectionValues,
+                                     Object initialSelectionValue)
+                              throws HeadlessException;
+
+/*@ pure @*/ public static void showMessageDialog(Component parentComponent,
+                                     Object message)
+                              throws HeadlessException;
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @*/
+/*@ pure @*/ public static void showMessageDialog(Component parentComponent,
+                                     Object message,
+                                     String title,
+                                     int messageType)
+                              throws HeadlessException;
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @*/
+/*@ pure @*/ public static void showMessageDialog(Component parentComponent,
+                                     Object message,
+                                     String title,
+                                     int messageType,
+                                     Icon icon)
+                              throws HeadlessException;
+
+/*@ pure @*/ public static int showConfirmDialog(Component parentComponent,
+                                    Object message)
+                             throws HeadlessException;
+
+/*@ requires optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public static int showConfirmDialog(Component parentComponent,
+                                    Object message,
+                                    String title,
+                                    int optionType)
+                             throws HeadlessException;
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @ requires optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public static int showConfirmDialog(Component parentComponent,
+                                    Object message,
+                                    String title,
+                                    int optionType,
+                                    int messageType)
+                             throws HeadlessException;
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @ requires optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public static int showConfirmDialog(Component parentComponent,
+                                    Object message,
+                                    String title,
+                                    int optionType,
+                                    int messageType,
+                                    Icon icon)
+                             throws HeadlessException;
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @ requires optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public static int showOptionDialog(Component parentComponent,
+                                   Object message,
+                                   String title,
+                                   int optionType,
+                                   int messageType,
+                                   Icon icon,
+                                   Object[] options,
+                                   Object initialValue)
+                            throws HeadlessException;
+
+
+/*@
+  @ assignable objectState;
+  @*/
+public JDialog createDialog(Component parentComponent,
+                            String title)
+                     throws HeadlessException;
+
+/*@ pure @*/ public static void showInternalMessageDialog(Component parentComponent,
+                                             Object message);
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @*/
+/*@ pure @*/ public static void showInternalMessageDialog(Component parentComponent,
+                                             Object message,
+                                             String title,
+                                             int messageType);
+
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @*/
+/*@ pure @*/ public static void showInternalMessageDialog(Component parentComponent,
+                                             Object message,
+                                             String title,
+                                             int messageType,
+                                             Icon icon);
+
+/*@ pure @*/ public static int showInternalConfirmDialog(Component parentComponent,
+                                            Object message);
+
+/*@ requires optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public static int showInternalConfirmDialog(Component parentComponent,
+                                            Object message,
+                                            String title,
+                                            int optionType);
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @ requires optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public static int showInternalConfirmDialog(Component parentComponent,
+                                            Object message,
+                                            String title,
+                                            int optionType,
+                                            int messageType);
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @ requires optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public static int showInternalConfirmDialog(Component parentComponent,
+                                            Object message,
+                                            String title,
+                                            int optionType,
+                                            int messageType,
+                                            Icon icon);
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @ requires optionType == YES_NO_OPTION ||
+  @          optionType == YES_NO_CANCEL_OPTION;
+  @*/
+/*@ pure @*/ public static int showInternalOptionDialog(Component parentComponent,
+                                           Object message,
+                                           String title,
+                                           int optionType,
+                                           int messageType,
+                                           Icon icon,
+                                           Object[] options,
+                                           Object initialValue);
+
+
+/*@ pure @*/ public static String showInternalInputDialog(Component parentComponent,
+                                             Object message);
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @*/
+/*@ pure @*/ public static String showInternalInputDialog(Component parentComponent,
+                                             Object message,
+                                             String title,
+                                             int messageType);
+
+
+/*@ requires messageType == ERROR_MESSAGE ||
+  @          messageType == INFORMATION_MESSAGE ||
+  @          messageType == WARNING_MESSAGE ||
+  @          messageType == QUESTION_MESSAGE ||
+  @          messageType == PLAIN_MESSAGE;
+  @*/
+/*@ pure @*/ public static Object showInternalInputDialog(Component parentComponent,
+                                             Object message,
+                                             String title,
+                                             int messageType,
+                                             Icon icon,
+                                             Object[] selectionValues,
+                                             Object initialSelectionValue);
+
+
+/*@
+  @ assignable objectState;
+  @*/
+public JInternalFrame createInternalFrame(Component parentComponent,
+                                          String title);
+
+
+/*@ pure @*/ public static Frame getFrameForComponent(Component parentComponent)
+                                  throws HeadlessException;
+
+
+/*@ pure @*/ public static JDesktopPane getDesktopPaneForComponent(Component parentComponent);
+
+
+public static void setRootFrame(Frame newRootFrame);
+
+
+/*@ pure @*/ public static Frame getRootFrame()
+                          throws HeadlessException;
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setUI(OptionPaneUI ui);
+
+/*@ pure @*/ public OptionPaneUI getUI();
+
+/*@
+  @ also
+  @ assignable objectState;
+  @*/
+public void updateUI();
+
+/*@ pure @*/ public String getUIClassID();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setMessage(Object newMessage);
+
+/*@ pure @*/ public Object getMessage();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setIcon(Icon newIcon);
+
+/*@ pure @*/ public Icon getIcon();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setValue(Object newValue);
+
+/*@ pure @*/ public Object getValue();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setOptions(Object[] newOptions);
+
+/*@ pure @*/ public Object[] getOptions();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setInitialValue(Object newInitialValue);
+
+/*@ pure @*/ public Object getInitialValue();
+
+/*@ requires newType == ERROR_MESSAGE ||
+  @          newType == INFORMATION_MESSAGE ||
+  @          newType == WARNING_MESSAGE ||
+  @          newType == QUESTION_MESSAGE ||
+  @          newType == PLAIN_MESSAGE;
+  @*/
+/*@
+  @ assignable objectState;
+  @*/
+public void setMessageType(int newType);
+
+
+/*@ pure @*/ public int getMessageType();
+
+/*@ requires newType == DEFAULT_OPTION ||
+  @          newType == YES_NO_OPTION ||
+  @          newType == YES_NO_CANCEL_OPTION ||
+  @          newType == OK_CANCEL_OPTION;
+  @ assignable objectState;
+  @*/
+public void setOptionType(int newType);
+
+/*@ pure @*/ public int getOptionType();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setSelectionValues(Object[] newValues);
+
+/*@ pure @*/ public Object[] getSelectionValues();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setInitialSelectionValue(Object newValue);
+
+/*@ pure @*/ public Object getInitialSelectionValue();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setInputValue(Object newValue);
+
+/*@ pure @*/ public Object getInputValue();
+
+/*@ pure @*/ public int getMaxCharactersPerLineCount();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void setWantsInput(boolean newValue);
+
+/*@ pure @*/ public boolean getWantsInput();
+
+/*@
+  @ assignable objectState;
+  @*/
+public void selectInitialValue();
+
+/*@ pure @*/ protected String paramString();
+
+/*@ pure @*/ public AccessibleContext getAccessibleContext();
+
+}

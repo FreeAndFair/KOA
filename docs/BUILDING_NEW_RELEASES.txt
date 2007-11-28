@@ -1,0 +1,12 @@
+o Synchronize all workspaces
+o Update ChangeLog ('svn log > ChangeLog.txt')
+o Update the version number: the current version is 2.0.0
+o Update docs/ReleaseNotes.txt
+o Build the release: 'make release'
+o Install and test on a different machine with a different operating system
+o Tag the release: e.g. mv koa2.0.0 tags/koa2.0.0; svn add tags/koa2.0.0
+o Upload release archive files to kind.ucd.ie
+o Announce to world
+ + All JMLSpecs mailing lists
+ + KOA developer list
+ + FreshMeat

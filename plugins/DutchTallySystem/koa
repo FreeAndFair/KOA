@@ -1,0 +1,4 @@
+#!/bin/sh
+
+java -classpath build:jars/bcprov-jdk14-118.jar:jars/fop.jar:jars/avalon-framework.jar:jars/batik.jar -ms250M -mx256M sos.koa.MenuPanel $@
+

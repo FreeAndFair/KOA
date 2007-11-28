@@ -1,0 +1,52 @@
+/*
+ * @(#)AccessControlContext.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public final class AccessControlContext
+{
+   /*@ public behavior
+     @    requires context != null;
+    */
+   public AccessControlContext(ProtectionDomain context[]);
+
+   /*@ public behavior
+     @    requires acc != null;
+     @    requires combiner != null;
+     @    signals(NullPointerException) true;
+     @    signals(SecurityException) true;
+    */
+   public AccessControlContext(AccessControlContext acc,
+                               DomainCombiner combiner)
+   throws NullPointerException, SecurityException;
+
+   /*@ public behavior
+     @    signals(SecurityException) true;
+    */
+   public /*@ pure */ DomainCombiner getDomainCombiner()
+   throws SecurityException;
+
+   /*@ public behavior
+     @    requires perm != null;
+     @    signals(AccessControlException) true;
+    */
+   public void checkPermission(Permission perm)
+   throws AccessControlException;
+
+   /*@ also
+     @ public behavior
+     @    requires obj != null;
+     @    ensures (obj instanceof AccessControlContext);
+    */
+   public boolean equals(Object obj);
+
+   public /*@ pure */ int hashCode();
+}
+

@@ -1,0 +1,84 @@
+/*
+ * @(#)SecureRandom.java
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public class SecureRandom extends java.util.Random
+{
+   public SecureRandom();
+
+   /*@ public behavior
+     @    requires seed != null;
+    */
+   public SecureRandom(byte[] seed);
+
+   /*@ public behavior
+     @    requires secureRandomSpi != null;
+     @    requires provider != null;
+    */
+   protected SecureRandom(SecureRandomSpi secureRandomSpi, Provider provider);
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures \result != null;
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static SecureRandom getInstance(String algorithm)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    signals (NoSuchAlgorithmException) true;
+     @    signals (NoSuchProviderException) true;
+    */
+   public static SecureRandom getInstance(String algorithm, String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    signals (NoSuchAlgorithmException) true;
+    */
+   public static SecureRandom getInstance(String algorithm, Provider provider)
+   throws NoSuchAlgorithmException;
+
+   public final /*@ pure */ Provider getProvider();
+
+   /*@ public behavior
+     @    requires seed != null;
+    */
+   synchronized public void setSeed(byte[] seed);
+
+   public void setSeed(long seed);
+
+   /*@ also
+     @ public behavior
+     @    requires bytes != null;
+    */
+   synchronized public void nextBytes(byte[] bytes);
+
+   final protected int next(int numBits);
+
+   /*@ public behavior
+     @    requires numBytes >= 0;
+     @    ensures \result != null && \result.length == numBytes;
+    */
+   public static byte[] getSeed(int numBytes);
+
+   /*@ public behavior
+     @    requires numBytes >= 0;
+     @    ensures \result != null && \result.length == numBytes;
+    */
+   public byte[] generateSeed(int numBytes);
+}
+

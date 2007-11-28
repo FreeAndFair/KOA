@@ -1,0 +1,7 @@
+
+Installation:
+----
+Unpack the archive (or at least the binaries).
+Run it with 'java -jar koa.jar' or use the scriptfiles
+'koa.bat' (Windows)  and 'koa.sh' (Linux).
+

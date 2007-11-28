@@ -1,0 +1,36 @@
+/*
+ * @(#)SAXException.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Engelbert Hubbers (hubbers@cs.kun.nl)
+ */
+
+package org.xml.sax;
+
+
+public class SAXException extends Exception
+{
+
+  /*@ public behavior
+    @    ensures getMessage().equals(message);
+    @*/
+  /*@ pure @*/ public SAXException(String message);
+
+  /*@ pure @*/ public SAXException(Exception e);
+
+  /*@ public behavior
+    @    ensures getMessage().equals(message);
+    @    ensures getException().equals(e);
+    @*/
+  /*@ pure @*/ public SAXException(String message, Exception e);
+
+  /*@ pure @*/ public String getMessage();
+
+  /*@ pure @*/ public Exception getException();
+
+  /*@ pure @*/ public String toString();
+
+}

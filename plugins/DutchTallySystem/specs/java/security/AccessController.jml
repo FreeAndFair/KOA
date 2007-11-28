@@ -1,0 +1,52 @@
+/*
+ * @(#)AccessController.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+public final class AccessController
+{
+   /*@ public behavior
+     @    requires action != null;
+    */
+   public static Object doPrivileged(PrivilegedAction action);
+
+   /*@ public behavior
+     @    requires action != null;
+     @    requires context != null;
+    */
+   public static Object doPrivileged(PrivilegedAction action,
+                                            AccessControlContext context);
+
+   /*@ public behavior
+     @    requires action != null;
+     @    signals(PrivilegedActionException) true;
+    */
+   public static Object doPrivileged(PrivilegedExceptionAction action)
+   throws PrivilegedActionException;
+
+   /*@ public behavior
+     @    requires action != null;
+     @    requires context != null;
+     @    signals(PrivilegedActionException) true;
+    */
+   public static Object doPrivileged(PrivilegedExceptionAction action,
+                                         AccessControlContext context)
+   throws PrivilegedActionException;
+
+   public static /*@ pure non_null */ AccessControlContext getContext();
+
+   /*@ public behavior
+     @    requires perm != null;
+     @    signals(AccessControlException) true;
+    */
+   public static void checkPermission(Permission perm)
+   throws AccessControlException;
+}
+

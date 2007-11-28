@@ -1,0 +1,80 @@
+/*
+ * @(#)IdentityScope.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.io.Serializable;
+import java.util.Enumeration;
+import java.util.Properties;
+
+public abstract class IdentityScope extends Identity
+{
+   protected IdentityScope();
+
+   /*@ public behavior
+     @    requires name != null;
+     @    ensures getName().equals(name);
+    */
+   public IdentityScope(String name);
+
+   /*@ public behavior
+     @    requires name != null;
+     @    requires scope != null;
+     @    ensures getName().equals(name);
+     @    ensures getSystemScope().equals(scope);
+     @    signals(KeyManagementException) true;
+    */
+   public IdentityScope(String name, IdentityScope scope)
+   throws KeyManagementException;
+
+   public static /*@ pure non_null */ IdentityScope getSystemScope();
+
+   /*@ public behavior
+     @    requires scope != null;
+     @    ensures getSystemScope().equals(scope);
+    */
+   protected static void setSystemScope(IdentityScope scope);
+
+   public abstract /*@ pure */ int size();
+
+   /*@ public behavior
+     @    requires name != null;
+    */
+   public abstract Identity getIdentity(String name);
+
+   /*@ public behavior
+     @    requires principal != null;
+    */
+   public Identity getIdentity(Principal principal);
+
+   /*@ public behavior
+     @    requires key != null;
+    */
+   public abstract Identity getIdentity(PublicKey key);
+
+   /*@ public behavior
+     @    requires identity != null;
+     @    signals(KeyManagementException) true;
+    */
+   public abstract void addIdentity(Identity identity)
+   throws KeyManagementException;
+
+   /*@ public behavior
+     @    requires identity != null;
+     @    signals(KeyManagementException) true;
+    */
+   public abstract void removeIdentity(Identity identity)
+   throws KeyManagementException;
+
+   public abstract Enumeration identities();
+
+   public /*@ pure non_null */ String toString();
+}
+

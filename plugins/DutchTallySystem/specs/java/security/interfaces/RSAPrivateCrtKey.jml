@@ -1,0 +1,62 @@
+/*
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @author Joe Kiniry <kiniry@cs.kun.nl>
+ * @version $Id$
+ */
+
+package java.security.interfaces;
+
+import java.math.BigInteger;
+
+public /*@ pure @*/ interface RSAPrivateCrtKey
+  extends RSAPrivateKey
+{
+  //@ public non_null instance model java.math.BigInteger _publicExponent;
+  //@ public represents _modulus <- getPublicExponent();
+
+  //@ public non_null instance model java.math.BigInteger _primeP, _primeQ;
+  //@ public represents _primeP <- getPrimeP();
+  //@ public represents _primeQ <- getPrimeQ();
+
+  //@ public non_null instance model java.math.BigInteger _primeExponentP, _primeExponentQ;
+  //@ public represents _primeExponentP <- getPrimeExponentP();
+  //@ public represents _primeExponentQ <- getPrimeExponentQ();
+
+  //@ public non_null instance model java.math.BigInteger _crtCoefficient;
+  //@ public represents _crtCoefficient <- getCrtCoefficient();
+
+  /*@ public normal_behavior
+    @   ensures \result == _publicExponent;
+    @*/ 
+  public BigInteger getPublicExponent();
+
+  /*@ public normal_behavior
+    @  ensures \result == _primeP;
+    @  ensures \result.isProbablePrime(Integer.MAX_VALUE);
+    @*/
+  public BigInteger getPrimeP();
+
+  /*@ public normal_behavior
+    @  ensures \result == _primeQ;
+    @  ensures \result.isProbablePrime(Integer.MAX_VALUE);
+    @*/
+  public BigInteger getPrimeQ();
+
+  /*@ public normal_behavior
+    @  ensures \result == _primeExponentP;
+    @  ensures \result.isProbablePrime(Integer.MAX_VALUE);
+    @*/
+  public BigInteger getPrimeExponentP();
+
+  /*@ public normal_behavior
+    @  ensures \result == _primeExponentQ;
+    @  ensures \result.isProbablePrime(Integer.MAX_VALUE);
+    @*/
+  public BigInteger getPrimeExponentQ();
+
+  /*@ public normal_behavior
+    @  ensures \result == _crtCoefficient;
+    @*/
+  public BigInteger getCrtCoefficient();
+}

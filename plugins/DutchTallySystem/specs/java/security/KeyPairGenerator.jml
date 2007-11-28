@@ -1,0 +1,121 @@
+/*
+ * @(#)KeyPairGenerator.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package java.security;
+
+import java.security.spec.AlgorithmParameterSpec;
+
+public abstract class KeyPairGenerator extends KeyPairGeneratorSpi {
+
+   /*@ model static final int _UNINITIALIZED; */
+   /*@ model static final int _INITIALIZED; */
+
+   /*@ invariant _UNINITIALIZED != _INITIALIZED;
+    */
+
+   /*@ model int _state; */
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures _state == _UNINITIALIZED;
+     @    ensures getAlgorithm().equals(algorithm);
+    */
+   protected KeyPairGenerator(String algorithm);
+
+   public /*@ pure non_null */ String getAlgorithm();
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals(NoSuchAlgorithmException) true;
+    */
+   public static KeyPairGenerator getInstance(String algorithm)
+   throws NoSuchAlgorithmException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    signals(NoSuchAlgorithmException) true;
+     @    signals(NoSuchProviderException) true;
+    */
+   public static KeyPairGenerator getInstance(String algorithm,
+                                              String provider)
+   throws NoSuchAlgorithmException, NoSuchProviderException;
+
+   /*@ public behavior
+     @    requires algorithm != null;
+     @    requires provider != null;
+     @    ensures \result != null;
+     @    ensures \result._state == _UNINITIALIZED;
+     @    ensures \result.getAlgorithm().equals(algorithm);
+     @    ensures \result.getProvider().equals(provider);
+     @    signals(NoSuchAlgorithmException) true;
+    */
+   public static KeyPairGenerator getInstance(String algorithm,
+                                              Provider provider)
+   throws NoSuchAlgorithmException;
+
+   public final /*@ pure non_null */ Provider getProvider();
+
+   /*@ public behavior
+     @    requires keysize >= 0;
+     @    assignable _state;
+     @    ensures _state == _INITIALIZED;
+    */
+   public void initialize(int keysize);
+
+   /*@ also
+     @ public behavior
+     @    requires keysize >= 0;
+     @    requires random != null;
+     @    assignable _state;
+     @    ensures _state == _INITIALIZED;
+    */
+   public void initialize(int keysize, SecureRandom random);
+
+   /*@ public behavior
+     @    requires params != null;
+     @    assignable _state;
+     @    ensures _state == _INITIALIZED;
+     @    signals(InvalidAlgorithmParameterException) true;
+    */
+   public void initialize(AlgorithmParameterSpec params)
+   throws InvalidAlgorithmParameterException;
+
+   /*@ also
+     @ public behavior
+     @    requires params != null;
+     @    requires random != null;
+     @    assignable _state;
+     @    ensures _state == _INITIALIZED;
+     @    signals(InvalidAlgorithmParameterException) true;
+    */
+   public void initialize(AlgorithmParameterSpec params,
+                          SecureRandom random)
+   throws InvalidAlgorithmParameterException;
+
+   /*@ public behavior
+     @    requires _state == _INITIALIZED;
+     @    ensures \result != null;
+    */
+   public final KeyPair genKeyPair();
+
+   /*@ also
+     @ public behavior
+     @    ensures \result == null;
+    */
+   public /*@ pure */ KeyPair generateKeyPair();
+}
+

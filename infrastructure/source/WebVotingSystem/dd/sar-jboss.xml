@@ -1,0 +1,12 @@
+<jboss>
+  <enterprise-beans>  
+    <entity>
+      <ejb-name>KOASAREntityEJB</ejb-name>
+      <jndi-name>SAREntity</jndi-name>
+      <resource-ref>
+       <res-ref-name>jdbc/KOA01</res-ref-name>
+        <jndi-name>java:DefaultDS</jndi-name>
+      </resource-ref>
+    </entity>
+   </enterprise-beans>    
+</jboss>

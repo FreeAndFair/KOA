@@ -1,0 +1,24 @@
+<jboss>
+  <enterprise-beans>  
+    <session>
+      <ejb-name>KOASessionEJB</ejb-name>
+      <jndi-name>KOASession</jndi-name>
+      <resource-ref>
+        <res-ref-name>jdbc/KOA01</res-ref-name>
+        <jndi-name>java:DefaultDS</jndi-name>
+      </resource-ref>
+		<ejb-ref>
+			<ejb-ref-name>KOAEntityEJB</ejb-ref-name>
+			<jndi-name>KOAEntity</jndi-name>
+		</ejb-ref>
+    </session>
+	 <entity>
+      <ejb-name>KOAEntityEJB</ejb-name>
+      <jndi-name>KOAEntity</jndi-name>
+      <resource-ref>
+        <r<res-ref-name>jdbc/KOA01</res-ref-name>
+        <jndi-name>java:DefaultDS</jndi-name>
+      </resource-ref>
+    </entity>
+  </enterprise-beans>    
+</jboss>

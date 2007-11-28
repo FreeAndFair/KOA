@@ -1,0 +1,17 @@
+/*
+ * @(#)HttpSessionContext.jml
+ *
+ * @version $Id:HttpSessionContext.jml 775 2006-04-15 13:45:44Z alanm $
+ */
+
+package javax.servlet.http;
+
+import java.util.Enumeration;
+
+public interface HttpSessionContext
+{
+   public abstract /*@ pure non_null */ Enumeration getIds();
+
+   public abstract /*@ pure non_null */ HttpSession getSession(/*@ non_null */ String arg);
+}
+

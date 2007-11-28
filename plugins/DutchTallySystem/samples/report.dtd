@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT report (globaal, table)>
+<!ELEMENT globaal (kieskringen+)>
+<!ATTLIST globaal
+    stembureau CDATA #REQUIRED
+    voorzitter CDATA #REQUIRED
+    state CDATA #REQUIRED
+    verkiezing CDATA #REQUIRED
+    periode_start CDATA #REQUIRED
+    periode_eind CDATA #REQUIRED
+    curtime CDATA #REQUIRED
+>
+
+<!ELEMENT kieskringen (kieskring+)>
+<!ELEMENT kieskring EMPTY>
+<!ATTLIST kieskring
+    nummer CDATA #REQUIRED
+    naam CDATA #REQUIRED
+>
+
+<!ELEMENT table (row+)>
+<!ATTLIST table
+    name CDATA #FIXED "ENCRYPTEDESB"
+>
+
+<!ELEMENT row EMPTY>
+<!ATTLIST row
+    stemnummer CDATA #REQUIRED
+    stem CDATA #REQUIRED
+>

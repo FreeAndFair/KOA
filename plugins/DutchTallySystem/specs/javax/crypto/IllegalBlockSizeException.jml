@@ -1,0 +1,23 @@
+/*
+ * @(#)IllegalBlockSizeException.jml
+ *
+ * JML specification Copyright 2004 SoS Group, University of Nijmegen
+ *
+ * @version $Id$
+ *
+ * @author Martijn Oostdijk (martijno@cs.kun.nl)
+ */
+
+package javax.crypto;
+
+import java.security.GeneralSecurityException;
+
+public class IllegalBlockSizeException extends GeneralSecurityException
+{
+    public IllegalBlockSizeException();
+
+    /*@ public behavior
+      @    ensures getMessage().equals(msg);
+     */
+    public IllegalBlockSizeException(String msg);
+}
