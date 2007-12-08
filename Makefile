@@ -7,7 +7,9 @@
 VERSION=2.0.0
 RELEASE_DIR=./koa$(VERSION)
 
-default: release
+default: build
+
+build:
 
 clean:
 	rm -rf $(RELEASE_DIR)
@@ -27,7 +29,6 @@ release: clean
 	cp .project $(RELEASE_DIR)
 	cp .classpath $(RELEASE_DIR)
 	mkdir $(RELEASE_DIR)/.externalToolBuilders
-	cp -r .externalToolBuilders/*.launch $(RELEASE_DIR)/.externalToolBuilders
 	zip -r koa$(VERSION).zip $(RELEASE_DIR)
 	tar cvf koa$(VERSION).tar $(RELEASE_DIR)
 	gzip koa$(VERSION).tar 
