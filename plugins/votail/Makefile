@@ -125,6 +125,8 @@ copyright = "Votail<br />&copy; 2006-7 Systems Research Group and University Col
 
 # targets
 
+default: classes
+
 all:	build source_docs test escjava distr
 
 build:	classes jml jmlc jmlunit_classes
