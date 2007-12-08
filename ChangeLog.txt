@@ -1,0 +1,20 @@
+------------------------------------------------------------------------
+r10 | dcochran | 2007-12-04 10:46:40 +0000 (Tue, 04 Dec 2007) | 1 line
+
+Updated KOA classpath
+------------------------------------------------------------------------
+r9 | dcochran | 2007-12-03 14:11:43 +0000 (Mon, 03 Dec 2007) | 1 line
+
+Moved working version of KOA into the subversion trunk
+------------------------------------------------------------------------
+r8 | dcochran | 2007-12-03 14:10:46 +0000 (Mon, 03 Dec 2007) | 1 line
+
+Moved working version of KOA into the subversion trunk and remove CVS files
+------------------------------------------------------------------------
+r7 | dcochran | 2007-11-28 14:16:19 +0000 (Wed, 28 Nov 2007) | 1 line
+
+Made copy of trunk
+------------------------------------------------------------------------
+r1 | dcochran | 2007-11-12 12:06:55 +0000 (Mon, 12 Nov 2007) | 1 line
+
+Moved KOA evoting software into the public subversion repository
