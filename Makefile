@@ -9,7 +9,14 @@ RELEASE_DIR=./koa$(VERSION)
 
 default: build
 
-build:
+build: infrastructure plugins
+
+infrastructure:
+
+plugins: votail
+
+votail:
+	make -C plugins/votail
 
 clean:
 	rm -rf $(RELEASE_DIR)
