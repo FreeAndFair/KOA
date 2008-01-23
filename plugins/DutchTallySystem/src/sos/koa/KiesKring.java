@@ -170,12 +170,18 @@ final class KiesKring
    *
    * <pre><jml>
    * normal_behavior
-   *   requires 0 <= a_kieskring_number;
-   *   requires a_kieskring_number <= CandidateList.MAX_KIESKRINGEN_PER_CANDIDATE_LIST;
-   *   requires a_kieskring_name.length() <= KIESKRING_NAME_MAX_LENGTH;
-   *   modifies \everything;
-   *   ensures \result.number() == a_kieskring_number;
-   *   ensures \result.name().equals(a_kieskring_name);
+   * {|
+   *     requires 0 <= a_kieskring_number;
+   *     requires a_kieskring_number <= CandidateList.MAX_KIESKRINGEN_PER_CANDIDATE_LIST;
+   *     requires a_kieskring_name.length() <= KIESKRING_NAME_MAX_LENGTH;
+   *     modifies MY_CACHED_KIESKRINGEN[a_kieskring_number];
+   *   also
+   *     requires MY_CACHED_KIESKRINGEN[a_kieskring_number] != null;
+   *     requires MY_CACHED_KIESKRINGEN[a_kieskring_number].name().equals(a_kieskring_name);
+   *     modifies \nothing;
+   * |}
+   * ensures \result.number() == a_kieskring_number;
+   * ensures \result.name().equals(a_kieskring_name);
    * </jml></pre>
    */
   static /*@ non_null @*/ KiesKring make(final byte a_kieskring_number,
