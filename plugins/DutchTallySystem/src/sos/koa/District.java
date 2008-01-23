@@ -147,6 +147,7 @@ class District
   // Implementation of Object
 
   /** {@inheritDoc} */
+  // @todo kiniry - must write spec for this method, as pointed out by DennisYessenovJackson08 paper
   public final boolean equals(final /*@ nullable \readonly @*/ Object an_object) {
     if (an_object == null) {
       return false;

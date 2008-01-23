@@ -154,7 +154,7 @@ public abstract class Task implements KOAConstants, ActionListener
     * @return Even more information about this (completed) task.
     */
     //FF - Added the below behaviors. If there is no additional info this method will return null.
-    //     The second behavior simply allows the case where isAdditionalBehavior() == true;. 
+    //     The second behavior simply allows the case where isAdditionalBehavior();. 
     //     Subclasses should place further restrictions on the postcondition in this case.
     //     The assignable \nothing in the second behavior will need removed if any of the subclasses require this.
     /*@ normal_behavior

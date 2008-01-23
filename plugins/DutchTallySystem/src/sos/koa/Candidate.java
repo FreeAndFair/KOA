@@ -187,7 +187,7 @@ public class Candidate
    *   requires a_firstname != a_kieslijst.my_name;
    *   requires some_initials != a_kieslijst.my_name;
    *   requires a_city_of_residence != a_kieslijst.my_name;
-   *   modifies \everything;
+   *   modifies objectState, my_kiesLijst.objectState;
    *   ensures (* all fields are properly initialized *);
    *   ensures lastname().equals(a_lastname);
    *   ensures firstname().equals(a_firstname);

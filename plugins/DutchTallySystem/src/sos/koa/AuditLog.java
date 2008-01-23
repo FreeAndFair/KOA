@@ -329,9 +329,9 @@ public class AuditLog
   * FF - original spec allowed violation of object invariants.
   */
  /*@  normal_behavior
-   @   requires b == true;
+   @   requires b;
    @   assignable importCandidatesSuccess;
-   @   ensures importCandidatesSuccess == true;
+   @   ensures importCandidatesSuccess;
   */
  public static void setImportCandidatesSuccess(boolean b) {
   importCandidatesSuccess = b;
@@ -512,10 +512,10 @@ public class AuditLog
   * FF- original spec allowed violation of invariants
   */
  /*@  normal_behavior
-   @   requires b == true;
-   @   requires importCandidatesSuccess == true;
+   @   requires b;
+   @   requires importCandidatesSuccess;
    @   assignable importVotesSuccess;
-   @   ensures importVotesSuccess == true;
+   @   ensures importVotesSuccess;
  */
  public static void setImportVotesSuccess(boolean b) {
   importVotesSuccess = b;
@@ -800,10 +800,10 @@ public class AuditLog
   *
   */
  /*@  normal_behavior
-   @   requires b == true;
-   @   requires importVotesSuccess == true;
+   @   requires b;
+   @   requires importVotesSuccess;
    @   assignable importPrivKeySuccess;
-   @   ensures importPrivKeySuccess == true;
+   @   ensures importPrivKeySuccess;
   */
  public static void setImportPrivKeySuccess(boolean b) {
   importPrivKeySuccess = b;
@@ -896,11 +896,11 @@ public class AuditLog
   *
   */
  /*@  normal_behavior
-   @   requires b == true;
-   @   requires importVotesSuccess == true;
-   @   requires importPrivKeySuccess == true;
+   @   requires b;
+   @   requires importVotesSuccess;
+   @   requires importPrivKeySuccess;
    @   assignable importPubKeySuccess;
-   @   ensures importPubKeySuccess == true;
+   @   ensures importPubKeySuccess;
  */
  public static void setImportPubKeySuccess(boolean b) {
   importPubKeySuccess = b;
@@ -992,11 +992,11 @@ public class AuditLog
   * FF- Previous spec gave possible violation of object invariants.
   */
  /*@  normal_behavior
-   @   requires b == true;
-   @   requires importVotesSuccess == true;
-   @   requires importPubKeySuccess == true;
+   @   requires b;
+   @   requires importVotesSuccess;
+   @   requires importPubKeySuccess;
    @   assignable keypairSuccess;
-   @   ensures keypairSuccess == true;
+   @   ensures keypairSuccess;
   */
  public static void setKeypairSuccess(boolean b) {
   keypairSuccess = b;
@@ -1024,12 +1024,12 @@ public class AuditLog
   * FF- original spec allows possible violation of object invariants
   */
  /*@  normal_behavior
-   @   requires b == true;
-   @   requires importPrivKeySuccess == true;
-   @   requires importPubKeySuccess == true;
-   @   requires keypairSuccess == true;
+   @   requires b;
+   @   requires importPrivKeySuccess;
+   @   requires importPubKeySuccess;
+   @   requires keypairSuccess;
    @   assignable decryptSuccess;
-   @   ensures decryptSuccess == true;
+   @   ensures decryptSuccess;
   */
  public static void setDecryptSuccess(boolean b) {
   decryptSuccess = b;
@@ -1144,10 +1144,10 @@ public class AuditLog
   * FF- original spec allows possible violation of an object invariant
   */
  /*@  normal_behavior
-   @   requires b == true;
-   @   requires decryptSuccess == true;
+   @   requires b;
+   @   requires decryptSuccess;
    @   assignable countSuccess;
-   @   ensures countSuccess == true;
+   @   ensures countSuccess;
  */
  public static void setCountSuccess(boolean b) {
   countSuccess = b;
@@ -1301,7 +1301,7 @@ public class AuditLog
     @ assignable votingElectionTimestampStart;
     @ assignable votingElectionTimestampEnd;
     @ assignable votingExportTimestamp;
-    @ assignable kiesKringen;
+    @ assignable kiesKringen.objectState;
     @ assignable importCandidatesSuccess;
     @ assignable importCandidatesError;
     @ assignable importCandidatesFileName;

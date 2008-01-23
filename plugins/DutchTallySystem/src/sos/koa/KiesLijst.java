@@ -225,7 +225,7 @@ final class KiesLijst
    * <pre><jml>
    * normal_behavior
    *   requires candidateCount() < KiesLijst.MAX_CANDIDATES_PER_KIESLIJST;
-   *   modifies \everything;
+   *   modifies objectState;
    *   ensures candidates()[\old(a_candidate.position_number())] == a_candidate;
    *   ensures candidateCount() == \old(candidateCount() + 1);
    *   ensures candidateCount() <= KiesLijst.MAX_CANDIDATES_PER_KIESLIJST;
@@ -355,6 +355,7 @@ final class KiesLijst
   // Implementation of Object
 
   /** {@inheritDoc} */
+  // @todo kiniry - must write spec for this method, as pointed out by DennisYessenovJackson08 paper
   public boolean equals(final /*@ nullable \readonly @*/ Object an_object) {
     if (an_object == null) {
       return false;
