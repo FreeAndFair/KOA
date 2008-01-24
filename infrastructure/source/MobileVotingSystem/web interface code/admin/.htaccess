@@ -1,4 +1,0 @@
-AuthName liam
-AuthType Basic
-require valid-user
-AuthUserFile /home/2002/s02bf067/public_html/web/admin/.htpasswd
