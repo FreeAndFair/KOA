@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>UCDKOA</name>
+	<name>koa</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -11,27 +11,7 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/build-infrastructure.launch</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
-			<triggers>auto,full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/make-tally-system.launch</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
-			<triggers>auto,full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/make-votail.launch</value>
+					<value>&lt;project&gt;/.externalToolBuilders/Build.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
