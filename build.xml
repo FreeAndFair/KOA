@@ -1,6 +1,4 @@
 <project name="koa">
   <ant antfile="build.xml" 
   	dir="infrastructure/source/WebVotingSystem"/>
-  <ant antfile="build.xml" 
-    dir="infrastructure/source/MobileVotingSystem"/>
 </project>
