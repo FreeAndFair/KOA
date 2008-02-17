@@ -83,7 +83,7 @@
 
     <target name="package-esb-entity" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOAESBEntity.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/esb-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/esb-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOAESBEntity.jar">  
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 <!--        	<metainf dir="${deploy.dir}" includes="jboss.xml"/>-->
@@ -97,7 +97,7 @@
 
     <target name="package-esb-session" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOAESBSessionEJB.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/esb-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/esb-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOAESBSessionEJB.jar">
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
@@ -111,7 +111,7 @@
 
     <target name="package-controller-entity" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOAControllerEntityEJB.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/controller-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/controller-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOAControllerEntityEJB.jar">    
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
@@ -126,7 +126,7 @@
 
     <target name="package-controller-session" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOAControllerSessionEJB.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/controller-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/controller-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOAControllerSessionEJB.jar">    
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
@@ -142,7 +142,7 @@
 
     <target name="package-databeheer-session" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOADatabeheerSessionEJB.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/databeheer-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/databeheer-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOADatabeheerSessionEJB.jar">    
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
@@ -163,7 +163,7 @@
 
     <target name="package-koa-entity" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOAEntityEJB.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/koa-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/koa-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOAEntityEJB.jar">    
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
@@ -177,7 +177,7 @@
 
     <target name="package-kieslijst" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOAKieslijstBean.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/kieslijst-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/kieslijst-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOAKieslijstBean.jar">    
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
@@ -194,7 +194,7 @@
 
     <target name="package-kr-entity" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOAKREntityEJB.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/kr-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/kr-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOAKREntityEJB.jar">    
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
@@ -209,7 +209,7 @@
 
     <target name="package-sar-entity" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOASAREntityEJB.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/sar-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/sar-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOASAREntityEJB.jar">    
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
@@ -223,7 +223,7 @@
 
     <target name="package-scheduler" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOASchedulerEJB.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/scheduler-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/scheduler-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOASchedulerEJB.jar">    
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
@@ -239,7 +239,7 @@
 
     <target name="package-koa-session" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOASessionEJB.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/koa-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/koa-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOASessionEJB.jar">    
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
@@ -255,7 +255,7 @@
 
     <target name="package-stemproces-session" depends="-prepare-package">
         <copy file="${main.src.dir}/META-INF/KOAStemprocesSessionBean.xml" tofile="${deploy.dir}/ejb-jar.xml" overwrite="true"/>
-        <copy file="dd/stemproces-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
+        <copy file="${main.src.dir}/META-INF/stemproces-jboss.xml" tofile="${deploy.dir}/jboss.xml" overwrite="true"/>
         <jar jarfile="${deploy.dir}/jar/KOAStemprocesSessionBean.jar">    
             <metainf dir="${deploy.dir}" includes="ejb-jar.xml"/>
 
