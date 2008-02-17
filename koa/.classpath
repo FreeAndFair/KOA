@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="jars/avalon-framework-4.2.0.jar"/>
-	<classpathentry kind="lib" path="jars/axis.jar"/>
-	<classpathentry kind="lib" path="jars/bcprov-jdk14-129.jar"/>
-	<classpathentry kind="lib" path="jars/checkstyle-all-4.3.jar"/>
-	<classpathentry kind="lib" path="jars/checkstyle-optional-4.3.jar"/>
-	<classpathentry kind="lib" path="jars/commons-fileupload-1.2.jar"/>
-	<classpathentry kind="lib" path="jars/esctools2.jar"/>
-	<classpathentry kind="lib" path="jars/fop.jar"/>
-	<classpathentry kind="lib" path="jars/j2ee.jar"/>
-	<classpathentry kind="lib" path="jars/jaxrpc.jar"/>
-	<classpathentry kind="lib" path="jars/jmljunitruntime.jar"/>
-	<classpathentry kind="lib" path="jars/jmlmodels.jar"/>
-	<classpathentry kind="lib" path="jars/jmlmodelsnonrac.jar"/>
-	<classpathentry kind="lib" path="jars/jml-release.jar"/>
-	<classpathentry kind="lib" path="jars/jmlruntime.jar"/>
-	<classpathentry kind="lib" path="jars/junit.jar"/>
-	<classpathentry kind="lib" path="jars/junit-4.3.1.jar"/>
-	<classpathentry kind="lib" path="jars/namespace.jar"/>
-	<classpathentry kind="lib" path="jars/servlet.jar"/>
-	<classpathentry kind="lib" path="jars/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="jars/xmlrpc-1.2-b1-modified.jar"/>
+	<classpathentry kind="src" path="src/main"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/avalon-framework-4.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/axis.jar"/>
+	<classpathentry kind="lib" path="lib/bcprov-jdk14-129.jar"/>
+	<classpathentry kind="lib" path="lib/checkstyle-all-4.3.jar"/>
+	<classpathentry kind="lib" path="lib/checkstyle-optional-4.3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-fileupload-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/esctools2.jar"/>
+	<classpathentry kind="lib" path="lib/fop.jar"/>
+	<classpathentry kind="lib" path="lib/j2ee.jar"/>
+	<classpathentry kind="lib" path="lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="lib/jmljunitruntime.jar"/>
+	<classpathentry kind="lib" path="lib/jmlmodels.jar"/>
+	<classpathentry kind="lib" path="lib/jmlmodelsnonrac.jar"/>
+	<classpathentry kind="lib" path="lib/jml-release.jar"/>
+	<classpathentry kind="lib" path="lib/jmlruntime.jar"/>
+	<classpathentry kind="lib" path="lib/junit.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/namespace.jar"/>
+	<classpathentry kind="lib" path="lib/servlet.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xmlrpc-1.2-b1-modified.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
