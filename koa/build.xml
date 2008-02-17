@@ -376,7 +376,7 @@
 
     <target name="package-tsm-web" depends="-prepare-package">
         <war warfile="${deploy.dir}/war/TSMWeb.war" webxml="web/TSM/WEB-INF/web.xml">
-            <lib dir="${deploy.dir}/jar/">
+            <lib dir="${lib.dir}">
                 <include name="struts.jar" />
                 <include name="commons*.jar"/>
                 <include name="axis.jar" />
