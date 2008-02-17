@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="plugins/votail/src"/>
-	<classpathentry kind="src" path="plugins/DutchTallySystem/src"/>
-	<classpathentry kind="src" path="infrastructure/source/WebVotingSystem/src"/>
-	<classpathentry kind="src" path="infrastructure/source/MobileVotingSystem/SMSRelay/src"/>
-	<classpathentry kind="src" path="infrastructure/source/MobileVotingSystem/Voting Client J2ME/src"/>
-	<classpathentry kind="src" path="infrastructure/source/MobileVotingSystem/Voting Server J2SE/src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.4.2"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/avalon-framework-4.2.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/axis.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/bcprov-jdk14-129.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/checkstyle-all-4.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/checkstyle-optional-4.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/commons-fileupload-1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/esctools2.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/fop.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/j2ee.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/jaxrpc.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/jmljunitruntime.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/jmlmodels.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/jmlmodelsnonrac.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/jml-release.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/jmlruntime.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/junit.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/junit-4.3.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/namespace.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/servlet.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/xercesImpl.jar"/>
-	<classpathentry exported="true" kind="lib" path="infrastructure/jars/xmlrpc-1.2-b1-modified.jar"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="jars/avalon-framework-4.2.0.jar"/>
+	<classpathentry kind="lib" path="jars/axis.jar"/>
+	<classpathentry kind="lib" path="jars/bcprov-jdk14-129.jar"/>
+	<classpathentry kind="lib" path="jars/checkstyle-all-4.3.jar"/>
+	<classpathentry kind="lib" path="jars/checkstyle-optional-4.3.jar"/>
+	<classpathentry kind="lib" path="jars/commons-fileupload-1.2.jar"/>
+	<classpathentry kind="lib" path="jars/esctools2.jar"/>
+	<classpathentry kind="lib" path="jars/fop.jar"/>
+	<classpathentry kind="lib" path="jars/j2ee.jar"/>
+	<classpathentry kind="lib" path="jars/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="jars/jmljunitruntime.jar"/>
+	<classpathentry kind="lib" path="jars/jmlmodels.jar"/>
+	<classpathentry kind="lib" path="jars/jmlmodelsnonrac.jar"/>
+	<classpathentry kind="lib" path="jars/jml-release.jar"/>
+	<classpathentry kind="lib" path="jars/jmlruntime.jar"/>
+	<classpathentry kind="lib" path="jars/junit.jar"/>
+	<classpathentry kind="lib" path="jars/junit-4.3.1.jar"/>
+	<classpathentry kind="lib" path="jars/namespace.jar"/>
+	<classpathentry kind="lib" path="jars/servlet.jar"/>
+	<classpathentry kind="lib" path="jars/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="jars/xmlrpc-1.2-b1-modified.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
