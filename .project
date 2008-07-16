@@ -31,18 +31,6 @@
 				<dictionary>
 					<key>LaunchConfigHandle</key>
 					<value>&lt;project&gt;/.externalToolBuilders/KOA Ant Build.launch</value>
-					<value>&lt;project&gt;/.externalToolBuilders/Votail.launch</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
-			<triggers>full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/Voting Client Ant Build.launch</value>
-					<value>&lt;project&gt;/.externalToolBuilders/DutchTally.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
@@ -53,7 +41,6 @@
 				<dictionary>
 					<key>LaunchConfigHandle</key>
 					<value>&lt;project&gt;/.externalToolBuilders/NL Tally System make build.launch</value>
-					<value>&lt;project&gt;/.externalToolBuilders/MobileVotingClient.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
