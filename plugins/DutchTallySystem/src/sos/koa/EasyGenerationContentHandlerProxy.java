@@ -65,7 +65,8 @@ import org.xml.sax.helpers.AttributesImpl;
  * Note: This class is only useful for simple cases with no namespaces. 
  */
 
-public class EasyGenerationContentHandlerProxy implements ContentHandler {
+public class EasyGenerationContentHandlerProxy
+	implements ContentHandler {
 
     /** An empty Attributes object used when no attributes are needed. */
     public static final Attributes EMPTY_ATTS = new AttributesImpl();

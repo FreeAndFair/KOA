@@ -21,7 +21,7 @@ import javax.print.attribute.DateTimeSyntax;
  * @author Engelbert Hubbers (hubbers@cs.kun.nl)
  */
 
-public class AuditLog 
+public /*@ nullable_by_default @*/ class AuditLog 
 {
  // General section...
  /** The creation time of the audit log. */
@@ -70,8 +70,12 @@ public class AuditLog
   * file with the votes.
   */
  private static /*@ spec_public non_null @*/ TreeMap kiesKringen = new TreeMap(); 
- //@ invariant kiesKringen.owner == this;
+ // invariant kiesKringen.owner == AuditLog.class;
 
+// static {
+//   //@ set kiesKringen.owner = AuditLog.class;
+// }
+ 
  // Import candidates section...
  /** To indicate whether importing the candidates succeeded or not. */
  /*@ spec_public @*/ private static boolean importCandidatesSuccess = false;

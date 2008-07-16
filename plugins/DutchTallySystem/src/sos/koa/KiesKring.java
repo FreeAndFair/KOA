@@ -11,7 +11,7 @@ package sos.koa;
  * @version $Id$
  */
 
-final class KiesKring
+final /*@ nullable_by_default @*/ class KiesKring
   implements Comparable, java.io.Serializable
 {
   /**
@@ -45,7 +45,8 @@ final class KiesKring
    * only contains fields with proper length. There is no maximum defined
    * by law.
    */
-  static final int MAX_DISTRICTS_PER_KIESKRING = 100000;
+  //static final int MAX_DISTRICTS_PER_KIESKRING = 100000;
+  static final int MAX_DISTRICTS_PER_KIESKRING = 100;
 
   /**
    * The maximum number of kieslijsten that can exist in a single
@@ -168,7 +169,9 @@ final class KiesKring
    * @param a_kieskring_name the name of the new kieskring.
    * @return the new kieskring.
    *
-   * <pre><jml>
+   * @bug kiniry 15-07-08 There seems to be a bug in JML 5.5 wrt parsing 
+   * nested specs in JML HTML blocks.
+   * <pre><jmll>
    * normal_behavior
    * {|
    *     requires 0 <= a_kieskring_number;
@@ -182,7 +185,22 @@ final class KiesKring
    * |}
    * ensures \result.number() == a_kieskring_number;
    * ensures \result.name().equals(a_kieskring_name);
-   * </jml></pre>
+   * </jmll></pre>
+   */
+  /**
+   * normal_behavior
+   * {|
+   *     requires 0 <= a_kieskring_number;
+   *     requires a_kieskring_number <= CandidateList.MAX_KIESKRINGEN_PER_CANDIDATE_LIST;
+   *     requires a_kieskring_name.length() <= KIESKRING_NAME_MAX_LENGTH;
+   *     modifies MY_CACHED_KIESKRINGEN[a_kieskring_number];
+   *   also
+   *     requires MY_CACHED_KIESKRINGEN[a_kieskring_number] != null;
+   *     requires MY_CACHED_KIESKRINGEN[a_kieskring_number].name().equals(a_kieskring_name);
+   *     modifies \nothing;
+   * |}
+   * ensures \result.number() == a_kieskring_number;
+   * ensures \result.name().equals(a_kieskring_name);
    */
   static /*@ non_null @*/ KiesKring make(final byte a_kieskring_number,
                                          final /*@ non_null @*/ String a_kieskring_name) {
@@ -494,7 +512,7 @@ final class KiesKring
   }
 
   /** {@inheritDoc} */
-  public String toString() {
+  public /*@ non_null @*/ String toString() {
     return number() + "." + (number() < 10 ? "  " : " ") + name();
   }
 
@@ -502,7 +520,7 @@ final class KiesKring
   // Implementation of Comparable
 
   /** {@inheritDoc} */
-  public int compareTo(final Object an_object) {
+  public int compareTo(final /*@ non_null @*/ Object an_object) {
     if (!(an_object instanceof KiesKring)) {
       throw new ClassCastException();
     }

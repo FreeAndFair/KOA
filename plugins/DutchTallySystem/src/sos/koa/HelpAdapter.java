@@ -16,7 +16,8 @@ import javax.swing.*;
  * @author Engelbert Hubbers (hubbers@cs.kun.nl)
  * Dehubbified by MO, meta-dehubbified and HTMLed by CB + MO.
  */
-public class HelpAdapter extends JFrame implements ActionListener, KOAConstants { 
+public class HelpAdapter extends JFrame
+	implements ActionListener, KOAConstants { 
 
    /*@ spec_public */ static final Dimension PREFERRED_SIZE = new Dimension(500,500);
 

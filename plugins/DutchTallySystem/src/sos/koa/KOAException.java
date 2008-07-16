@@ -11,7 +11,7 @@ package sos.koa;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public class KOAException extends Exception {
+public /*@ nullable_by_default @*/ class KOAException extends Exception {
 
    /**
     * Constructs a new exception with error message <code>s</code>.

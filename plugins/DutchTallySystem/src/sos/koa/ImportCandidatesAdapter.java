@@ -26,7 +26,7 @@ import org.xml.sax.helpers.DefaultHandler;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public class ImportCandidatesAdapter extends Task
+public /*@ nullable_by_default @*/ class ImportCandidatesAdapter extends Task
 {
    /** The candidate list. */
    CandidateList candidates; //@ in objectState;

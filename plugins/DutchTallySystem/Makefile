@@ -1,4 +1,4 @@
-# @todo kiniry 16 Aug 2005 - Remove jmlc_junit seperate compilation
+# @todo kiniry 16 Aug 2005 - Remove jmlc_junit separate compilation
 # and classfile directory as it is no longer necessary with JML 5.
 # Modified 2007, Systems Research Group, University College Dublin
 
@@ -9,12 +9,17 @@ BIBWARN = 'LaTeX Warning: Citation'
 REFWARN = 'Rerun to get cross-references'
 LATEXMAX = 6
 FIGSCALE = 0.5
+JMLVERSION = 5.4
 
 # CLASSPATH components
 
-CORECP	= src:specs
-SPECS = ../../specs
+CORECP	= src
+#CORECP	= src:specs
+SPECS = specs
+#SPECS = ../../specs
+JMLSPECS = /usr/local/Java/JML-$(JMLVERSION)/specs
 JARS = ../../infrastructure/jars
+SOURCEPATH = $(CORECP):$(JMLSPECS):$(SPECS)
 JMLCP	= $(JARS)/jmlruntime.jar:$(JARS)/jmljunitruntime.jar:$(JARS)/jml-release.jar:$(SPECS)
 JUNITCP	= $(JARS)/junit.jar
 JCECP	= $(JARS)/bcprov-jdk14-129.jar
@@ -25,12 +30,12 @@ ESCJAVA2CP = $(JARS)/esctools2.jar
 
 # local variables for build process
 
-jml ?= /usr/local/bin/jml
+jml ?= /usr/local/Java/bin/jml
 javac ?= /usr/bin/javac
-jmlrac ?= /usr/local/bin/jmlrac
-jmlc ?= /usr/local/bin/jmlc
-jmldoc ?= /usr/local/bin/jmldoc
-jmlunit ?= /usr/local/bin/jmlunit
+jmlrac ?= /usr/local/Java/bin/jmlrac
+jmlc ?= /usr/local/Java/bin/jmlc --oldSemantics
+jmldoc ?= /usr/local/Java/bin/jmldoc
+jmlunit ?= /usr/local/Java/bin/jmlunit
 
 basedocdir = doc
 srcpath = src
@@ -40,10 +45,10 @@ jmlc_path =	jmlc
 jmlunit_path =	jmlunit
 jmlc_jmlunit_path =	jmlc_jmlunit
 
-ESCPATH = ../../../ESCJava2
-escjava = $(ESCPATH)/Escjava/escj -source 1.4 -vclimit 2500000
-export ESCTOOLS_ROOT=$(ESCPATH)
-export SIMPLIFY=$(ESCPATH)/Escjava/release/master/bin/Simplify-1.5.4.macosx
+ESCPATH = /usr/local/Java/bin
+escjava = $(ESCPATH)/escjava2 -source 1.4 -vclimit 2500000
+#export ESCTOOLS_ROOT=$(ESCPATH)
+export SIMPLIFY=/usr/local/Java/ESCJava2/Simplify-1.5.4.macosx
 
 # Various CLASSPATH constructions
 
@@ -85,7 +90,7 @@ jmldocdir =	$(basedocdir)/jmldocs
 
 main_memory_use =	-ms256M -mx256M
 rac_memory_use =	-ms256M -mx320M
-test_memory_use	=	-ms256M -mx320M
+test_memory_use	=	-ms256M -mx1024M
 
 copyright = "SOA<br />&copy; 2004 SoS Group<br />All Rights Reserved"
 
@@ -142,7 +147,7 @@ copyright = "SOA<br />&copy; 2004 SoS Group<br />All Rights Reserved"
 
 # targets
 
-all:	build source_docs test escjava distr
+all:	build source_docs test # escjava distr
 
 build:	classes jml jmlc jmlunit_classes
 
@@ -187,16 +192,18 @@ classes.stamp:	$(javafiles)
 jml:	jml.stamp
 
 jml.stamp:	$(javafiles)
-	export CLASSPATH=$(JMLC_CLASSPATH);\
-	$(jml) --Quiet --source 1.4 -A -a $(javapat) && \
+	$(jml) --classpath $(JMLC_CLASSPATH) \
+	  --sourcepath $(SOURCEPATH) \
+	  --Quiet --source 1.4 -A -a $(javapat) && \
 	touch jml.stamp
 
-jmlc:	jmlc.stamp
+jmlc:	jmlc.stamp jml.stamp
 
 jmlc.stamp:	$(javafiles)
 	@mkdir -p $(jmlc_path)
-	export CLASSPATH=$(JMLC_CLASSPATH);\
-	$(jmlc) --destination $(jmlc_path) \
+	$(jmlc) --classpath $(JMLC_CLASSPATH) \
+		--sourcepath $(SOURCEPATH) \
+		--destination $(jmlc_path) \
 		--Quiet --source 1.4 -A -a $(javapat) && \
 	touch jmlc.stamp
 
@@ -204,8 +211,9 @@ jmlc_jmlunit: jmlc_jmlunit.stamp
 
 jmlc_jmlunit.stamp:	$(javafiles)
 	@mkdir -p $(jmlc_jmlunit_path)
-	export CLASSPATH=$(JUNIT_CLASSPATH);\
-	$(jmlc) --destination $(jmlc_jmlunit_path) \
+	$(jmlc) --classpath $(JUNIT_CLASSPATH) \
+		--sourcepath $(SOURCEPATH) \
+		--destination $(jmlc_jmlunit_path) \
 		--Quiet --source 1.4 -A -a $(javapat) && \
 	touch jmlc_jmlunit.stamp
 
@@ -213,11 +221,11 @@ jmlunit:	jmlc_jmlunit jmlunit.stamp
 
 jmlunit.stamp:	$(javafiles)
 	@mkdir -p $(jmlunit_path)
-	export CLASSPATH=$(JAVAC_CLASSPATH);\
-	$(jmlunit) --destination $(jmlunit_path) \
-		--sourcepath $(specpath):$(srcpath) \
+	$(jmlunit) --classpath $(JAVAC_CLASSPATH) \
+		--destination $(jmlunit_path) \
+		--sourcepath $(SOURCEPATH) \
 		--package --source 1.4 \
-		--testLevel=2 $(srcpath)/sos/koa && \
+		--testLevel=2 $(core_javafiles) && \
 	touch jmlunit.stamp
 
 jmlunit_classes:	jmlunit jmlunit_classes.stamp
@@ -263,12 +271,7 @@ escjava2-current:
 escjava2-core:
 	export CLASSPATH=$(ESCJAVA_CLASSPATH);\
 	$(escjava) -bootclasspath $(BOOTCP) \
-		src/sos/koa/Candidate.java \
-		src/sos/koa/CandidateList.java \
-		src/sos/koa/District.java \
-		src/sos/koa/KiesKring.java \
-		src/sos/koa/KiesLijst.java \
-		src/sos/koa/VoteSet.java
+		$(core_javafiles)
 
 checkstyle.stamp:
 	export CLASSPATH=$(CHECKSTYLE_CLASSPATH); \
@@ -335,7 +338,7 @@ viewpdf-test:	classes
 
 # generating source-based documentation
 
-source_docs:	javadoc jmldoc
+source_docs:	javadoc # jmldoc
 
 javadoc:	javadoc.stamp
 
@@ -357,7 +360,7 @@ jmldoc.stamp:	$(javafiles) $(srcpath)/sos/koa/package.html $(basedocdir)/overvie
 	mkdir -p $(jmldocdir); \
 	export CLASSPATH=$(BASE_CLASSPATH);\
 	$(jmldoc) -d $(jmldocdir) $(jmldocflags) \
-	-sourcepath .:$(srcpath):$(jdksrcpath) \
+	-sourcepath .:$(SOURCEPATH):$(jdksrcpath) \
 	-overview $(basedocdir)/overview.html \
 	-doctitle "SOA: The SoS/KOA Vote Recount System" \
 	-header $(copyright) \

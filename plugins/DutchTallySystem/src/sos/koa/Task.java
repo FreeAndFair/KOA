@@ -17,7 +17,8 @@ import javax.swing.*;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public abstract class Task implements KOAConstants, ActionListener
+public abstract /*@ nullable_by_default @*/ class Task
+	implements KOAConstants, ActionListener
 {
    /** The current sub-task. */
    /*@ spec_public */ int subTaskCount; //@ in objectState;
@@ -260,7 +261,7 @@ public abstract class Task implements KOAConstants, ActionListener
     *
     * @param ae Event indicating the button is pressed.
     */
-   public void actionPerformed(ActionEvent ae) {
+   public void actionPerformed(/*@ non_null @*/ ActionEvent ae) {
       if (isProgressMonitoredTask()) {
          (new MonitoredThread()).start();
       } else {

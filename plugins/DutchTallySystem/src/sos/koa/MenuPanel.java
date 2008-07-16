@@ -20,7 +20,8 @@ import javax.swing.*;
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
 
-public class MenuPanel extends JPanel implements KOAConstants
+public /*@ nullable_by_default @*/ class MenuPanel extends JPanel
+	implements KOAConstants
 {
   /** The (single) menu panel instance. */
 

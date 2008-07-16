@@ -13,7 +13,7 @@ import java.util.Iterator;
  * @version $Id$
  */
 
-public class VoteSet
+public /*@ nullable_by_default @*/ class VoteSet
   implements java.io.Serializable
 {
   /**

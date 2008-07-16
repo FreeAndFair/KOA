@@ -13,7 +13,7 @@ import java.io.*;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public class FileNameFilter extends javax.swing.filechooser.FileFilter
+public /*@ nullable_by_default @*/ class FileNameFilter extends javax.swing.filechooser.FileFilter
 {
    /** Allowed extension of files accepted by this filter. */
    String extension; //@ in objectState;

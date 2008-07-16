@@ -41,7 +41,7 @@ import org.apache.fop.messaging.MessageHandler;
  *
  * @author Engelbert Hubbers (hubbers@cs.kun.nl)
  */
-public class ReportAdapter extends Task {
+public /*@ nullable_by_default @*/ class ReportAdapter extends Task {
 
   String info; //@ in objectState;
 

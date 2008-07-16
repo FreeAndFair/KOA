@@ -35,7 +35,7 @@ import javax.swing.*;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public class ImportKeyAdapter extends Task
+public /*@ nullable_by_default @*/ class ImportKeyAdapter extends Task
 {
    /** The type of encryption used to wrap the key. */
    private static final String KEY_DECRYPTION_ALGORITHM = "PBEWithMD5AndDES";

@@ -12,7 +12,7 @@ package sos.koa;
  * @version $Id$
  */
 
-class District
+/*@ nullable_by_default @*/ class District
   implements Comparable, java.io.Serializable
 {
   /**
@@ -168,7 +168,7 @@ class District
   }
 
   /** {@inheritDoc} */
-  public final String toString() {
+  public final /*@ non_null @*/ String toString() {
     return my_number + "." + (my_number < 10 ? "  " : " ") + my_name;
     // @verification kiniry 16 May 2004 - String concatenation semantics for 
     // ESC/Java2 are incomplete.  The postcondition "\result != null" of 
@@ -179,7 +179,7 @@ class District
   // Implementation of Comparable
 
   /** {@inheritDoc} */
-  public final int compareTo(final Object an_object) {
+  public final int compareTo(final /*@ non_null @*/ Object an_object) {
     if (!(an_object instanceof District)) {
       throw new ClassCastException();
     }

@@ -11,7 +11,7 @@ package sos.koa;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public class Hex {
+public /*@ nullable_by_default @*/ class Hex {
 
    /**
     * This private constructor makes it impossible to create

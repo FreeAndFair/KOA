@@ -16,7 +16,8 @@ import javax.swing.*;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public class ExitAdapter extends Task implements WindowListener
+public /*@ nullable_by_default @*/ class ExitAdapter extends Task
+	implements WindowListener
 {
    /**
     * Constructs this adapter.

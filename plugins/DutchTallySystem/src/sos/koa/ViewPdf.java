@@ -22,7 +22,7 @@ import java.io.IOException;
  * @version $Id$
  */
 
-class ViewPdf
+/*@ nullable_by_default @*/ class ViewPdf
 {
   /**
    * The command-line Java property that is used to determine a

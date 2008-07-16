@@ -68,7 +68,8 @@ import org.xml.sax.EntityResolver;
  * events from Java objects.
  */
 
-public abstract class AbstractObjectReader implements XMLReader {
+public abstract class AbstractObjectReader
+	implements XMLReader {
 
     private static final String NAMESPACES =
         "http://xml.org/sax/features/namespaces";

@@ -11,7 +11,7 @@ package sos.koa;
  * @version $Id$
  */
 
-class CandidateListMetadata
+/*@ nullable_by_default @*/ class CandidateListMetadata
 {
   /**
    * The request reference of the associated candidate list.
@@ -245,7 +245,7 @@ class CandidateListMetadata
   // Implementation of Object
 
   /** {@inheritDoc} */
-  public final String toString() {
+  public final /*@ non_null @*/ String toString() {
     return "request reference  : " + requestReference() + "\n" +
       "response reference : " + responseReference() + "\n" +
       "creation time      : " + creationTime() + "\n" +

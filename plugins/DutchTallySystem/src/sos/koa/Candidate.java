@@ -11,7 +11,7 @@ package sos.koa;
  * @version $Id$
  */
 
-public class Candidate
+public /*@ nullable_by_default @*/ class Candidate
   implements Comparable, java.io.Serializable
 {
   /**
@@ -389,7 +389,7 @@ public class Candidate
   }
 
   /** {@inheritDoc} */
-  public final String toString() {
+  public final /*@ non_null @*/ String toString() {
     return position_number() + "." + (position_number() < 10 ? "  " : " ") +
       initials() + " " + lastname() + " (" + firstname() + ")\n" +
       "kieskring :  " + kiesKring() +
@@ -400,7 +400,7 @@ public class Candidate
   // Implementation of Comparable
 
   /** {@inheritDoc} */
-  public final int compareTo(final Object an_object) {
+  public final int compareTo(final /*@ non_null @*/ Object an_object) {
     if (!(an_object instanceof Candidate)) {
       throw new ClassCastException();
     }

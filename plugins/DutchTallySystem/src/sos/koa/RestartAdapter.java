@@ -15,7 +15,7 @@ import javax.swing.*;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public class RestartAdapter extends Task {
+public /*@ nullable_by_default @*/ class RestartAdapter extends Task {
 
    /**
     * Constructs a new adapter.

@@ -37,7 +37,7 @@ import javax.crypto.BadPaddingException;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public class DecryptAdapter extends Task
+public /*@ nullable_by_default @*/ class DecryptAdapter extends Task
 {
   /** The salt value used to generate the session keys. */
   private static final byte [] SALT =

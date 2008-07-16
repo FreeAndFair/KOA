@@ -16,7 +16,7 @@ import javax.swing.*;
  * 
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public class CountAdapter extends Task
+public /*@ nullable_by_default @*/ class CountAdapter extends Task
 {
   /** The datastructure containing counted votes. */
   /*@ spec_public @*/ VoteSet voteSet; //@ in objectState;

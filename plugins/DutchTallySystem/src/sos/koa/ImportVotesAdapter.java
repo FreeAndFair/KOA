@@ -22,7 +22,7 @@ import org.xml.sax.helpers.DefaultHandler;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-public class ImportVotesAdapter extends Task
+public /*@ nullable_by_default @*/ class ImportVotesAdapter extends Task
 {
    /** The imported, not yet decrypted, votes. */
    /*@ spec_public */ ArrayList rawVotes; //@ in objectState;

@@ -16,7 +16,7 @@ import javax.swing.*;
  *
  * @author Martijn Oostdijk (martijno@cs.kun.nl)
  */
-class ClearAdapter extends Task
+/*@ nullable_by_default @*/ class ClearAdapter extends Task
 {
   /** A flag indicating if the system has been cleared. */
   boolean systemIsCleared;

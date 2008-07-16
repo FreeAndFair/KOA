@@ -19,7 +19,7 @@ import java.util.TreeMap;
  * @version $Id$
  */
 
-class CandidateList
+/*@ nullable_by_default @*/ class CandidateList
   implements java.io.Serializable
 {
   /**

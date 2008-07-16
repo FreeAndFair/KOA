@@ -11,7 +11,7 @@ package sos.koa;
  * @version $Id$
  */
 
-final class KiesLijst
+final /*@ nullable_by_default @*/ class KiesLijst
   implements Comparable, java.io.Serializable
 {
   /**
@@ -377,7 +377,7 @@ final class KiesLijst
   }
 
   /** {@inheritDoc} */
-  public String toString() {
+  public /*@ non_null @*/ String toString() {
     Candidate cand;
     final StringBuffer result =
       new StringBuffer(number() + "." + (number() < 10 ? "  " : " ") + name() + "\n");
@@ -395,7 +395,7 @@ final class KiesLijst
   // Implementation of Comparable
 
   /** {@inheritDoc} */
-  public int compareTo(final Object an_object) {
+  public int compareTo(final /*@ non_null @*/ Object an_object) {
     if (!(an_object instanceof KiesKring)) {
       throw new ClassCastException();
     }
