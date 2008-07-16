@@ -6,6 +6,11 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>net.sourceforge.metrics.builder</name>
 			<arguments>
 			</arguments>
@@ -25,11 +30,8 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-<<<<<<< .mine
 					<value>&lt;project&gt;/.externalToolBuilders/KOA Ant Build.launch</value>
-=======
 					<value>&lt;project&gt;/.externalToolBuilders/Votail.launch</value>
->>>>>>> .r52
 				</dictionary>
 			</arguments>
 		</buildCommand>
@@ -39,11 +41,8 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-<<<<<<< .mine
 					<value>&lt;project&gt;/.externalToolBuilders/Voting Client Ant Build.launch</value>
-=======
 					<value>&lt;project&gt;/.externalToolBuilders/DutchTally.launch</value>
->>>>>>> .r52
 				</dictionary>
 			</arguments>
 		</buildCommand>
@@ -53,11 +52,8 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-<<<<<<< .mine
 					<value>&lt;project&gt;/.externalToolBuilders/NL Tally System make build.launch</value>
-=======
 					<value>&lt;project&gt;/.externalToolBuilders/MobileVotingClient.launch</value>
->>>>>>> .r52
 				</dictionary>
 			</arguments>
 		</buildCommand>
