@@ -357,7 +357,7 @@ public /*@ nullable_by_default @*/ class DecryptAdapter extends Task
    *
    * @return an array of error strings.
    */
-  /*@ pure non_null */ String[] getErrors() {
+  /*@ non_null */ String[] getErrors() {
     String[] result = new String[errors.size()];
     errors.toArray(result);
     return result;

@@ -84,6 +84,7 @@ public /*@ nullable_by_default @*/ class CountAdapter extends Task
   /*@ 
     @ also
     @ assignable AuditLog.*;
+    @ assignable \not_specified;
     @*/
   void logCompleted() {
     AuditLog.setCountSuccess(true);
@@ -270,7 +271,7 @@ public /*@ nullable_by_default @*/ class CountAdapter extends Task
    *
    * @return an array of error strings.
    */
-  /*@ pure @*/ String[] getErrors() {
+  String[] getErrors() {
     String[] result = new String[errors.size()];
     errors.toArray(result);
     return result;

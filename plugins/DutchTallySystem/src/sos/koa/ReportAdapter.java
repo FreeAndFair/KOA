@@ -214,7 +214,7 @@ public /*@ nullable_by_default @*/ class ReportAdapter extends Task {
     return info;
   }
 
-  /*@ pure @*/ public void convertAuditLog2PDF(String xslt, File xmlOut, File pdfOut)
+  public void convertAuditLog2PDF(String xslt, File xmlOut, File pdfOut)
     throws IOException, FOPException, TransformerException {
     convertXML2PDF(new SAXSource(new AuditLogXMLReader(),
                                  new InputSource()),
@@ -223,7 +223,7 @@ public /*@ nullable_by_default @*/ class ReportAdapter extends Task {
                    new FileOutputStream(pdfOut));
   }
 
-  /*@ pure @*/ public void convertCandidateList2PDF(String xslt, File xmlOut, File pdfOut)
+  public void convertCandidateList2PDF(String xslt, File xmlOut, File pdfOut)
     throws IOException, FOPException, TransformerException {
     CandidateList candidates =
       MenuPanel.getTheMenuPanel().getCandidateList();
@@ -234,7 +234,7 @@ public /*@ nullable_by_default @*/ class ReportAdapter extends Task {
                    new FileOutputStream(pdfOut));
   }
 
-  /*@ pure @*/ private void convertXML2PDF(Source src, StreamSource xslt,
+  private void convertXML2PDF(Source src, StreamSource xslt,
                                            StreamResult xmlOut, OutputStream pdfOut)
     throws IOException, FOPException, TransformerException {
 

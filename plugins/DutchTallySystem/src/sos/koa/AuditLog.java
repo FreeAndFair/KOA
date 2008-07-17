@@ -243,7 +243,7 @@ public /*@ nullable_by_default @*/ class AuditLog
   *  @return the current time.
   */
 
- public /*@ pure non_null @*/ static String getCurrentTimestamp() {
+ public /*@ non_null @*/ static String getCurrentTimestamp() {
    Date rightNow = new Date(System.currentTimeMillis());
    return rightNow.toString();
  }

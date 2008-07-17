@@ -87,7 +87,7 @@ public class HelpAdapter extends JFrame
     *
     * @param ae an event indicating the user pressed the help button.
     */
-   public void actionPerformed(ActionEvent ae) {
+   public void actionPerformed(/*@ non_null @*/ ActionEvent ae) {
       setText(MenuPanel.getTheMenuPanel().getState());
       setVisible(!isVisible());
       setSize(PREFERRED_SIZE);
