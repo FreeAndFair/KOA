@@ -454,16 +454,16 @@ clean_other_stamps:
 	rm -f escjava2-typecheck.stamp escjava2.stamp checkstyle.stamp
 
 clean_classes:
-	rm -rf distr $(buildpath) classes.stamp jmlunit_classes.stamp
+	rm -rf distr $(buildpath)/* classes.stamp jmlunit_classes.stamp
 
 clean_jml:
 	rm -rf jml.stamp
 
 clean_jmlc:
-	rm -rf $(jmlc_path) jmlc.stamp
+	rm -rf $(jmlc_path)/* jmlc.stamp
 
 clean_jmlcjunit:
-	rm -rf $(jmlc_jmlunit_path) jmlc_jmlunit.stamp
+	rm -rf $(jmlc_jmlunit_path)/* jmlc_jmlunit.stamp
 
 clean_jmlunit:
 	rm -f $(generated_jmlunitfiles) jmlunit.stamp
