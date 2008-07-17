@@ -39,7 +39,7 @@ public class StatementExecutor {
 	}
 	
 	/**
-	 * Retieves all information pertaining to the topics if they are currently active.
+	 * Retrieves all information pertaining to the topics if they are currently active.
 	 * @return List representing the topics and all associated data.
 	 */
 	public ArrayList showTopics() {
@@ -64,7 +64,7 @@ public class StatementExecutor {
 				Calendar retEndDate = Calendar.getInstance();
 				retEndDate.set(retYear,retMonth,retDay);
 				
-				if((c.compareTo(retStDate) > 0) && (c.compareTo(retEndDate) < 0)) {
+				if(c.after(retStDate) && c.before(retEndDate)) {
 					topicList.add(result.getString("topic"));
 					topicList.add(String.valueOf(result.getInt("idNum")));
 					topicList.add(result.getBytes("image"));
