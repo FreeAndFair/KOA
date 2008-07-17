@@ -5,8 +5,6 @@
 	<classpathentry kind="src" path="plugins/votail/jmlunit"/>
 	<classpathentry kind="src" path="plugins/DutchTallySystem/src"/>
 	<classpathentry kind="src" path="infrastructure/source/WebVotingSystem/src"/>
-	<classpathentry kind="src" path="infrastructure/source/MobileVotingSystem/SMSRelay/src"/>
-	<classpathentry kind="src" path="infrastructure/source/MobileVotingSystem/Voting Client J2ME/src"/>
 	<classpathentry kind="src" path="infrastructure/source/MobileVotingSystem/Voting Server J2SE/src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.4.2"/>
 	<classpathentry kind="lib" path="infrastructure/jars/avalon-framework-4.2.0.jar"/>
