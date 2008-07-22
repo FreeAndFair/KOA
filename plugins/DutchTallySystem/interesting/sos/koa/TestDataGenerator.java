@@ -1,8 +1,8 @@
 /*
- * Copyright 2004 SoS Group, University of Nijmegen
+ * Copyright 2008 University College Dublin, Joe Kiniry, Dan Zimmerman
  *
- * @author Joe Kiniry <kiniry@cs.kun.nl>
- * @version $Id$
+ * @author Joe Kiniry <kiniry@acm.org>
+ * @author Dan Zimmerman <dmz@acm.org>
  */
 
 package sos.koa;
