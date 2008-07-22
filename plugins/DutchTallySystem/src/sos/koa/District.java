@@ -70,6 +70,7 @@ package sos.koa;
    *   ensures name().equals(a_district_name);
    * </jml></pre>
    */
+  // @bug (@wtf) dmz & kiniry - constructor is missing KiesKring parameter!
   District (final int a_district_number,
             final /*@ non_null @*/ String a_district_name) {
     my_number = a_district_number;
