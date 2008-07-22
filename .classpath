@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="plugins/votail/src"/>
-	<classpathentry kind="src" path="plugins/DutchTallySystem/jmlunit"/>
+	<classpathentry kind="src" path="plugins/DutchTallySystem/interesting"/>
 	<classpathentry kind="src" path="plugins/votail/jmlunit"/>
 	<classpathentry kind="src" path="plugins/DutchTallySystem/src"/>
 	<classpathentry kind="src" path="infrastructure/source/WebVotingSystem/src"/>
@@ -17,7 +17,7 @@
 	<classpathentry kind="lib" path="infrastructure/jars/fop.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/j2ee.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/jaxrpc.jar"/>
-	<classpathentry kind="lib" path="infrastructure/jars/jmljunitruntime.jar"/>
+	<classpathentry kind="lib" path="infrastructure/jars/jmljunitruntime.jar" sourcepath="/usr/local/java/JML-5.5"/>
 	<classpathentry kind="lib" path="infrastructure/jars/jmlmodels.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/jmlmodelsnonrac.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/jml-release.jar"/>
