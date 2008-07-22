@@ -9,7 +9,7 @@ BIBWARN = 'LaTeX Warning: Citation'
 REFWARN = 'Rerun to get cross-references'
 LATEXMAX = 6
 FIGSCALE = 0.5
-JMLVERSION = 5.4
+JMLVERSION = 5.5
 
 # CLASSPATH components
 
@@ -43,7 +43,9 @@ specpath =	specs
 buildpath =	build
 jmlc_path =	jmlc
 jmlunit_path =	jmlunit
+interesting_path = interesting
 jmlc_jmlunit_path =	jmlc_jmlunit
+jmlc_interesting_path = jmlc_interesting
 
 ESCPATH = /usr/local/Java/bin
 escjava = $(ESCPATH)/escjava2 -source 1.4 -vclimit 2500000
@@ -56,15 +58,16 @@ BASE_CLASSPATH	= $(CORECP):$(JCECP):$(FOPCP):$(MISCCP):$(JUNITCP):$(JMLCP)
 JAVAC_CLASSPATH	= $(buildpath):$(BASE_CLASSPATH)
 JMLC_CLASSPATH	= $(jmlc_path):$(BASE_CLASSPATH)
 JUNIT_CLASSPATH	= $(jmlc_jmlunit_path):$(BASE_CLASSPATH)
+INTERESTING_CLASSPATH = $(jmlc_interesting_path):$(BASE_CLASSPATH)
 ESCJAVA_CLASSPATH	= $(CORECP):$(JCECP):$(FOPCP):$(MISCCP):$(JUNITCP):$(JMLCP):$(ESCJAVA2CP)
 UNIT_TEST_CLASSPATH	= $(jmlc_jmlunit_path):$(buildpath):$(JCECP):$(FOPCP):$(MISCCP):$(JUNITCP):$(JMLCP)
+INTERESTING_UNIT_TEST_CLASSPATH = $(jmlc_interesting_path):$(buildpath):$(JCECP):$(FOPCP):$(MISCCP):$(JUNITCP):$(JMLCP)
 CHECKSTYLE_CLASSPATH	= $(CORECP):$(CHECKSTYLECP)
 
 javapat	=	$(srcpath)/sos/koa/*java
 javafiles =	$(wildcard $(srcpath)/sos/koa/*java)
 core_javafiles =	$(srcpath)/sos/koa/Candidate.java \
 			$(srcpath)/sos/koa/CandidateList.java \
-			$(srcpath)/sos/koa/CandidateListMetadata.java \
 			$(srcpath)/sos/koa/District.java \
 			$(srcpath)/sos/koa/KiesKring.java \
 			$(srcpath)/sos/koa/KiesLijst.java \
@@ -80,6 +83,9 @@ adapter_files =	$(wildcard $(srcpath)/sos/koa/*Adapter.java)
 jmlunitpat =	$(jmlunit_path)/sos/koa/*java
 jmlunitfiles =	$(wildcard $(jmlunit_path)/sos/koa/*java)
 generated_jmlunitfiles	=	$(wildcard $(jmlunit_path)/sos/koa/*_JML_Test.java)
+interestingpat =	$(interesting_path)/sos/koa/*java
+interestingfiles =	$(wildcard $(interesting_path)/sos/koa/*java)
+generated_interestingfiles	=	$(wildcard $(interesting_path)/sos/koa/*_JML_Test.java)
 classfiles =	$(foreach javafile,$(javafiles),\
 		$(subst .java,.class,$(javafile)))
 javadoc =	javadoc
@@ -138,22 +144,23 @@ copyright = "SOA<br />&copy; 2004 SoS Group<br />All Rights Reserved"
 
 .PHONY: all build escjava test ps pdf spellcheck \
 	classes jmlc jmlc_jmlunit jmlunit jmlunit_classes \
+	jmlc_interesting interesting interesting_classes \
 	escjava2-typecheck escjava2 escjava2-current escjava2-core \
-	main main-jmlrac jml-junit-tests jmlrac-tests \
+	main main-jmlrac jml-junit-tests jmlrac-tests interesting-tests \
 	source_docs javadoc jmldoc checkstyle \
 	clean clean_other_stamps clean_classes clean_jmlc \
-	clean_jmlcjunit clean_jmlunit \
+	clean_jmlcjunit clean_jmlunit clean_jmlcintersting clean_interesting \
 	clean_javadoc clean_jmldoc
 
 # targets
 
 all:	build source_docs test # escjava distr
 
-build:	classes jml jmlc jmlunit_classes
+build:	classes jml jmlc jmlunit_classes interesting_classes
 
 escjava:	escjava2-typecheck escjava2
 
-test:	jmlrac-tests
+test:	jmlrac-tests interesting-tests
 
 # paper documentation-related
 
@@ -207,6 +214,8 @@ jmlc.stamp:	$(javafiles)
 		--Quiet --source 1.4 -A -a $(javapat) && \
 	touch jmlc.stamp
 
+# jml-junit
+
 jmlc_jmlunit: jmlc_jmlunit.stamp
 
 jmlc_jmlunit.stamp:	$(javafiles)
@@ -235,6 +244,38 @@ jmlunit_classes.stamp:	$(jmlunitfiles)
 	export CLASSPATH=$(JUNIT_CLASSPATH);\
 	$(javac) -g -d $(jmlc_jmlunit_path) -source 1.4 $(jmlunitpat) && \
 	touch jmlunit_classes.stamp
+
+# interestingness testing
+
+jmlc_interesting: jmlc_interesting.stamp
+
+jmlc_interesting.stamp:	$(javafiles)
+	@mkdir -p $(jmlc_interesting_path)
+	$(jmlc) --classpath $(INTERESTING_CLASSPATH) \
+		--sourcepath $(SOURCEPATH) \
+		--destination $(jmlc_interesting_path) \
+		--Quiet --source 1.4 -A -a $(javapat) && \
+	touch jmlc_interesting.stamp
+
+interesting:	jmlc_interesting interesting.stamp
+
+interesting.stamp:	$(javafiles)
+	@mkdir -p $(interesting_path)
+	$(jmlunit) --classpath $(JAVAC_CLASSPATH) \
+		--useGenerator \
+		--destination $(interesting_path) \
+		--sourcepath $(SOURCEPATH) \
+		--package --source 1.4 \
+		--testLevel=2 $(core_javafiles) && \
+	touch interesting.stamp
+
+interesting_classes:	interesting interesting_classes.stamp
+
+interesting_classes.stamp:	$(jmlunitfiles)
+	mkdir -p $(jmlc_interesting_path)
+	export CLASSPATH=$(INTERESTING_CLASSPATH);\
+	$(javac) -g -d $(jmlc_interesting_path) -source 1.4 $(interestingpat) && \
+	touch interesting_classes.stamp
 
 # targets related to checking software
 
@@ -306,6 +347,20 @@ jmlrac-tests:	classes jmlunit_classes
 	export CLASSPATH=$(UNIT_TEST_CLASSPATH);\
 	$(jmlrac) $(test_memory_use) sos.koa.KiesLijst_JML_Test
 	export CLASSPATH=$(UNIT_TEST_CLASSPATH);\
+	$(jmlrac) $(test_memory_use) sos.koa.VoteSet_JML_Test
+
+interesting-tests:	classes interesting_classes
+	export CLASSPATH=$(INTERESTING_UNIT_TEST_CLASSPATH);\
+	$(jmlrac) $(test_memory_use) sos.koa.Candidate_JML_Test
+	export CLASSPATH=$(INTERESTING_UNIT_TEST_CLASSPATH);\
+	$(jmlrac) $(test_memory_use) sos.koa.CandidateList_JML_Test
+	export CLASSPATH=$(INTERESTING_UNIT_TEST_CLASSPATH);\
+	$(jmlrac) $(test_memory_use) sos.koa.District_JML_Test
+	export CLASSPATH=$(INTERESTING_UNIT_TEST_CLASSPATH);\
+	$(jmlrac) $(test_memory_use) sos.koa.KiesKring_JML_Test
+	export CLASSPATH=$(INTERESTING_UNIT_TEST_CLASSPATH);\
+	$(jmlrac) $(test_memory_use) sos.koa.KiesLijst_JML_Test
+	export CLASSPATH=$(INTERESTING_UNIT_TEST_CLASSPATH);\
 	$(jmlrac) $(test_memory_use) sos.koa.VoteSet_JML_Test
 
 jmlrac-tests-current:	classes jmlunit_classes
@@ -445,11 +500,14 @@ usermanual.stamp:
 
 # targets related to cleaning up
 
-clean:	clean_javadoc clean_jmldoc clean_classes clean_jml clean_jmlc clean_jmlunit clean_jmlcjunit clean_other_stamps clean_distr clean_src_distr clean_usermanual
+clean:	clean_javadoc clean_jmldoc clean_classes clean_jml clean_jmlc \
+	clean_jmlunit clean_jmlcjunit clean_interesting clean_jmlcinteresting \
+	clean_other_stamps clean_distr clean_src_distr clean_usermanual
 	rm -f $(BASE).dvi $(BASE).ps $(BASE).pdf
 	rm -f *.log *.bbl *.blg *.aux *.out
 	rm -f *.pstex *.pstex_t *.pdf *.pdf_t *.pdftex
 	rm -f *.bak
+
 clean_other_stamps:
 	rm -f escjava2-typecheck.stamp escjava2.stamp checkstyle.stamp
 
@@ -467,6 +525,12 @@ clean_jmlcjunit:
 
 clean_jmlunit:
 	rm -f $(generated_jmlunitfiles) jmlunit.stamp
+
+clean_jmlcinteresting:
+	rm -rf $(jmlc_interesting_path)/* jmlc_interesting.stamp
+
+clean_interesting:
+	rm -f $(generated_interestingfiles) interesting.stamp
 
 clean_javadoc:
 	rm -rf $(javadocdir)/*.html \
