@@ -24,18 +24,19 @@ clean:
 
 release: clean
 	mkdir -p $(RELEASE_DIR)
-	svn export infrastructure $(RELEASE_DIR)/infrastructure
-	svn export plugins $(RELEASE_DIR)/plugins
-	svn export docs $(RELEASE_DIR)/docs
-	svn export papers $(RELEASE_DIR)/papers
-	svn export specs $(RELEASE_DIR)/specs
-	svn export servletspecs $(RELEASE_DIR)/servletspecs
+	cp -R infrastructure $(RELEASE_DIR)/infrastructure
+	cp -R plugins $(RELEASE_DIR)/plugins
+	cp -R docs $(RELEASE_DIR)/docs
+	cp -R papers $(RELEASE_DIR)/papers
+	cp -R specs $(RELEASE_DIR)/specs
+	cp -R servletspecs $(RELEASE_DIR)/servletspecs
 	cp license.txt $(RELEASE_DIR)
 	cp ReadMe.txt $(RELEASE_DIR)
 	cp ChangeLog.txt $(RELEASE_DIR)
 	cp .project $(RELEASE_DIR)
 	cp .classpath $(RELEASE_DIR)
-	mkdir $(RELEASE_DIR)/.externalToolBuilders
+	cp -R .externalToolBuilders $(RELEASE_DIR)/.externalToolBuilders
+	-find $(RELEASE_DIR) -name ".svn*" -exec rm -rf {} \;
 	zip -r koa$(VERSION).zip $(RELEASE_DIR)
 	tar cvf koa$(VERSION).tar $(RELEASE_DIR)
 	gzip koa$(VERSION).tar 
