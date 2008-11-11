@@ -1,0 +1,8 @@
+Run cianvotail.server.Main - a server will start at http://localhost:9001/
+Go to http://localhost:9001/admin (this will only work in Firefox 2+)
+Click "Opened", when prompted enter sample admin username: admin6, password: admin6
+Go to http://localhost:9001/vote
+Enter some ballot entries, click "Next", then "Vote", when prompted enter sample voter username: john, password john
+The ballot reciept is returned as the response to a Ajax HTTP POST request - it should be obviously displayed to the user, but it currently isn't - use a tool like FireBug to show the response
+Go back to http://localhost:9001/admin and click "Closed"
+Go to http://localhost:9001/election/ballots - this should give a list of ballots, but is curently giving a parsing error

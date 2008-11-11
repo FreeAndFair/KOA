@@ -29,5 +29,6 @@
 	<classpathentry kind="lib" path="infrastructure/jars/xmlrpc-1.2-b1-modified.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/junit-4.4.jar"/>
 	<classpathentry kind="lib" path="plugins/DutchTallySystem/jmlc_jmlunit"/>
+	<classpathentry kind="src" path="/jmlspecs"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
