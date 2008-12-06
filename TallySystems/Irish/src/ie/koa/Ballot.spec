@@ -6,7 +6,7 @@ package ie.koa;
  * (PRSTV) system.
  * 
  * @author Dermot Cochran
- * @copyright Systems Research Group and University College Dublin, Ireland.
+ * @copyright 2005-2008
  * @reviewer Joe Kiniry
  * 
  * @see <a href="http://www.cev.ie/htm/tenders/pdf/1_2.pdf">Department of 
@@ -183,6 +183,7 @@ public class Ballot {
     @   requires 0 <= listSize;
     @   requires (\forall int i; 0 <= i && i < listSize;
     @     (candidateIDList[i]) != NONTRANSFERABLE);
+    @   assignable preferenceList;
     @   ensures numberOfPreferences == listSize;
     @   ensures ballotID == uniqueID;
     @   ensures (\forall int i; 0 <= i && i < listSize;

@@ -1,5 +1,7 @@
 package ie.koa;
 
+import ie.koa.UniqueNumber;
+
 /**
  * The Ballot class represents a ballot paper in an Irish election,
  * which uses the Proportional Representation Single Transfer Vote.
@@ -9,6 +11,9 @@ package ie.koa;
  * Department of Environment and Local Government, 
  * Count Requirements and Commentary on Count Rules,
  * section 3-14</a>
+ * 
+ * @author <a href="http://kind.ucd.ie">Dermot Cochran</a>
+ * @copyright 2005-2008
  */
 
 //@ refine "Ballot.spec";
@@ -16,16 +21,16 @@ public class Ballot {
   public static final int MAX_POSSIBLE_BALLOTS = 150000;
 
 /**
-   * Candidate ID value to use for nontransferable ballot papers
+   * Candidate ID value to use for non-transferable ballot papers
    * 
    * @design A special candidate ID value is used to indicate
    * non-transferable votes i.e., when the list of preferences has
    * been exhausted and none of the continuing candidates are in the preference list, 
-   * the ballot is deemed to be non-transferable
+   * the ballot is deemed to be non-transferable.
    * 
    * @see <a href="http://www.cev.ie/htm/tenders/pdf/1_2.pdf">
    * Department Of Environment and Local Government,
-   * Count requirements and Commentaryan Count Rules,
+   * Count requirements and Commentary an Count Rules,
    * section 7, pages 23-27</a>
    */
   public static final int NONTRANSFERABLE = 0;
@@ -59,14 +64,11 @@ public class Ballot {
     @   preferenceList[i] != preferenceList[j]);
     @*/
   //@ public invariant preferenceList.length == numberOfPreferences;
-  //	 @bug Patrick etc.-- can't be empty, hence non-null is used	
   protected /*@ spec_public non_null@*/ int[] preferenceList = new int [0];
 	
   /** Total number of valid preferences on this ballot paper */
   //@ public invariant (0 == numberOfPreferences) | (0 < numberOfPreferences);
-  // @bug kiniry - this should probably be an int because an array
-  // length is an int and this field relates to preferenceList's length.
-  // @design Patrick and Joe - Again, numberOfPreferences == 0 means an invalid numberOfPreferences and thus an invalid/uninitialised ballot.
+  // @design numberOfPreferences == 0 means an empty ballot.
   // @see #ballotID invariant
   protected /*@ spec_public @*/ int numberOfPreferences;
   
@@ -78,20 +80,20 @@ public class Ballot {
   protected /*@ spec_public @*/ int positionInList;
 
   /** Maximum possible numbers of counting rounds*/
-  // @design Patrick must justify the length of this array.
-  public static final int MAXIMUM_ROUNDS_OF_COUNTING = 50;
+  public static final int MAXIMUM_ROUNDS_OF_COUNTING = Candidate.MAX_CANDIDATES - 1;
+
+  /** Default value of internal identifier for an empty ballot */
+  private static final int NO_ID_YET = 0;
   
   /** Candidate ID to which the vote is assigned at the end of each count */
   //@ public invariant candidateIDAtCount.length == MAXIMUM_ROUNDS_OF_COUNTING;
-  // @bug Patrick etc.	
   protected /*@ spec_public non_null @*/ int[] candidateIDAtCount = 
     new int [MAXIMUM_ROUNDS_OF_COUNTING];
-
 
   /** Last count number in which this ballot was transferred */
   //@ public invariant 0 <= countNumberAtLastTransfer;
   //@ public invariant countNumberAtLastTransfer < MAXIMUM_ROUNDS_OF_COUNTING;
-  //@ public initially countNumberAtLastTransfer == 0;
+  //@ public initially countNumberAtLastTransfer == 0;  
   protected /*@ spec_public @*/ int countNumberAtLastTransfer;
     
   /** Random number used for proportional distribution of surplus votes */
@@ -110,36 +112,19 @@ public class Ballot {
     @   ensures countNumberAtLastTransfer == 0;
     @   ensures positionInList == 0;
     @   ensures candidateID == NONTRANSFERABLE; 
-    @   ensures ballotID == 0;
+    @   ensures ballotID == NO_ID_YET;
     @*/
-  // @bug- Patrick: How to ensure ballotID > 0, when ballotID is assigned in load().
-  // @design Patrick and Joe - Perhaps ballotID of 0 encodes an invalid ballot?
   public /*@ pure @*/ Ballot() {
 	  
     numberOfPreferences = 0;
     countNumberAtLastTransfer = 0;
     positionInList = 0;
     candidateID = NONTRANSFERABLE; 
-    ballotID = 0;
+    ballotID = NO_ID_YET;
     randomNumber = UniqueNumber.getUniqueID(); 
     //@ set _randomNumber = randomNumber;
   }
     
-  /**
-   * Copy constructor
-   * 
-   * @return An exact copy of this ballot paper
-   */    
-  /*@ also public normal_behavior
-    @ ensures this == \result;
-    @ ensures (* the above postcondition is probably incorrect and should be an equals call *);
-    @ ensures this.equals(\result);
-    @*/
-  public /*@ pure @*/ Ballot copy() {
-    return this;
-  }
-    
-
   /**
    * Get the location of the ballot at each count
    * 
@@ -152,12 +137,7 @@ public class Ballot {
     @ ensures \result == candidateIDAtCount[countNumber];
     @*/
   public /*@ pure @*/ int getPreferenceAtCount(int countNumber) {
-    if (0 <= countNumber && countNumber <= countNumberAtLastTransfer) {
-      int number = candidateIDAtCount[countNumber];
-      return number;
-    } else {
-      return 0;
-    }
+    return candidateIDAtCount[countNumber];
   }
     
   /**
@@ -189,16 +169,7 @@ public class Ballot {
     @ ensures \result == preferenceList[0];      
     @*/
   public /*@ pure @*/ int getFirstPreference() {
-    int number = 0;
-    if (0 < numberOfPreferences) {
-      number = preferenceList[0];
-    }
-    if (number != NONTRANSFERABLE) {
-      return number;
-    }else{
-      return 0;
-    }
-
+    return preferenceList[0];
   }
     
   /**
@@ -224,42 +195,31 @@ public class Ballot {
    */    
   /*@ also public normal_behavior
     @   requires 0 < listSize;
-    @   requires (* @bug Patrick refined precondition from 0 <= listSize because there must be at least one pref in the list *);
     @   requires (\forall int i; 0 <= i && i < listSize;
     @     (candidateIDList[i]) != NONTRANSFERABLE);
     @   requires (\forall int i; 0 <= i && i < listSize;
     @     (candidateIDList[i]) > 0);
-    // @bug: - Patrick: added candidateIDList[i]) > 0 as candidateID can never be zero
     @   requires candidateIDList.length == listSize;
     @   requires positionInList < listSize;
-    // @bug - upperbound placed on positioninList to stop IndexTooBig error
-    @   requires (* re-evaluate: preferenceList.length == listSize; *);
-    @   requires (* @bug Patrick both list lengths precondition missing *);
-    @   requires 0 < uniqueID;
-    @   requires (* @bug Patrick and Joe - Nothing was said about uniqueID and load must make the ballot valid and a ballotID of 0 is invalid *);
     @   ensures numberOfPreferences == listSize;
-    @   ensures ballotID == uniqueID;
+    @   ensures ballotID != NO_ID_YET;
     @   ensures preferenceList.length == listSize;
     @   ensures (\forall int i; 0 <= i && i < listSize;
     @     (preferenceList[i] == candidateIDList[i]));
     @*/
-  // @bug- Patrick- candidateIDList must be non-null, and therefore is not empty
-  // @review Patrick - Must figure out relationship between preferenceList's initial size and numberOfPreferences.
-  public void load(/*@ non_null @*/ int[] candidateIDList, int listSize, int uniqueID){
-    // numberOfPreferences == 0;
-    // countNumberAtLastTransfer == 0;
-    // positionInList == 0;
-    // candidateID == NONTRANSFERABLE; 
-    // ballotID == 0;
+   public void load(/*@ non_null @*/ int[] candidateIDList, int listSize){
     numberOfPreferences = listSize;
-    ballotID = UniqueNumber.getUniqueID();
+    
+    // Assign a unique internal identifier
+    do {
+      ballotID = UniqueNumber.getUniqueID();
+    } 
+    while (ballotID == NO_ID_YET);
     preferenceList = new int [listSize];
     for(int i = 0; i < listSize; i++){
-      if (candidateIDList[i] != NONTRANSFERABLE && 0 < candidateIDList[i]) {
-		preferenceList[i] = candidateIDList[i];
-		candidateID = preferenceList[positionInList];
-	  }
-    }
+ 		preferenceList[i] = candidateIDList[i];
+ 	  }
+    candidateID = getFirstPreference();
   }
     
   /**
@@ -308,16 +268,11 @@ public class Ballot {
     @*/
 
   public /*@ pure @*/ int getNextPreference(int offset){
-    if(0 <= positionInList && positionInList <= numberOfPreferences){
-      if(1 <= offset && preferenceList != null){
         if(positionInList + offset < numberOfPreferences){
           return (preferenceList[positionInList + offset]);
         }else{
           return NONTRANSFERABLE;
         }
-      }
-    }
-    return 0;
   }
  
   /**
