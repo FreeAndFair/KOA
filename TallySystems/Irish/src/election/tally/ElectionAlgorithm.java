@@ -1,10 +1,10 @@
-package ie.koa;
+package election.tally;
 
 
 /**
  * Vote counting algorithm for elections to Dail Eireann.
  * 
- * This Java package <code>ie.koa</code> is designed to be used as part of the 
+ * This Java package <code>election.tally</code> is designed to be used as part of the 
  * KOA remote voting system, but does not assume anything about the KOA system
  * other than that it takes care of the remote voting process, supplies a valid
  * set of ballots and candidate IDs to be counted by this algorithm and takes 
@@ -57,7 +57,7 @@ public class ElectionAlgorithm {
 	  @*/
 	
 	/** List of decisions made */
-	/*@ public model non_null ie.koa.Decision[] decisionsMade;
+	/*@ public model non_null election.tally.Decision[] decisionsMade;
 	  @ public invariant 
 	  @   (\forall int i; 0 <= i && i < numberOfDecisions;
 	  @   decisionsMade[i].decisionTaken != Decision.NODECISION &&
@@ -992,7 +992,7 @@ public /*@ pure @*/ byte getStatus(){
   @   protected normal_behavior
   @   requires state == COUNTING;
   @   requires isElected (fromCandidate);
-  @   requires toCandidate.getStatus() == ie.koa.Candidate.CONTINUING;
+  @   requires toCandidate.getStatus() == election.tally.Candidate.CONTINUING;
   @   requires getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate);
   @   ensures (getCandidateOrderByHighestRemainder (fromCandidate,toCandidate) <=
   @   getTransferShortfall (fromCandidate))
@@ -1130,7 +1130,7 @@ protected /*@ pure @*/ int getOrder(Candidate candidate){
   @   protected normal_behavior
   @   requires state == COUNTING;
   @   requires isElected (fromCandidate);
-  @   requires toCandidate.getStatus() == ie.koa.Candidate.CONTINUING;
+  @   requires toCandidate.getStatus() == election.tally.Candidate.CONTINUING;
   @   requires getSurplus(fromCandidate) < 
   @   getTotalTransferableVotes(fromCandidate);
   @   requires 0 <= getTransferShortfall (fromCandidate);
@@ -1228,11 +1228,11 @@ protected /*@ pure @*/ int getTransferRemainder(/*@ non_null @*/ Candidate fromC
   @   protected normal_behavior
   @   requires state == COUNTING;
   @   requires isElected (fromCandidate);
-  @   requires toCandidate.getStatus() == ie.koa.Candidate.CONTINUING;
+  @   requires toCandidate.getStatus() == election.tally.Candidate.CONTINUING;
   @   requires getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate);
   @   ensures \result == (\num_of int i; i <= 0 && i < totalCandidates &&
   @   candidateList[i].getCandidateID() != toCandidate.getCandidateID()&&
-  @   candidateList[i].getStatus() == ie.koa.Candidate.CONTINUING;
+  @   candidateList[i].getStatus() == election.tally.Candidate.CONTINUING;
   @   (getTransferRemainder(fromCandidate, candidateList[i]) >
   @   getTransferRemainder(fromCandidate, toCandidate)) ||
   @   ((getTransferRemainder(fromCandidate, candidateList[i]) ==

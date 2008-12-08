@@ -727,7 +727,7 @@ For an example of a formal requirement, we look to Section
      @   (\sum int i; 0 <= i && i < totalCandidates; 
      @   candidateList[i].getTotalVote());
      @*/
-   protected void distributeSurplus(/*@ non_null @*/ ie.koa.Candidate candidateWithSurplus);
+   protected void distributeSurplus(/*@ non_null @*/ election.tally.Candidate candidateWithSurplus);
  \end{verbatim}
  }
  \caption{JML Specification of the \texttt{distributeSurplus} method.}
@@ -895,7 +895,7 @@ For an example of a formal requirement, we look to Section
 %   /*@ requires state == COUNTING;
 %     @ requires isElected (fromCandidate); 
 %     @ requires toCandidate.getStatus() 
-%     @     == ie.koa.Candidate.CONTINUING;
+%     @     == election.tally.Candidate.CONTINUING;
 %     @ requires getSurplus(fromCandidate) 
 %     @     < getTotalTransferableVotes
 %     @     (fromCandidate);

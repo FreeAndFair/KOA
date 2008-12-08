@@ -1,4 +1,4 @@
- package ie.koa;
+ package election.tally;
 
 /**
  * This is a Java Modeling Language (JML) design specification of the vote counting 
@@ -94,7 +94,7 @@ public class ElectionAlgorithm {
    * counting starts, there must be a ballot paper associated with each vote
    * held by a candidate.
    */
-  //@ public model non_null ie.koa.Candidate[] candidateList;
+  //@ public model non_null election.tally.Candidate[] candidateList;
   /*@ public invariant (state == PRELOAD || state == LOADING || state == PRECOUNT) 
     @   ==> 
     @   (\forall int i; 0 <= i && i < totalCandidates;
@@ -123,7 +123,7 @@ public class ElectionAlgorithm {
     @*/
 	
   /** List of contents of each ballot paper that will be counted. */
-  //@ public model non_null ie.koa.Ballot[] ballotsToCount;
+  //@ public model non_null election.tally.Ballot[] ballotsToCount;
   /*@ public invariant (state >= PRECOUNT)
     @  ==>
     @  (\forall int i, j; 
@@ -377,7 +377,7 @@ public class ElectionAlgorithm {
     @ requires state == COUNTING;
     @ ensures \result == (candidate.getTotalVote() >= quota);
     @*/
-  protected /*@ pure @*/ boolean hasQuota (ie.koa.Candidate candidate);
+  protected /*@ pure @*/ boolean hasQuota (election.tally.Candidate candidate);
 
 	
   /** 
@@ -413,7 +413,7 @@ public class ElectionAlgorithm {
     @ ensures (\result == true) <==> 
     @   (candidate.getStatus() == Candidate.ELECTED || hasQuota(candidate));
     @*/
-  protected /*@ pure @*/ boolean isElected (ie.koa.Candidate candidate);
+  protected /*@ pure @*/ boolean isElected (election.tally.Candidate candidate);
 	
 	
   /** 
@@ -434,7 +434,7 @@ public class ElectionAlgorithm {
     @ ensures (hasQuota(candidate) == false) ==> \result == 0;
     @ ensures \result >= 0;
     @*/
-  protected /*@ pure @*/ int getSurplus (ie.koa.Candidate candidate);
+  protected /*@ pure @*/ int getSurplus (election.tally.Candidate candidate);
 	
   /** 
    * Determines if a candidate has saved his or her deposit.
@@ -456,7 +456,7 @@ public class ElectionAlgorithm {
     @ ensures \result == (candidate.getOriginalVote() >= depositSavingThreshold) ||
     @   (isElected (candidate) == true);
     @*/
-  protected /*@ pure @*/ boolean isDepositSaved (/*@ non_null @*/ ie.koa.Candidate candidate);
+  protected /*@ pure @*/ boolean isDepositSaved (/*@ non_null @*/ election.tally.Candidate candidate);
 
 	
   /** 
@@ -499,7 +499,7 @@ public class ElectionAlgorithm {
     @   candidateList[i].getTotalVote());
     @*/
   protected void distributeSurplus(/*@ non_null @*/ 
-                                ie.koa.Candidate candidateWithSurplus);
+                                election.tally.Candidate candidateWithSurplus);
 	
 	
   /** 
@@ -760,7 +760,7 @@ public class ElectionAlgorithm {
    */
   /*@ requires state == COUNTING;
     @ requires isElected (fromCandidate); 
-    @ requires toCandidate.getStatus() == ie.koa.Candidate.CONTINUING;
+    @ requires toCandidate.getStatus() == election.tally.Candidate.CONTINUING;
     @ requires getSurplus(fromCandidate) < 
     @   getTotalTransferableVotes(fromCandidate);
     @ ensures (getCandidateOrderByHighestRemainder 
@@ -797,11 +797,11 @@ public class ElectionAlgorithm {
    */
   /*@ requires state == COUNTING;
     @ requires isElected (fromCandidate); 
-    @ requires toCandidate.getStatus() == ie.koa.Candidate.CONTINUING;
+    @ requires toCandidate.getStatus() == election.tally.Candidate.CONTINUING;
     @ requires getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate);
     @ ensures \result == (\num_of int i; i <= 0 && i < totalCandidates &&
     @   candidateList[i].getCandidateID() != toCandidate.getCandidateID() &&
-    @   candidateList[i].getStatus() == ie.koa.Candidate.CONTINUING;
+    @   candidateList[i].getStatus() == election.tally.Candidate.CONTINUING;
     @   (getTransferRemainder(fromCandidate, candidateList[i]) > 
     @      getTransferRemainder(fromCandidate, toCandidate)) ||
     @   ((getTransferRemainder(fromCandidate, candidateList[i]) == 
@@ -901,7 +901,7 @@ public class ElectionAlgorithm {
    */
   /*@ requires state == COUNTING;
     @ requires isElected (fromCandidate); 
-    @ requires toCandidate.getStatus() == ie.koa.Candidate.CONTINUING;
+    @ requires toCandidate.getStatus() == election.tally.Candidate.CONTINUING;
     @ requires getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate);
     @ requires 0 <= getTransferShortfall (fromCandidate);
     @ ensures \result == 

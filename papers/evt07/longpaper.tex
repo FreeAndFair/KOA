@@ -755,7 +755,7 @@ For an example of a more complicated requirement, we look to Section
      @   candidateList[i].getTotalVote());
      @*/
    protected void distributeSurplus(/*@ non_null @*/ 
-             ie.koa.Candidate candidateWithSurplus);
+             election.tally.Candidate candidateWithSurplus);
  \end{verbatim}
  \caption{JML Specification of the \texttt{distributeSurplus} method.}
  \label{fig:JMLModerateExample}
@@ -921,7 +921,7 @@ For an example of a more complicated requirement, we look to Section
 %   /*@ requires state == COUNTING;
 %     @ requires isElected (fromCandidate); 
 %     @ requires toCandidate.getStatus() 
-%     @     == ie.koa.Candidate.CONTINUING;
+%     @     == election.tally.Candidate.CONTINUING;
 %     @ requires getSurplus(fromCandidate) 
 %     @     < getTotalTransferableVotes
 %     @     (fromCandidate);

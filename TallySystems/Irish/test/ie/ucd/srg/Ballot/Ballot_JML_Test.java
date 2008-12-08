@@ -2,7 +2,7 @@
 
 package ie.ucd.srg.Ballot;
 
-import ie.koa.Ballot;
+import election.tally.Ballot;
 
 /** Automatically-generated test driver for JML and JUnit based
  * testing of Ballot. The superclass of this class should be edited
@@ -978,7 +978,7 @@ public class Ballot_JML_Test
 
         /** Initialize this instance. */
         public TestIsAfter(ie.ucd.srg.Ballot receiver$, ie.ucd.srg.Ballot other) {
-            super("isAfter"+ ":" + (other==null? "null" :"{ie.koa.Ballot}"));
+            super("isAfter"+ ":" + (other==null? "null" :"{election.tally.Ballot}"));
             this.receiver$ = receiver$;
             this.other = other;
         }

@@ -1,10 +1,13 @@
-package ie.koa;
+package election.tally;
 
 /**
  * Decisions taken during the counting of votes.
  * 
  * @design It is necessary to be able to record any decision which might
  * influence the order in which votes are counted of transfered. 
+ *
+ * @author Dermot Cochran
+ * @copyright 2005-2008
  */
 public class Decision {
 	

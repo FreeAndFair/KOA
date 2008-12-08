@@ -1,7 +1,7 @@
-package ie.koa;
+package election.tally;
 
 /** 
- * The Candidate object records the number of votes recieved during
+ * The Candidate object records the number of votes received during
  * each round of counting. Votes can only be added to the candidate's
  * stack while the candidate has a status of <code>CONTINUING</code>.
  * 
@@ -9,48 +9,65 @@ package ie.koa;
  * Department of Environment and Local Government, 
  * Count Requirements and Commentary on Count Rules,
  * section 3-14</a>
+ * 
+ * @author Dermot Cochran
+ * @copyright 2005-2008
  */
 
 //@ refine "Candidate.spec";
 public class Candidate {
-public static final int MAX_CANDIDATES = 1000;
+	
+/**
+ * Maximum expected number of candidates in any one constituency.
+ * 
+ * @see <a href="http://en.wikipedia.org/wiki/List_of_political_parties_in_the_Republic_of_Ireland">
+ * List of political parties in Ireland</a>	
+ * 
+ * The average number of candidates could me much less.
+ */
+public static final int MAX_SEATS = 5;
+public static final int MAX_MAJOR_PARTIES = 7; // Large enough to contest two or more seats
+public static final int MAX_MINOR_PARTIES = 7; // Too small to contest more than one seat
+public static final int MAX_INDEPENDENTS = 7;
+public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_MINOR_PARTIES + MAX_INDEPENDENTS; // Forty Nine
 
-/** Identifier for the candidate */
-// @bon All candidates' identifiers are non-negative.
-//@ public invariant 0 <= candidateID;
-//@ public invariant (state != UNASSIGNED) ==> 0 < candidateID;
-/*@ public invariant (\forall Candidate a, b;
+/** Identifier for the candidate.
+ * 
+ * <BON>
+ * class_chart CANDIDATE_ID
+ * inherit VALUE
+ * constraints
+ *   The internal identifier for each candidate is a non negative number
+ * end
+ * </BON>
+ */
+/*@ public invariant 0 <= candidateID;
+  @ public invariant (state != UNASSIGNED) ==> 0 < candidateID;
+  @ public invariant (\forall Candidate a, b;
   @   a != null && b != null &&
   @   a.state != UNASSIGNED && b.state != UNASSIGNED;
   @   (a.candidateID == b.candidateID) <==> (a == b));
-  @*/
-// @bug patrick-  added old(state)==state as it allows the variable to be initiliased
-/*@ public constraint ((state != UNASSIGNED) && (\old(state) == state)) ==>
+  @ public constraint ((state != UNASSIGNED) && (\old(state) == state)) ==>
   @   candidateID == \old(candidateID);
   @*/
 	protected /*@ spec_public @*/ int candidateID;
 	
 /** Number of votes added at each count */
 /*@ public invariant (\forall int i; 0 < i && i < MAXCOUNT;
-  @ 0 <= votesAdded[i]);
+  @   0 <= votesAdded[i]);
+  @ public initially (\forall int i; 0 < i && i < MAXCOUNT;
+  @   votesAdded[i] == 0);	
+  @ public invariant votesAdded.length == MAXCOUNT;
   @*/
-/*@ public initially (\forall int i; 0 < i && i < MAXCOUNT;
-  @ votesAdded[i] == 0);
-  @*/	
-//@ public invariant votesAdded.length == MAXCOUNT;
-// @bug Patrick and Joe etc.
   protected /*@ spec_public non_null @*/ int[] votesAdded;
 	
 /** Number of votes removed at each count */
 /*@ public invariant (\forall int i; 0 < i && i < MAXCOUNT;
   @                                  0 <= votesRemoved[i]);
-  @*/
-/*@ public initially (\forall int i; 0 < i && i < MAXCOUNT;
+  @ public initially (\forall int i; 0 < i && i < MAXCOUNT;
   @                                  votesRemoved[i] == 0);
-  @*/	
-//@ public invariant votesRemoved.length == MAXCOUNT;
-// @bug Patrick and Joe See the above discussion of the new invariant
-// for votesAdded.
+  @ public invariant votesRemoved.length == MAXCOUNT;
+  @*/
   protected /*@ spec_public non_null @*/ int[] votesRemoved;
 
 //@ public invariant votesAdded != votesRemoved;
@@ -59,21 +76,12 @@ public static final int MAX_CANDIDATES = 1000;
 //@ public invariant votesRemoved != votesAdded;
 //@ public invariant votesRemoved.owner == votesAdded.owner;
 //@ public invariant \typeof(votesRemoved.owner) <: Candidate.class;
-  
-// @design @bug Patrick and Joe 
-// @bug Patrick and Joe - There seems to be a bug in this variable as  
-// votesRemoved points to the same integer array as votesAdded. 
-// As this should not happen, invariants are created so votesRemoved cannot 
-// have the same memory as votesAdded and that they both cannot be null.
-// Also to help solve this problem for each incidence of Candidate, this Candidate   
-// is made as the owner of both of the integer arrays. Also to back up the invariant
-// integer arrays must be owned by the Candidate class.  
 	
 /** The status of the candidate at the latest count */
 /*@ public invariant state == ELECTED || state == ELIMINATED ||
   @   state == CONTINUING || state == UNASSIGNED;
   @ public initially state == UNASSIGNED;
-  @*/
+  @*/      
 	protected /*@ spec_public @*/ byte state;
 	
 /** The number of rounds of counting so far */
@@ -89,16 +97,25 @@ public static final int MAX_CANDIDATES = 1000;
 /*@ public constraint 
   @   \old(lastSetAddedCountNumber) <= lastSetAddedCountNumber;
   @*/
-// @bug Patrick and Joe - There seems to be a bug in this constraint
-// assertion, as it must hold for all methods (pure or otherwise), and
-// the JML Reference Manual indicates that constraints generally are
-// reflexive and transitive, and '<' is not reflexive.
 //@ public invariant lastSetAddedCountNumber <= lastCountNumber;
 	protected /*@ spec_public @*/ int lastSetAddedCountNumber;
 	
 /**
  * Unique random number used to simulate drawing of lots between candidates.
- * @review Patrick - Write about implicit semantics of "random" in this spec.
+ * 
+ * <BON>
+ * class_chart RANDOM_NUMBER
+ * explanation
+ *   "A number chosen so as to simulate the drawing of lots or shuffling of \
+ *   ballot papers.  It should be unbiased and fair so as not to favour any \
+ *   one candidate over another, and it should be repeatable so that each \
+ *   count will give the same results."
+ * inherit VALUE
+ * constraints
+ *   "The random number cannot be changed once it has been assigned";
+ *   "No two candidates can have the same random number";
+ *   "The election administrator cannot control the value of the random number"
+ * end
  */
 /*@ public invariant (\forall Candidate a, b;
   @   a != null && b != null &&
@@ -156,7 +173,7 @@ public static final int MAX_CANDIDATES = 1000;
  * Gets number of votes added or removed in this round count.
  * 
  * @param count This count number
- * @return A positive number if the candidate recieved transfers or 
+ * @return A positive number if the candidate received transfers or 
  * a negative number if the candidate's surplus was distributed or 
  * the candidate was eliminated and votes transfered to another. 
  */	
@@ -193,9 +210,6 @@ public static final int MAX_CANDIDATES = 1000;
   @   ensures \result == (\sum int i; 0 <= i && i <= lastCountNumber;
   @     ((votesAdded[i]) - (votesRemoved[i])));
   @*/
-// @verify Patrick and Joe - ESC/Java2 cannot check assertions that
-// contain the \sum operator, so we will test this instead for
-// validation.
 	public /*@ pure @*/ int getTotalVote() {
 		int i = 0;
 		int totalVote = 0;
@@ -222,10 +236,6 @@ public static final int MAX_CANDIDATES = 1000;
   @   ensures \result == (\sum int i; 0 <= i && i <=lastCountNumber;
   @     votesAdded[i]); 
   @*/
-// @verify Patrick and Joe - ESC/Java2 cannot check assertions that
-// contain the \sum operator, so we will test this instead for
-// validation.
-// @TODO Dermot - or use a ghost variable to check the total
 	public /*@ pure @*/ int getOriginalVote() {
 		int total = 0;
 		int i = 0;
@@ -307,7 +317,6 @@ public static final int MAX_CANDIDATES = 1000;
   @   requires 0 < count & count < MAXCOUNT;
   @   requires (* new bounds precondition added by Patrick and Joe on 25 Jan 2007 *);
   @   requires 0 <= numberOfVotes;
-  @   requires (* @bug Patrick and Joe missing precondition bounding numberOfVotes to conform to invariant *);
   @   assignable lastCountNumber, votesAdded[count], lastSetAddedCountNumber;
   @   ensures votesAdded[count] == numberOfVotes;
   @   ensures lastCountNumber == count;
@@ -338,14 +347,11 @@ public static final int MAX_CANDIDATES = 1000;
   @   requires lastCountNumber < count;
   @   requires votesRemoved[count] == 0;
   @   requires 0 < count & count < MAXCOUNT;
-  @   requires (* new bounds precondition added by Patrick and Joe on 25 Jan 2007 *);
   @   requires 0 <= numberOfVotes;
-  @   requires (* @bug Patrick and Joe missing precondition bounding numberOfVotes to conform to invariant *);
   @   assignable lastCountNumber, votesRemoved[count];
   @   ensures votesRemoved[count] == numberOfVotes;
   @   ensures lastCountNumber == count;
   @*/
-// @review Patrick and Joe - Patrick will review postcondition and code.
   public void removeVote(int numberOfVotes, int count){
     if(state == ELIMINATED || state == ELECTED){
       if(lastCountNumber < count && votesRemoved[count] == 0){
@@ -373,7 +379,6 @@ public static final int MAX_CANDIDATES = 1000;
   @   ensures candidateID == candidateIDToAssign;
   @   ensures state == CONTINUING;
   @*/
-// @bug - Patrick:	Constraint states that candidate ID must equal the old Candidate ID
 	public void setCandidateID(int candidateIDToAssign){
         if(state == UNASSIGNED && 0 < candidateIDToAssign){
         	candidateID = candidateIDToAssign;
@@ -459,11 +464,9 @@ public static final int MAX_CANDIDATES = 1000;
   @   (this.randomNumber > other.randomNumber);
   @*/
 	public /*@ pure @*/ boolean isAfter(/*@ non_null @*/ Candidate other){
-		if(state != UNASSIGNED){
 			if(this.randomNumber > other.randomNumber){
 				return true;
 			}
-		}
 		return false;
 	}
 }

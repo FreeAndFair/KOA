@@ -1,5 +1,5 @@
 
-package ie.koa;
+package election.tally;
 
 public class UniqueNumber {
    

@@ -1,4 +1,4 @@
-package ie.koa;
+package election.tally;
 
 /**
  * The Candidate object records the number of votes received during

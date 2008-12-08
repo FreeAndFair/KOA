@@ -1,4 +1,4 @@
-package ie.koa;
+package election.tally;
 /**
  * Election results
  *

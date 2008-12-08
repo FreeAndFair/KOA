@@ -96,7 +96,7 @@ public abstract class Ballot_JML_TestData
 
     /** Return a new, freshly allocated indefinite iterator that
      * produces test data of type 
-     * ie.koa.Ballot
+     * election.tally.Ballot
      * for testing the method named by the String methodName in
      * a loop that encloses loopsThisSurrounds many other loops.
      * @param methodName name of the method for which this
@@ -114,7 +114,7 @@ public abstract class Ballot_JML_TestData
     }
 
     /** The strategy for generating test data of type
-     * ie.koa.Ballot. */
+     * election.tally.Ballot. */
     private org.jmlspecs.jmlunit.strategies.StrategyType
         vie_koa_BallotStrategy
         = new org.jmlspecs.jmlunit.strategies.NewObjectAbstractStrategy()

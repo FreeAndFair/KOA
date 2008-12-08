@@ -1,4 +1,4 @@
-package ie.koa;
+package election.tally;
 
 /**
  * Data transfer structure for candidate ID details and number of seats

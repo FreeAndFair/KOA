@@ -286,7 +286,7 @@ javadoc.stamp:	$(javafiles) $(srcpath)/ie/koa/package.html $(basedocdir)/overvie
 	-doctitle "Votail: A KOA plugin for the Irish Election System" \
 	-header $(copyright) \
 	-footer $(copyright) \
-	-subpackages ie.koa; \
+	-subpackages election.tally; \
 	touch javadoc.stamp
 
 jmldoc:		jmldoc.stamp
@@ -300,7 +300,7 @@ jmldoc.stamp:	$(javafiles) $(srcpath)/ie/koa/package.html $(basedocdir)/overview
 	-doctitle "Votail: A KOA plugin the Irish Election System" \
 	-header $(copyright) \
 	-footer $(copyright) \
-	ie.koa;
+	election.tally;
 	touch jmldoc.stamp
 
 distr: distr.stamp

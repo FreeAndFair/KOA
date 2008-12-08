@@ -1,4 +1,4 @@
-package ie.koa;
+package election.tally;
 
 /** Data transfer structure for set of all valid votes */
 //@ refine "BallotBox.spec";

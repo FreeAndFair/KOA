@@ -1,6 +1,6 @@
-package ie.koa;
+package election.tally;
 
-import ie.koa.UniqueNumber;
+import election.tally.UniqueNumber;
 
 /**
  * The Ballot class represents a ballot paper in an Irish election,
@@ -279,7 +279,7 @@ public class Ballot {
    * Transfer this ballot to the next preference candidate.
    * 
    * @design This method may be called multiple times during the same count
-   * until the ballot is nontransferable or a continuing candidate ID is
+   * until the ballot is non-transferable or a continuing candidate ID is
    * found in the remainder of the preference list.
    * 
    * @param countNumber the count number at which the ballot was transfered.
@@ -289,7 +289,6 @@ public class Ballot {
     @   requires positionInList <= numberOfPreferences;
     @   requires countNumberAtLastTransfer <= countNumber;
     @   requires countNumber < MAXIMUM_ROUNDS_OF_COUNTING;
-    @   requires (* @bug Patrick - Missing upperbound on countNumber *);
     @   assignable countNumberAtLastTransfer, positionInList, preferenceList[*], candidateID;
     @   ensures countNumberAtLastTransfer == countNumber;
     @   ensures \old(positionInList) <= positionInList;
@@ -297,8 +296,7 @@ public class Ballot {
     @           (positionInList == numberOfPreferences);
     @*/
   public void transfer(int countNumber) {
-		if (0 <= positionInList && positionInList <= numberOfPreferences) {
-			if (countNumberAtLastTransfer <= countNumber) {
+ 			if (countNumberAtLastTransfer <= countNumber) {
 				countNumberAtLastTransfer = countNumber;
 				if (positionInList != numberOfPreferences) {
 					shiftPreferenceList();
@@ -307,7 +305,6 @@ public class Ballot {
 					candidateID = NONTRANSFERABLE;
 				}
 			}
-		}
 	}
   
   /**
@@ -317,9 +314,9 @@ public class Ballot {
 	 *            the position in the list from where the list must be
     *            
     * @note Dermot Cochran: The ballot information still needs to be preserved
-    * when publishing the results.  Not all of the ballot can be publicy revealed;
+    * when publishing the results.  Not all of the ballot can be publicly revealed;
     * only the current top preference and next preference so that the count can
-    * independantly checked at each round.
+    * independently checked at each round.
 	 */
   /*@ private normal_behavior
     @ requires 0 < positionInList;
@@ -333,10 +330,6 @@ public class Ballot {
 		preferenceList[positionInList+1] = preferenceList[positionInList];
 		preferenceList[positionInList] = temp;
 	  }
-		/*System.arraycopy(preferenceList, positionInList - 1, preferenceList,
-				positionInList, 1);*/
-				
-		// System.arrayCopy(); vs. loop with very good invariant & variant
 	}
     
   /**

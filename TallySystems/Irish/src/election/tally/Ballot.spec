@@ -1,4 +1,4 @@
-package ie.koa;
+package election.tally;
 
 /**
  * The Ballot class represents a ballot paper in an Irish election,
