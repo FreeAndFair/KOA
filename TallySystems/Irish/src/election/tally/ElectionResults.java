@@ -2,10 +2,13 @@ package election.tally;
 /**
  * Election results
  *
+ * @author Dermot Cochran
+ * @copyright 2005-2008
  */
 
 public class ElectionResults {
 //@ public invariant 0 <= numberElected;
+//@ public invariant numberElected <= Candidate.MAX_SEATS;
 	public long numberElected;
 
 /*@ public invariant (\forall int i;
