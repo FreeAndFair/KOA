@@ -7,7 +7,7 @@ package election.tally;
  * influence the order in which votes are counted of transfered. 
  *
  * @author Dermot Cochran
- * @copyright 2005-2008
+ * @copyright 2005-2009
  */
 public class Decision {
 	
@@ -79,7 +79,6 @@ public class Decision {
   @ public constraint (decisionTaken != NODECISION) ==>
   @   chosenByLot == \old(chosenByLot);  
   @*/
-	// @bug -Patrick - cannot use (== \old)in that context.Invalid types (boolean and void) in equality comparison
 	public boolean chosenByLot;
 	
 /**	Default constructor */
@@ -94,9 +93,5 @@ public class Decision {
 		atCountNumber = 0;
 		candidateID = 0;
 		chosenByLot = false;	
-	}
-	
-	public void checkInvariants() {
-		;
 	}
 }

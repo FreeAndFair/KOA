@@ -161,11 +161,11 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  */	
 	public static final int MAXCOUNT = 100;
 	
-	/**
-	 * Total number of votes this candidate has at any time 
-	 * 
-	 * @design This variable was added as to provide easy access from other classes.
-	 */
+/**
+ * Total number of votes this candidate has at any time 
+ * 
+ * @design This variable was added as to provide easy access from other classes.
+ */
 	public int total;
 
 	
@@ -176,6 +176,11 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * @return A positive number if the candidate received transfers or 
  * a negative number if the candidate's surplus was distributed or 
  * the candidate was eliminated and votes transfered to another. 
+ * 
+ * <BON>
+ * query
+ *   How many votes have been added or removed in this count round?
+ * </BON>
  */	
 /*@ also
   @   public normal_behavior
@@ -185,7 +190,6 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
   @   requires count < MAXCOUNT;
   @   ensures \result == votesAdded[count] - votesRemoved[count];
   @*/
-// @bon How many votes have been added or removed in this count round?
 	public /*@ pure @*/ int getVoteAtCount(int count){
 		int sum = 0;
 		if(state != UNASSIGNED){
