@@ -31,6 +31,12 @@ package election.tally;
 
 /* <BON>
  * class_chart UNIQUE_NUMBER
+ * explanation
+ *   "Unique internal identifier"
+ * query
+ *   "What is the value of the next unique number?"
+ * constraint
+ *   "The sequence of unique numbers is not repeated within the lifetime of the system"
  * </BON>
  */
 
