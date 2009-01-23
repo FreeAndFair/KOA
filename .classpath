@@ -29,5 +29,7 @@
 	<classpathentry kind="lib" path="infrastructure/jars/xmlrpc-1.2-b1-modified.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/junit-4.4.jar"/>
 	<classpathentry kind="src" path="/jmlspecs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Logging"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CLO"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

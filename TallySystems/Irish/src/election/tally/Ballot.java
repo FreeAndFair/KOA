@@ -1,6 +1,47 @@
+/*
+ * Copyright (c) 2005-2009 Dermot Cochran
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package election.tally;
 
 import election.tally.UniqueNumber;
+
+/* <BON>
+ * class_chart BALLOT
+ * indexing
+ *   author: "Dermot Cochran"
+ * explanation
+ *   "An electronic representation of a valid ballot paper"
+ * query
+ *   "To which continuing candidate is this ballot allocated?",
+ *   "In which round of counting was this ballot last transfered?",
+ *   "Who is the first preference candidate on this ballot?",
+ *   "Is this ballot deeper in the pile than another ballot?",
+ *   "What is the internal identifier (sequence number) for this ballot?"
+ * command
+ *   "Load this ballot from the database"
+ * constraint
+ *   "Every valid ballot has a valid first preference"
+ * </BON>
+ */
 
 /**
  * The Ballot class represents a ballot paper in an Irish election,
@@ -13,8 +54,10 @@ import election.tally.UniqueNumber;
  * section 3-14</a>
  * 
  * @author <a href="http://kind.ucd.ie">Dermot Cochran</a>
- * @copyright 2005-2008
+ * @copyright 2005-2009
  */
+
+
 
 //@ refine "Ballot.spec";
 public class Ballot {
@@ -412,6 +455,19 @@ public class Ballot {
     return false;
   }
   
+  /**
+   * Simple unit test for the Ballot class
+   */
+  public void main () {
+	Ballot ballot = new Ballot();
+	int[] candidateIDList = {1,2,3,4,5,6,7};
+	int listSize = candidateIDList.length;
+	ballot.load(candidateIDList, listSize);
+	//@ assert ballot.getFirstPreference() = 1;
+	//@ assert ballot.getRemainingPreferences() = listSize - 1;
+	//@ assert ballot.isAssignedTo(1);
+	//@ assert !ballot.isAssignedTo(8);
+  }
 
   
 }
