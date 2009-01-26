@@ -32,7 +32,7 @@ jmldoc ?= /usr/local/bin/jmldoc
 jmlunit ?= /usr/local/bin/jmlunit
 
 basedocdir = doc
-srcpath = src
+srcpath = src/election/tally
 specpath =$(SPECS)
 buildpath =	build
 jmlc_path =	jmlc_build
@@ -54,11 +54,11 @@ ESCJAVA_CLASSPATH	= $(CORECP):$(JCECP):$(FOPCP):$(MISCCP):$(JUNITCP):$(JMLCP):$(
 UNIT_TEST_CLASSPATH	= $(jmlc_jmlunit_path):$(buildpath):$(JCECP):$(FOPCP):$(MISCCP):$(JUNITCP):$(JMLCP)
 CHECKSTYLE_CLASSPATH	= $(CORECP):$(CHECKSTYLECP)
 
-javapat	=	$(srcpath)/ie/koa/*.java
-javafiles =	$(wildcard $(srcpath)/ie/koa/*.java)
-jmlunitpat =	$(jmlunit_path)/ie/koa/*.java
-jmlunitfiles =	$(wildcard $(jmlunit_path)/ie/koa/*.java)
-generated_jmlunitfiles	=	$(wildcard $(jmlunit_path)/ie/koa/*_JML_Test.java)
+javapat	=	$(srcpath)/*.java
+javafiles =	$(wildcard $(srcpath)/*.java)
+jmlunitpat =	$(jmlunit_path)/*.java
+jmlunitfiles =	$(wildcard $(jmlunit_path)/*.java)
+generated_jmlunitfiles	=	$(wildcard $(jmlunit_path)/*_JML_Test.java)
 classfiles =	$(foreach javafile,$(javafiles),\
 		$(subst .java,.class,$(javafile)))
 javadocflags =	-version -author -private -source 1.4
@@ -70,7 +70,7 @@ main_memory_use =	-ms256M -mx256M
 rac_memory_use =	-ms256M -mx320M
 test_memory_use	=	-ms256M -mx320M
 
-copyright = "Votail<br />&copy; 2006-7 Systems Research Group and University College Dublin<br />All Rights Reserved"
+copyright = "International Online Voting<br />&copy; 2006-9 Dermot Cochran<br />All Rights Reserved"
 
 # implicit rules for paper documentation generation
 
@@ -232,14 +232,14 @@ escjava2.stamp:	$(javafiles)
 escjava2-current:
 	export CLASSPATH=$(ESCJAVA_CLASSPATH);\
 	$(escjava) -bootclasspath $(BOOTCP) \
-		ie/koa/ElectionAlgorithm.java
+		ElectionAlgorithm.java
 
 escjava2-core:
 	export CLASSPATH=$(ESCJAVA_CLASSPATH);\
 	$(escjava) -bootclasspath $(BOOTCP) \
-		ie/koa/ElectionAlgorithm.java \
-		ie/koa/Ballot.java \
-		ie/koa/Candidate.java
+		ElectionAlgorithm.java \
+		Ballot.java \
+		Candidate.java
 
 checkstyle.stamp:
 	export CLASSPATH=$(CHECKSTYLE_CLASSPATH); \
@@ -297,7 +297,7 @@ jmldoc.stamp:	$(javafiles) $(srcpath)/ie/koa/package.html $(basedocdir)/overview
 	$(jmldoc) -d $(jmldocdir) $(jmldocflags) \
 	-sourcepath .:$(srcpath):$(jdksrcpath) \
 	-overview $(basedocdir)/overview.html \
-	-doctitle "Votail: A KOA plugin the Irish Election System" \
+	-doctitle "Cian Votail: Online Voting for Irish PR-STV"
 	-header $(copyright) \
 	-footer $(copyright) \
 	election.tally;

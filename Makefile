@@ -1,6 +1,6 @@
 # This makefile builds a release file; it does not build the software
 # Building the software is described in ReadMe.txt
-# Copyright (c) 2007, Systems Research Group, University College Dublin
+# Copyright (c) 2007-2009, Dermot Cochran <http://voting.ucd.ie:8080>
 
 .PHONY: clean release
 
@@ -16,7 +16,7 @@ infrastructure:
 plugins: votail
 
 votail:
-	make -C plugins/votail
+	make -C TallySystems/Irish
 
 clean:
 	rm -rf $(RELEASE_DIR)
