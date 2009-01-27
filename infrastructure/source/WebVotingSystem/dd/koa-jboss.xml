@@ -16,7 +16,7 @@
       <ejb-name>KOAEntityEJB</ejb-name>
       <jndi-name>KOAEntity</jndi-name>
       <resource-ref>
-        <r<res-ref-name>jdbc/KOA01</res-ref-name>
+        <res-ref-name>jdbc/KOA01</res-ref-name>
         <jndi-name>java:DefaultDS</jndi-name>
       </resource-ref>
     </entity>

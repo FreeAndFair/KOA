@@ -23,6 +23,31 @@
 	<classpathentry kind="lib" path="infrastructure/jars/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/xmlrpc-1.2-b1-modified.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/junit-4.4.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/bcprov-jdk15-138.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/hsqldb.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/http.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/jersey-core-1.0.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/jersey-server-1.0.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/jersey-spring-1.0.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/jsr311-api-1.0.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/jta.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/persistence-api-1.0.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/spring-agent.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/spring-aspects.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/spring.jar"/>
+	<classpathentry kind="lib" path="infrastructure/source/cianvotail/lib/toplink-essentials.jar"/>
 	<classpathentry kind="src" path="/jmlspecs"/>
+	<classpathentry kind="lib" path="infrastructure/jars/batik.jar"/>
+	<classpathentry kind="lib" path="infrastructure/jars/jml-release.jar"/>
+	<classpathentry kind="lib" path="infrastructure/jars/jmljunitruntime.jar"/>
+	<classpathentry kind="lib" path="infrastructure/jars/jmlmodels.jar"/>
+	<classpathentry kind="lib" path="infrastructure/jars/jmlmodelsnonrac.jar"/>
+	<classpathentry kind="lib" path="infrastructure/jars/jmlruntime.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

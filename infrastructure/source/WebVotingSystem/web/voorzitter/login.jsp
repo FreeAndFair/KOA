@@ -4,7 +4,7 @@
 <META name="GENERATOR" content="IBM WebSphere Studio">
 <META http-equiv="Pragma" content="no-cache"/>
 <META http-equiv="Expires" content="-1"/>
-<TITLE>KOA Remote Voting - Voorzitter - Login Page</TITLE>
+<TITLE>KOA Remote Voting - Login Page</TITLE>
 <LINK href="VoorzitterWeb.css" rel="stylesheet" type="text/css">
 </HEAD>
 <BODY>
@@ -72,7 +72,7 @@
             <tr valign="top">
                 <td colspan="3">
                 <div align="center">
-                <H2>The responsibility for this site rests at the Ministry of the Interior and Kingdom Relations</H2>
+                <H2>The responsibility for this site rests at University College Dublin - Complex and Adaptive Systems Laboratory</H2>
                 </div>
                 </td>
             </tr>

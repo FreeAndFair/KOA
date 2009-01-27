@@ -280,7 +280,7 @@
      		<fileset dir="${java.build.dir}">
      		  	<include name="ie/ucd/srg/koa/stemproces/beans/**"/>
 				<include name="ie/ucd/srg/ejs/container/**"/>
-				<include name="ie/ucd/srg/koa/**/**"/>
+				<include name="ie/ucd/srg/koa/**"/>
 				<include name="ie/ucd/srg/koa/kieslijst/beans/**"/>
 				<include name="ie/ucd/srg/koa/esb/beans/**"/>
 		  	</fileset>
