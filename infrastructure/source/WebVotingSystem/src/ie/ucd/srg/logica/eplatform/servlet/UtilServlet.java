@@ -1,5 +1,6 @@
 /*
  * Created on 26-Oct-2004
+ * Modified on 27-Jan-2009 by Dermot Cochran
  */
 
 package ie.ucd.srg.logica.eplatform.servlet;
@@ -11,18 +12,9 @@ import ie.ucd.srg.logica.eplatform.ticket.*;
 
 /**
  * @author Alan E. Morkan
+ * @author Dermot Cochran
  */
 public class UtilServlet extends HttpServlet {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 
-	 */
-    public static UtilServlet props;
     
     /**
      * is this necessary
@@ -39,10 +31,8 @@ public class UtilServlet extends HttpServlet {
     /**
      * 
      */
-    //@ ensures props != null;
     public void init(){
     	//@ assert false;
-    	props = new UtilServlet();
     }
     
     /**
