@@ -354,31 +354,31 @@
 	</target>
 
 	<target name="package-databeheer-web">
-		<delete file="${build.dir}/war/KOADatabeheerWeb.war"/>
-		<copy file="web/databeheer/WEB-INF/web.xml" tofile="dd/web.xml" overwrite="true"/>
+		<delete file="${build.dir}/war/KOADatabeheerWeb.war" />
+		<copy file="web/databeheer/WEB-INF/web.xml" tofile="dd/web.xml" overwrite="true" />
 		<war warfile="${build.dir}/war/KOADatabeheerWeb.war" webxml="dd/web.xml">
-      	<fileset dir="${basedir}/web/databeheer/">
-      		<include name="*.jsp" />
+      		<fileset dir="${basedir}/web/databeheer/">
+      			<include name="*.jsp" />
 	  			<include name="images/*.gif" />
 				<include name="DatabeheerWeb.css" />
-       	</fileset>
+       		</fileset>
 			<fileset dir="${basedir}/properties/globalproperties/">
 				<include name="*.properties" />
 			</fileset>
         	<lib dir="${build.dir}/jar/">
          		<include name="struts.jar" />
-         		<include name="commons*.jar"/>
+         		<include name="commons*.jar" />
 			</lib>
-       	<classes dir="${java.build.dir}/" >
+       		<classes dir="${java.build.dir}/" >
 				<include name="ie/ucd/srg/koa/ticket/**" />
          		<include name="ie/ucd/srg/koa/databeheer/**" />
 				<include name="ie/ucd/srg/logica/eplatform/**" />
+				<include name="ie/ucd/srg/logica/eplatform/servlet/**" />
 				<include name="ie/ucd/srg/koa/reportserver/servlet/**" />
 				<include name="ie/ucd/srg/koa/reportserver/command/**" />
 				<include name="ie/ucd/srg/koa/eventhandling/**" />
 				<include name="ie/ucd/srg/koa/utils/**" />
-				<!--<include name="ie/ucd/srg/koa/votecommands/**" />-->
-				<include name="ie/ucd/srg/koa/soap/command/**" />
+ 				<include name="ie/ucd/srg/koa/soap/command/**" />
 			</classes>
 		</war> 
 	</target>
