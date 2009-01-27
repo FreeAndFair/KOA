@@ -5,7 +5,7 @@
   	<property file="${basedir}/build.properties"/>
   	<property name="src.dir"       	value="${basedir}/src"/>
   	<property name="build.dir"     	value="${basedir}/bin"/>
-	<!-- Assuming a  Mac OS X environment; Java Home would be /usr/java on Linux for example -->
+	<!-- Assuming a Mac OS X environment; Java Home would be /usr/java on Linux for example -->
   	<property name="java_home"	 	value="/Library/Java/Home"/>
 
 	<path id="classpath">
@@ -79,6 +79,8 @@
 	            <bottom>${doc.copyright}</bottom>
 	        </javadoc>    
 	    </target>
+	
+	    <!-- TODO BON docuumentation and JML javadoc -->
 	    
 	    <target name="clean" depends="clean-build,clean-doc-java" description="Calls all clean- targets." />
 	    
@@ -104,7 +106,7 @@
   		<jar jarfile="${build.dir}/jar/KOAESBEntity.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
      		<fileset dir="${java.build.dir}">
-     	  		<include name="${build.dir}/ie/ucd/srg/koa/esb/beans/*"/>
+     	  		<include name="ie/ucd/srg/koa/esb/beans/*"/>
      	  		<include name="ie/ucd/srg/ibm/ejs/container/**"/>
 				<include name="ie/ucd/srg/ejs/persistence/**"/>
    	  	</fileset>
@@ -373,7 +375,6 @@
 				<include name="ie/ucd/srg/koa/ticket/**" />
          		<include name="ie/ucd/srg/koa/databeheer/**" />
 				<include name="ie/ucd/srg/logica/eplatform/**" />
-				<include name="ie/ucd/srg/logica/eplatform/servlet/**" />
 				<include name="ie/ucd/srg/koa/reportserver/servlet/**" />
 				<include name="ie/ucd/srg/koa/reportserver/command/**" />
 				<include name="ie/ucd/srg/koa/eventhandling/**" />
@@ -395,9 +396,6 @@
 			<classes dir="${java.build.dir}/">
          		<include name="ie/ucd/srg/koa/soap/VSL.class"/>
 	       	</classes>
-			<!--<classes dir="${src.dir}/jar/">
-       			<include name="org/apache/axis/transport/http/*.class"/>
-			</classes>-->
      	</war>
 	</target>
 

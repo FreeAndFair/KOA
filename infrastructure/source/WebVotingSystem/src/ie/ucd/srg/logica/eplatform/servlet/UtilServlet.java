@@ -17,6 +17,11 @@ public class UtilServlet extends HttpServlet {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
     public static UtilServlet props;
     
     /**

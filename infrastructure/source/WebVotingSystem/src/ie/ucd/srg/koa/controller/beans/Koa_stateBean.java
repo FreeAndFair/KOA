@@ -4,13 +4,17 @@ package ie.ucd.srg.koa.controller.beans;
  */
 public class Koa_stateBean implements javax.ejb.EntityBean
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private javax.ejb.EntityContext myEntityCtx;
 	/**
-	 * Implemetation field for persistent attribute: id
+	 * Implementation field for persistent attribute: id
 	 */
 	public java.lang.Integer id;
 	/**
-	 * Implemetation field for persistent attribute: current_state
+	 * Implementation field for persistent attribute: current_state
 	 */
 	public java.lang.String current_state;
 	/**

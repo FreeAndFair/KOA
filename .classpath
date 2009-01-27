@@ -17,11 +17,6 @@
 	<classpathentry kind="lib" path="infrastructure/jars/fop.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/j2ee.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/jaxrpc.jar"/>
-	<classpathentry kind="lib" path="infrastructure/jars/jmljunitruntime.jar" sourcepath="/usr/local/java/JML-5.5"/>
-	<classpathentry kind="lib" path="infrastructure/jars/jmlmodels.jar"/>
-	<classpathentry kind="lib" path="infrastructure/jars/jmlmodelsnonrac.jar"/>
-	<classpathentry kind="lib" path="infrastructure/jars/jml-release.jar"/>
-	<classpathentry kind="lib" path="infrastructure/jars/jmlruntime.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/junit.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/namespace.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/servlet.jar"/>
@@ -29,7 +24,5 @@
 	<classpathentry kind="lib" path="infrastructure/jars/xmlrpc-1.2-b1-modified.jar"/>
 	<classpathentry kind="lib" path="infrastructure/jars/junit-4.4.jar"/>
 	<classpathentry kind="src" path="/jmlspecs"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Logging"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/CLO"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

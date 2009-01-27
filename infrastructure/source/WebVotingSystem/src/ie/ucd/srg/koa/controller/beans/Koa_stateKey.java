@@ -6,7 +6,7 @@ public class Koa_stateKey implements java.io.Serializable
 {
 	static final long serialVersionUID = 3206093459760846163L;
 	/**
-	 * Implemetation field for persistent attribute: id
+	 * Implementation field for persistent attribute: id
 	 */
 	public java.lang.Integer id;
 	/**
