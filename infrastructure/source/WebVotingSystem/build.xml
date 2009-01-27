@@ -1,27 +1,96 @@
+<!-- Copyright 2008 Jordan Neill and Dermot Cochran -->
+<!-- Copyright 2009 Dermot Cochran -->
 <project name="koa" default="all" basedir=".">
 
   	<property file="${basedir}/build.properties"/>
   	<property name="src.dir"       	value="${basedir}/src"/>
   	<property name="build.dir"     	value="${basedir}/bin"/>
-  	<property name="java_home"	 	value="/usr/java/j2sdk1.4.2_09"/>
+	<!-- Assuming a  Mac OS X environment; Java Home would be /usr/java on Linux for example -->
+  	<property name="java_home"	 	value="/Library/Java/Home"/>
 
 	<path id="classpath">
 		<fileset dir="${java_home}/lib">
     		<include name="*.jar"/>
 	  	</fileset>
-		<fileset dir="${basedir}/jar">
+		<fileset dir="${basedir}/../../jars">
 			<include name="*.jar"/>
 		</fileset>
 		<fileset dir="${java_home}/jre/lib">
 			<include name="*.jar"/>
 		</fileset>
 	</path> 
-  
-	<target name="clean">
-		<delete dir="${build.dir}"/>
-	</target>
 	
-  	<target name="prepare">
+	<target name="-config-base">
+	        <property name="src.dir" value="src" />
+
+	        <property name="lib.dir" value="../../jars" />
+	        <property name="build.dir" value="build" />
+	        <property name="doc.dir" value="doc" />
+
+	    	<property name="deploy.dir" value="deploy" />
+
+	        <path id="src.path" path="${src.dir}" />
+	    </target>
+
+	    <target name="-config-java" depends="-config-base">
+	        <property name="java.build.dir" value="${build.dir}/java" />
+	        <property name="java.doc.dir" value="${doc.dir}/javadoc" />
+	        <property name="main.src.dir" value="${src.dir}" />
+
+	        <path id="java.classpath">
+	            <fileset dir="${lib.dir}">
+	                <include name="avalon-framework-4.2.0.jar"/>
+	                <include name="axis.jar"/>
+	                <include name="bcprov-jdk14-129.jar"/>
+	                <include name="commons-fileupload-1.2.jar"/>
+	                <include name="fop.jar"/>
+	                <include name="j2ee.jar"/>
+	                <include name="jaxrpc.jar"/>
+	                <include name="namespace.jar"/>
+	                <include name="servlet.jar"/>
+	                <include name="xercesImpl.jar"/>
+	                <include name="xmlrpc-1.2-b1-modified.jar"/>
+	                <include name="wsdl4j.jar"/>
+	            </fileset>
+	        </path>
+	    </target>
+
+
+
+	    <target name="build" depends="build-java" 
+	            description="Calls all build- targets" />
+	    
+	    <target name="build-java" depends="-config-java" 
+	            description="Compiles using javac, output goes to java build dir.">
+	        <mkdir dir="${java.build.dir}" />
+	        <javac classpathref="java.classpath" srcdir="${main.src.dir}" destdir="${java.build.dir}" 
+	               debug="true" source="1.4" target="1.4" />
+	    </target>
+	    
+	    
+	    
+
+	    <target name="doc" depends="doc-java" description="Calls all doc- targets." />
+
+	    <target name="doc-java" depends="-config-java" 
+	            description="Creates javadoc, output goes to java doc dir.">
+	        <javadoc sourcepath="${main.src.dir}" destdir="${java.doc.dir}" author="true" version="true" use="true">
+	            <doctitle>${doc.title}</doctitle>
+	            <bottom>${doc.copyright}</bottom>
+	        </javadoc>    
+	    </target>
+	    
+	    <target name="clean" depends="clean-build,clean-doc-java" description="Calls all clean- targets." />
+	    
+	    <target name="clean-build" depends="-config-base" description="Deletes build dir.">
+	        <delete dir="${build.dir}" />
+	    </target>
+	    
+	    <target name="clean-doc-java" depends="-config-java" description="Deletes javadoc dir.">
+	        <delete dir="${java.doc.dir}" />
+	    </target>
+	
+  	<target name="prepare" depends="build-java">
     	<mkdir dir="${build.dir}"/>
     	<mkdir dir="${build.dir}/jar"/>
   		<mkdir dir="${build.dir}/war"/>
@@ -34,7 +103,7 @@
     	<copy file="dd/esb-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
   		<jar jarfile="${build.dir}/jar/KOAESBEntity.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      	  		<include name="${build.dir}/ie/ucd/srg/koa/esb/beans/*"/>
      	  		<include name="ie/ucd/srg/ibm/ejs/container/**"/>
 				<include name="ie/ucd/srg/ejs/persistence/**"/>
@@ -48,7 +117,7 @@
     	<copy file="dd/esb-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 		<jar jarfile="${build.dir}/jar/KOAESBSessionEJB.jar">
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      		  	<include name="ie/ucd/srg/koa/esb/beans/**"/>
 				<include name="ie/ucd/srg/koa/**/**"/>
      		  	<include name="ie/ucd/srg/ejs/container/**"/>
@@ -62,7 +131,7 @@
 		<copy file="dd/controller-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 	 	<jar jarfile="${build.dir}/jar/KOAControllerEntityEJB.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      		  	<include name="ie/ucd/srg/koa/controller/beans/*Koa*.class"/>
 				<include name="ie/ucd/srg/ejs/container/**"/>
 				<include name="ie/ucd/srg/ejs/persistence/**"/>
@@ -77,7 +146,7 @@
     	<copy file="dd/controller-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 	 	<jar jarfile="${build.dir}/jar/KOAControllerSessionEJB.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      		  	<include name="ie/ucd/srg/koa/controller/beans/*Controller*.class"/>
 				<include name="ie/ucd/srg/koa/controller/subscription/ClientSubscription.class"/>
 				<include name="ie/ucd/srg/koa/**/**"/>
@@ -93,13 +162,13 @@
 		<copy file="dd/databeheer-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 		<jar jarfile="${build.dir}/jar/KOADatabeheerSessionEJB.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      		  	<include name="ie/ucd/srg/koa/databeheer/ejb/session/**"/>
-      		<include name="ie/ucd/srg/ejs/container/**"/>
+      		    <include name="ie/ucd/srg/ejs/container/**"/>
 				<include name="ie/ucd/srg/logicacmg/koa/**/**"/>
 				<include name="ie/ucd/srg/logica/eplatform/error/ErrorMessageFactory.class"/>
 				<include name="ie/ucd/srg/logica/eplatform/util/XMLProperties.class"/>
-      	   <include name="ie/ucd/srg/koa/kieslijst/beans/**"/>
+      	        <include name="ie/ucd/srg/koa/kieslijst/beans/**"/>
 				<include name="ie/ucd/srg/koa/kr/beans/**"/>
 				<include name="ie/ucd/srg/koa/databeheer/data/KiezerData.class"/>
 				<include name="ie/ucd/srg/koa/databeheer/xml/WrongIdWriter.class"/>
@@ -114,9 +183,9 @@
 		<copy file="dd/koa-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 		<jar jarfile="${build.dir}/jar/KOAEntityEJB.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      	  		<include name="ie/ucd/srg/koa/koaschema/**"/>
-      		<include name="ie/ucd/srg/ejs/container/**"/>
+      		    <include name="ie/ucd/srg/ejs/container/**"/>
 				<include name="ie/ucd/srg/ejs/persistence/**"/>
 			</fileset>
 	  	</jar>
@@ -128,9 +197,9 @@
     	<copy file="dd/kieslijst-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 	 	<jar jarfile="${build.dir}/jar/KOAKieslijstBean.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      		  	<include name="ie/ucd/srg/koa/kieslijst/beans/**"/>
-      		<include name="ie/ucd/srg/ejs/container/**"/>
+      		    <include name="ie/ucd/srg/ejs/container/**"/>
 				<include name="ie/ucd/srg/koa/**/**"/>
 				<include name="ie/ucd/srg/koa/kr/beans/**"/>
 				<include name="ie/ucd/srg/koa/controller/beans/**"/>
@@ -145,7 +214,7 @@
     	<copy file="dd/kr-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 	 	<jar jarfile="${build.dir}/jar/KOAKREntityEJB.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      		  	<include name="ie/ucd/srg/koa/kr/beans/**"/>
      		  	<include name="ie/ucd/srg/ejs/container/**"/>
 				<include name="ie/ucd/srg/ejs/persistence/**"/>
@@ -160,7 +229,7 @@
     	<copy file="dd/sar-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 	 	<jar jarfile="${build.dir}/jar/KOASAREntityEJB.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      		  	<include name="ie/ucd/srg/koa/sar/**"/>
      		 	<include name="ie/ucd/srg/ejs/container/**"/>
 				<include name="ie/ucd/srg/ejs/persistence/**"/>
@@ -174,7 +243,7 @@
     	<copy file="dd/scheduler-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 	 	<jar jarfile="${build.dir}/jar/KOASchedulerEJB.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      	  	<include name="ie/ucd/srg/koa/scheduler/beans/**"/>
 			<include name="ie/ucd/srg/ejs/container/**"/>
 			<include name="ie/ucd/srg/ejs/persistence/**"/>
@@ -190,7 +259,7 @@
     	<copy file="dd/koa-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 	 	<jar jarfile="${build.dir}/jar/KOASessionEJB.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      		 	<include name="ie/ucd/srg/koa/session/beans/**"/>
      		  	<include name="ie/ucd/srg/koa/kr/beans/**"/>   
 				<include name="ie/ucd/srg/ejs/container/**"/>
@@ -206,7 +275,7 @@
     	<copy file="dd/stemproces-jboss.xml" tofile="${build.dir}/jboss.xml" overwrite="true"/>
 	 	<jar jarfile="${build.dir}/jar/KOAStemprocesSessionBean.jar">    
      		<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     		<fileset dir="${build.dir}">
+     		<fileset dir="${java.build.dir}">
      		  	<include name="ie/ucd/srg/koa/stemproces/beans/**"/>
 				<include name="ie/ucd/srg/ejs/container/**"/>
 				<include name="ie/ucd/srg/koa/**/**"/>
@@ -215,16 +284,6 @@
 		  	</fileset>
   		</jar>
 	</target>
-
-<!--<target name="package-eplatform-ejb" depends="">
-	<delete file="${build.dir}/jar/ePlatformEJBCore.jar"/>
-   <jar jarfile="${build.dir}/jar/ePlatformEJBCore.jar">    
-     	<metainf dir="${build.dir}" includes="ejb-jar.xml"/>
-     	<fileset dir="${build.dir}">
-			<include name="/ie/ucd/srg/logica/eplatform/**/**"/>  	  	
- 	  	</fileset>
-  	</jar>
-</target>-->
 
 	<target name="package-ejb" depends="package-esb-entity, package-esb-session, package-controller-entity, package-controller-session, package-kr-entity, package-koa-entity, package-koa-session, package-databeheer-session, package-stemproces-session, package-sar-entity, package-scheduler, package-kieslijst">
 	</target>
@@ -250,9 +309,9 @@
          	<include name="commons*.jar"/>
 				<include name="bcprov-jdk14-123.jar" />
 			</lib>
-       	<classes dir="${build.dir}/" >
+       	<classes dir="${java.build.dir}/" >
 				<include name="ie/ucd/srg/koa/constants/**" />
-         	<include name="ie/ucd/srg/koa/servlet/**" />
+         	    <include name="ie/ucd/srg/koa/servlet/**" />
 				<include name="ie/ucd/srg/koa/ticket/**" />				
 				<include name="ie/ucd/srg/koa/eventhandling/**" />
 				<include name="ie/ucd/srg/koa/utils/**" />
@@ -269,18 +328,18 @@
    		<fileset dir="${basedir}/web/voorzitter/">
    			<include name="*.jsp" />
 				<include name="properties/**" />
-   			<include name="images/*.gif" />
+   			    <include name="images/*.gif" />
 				<include name="*.css" />
    		</fileset>
    		<lib dir="${build.dir}/jar/">
-            <include name="struts.jar" />
+                <include name="struts.jar" />
         		<include name="commons*.jar"/>
 				<include name="bcprov-jdk14-123.jar" />
 			</lib>
-			<classes dir="${build.dir}/" >
-       		<include name="ie/ucd/srg/koa/ticket/**" />
+			<classes dir="${java.build.dir}/" >
+       		    <include name="ie/ucd/srg/koa/ticket/**" />
         		<include name="ie/ucd/srg/koa/servlet/KOASchedulerServlet.class" />
-       		<include name="ie/ucd/srg/koa/scheduler/Scheduler.class" />
+       		    <include name="ie/ucd/srg/koa/scheduler/Scheduler.class" />
 				<include name="ie/ucd/srg/koa/voorzitter/**" />
 				<include name="ie/ucd/srg/logica/eplatform/**" />
 				<include name="ie/ucd/srg/koa/reportserver/command/**" />
@@ -310,7 +369,7 @@
          		<include name="struts.jar" />
          		<include name="commons*.jar"/>
 			</lib>
-       	<classes dir="${build.dir}/" >
+       	<classes dir="${java.build.dir}/" >
 				<include name="ie/ucd/srg/koa/ticket/**" />
          		<include name="ie/ucd/srg/koa/databeheer/**" />
 				<include name="ie/ucd/srg/logica/eplatform/**" />
@@ -333,7 +392,7 @@
 	         	<include name="commons*.jar"/>
     	   		<include name="axis.jar" />
         	</lib>
-			<classes dir="${build.dir}/">
+			<classes dir="${java.build.dir}/">
          		<include name="ie/ucd/srg/koa/soap/VSL.class"/>
 	       	</classes>
 			<!--<classes dir="${src.dir}/jar/">
