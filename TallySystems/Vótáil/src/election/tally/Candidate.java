@@ -14,7 +14,7 @@ package election.tally;
  * @copyright 2005-2008
  */
 
-//@ refine "Candidate.spec";
+//@ refine "Candidate.java-refined";
 public class Candidate {
 	
 /**

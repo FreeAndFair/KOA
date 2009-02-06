@@ -1,7 +1,7 @@
 package election.tally;
 
 /** Data transfer structure for set of all valid votes */
-//@ refine "BallotBox.spec";
+//@ refine "BallotBox.java-refined";
 public class BallotBox {
 	
 /**

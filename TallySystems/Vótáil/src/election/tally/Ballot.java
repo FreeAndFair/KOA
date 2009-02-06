@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2009 Dermot Cochran
+ * Copyright (c) 2005-2009 Dermot Cochran, Joseph R. Kiniry and Patrick E. Tierney
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,11 @@
  * THE SOFTWARE.
  */
 
+
 package election.tally;
+
+//@ refine "Ballot.java-refined";
+
 
 import election.tally.UniqueNumber;
 
@@ -44,7 +48,7 @@ import election.tally.UniqueNumber;
  */
 
 /**
- * The Ballot class represents a ballot paper in an Irish election,
+ * The ordered set of preferences from a ballot paper in an Irish election,
  * which uses the Proportional Representation Single Transfer Vote.
  * (PRSTV) system.
  * 
@@ -53,30 +57,28 @@ import election.tally.UniqueNumber;
  * Count Requirements and Commentary on Count Rules,
  * section 3-14</a>
  * 
- * @author <a href="http://kind.ucd.ie">Dermot Cochran</a>
+ * @author <a href="http://kind.ucd.ie/products/opensource/KOA/V—t‡il.html">Dermot Cochran</a>
  * @copyright 2005-2009
  */
 
 
-
-//@ refine "Ballot.spec";
 public class Ballot {
   public static final int MAX_POSSIBLE_BALLOTS = 150000;
 
 /**
-   * Candidate ID value to use for non-transferable ballot papers
-   * 
-   * @design A special candidate ID value is used to indicate
-   * non-transferable votes i.e., when the list of preferences has
-   * been exhausted and none of the continuing candidates are in the preference list, 
-   * the ballot is deemed to be non-transferable.
-   * 
-   * @see <a href="http://www.cev.ie/htm/tenders/pdf/1_2.pdf">
-   * Department Of Environment and Local Government,
-   * Count requirements and Commentary an Count Rules,
-   * section 7, pages 23-27</a>
-   */
-  public static final int NONTRANSFERABLE = 0;
+ * Candidate ID value to use for non-transferable ballot papers
+ * 
+ * @design A special candidate ID value is used to indicate
+ * non-transferable votes i.e., when the list of preferences has
+ * been exhausted and none of the continuing candidates are in the preference list, 
+ * the ballot is deemed to be non-transferable.
+ * 
+ * @see <a href="http://www.cev.ie/htm/tenders/pdf/1_2.pdf">
+ * Department Of Environment and Local Government,
+ * Count requirements and Commentary an Count Rules,
+ * section 7, pages 23-27</a>
+ */
+public static final int NONTRANSFERABLE = 0;
 	
   /** Ballot ID number */
   //@ public invariant (ballotID == 0) | (0 < ballotID);
@@ -223,9 +225,6 @@ public class Ballot {
    * 
    * @param listSize
    *            Number of candidate IDs in the list
-   * 
-   * @param uniqueID
-   *            The serial number of the ballot or equivalent
    * 
    * @design There should be at least one preference in the list. Empty or spoilt
    *         votes should neither be loaded nor counted. There should be no
@@ -463,8 +462,8 @@ public class Ballot {
 	int[] candidateIDList = {1,2,3,4,5,6,7};
 	int listSize = candidateIDList.length;
 	ballot.load(candidateIDList, listSize);
-	//@ assert ballot.getFirstPreference() = 1;
-	//@ assert ballot.getRemainingPreferences() = listSize - 1;
+	//@ assert ballot.getFirstPreference() == 1;
+	//@ assert ballot.remainingPreferences() == listSize - 1;
 	//@ assert ballot.isAssignedTo(1);
 	//@ assert !ballot.isAssignedTo(8);
   }

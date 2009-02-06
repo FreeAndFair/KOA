@@ -26,7 +26,7 @@ package election.tally;
  * Homepage</a>
  * @see <a href="http://www.jmlspecs.org/">JML Homepage</a>  
  */
-//@ refine "ElectionAlgorithm.spec";
+//@ refine "ElectionAlgorithm.java-refined";
 public class ElectionAlgorithm {
 	/**
 	* Abstract State Machine for Election Algorithm.
@@ -488,7 +488,7 @@ public static final byte REPORT = 7;
 /**
  * Default Constructor.
  */
-/*@ also
+/*@ 
   @   protected normal_behavior
   @   ensures state == EMPTY;
   @   ensures countNumber == 0;

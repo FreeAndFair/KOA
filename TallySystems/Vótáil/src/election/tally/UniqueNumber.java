@@ -36,13 +36,13 @@ package election.tally;
  * query
  *   "What is the value of the next unique number?"
  * constraint
- *   "The sequence of unique numbers is not repeated within the lifetime of the system"
+ *   "No two internal identifiers are the same"
  * </BON>
  */
 
 public class UniqueNumber {
    
-private static volatile int uniqueID = 0;
+private /*@ spec_public @*/ static volatile int uniqueID = 0;
 
 /**
  * Generates a unique ID number
@@ -51,11 +51,28 @@ private static volatile int uniqueID = 0;
  */
    /*@ public normal_behavior
      @ assignable uniqueID;
-     @ ensures \result >= 0;
-     @ ensures \old(uniqueID) < uniqueID;
+     @ ensures 0 < \result;
      @*/ 
    public synchronized static int getUniqueID() {
-       return uniqueID++;
+       return ++uniqueID;
+   }
+   
+ /**
+  * Simple unit test for uniqueness of generated ID values
+  */
+   public void main (String args[]) {
+	   int first = UniqueNumber.getUniqueID();
+	   int second = UniqueNumber.getUniqueID();
+	   //@ assert first != second;
+	   assert first != second;
+	   int next = 0;
+	   for (int i = 0; i < args.length; i++) {
+		   next = UniqueNumber.getUniqueID();
+		   //@ assert next != second;
+		   //@ assert next != first;
+		   assert next != first;
+		   assert next != second;
+	   }
    }
 
 }

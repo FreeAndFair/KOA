@@ -115,7 +115,7 @@ public class Ballot {
   /*@ public normal_behavior
     @   ensures this == \result;
     @*/
-  public /*@ pure @*/ Ballot copy();
+  public /*@ model @*/ Ballot copy();
   
   /**
    * Get the location of the ballot at each count
@@ -168,8 +168,6 @@ public class Ballot {
    * 
    * @param listSize Number of candidate IDs in the list
    * 
-   * @param uniqueID The serial number of the ballot or equivalent
-   * 
    * @design There should be at least one preference in the list.
    *   Empty or spoilt votes should neither be loaded nor counted.
    *   There should be no duplicate preferences in the list and none
@@ -185,11 +183,10 @@ public class Ballot {
     @     (candidateIDList[i]) != NONTRANSFERABLE);
     @   assignable preferenceList;
     @   ensures numberOfPreferences == listSize;
-    @   ensures ballotID == uniqueID;
     @   ensures (\forall int i; 0 <= i && i < listSize;
     @     (preferenceList[i] == candidateIDList[i]));
     @*/
-  public void load(int[] candidateIDList, int listSize, int uniqueID);
+  public void load(int[] candidateIDList, int listSize);
   
   /**
    * Get candidate ID to which this ballot is assigned
