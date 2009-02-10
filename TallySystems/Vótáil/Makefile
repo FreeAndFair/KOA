@@ -42,7 +42,7 @@ jmlc_path =	jmlc_build
 jmlunit_path =	jmlunit_build
 
 ESCPATH = ../../../ESCJava2
-escjava = $(ESCPATH)/release-files/escj -source 1.4 -vclimit 2500000 -warnUnsoundIncomplete
+escjava = $(ESCPATH)/release-files/escj -source 1.4 -vclimit 2500000
 export ESCTOOLS_ROOT=$(ESCPATH)
 export SIMPLIFY=$(ESCPATH)/Escjava/release/master/bin/Simplify-1.5.5.macosx
 

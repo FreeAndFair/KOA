@@ -108,16 +108,6 @@ public class Ballot {
   public /*@ pure @*/ Ballot();
   
   /**
-   * Copy constructor
-   * 
-   * @return An exact copy of this ballot paper 
-   */
-  /*@ public normal_behavior
-    @   ensures this == \result;
-    @*/
-  public /*@ model @*/ Ballot copy();
-  
-  /**
    * Get the location of the ballot at each count
    * 
    * @param countNumber
