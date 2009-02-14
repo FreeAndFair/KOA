@@ -52,6 +52,7 @@ private /*@ spec_public @*/ static volatile int uniqueID = 0;
    /*@ public normal_behavior
      @ assignable uniqueID;
      @ ensures 0 < \result;
+     @ ensures \old(uniqueID) < \result;
      @*/ 
    public synchronized static int getUniqueID() {
        return ++uniqueID;
@@ -59,19 +60,17 @@ private /*@ spec_public @*/ static volatile int uniqueID = 0;
    
  /**
   * Simple unit test for uniqueness of generated ID values
+  *
   */
-   public void main (String args[]) {
+   public void main (String /*@ non_null @*/ args[]) {
 	   int first = UniqueNumber.getUniqueID();
 	   int second = UniqueNumber.getUniqueID();
 	   //@ assert first != second;
-	   assert first != second;
-	   int next = 0;
+ 	   int next = 0;
 	   for (int i = 0; i < args.length; i++) {
 		   next = UniqueNumber.getUniqueID();
 		   //@ assert next != second;
 		   //@ assert next != first;
-		   assert next != first;
-		   assert next != second;
 	   }
    }
 

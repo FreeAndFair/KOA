@@ -484,7 +484,6 @@ public static final byte FINISHED = 6;
 /** Declare election result */
 public static final byte REPORT = 7;
 
-
 /**
  * Default Constructor.
  */
@@ -502,8 +501,6 @@ public /*@ pure @*/ ElectionAlgorithm(){
 	numberOfCandidatesEliminated = 0;
 }
 
-
-
 /**
  * Determine if the candidate has enough votes to be elected.
  * 
@@ -519,12 +516,7 @@ public /*@ pure @*/ ElectionAlgorithm(){
   @   ensures \result == (candidate.getTotalVote() >= quota);
   @*/
 protected /*@ pure @*/ boolean hasQuota(Candidate candidate){
-	if(candidate != null && countNumberValue >= 1 && status == COUNTING){
-		if(candidate.getTotalVote() >= numberOfVotesRequired){
-			return true;
-		}
-	}
-	return false;
+	return (candidate.getTotalVote() >= numberOfVotesRequired);
 }
 
 /**
@@ -544,12 +536,7 @@ protected /*@ pure @*/ boolean hasQuota(Candidate candidate){
   @   (candidate.getStatus() == Candidate.ELECTED || hasQuota(candidate));
   @*/
 protected /*@ pure @*/ boolean isElected(Candidate candidate){
-	if(candidate != null && countNumberValue >= 1 && status == COUNTING){
-		if(candidate.getStatus() == Candidate.ELECTED || hasQuota(candidate)){
-			return true;
-		}
-	}
-	return false;
+	return ((candidate.getStatus() == Candidate.ELECTED) || hasQuota(candidate));
 }
 
 /**
@@ -571,17 +558,17 @@ protected /*@ pure @*/ boolean isElected(Candidate candidate){
   @   ensures \result >= 0;
   @*/
 protected /*@ pure @*/ int getSurplus(Candidate candidate){
-	if(candidate != null && countNumberValue > 1){
-		if(hasQuota(candidate)){
-			return (candidate.getTotalVote() - numberOfVotesRequired);
-		}
+	int surplus = 0;
+ 	if (hasQuota(candidate)) {			
+ 		surplus = candidate.getTotalVote() - numberOfVotesRequired;
 	}
-	return 0;
+	return surplus;
 }
 
 /**
  * @design The deposit saving threshold is one plus one quarter of the full quota
- * @design This needs to be checked just before the candidate is eliminated
+ * @design This needs to be checked just before the candidate is eliminated to include
+ *   all transfers received before the candidate was either elected or eliminated
  * @see http://www.cev.ie/htm/tenders/pdf/1_2.pdf, section 3 page 13, section 4 page 17 and section 14
  * @param candidate The candidate for which to check
  * @return true if candidate has enough votes to save deposit
@@ -593,14 +580,8 @@ protected /*@ pure @*/ int getSurplus(Candidate candidate){
   @   (isElected (candidate) == true);
   @*/
 protected /*@ pure @*/ boolean isDepositSaved(Candidate candidate){
-	if(status == COUNTING || status == FINISHED || status == REPORT){
-		if(candidate.getOriginalVote() >= savingThreshold){
-			return true;
-		}else if(isElected (candidate)){
-			return true;
-		}
-	}
-	return false;
+ 	return ((candidate.getOriginalVote() >= savingThreshold)
+		|| (isElected (candidate)));
 }
 
 /**
@@ -611,6 +592,10 @@ protected /*@ pure @*/ boolean isDepositSaved(Candidate candidate){
  * @see http://www.cev.ie/htm/tenders/pdf/1_2.pdf, section 12, page 47
  * 
  * @note ESC/Java2 cannot check assertions that contain the \sum operator
+ * 
+ * @TODO write a BON specification for this method
+ * @TODO determine which ballots are to be transferred
+ * @TODO determine that the transfers are in accordance with the preferences
  */
 /*@ also
   @   protected normal_behavior
@@ -618,42 +603,32 @@ protected /*@ pure @*/ boolean isDepositSaved(Candidate candidate){
   @   requires state == COUNTING;
   @   requires numberOfContinuingCandidates > remainingSeats;
   @   requires (numberOfContinuingCandidates > remainingSeats + 1) ||
-  @   (sumOfSurpluses + lowestContinuingVote > nextHighestVote) ||
-  @   (numberOfEqualLowestContinuing > 1);
+  @     (sumOfSurpluses + lowestContinuingVote > nextHighestVote) ||
+  @     (numberOfEqualLowestContinuing > 1);
   @   requires remainingSeats > 0;
   @   requires (remainingSeats > 1) ||
-  @   ((highestContinuingVote < sumOfOtherContinuingVotes + sumOfSurpluses) &&
-  @   (numberOfEqualHighestContinuing == 1));
+  @     ((highestContinuingVote < sumOfOtherContinuingVotes + sumOfSurpluses) &&
+  @     (numberOfEqualHighestContinuing == 1));
   @   requires getSurplus (candidateWithSurplus) == highestSurplus;
   @   requires (sumOfSurpluses + highestContinuingVote >= quota) ||
-  @   (sumOfSurpluses + lowestContinuingVote > nextHighestVote) ||
-  @   (numberOfEqualLowestContinuing > 1) ||
-  @   ((sumOfSurpluses + lowestContinuingVote >= depositSavingThreshold) &&
-  @   (lowestContinuingVote < depositSavingThreshold));
+  @     (sumOfSurpluses + lowestContinuingVote > nextHighestVote) ||
+  @     (numberOfEqualLowestContinuing > 1) ||
+  @     ((sumOfSurpluses + lowestContinuingVote >= depositSavingThreshold) &&
+  @     (lowestContinuingVote < depositSavingThreshold));
+  @   assignable candidates;
   @   ensures getSurplus (candidateWithSurplus) == 0;
   @   ensures countNumber == \old (countNumber) + 1;
   @   ensures (state == COUNTING) || (state == FINISHED);
   @   ensures totalVotes == nonTransferableVotes +
-  @   (\sum int i; 0 <= i && i < totalCandidates;
+  @     (\sum int i; 0 <= i && i < totalCandidates;
   @   candidateList[i].getTotalVote());
   @*/
 	protected void distributeSurplus(Candidate candidateWithSurplus) {
-		int add = 0;
-		if (status == COUNTING && getSurplus(candidateWithSurplus) == highestAvailableSurplus) {
-			if ((totalNumberOfContinuingCandidates > totalRemainingSeats + 1)|| (totalSumOfSurpluses + lowestVote > nextHighest)|| (totalNumberOfEqualLowestContinuing > 1)) {
-				if ((totalRemainingSeats > 1)|| ((highestContinuing < totalSumOfOtherContinuingVotes + totalSumOfSurpluses) && (totalNumberOfEqualHighestContinuing == 1))) {
-					if ((totalSumOfSurpluses + highestContinuing >= numberOfVotesRequired)|| (totalSumOfSurpluses + lowestVote > nextHighest) || (totalNumberOfEqualLowestContinuing > 1) || ((totalSumOfSurpluses + lowestVote >= savingThreshold) && (lowestVote < savingThreshold))) {
-						countNumberValue = countNumberValue + 1;
-						candidateWithSurplus.total = numberOfVotesRequired;
-						for(int i=0; i<totalNumberOfCandidates;i++){
-							add += candidates[i].getTotalVote();
-						}
-						totalNumberOfVotes = totalofNonTransferableVotes + add;
-					}
-				}
-			}
-		}
+		 //@ assert false;
 	}
+				
+			
+		
 
 /**
  * Elimination of a candidate and transfer of votes.
@@ -664,32 +639,32 @@ protected /*@ pure @*/ boolean isDepositSaved(Candidate candidate){
  */
 /*@ also
   @   protected normal_behavior
-  @   requires 1 <= numberToEliminate;
-  @   requires numberToEliminate <= numberOfContinuingCandidates;
-  @   requires (\forall int i;
-  @   0 <= i && i < numberToEliminate;
-  @   candidatesToEliminate[i].getTotalVote() == 0 ||
-  @   depositSavingThreshold <= candidatesToEliminate[i].getTotalVote() ||
-  @   candidatesToEliminate[i].getTotalVote() +
-  @   sumOfSurpluses + (\sum int j;
-  @   0 <= j && j != i && j < numberToEliminate;
-  @   candidatesToEliminate[i].getTotalVote()) < depositSavingThreshold);
-  @   requires (\forall int i;
-  @   0 <= i && i < numberToEliminate;
-  @   candidatesToEliminate[i].getStatus() == Candidate.CONTINUING);
-  @   requires sumOfSurpluses + (\sum int i;
-  @   0 <= i && i < numberToEliminate;
-  @   candidatesToEliminate[i].getTotalVote()) < quota;
-  @   requires remainingSeats < numberOfContinuingCandidates;
-  @   requires (state == COUNTING);
-  @   ensures (\forall int i;
-  @   0 <= i && i < numberToEliminate;
-  @   candidatesToEliminate[i].getStatus() == Candidate.ELIMINATED &&
-  @   candidatesToEliminate[i].getTotalVote() == 0);
-  @   ensures numberEliminated == \old (numberEliminated) + numberToEliminate;
-  @   ensures remainingSeats <= numberOfContinuingCandidates;
-  @   ensures numberElected <= seats;
-  @   ensures \old(lowestContinuingVote) <= lowestContinuingVote;
+  @     requires 1 <= numberToEliminate;
+  @     requires numberToEliminate <= numberOfContinuingCandidates;
+  @     requires (\forall int i;
+  @       0 <= i && i < numberToEliminate;
+  @       candidatesToEliminate[i].getTotalVote() == 0 ||
+  @       depositSavingThreshold <= candidatesToEliminate[i].getTotalVote() ||
+  @       candidatesToEliminate[i].getTotalVote() +
+  @       sumOfSurpluses + (\sum int j;
+  @       0 <= j && j != i && j < numberToEliminate;
+  @       candidatesToEliminate[i].getTotalVote()) < depositSavingThreshold);
+  @     requires (\forall int i;
+  @       0 <= i && i < numberToEliminate;
+  @       candidatesToEliminate[i].getStatus() == Candidate.CONTINUING);
+  @     requires sumOfSurpluses + (\sum int i;
+  @       0 <= i && i < numberToEliminate;
+  @       candidatesToEliminate[i].getTotalVote()) < quota;
+  @     requires remainingSeats < numberOfContinuingCandidates;
+  @     requires (state == COUNTING);
+  @     ensures (\forall int i;
+  @       0 <= i && i < numberToEliminate;
+  @       candidatesToEliminate[i].getStatus() == Candidate.ELIMINATED &&
+  @       candidatesToEliminate[i].getTotalVote() == 0);
+  @     ensures numberEliminated == \old (numberEliminated) + numberToEliminate;
+  @     ensures remainingSeats <= numberOfContinuingCandidates;
+  @     ensures numberElected <= seats;
+  @     ensures \old(lowestContinuingVote) <= lowestContinuingVote;
   @*/
 protected void eliminateCandidates(Candidate[] candidatesToEliminate, int numberToEliminate){
 	// @assert false;
@@ -705,12 +680,18 @@ protected void eliminateCandidates(Candidate[] candidatesToEliminate, int number
   @   requires state == FINISHED;
   @   assignable state;
   @   ensures state == REPORT;
+  @   ensures \result != null;
+  @   ensures \result.numberElected == numberOfSeats;
+  @	  ensures \result.numberElected == \result.electedCandidateIDs.length;
+  @   ensures (\forall int i;
+  @     0 <= i && i < numberOfSeats;
+  @     isElected(\result.electedCandidateIDs[i]);
   @*/
-public ElectionResults report(){
-	if(status == FINISHED){
-		status = REPORT;
-	}
-	return null;
+public /*@ non_null @*/ ElectionResults report(){
+	 
+	status = REPORT;
+	//@ assert false;
+	return new ElectionResults();
 }
 
 /**
@@ -730,11 +711,11 @@ public ElectionResults report(){
   @ requires countNumber == 0;
   @ ensures state == FINISHED;
   @ assignable state, countNumber, numberElected, numberEliminated,
-  @ numberOfContinuingCandidates, remainingSeats, 
-  @ numberOfSurpluses, candidateList,
-  @ sumOfSurpluses, highestContinuingVote, lowestContinuingVote,
-  @ nextHighestVote, nonTransferableVotes, ballotsToCount,
-  @ numberOfContinuingCandidates;
+  @   numberOfContinuingCandidates, remainingSeats, 
+  @   numberOfSurpluses, candidateList,
+  @   sumOfSurpluses, highestContinuingVote, lowestContinuingVote,
+  @   nextHighestVote, nonTransferableVotes, ballotsToCount,
+  @   numberOfContinuingCandidates;
   @ ensures remainingSeats == 0;
   @ ensures numberElected == seats;
   @ ensures numberEliminated == totalCandidates - numberElected;
@@ -803,17 +784,14 @@ public void load(BallotBox ballotBox) {
   @   ballotsToCount[j].isAssignedTo(candidateID));
   @*/
 protected /*@ pure @*/ int getNumberOfVotes(int candidateID){
-	int num = 0;
-	if (status == COUNTING || status == FINISHED || status == REPORT) {
-			if (0 < candidateID || candidateID == Ballot.NONTRANSFERABLE) {
-				for (int j = 0; j < totalNumberOfVotes; j++) {
-					if (ballots[j].isAssignedTo(candidateID)) {
-						num++;
-					}
-				}
-			}
+	int numberOfVotes = 0;
+ 	for (int j = 0; j < totalNumberOfVotes; j++) {
+		if (ballots[j].isAssignedTo(candidateID)) {
+			numberOfVotes++;
 		}
-	return num;
+	}
+				
+	return numberOfVotes;
 }
 
 /**
@@ -832,23 +810,21 @@ protected /*@ pure @*/ int getNumberOfVotes(int candidateID){
   @   requires 0 < toCandidateID;
   @   requires toCandidateID != Ballot.NONTRANSFERABLE;
   @   ensures \result== (\num_of int j; 0 <= j && j < totalVotes;
-  @   (ballotsToCount[j].isAssignedTo(fromCandidate.getCandidateID())) &&
-  @   (ballotsToCount[j].getCountNumberAtLastTransfer() ==
+  @     (ballotsToCount[j].isAssignedTo(fromCandidate.getCandidateID())) &&
+  @     (ballotsToCount[j].getCountNumberAtLastTransfer() ==
   @   fromCandidate.getLastSetAddedCountNumber()) &&
-  @   (getNextContinuingPreference(ballotsToCount[j]) == toCandidateID));
+  @     (getNextContinuingPreference(ballotsToCount[j]) == toCandidateID));
   @*/
 	protected /*@ pure @*/ int getPotentialTransfers(Candidate fromCandidate,int toCandidateID) {
-		int num = 0;
-		if (status == COUNTING && 0 < toCandidateID	&& toCandidateID != Ballot.NONTRANSFERABLE) {
-			for (int j = 0; j < totalNumberOfVotes; j++) {
-				if (ballots[j].isAssignedTo(fromCandidate.getCandidateID()) == (getNextContinuingPreference(ballots[j]) == toCandidateID)) {
-					if (ballots[j].getCountNumberAtLastTransfer() == fromCandidate.getLastSetAddedCountNumber()) {
-						num++;
-					}
+		int numberOfBallots = 0;
+ 		for (int j = 0; j < totalNumberOfVotes; j++) {
+			if (ballots[j].isAssignedTo(fromCandidate.getCandidateID()) == (getNextContinuingPreference(ballots[j]) == toCandidateID)) {
+				if (ballots[j].getCountNumberAtLastTransfer() == fromCandidate.getLastSetAddedCountNumber()) {
+					numberOfBallots++;
 				}
 			}
 		}
-		return num;
+	return numberOfBallots;
 	}
 
 /**

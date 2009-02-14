@@ -20,11 +20,9 @@
  * THE SOFTWARE.
  */
 
-
 package election.tally;
 
 //@ refine "Ballot.java-refined";
-
 
 import election.tally.UniqueNumber;
 

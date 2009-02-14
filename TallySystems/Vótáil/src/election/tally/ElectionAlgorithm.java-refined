@@ -936,7 +936,7 @@ public class ElectionAlgorithm {
 		  /*@ non_null @*/ Candidate fromCandidate);
   
   /**
-   * Determine if a candidate ID beints to a continuing candidate.
+   * Determine if a candidate ID belongs to a continuing candidate.
    * 
    * @param candidateID
    *        The ID of candidate for which to check the status
