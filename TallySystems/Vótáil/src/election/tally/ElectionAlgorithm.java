@@ -869,7 +869,7 @@ public /*@ pure @*/ byte getStatus(){
 	}
 
 /**
- * Determine if a candidate ID beints to a continuing candidate.
+ * Determine if a candidate ID belongs to a continuing candidate.
  * 
  * @param candidateID
  * The ID of candidate for which to check the status
@@ -881,7 +881,7 @@ public /*@ pure @*/ byte getStatus(){
   @   public normal_behavior
   @   requires 0 < candidateID;
   @   ensures \result == (\exists int i;
-  @   0 <= i && i < totalCandidates;
+  @     0 <= i && i < totalCandidates;
   @   candidateID == candidateList[i].getCandidateID() &&
   @   candidateList[i].getStatus() == Candidate.CONTINUING);
   @*/
@@ -901,31 +901,31 @@ public /*@ pure @*/ byte getStatus(){
  * the number of transfers available throughout the candidate ballot stack
  * 
  * @param fromCandidate Candidate from which to count the transfers
- * @param toCandidate Continuing candidate eligible to recieve votes
+ * @param toCandidate Continuing candidate eligible to receive votes
  * @return Number of votes available for transfer 
  */
 /*@ also
   @   protected normal_behavior
   @   requires (state == COUNTING);
   @   requires (fromCandidate.getStatus() == Candidate.ELECTED) ||
-  @   (fromCandidate.getStatus() == Candidate.ELIMINATED);
+  @     (fromCandidate.getStatus() == Candidate.ELIMINATED);
   @   requires toCandidate.getStatus() == Candidate.CONTINUING;
   @   ensures ((fromCandidate.getStatus() == Candidate.ELECTED) &&
-  @   (getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate)))
-  @   ==>
-  @   (\result ==
-  @   (getSurplus (fromCandidate) *
-  @   getPotentialTransfers (fromCandidate,
-  @   toCandidate.getCandidateID()) /
-  @   getTotalTransferableVotes (fromCandidate)));
+  @     (getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate)))
+  @     ==>
+  @     (\result ==
+  @     (getSurplus (fromCandidate) *
+  @     getPotentialTransfers (fromCandidate,
+  @     toCandidate.getCandidateID()) /
+  @     getTotalTransferableVotes (fromCandidate)));
   @   ensures ((fromCandidate.getStatus() == Candidate.ELIMINATED) ||
-  @   (getTotalTransferableVotes(fromCandidate) <= getSurplus(fromCandidate)))
-  @   ==>
-  @   (\result ==
-  @   (\num_of int j; 0 <= j && j < totalVotes;
-  @   ballotsToCount[j].isAssignedTo(fromCandidate.getCandidateID()) &&
-  @   getNextContinuingPreference(ballotsToCount[j]) ==
-  @   toCandidate.getCandidateID()));
+  @     (getTotalTransferableVotes(fromCandidate) <= getSurplus(fromCandidate)))
+  @     ==>
+  @     (\result ==
+  @     (\num_of int j; 0 <= j && j < totalVotes;
+  @     ballotsToCount[j].isAssignedTo(fromCandidate.getCandidateID()) &&
+  @     getNextContinuingPreference(ballotsToCount[j]) ==
+  @     toCandidate.getCandidateID()));
   @*/
 	protected /*@ pure @*/ int getActualTransfers(Candidate fromCandidate, Candidate toCandidate) {
 		int numberOfVotes =0;
@@ -975,15 +975,8 @@ public /*@ pure @*/ byte getStatus(){
   @   ==> \result == 0;
   @*/
 protected /*@ pure @*/ int getRoundedFractionalValue(/*@ non_null @*/ Candidate fromCandidate, /*@ non_null @*/ Candidate toCandidate){
-	if(status == COUNTING && isElected (fromCandidate) && toCandidate.getStatus() == Candidate.CONTINUING && getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate)){
-		if(getCandidateOrderByHighestRemainder (fromCandidate,toCandidate) <= getTransferShortfall (fromCandidate)){
-			return 1;
-		}else if(getCandidateOrderByHighestRemainder (fromCandidate,toCandidate) > getTransferShortfall (fromCandidate)){
-			return 0;
-		}
-	}
-	return 0;
-}
+ 		return (getCandidateOrderByHighestRemainder (fromCandidate,toCandidate) <= getTransferShortfall (fromCandidate)) ? 1 : 0;
+ }
 
 /**
  * Determine shortfall between sum of transfers rounded down and the size 
@@ -996,15 +989,13 @@ protected /*@ pure @*/ int getRoundedFractionalValue(/*@ non_null @*/ Candidate 
  * of surplus
  */
 protected /*@ pure @*/ int getTransferShortfall(/*@ non_null @*/ Candidate fromCandidate){
-	int temp =0;
-	if(status == COUNTING && isElected (fromCandidate) && getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate)){
-		for(int i=0;i<totalNumberOfCandidates;i++){
+	int shortfall =0;
+ 		for(int i=0;i<totalNumberOfCandidates;i++){
 			if(candidates[i].getStatus() == Candidate.CONTINUING){
-				temp += getActualTransfers (fromCandidate, candidates[i]);
+				shortfall += getActualTransfers (fromCandidate, candidates[i]);
 			}
 		}
-	}
-	return 0;
+	return shortfall;
 }
 
 /**
@@ -1033,14 +1024,12 @@ protected /*@ pure @*/ int getTransferShortfall(/*@ non_null @*/ Candidate fromC
   @   (\result == firstCandidate.candidateID);
   @*/
 protected /*@ pure @*/ int randomSelection(/*@ non_null @*/ Candidate firstCandidate, /*@ non_null @*/ Candidate secondCandidate){
-	if(status == COUNTING && firstCandidate.getStatus() == Candidate.CONTINUING && secondCandidate.getStatus() == Candidate.CONTINUING){
-		if(firstCandidate.randomNumber < secondCandidate.randomNumber){
+ 		if(firstCandidate.randomNumber < secondCandidate.randomNumber){
 			return firstCandidate.candidateID;
 		}else {
 			return secondCandidate.candidateID;
 		}
-	}
-	return 0;
+	 
 }
 
 /**
@@ -1078,10 +1067,8 @@ protected /*@ pure @*/ int getOrder(Ballot ballot){
   @   (getOrder (c) < getOrder (d)) <==> (d.isAfter(c)));
   @*/
 protected /*@ pure @*/ int getOrder(Candidate candidate){
-	if(status == REPORT){
-		return candidates.length;
-	}
-	return 0;
+ 		return candidates.length;
+	 
 }
 
 /**
