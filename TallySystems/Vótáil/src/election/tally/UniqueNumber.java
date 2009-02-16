@@ -62,7 +62,8 @@ private /*@ spec_public @*/ static volatile int uniqueID = 0;
   * Simple unit test for uniqueness of generated ID values
   *
   */
-   public void main (String /*@ non_null @*/ args[]) {
+   //@ requires args != null;
+   public void main (String args[]) {
 	   int first = UniqueNumber.getUniqueID();
 	   int second = UniqueNumber.getUniqueID();
 	   //@ assert first != second;

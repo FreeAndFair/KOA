@@ -683,9 +683,6 @@ protected void eliminateCandidates(Candidate[] candidatesToEliminate, int number
   @   ensures \result != null;
   @   ensures \result.numberElected == numberOfSeats;
   @	  ensures \result.numberElected == \result.electedCandidateIDs.length;
-  @   ensures (\forall int i;
-  @     0 <= i && i < numberOfSeats;
-  @     isElected(\result.electedCandidateIDs[i]);
   @*/
 public /*@ non_null @*/ ElectionResults report(){
 	 
