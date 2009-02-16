@@ -1059,10 +1059,7 @@ protected /*@ pure @*/ int randomSelection(/*@ non_null @*/ Candidate firstCandi
   @   (getOrder (a) < getOrder (b)) <==> (b.isAfter(a)));
   @*/
 protected /*@ pure @*/ int getOrder(Ballot ballot){
-		if (status == REPORT) {
-           return ballots.length;
-		}
-		return 0;
+            return ballots.length;
 	}
 
 /**
@@ -1095,7 +1092,7 @@ protected /*@ pure @*/ int getOrder(Candidate candidate){
  * use floating point numbers, which could introduce rounding errors.
  * 
  * @param fromCandidate Elected candidate from which to count to transfers
- * @param tocandidate Continuing candidate eligible to recieve votes
+ * @param tocandidate Continuing candidate eligible to receive votes
  * 
  * @return The size of the quotient remainder 
  */
@@ -1114,13 +1111,8 @@ protected /*@ pure @*/ int getOrder(Candidate candidate){
   @   getSurplus(fromCandidate));
   @*/
 protected /*@ pure @*/ int getTransferRemainder(/*@ non_null @*/ Candidate fromCandidate, /*@ non_null @*/ Candidate toCandidate){
-	int temp = 0;
-	if(status == COUNTING && isElected (fromCandidate) && toCandidate.getStatus() == Candidate.CONTINUING){
-		if(getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate) && 0 <= getTransferShortfall (fromCandidate)){
-		    temp = getPotentialTransfers(fromCandidate, toCandidate.getCandidateID()) - ((getActualTransfers(fromCandidate, toCandidate) * getTotalTransferableVotes (fromCandidate)) / getSurplus(fromCandidate));
-		}
-	}
-	return temp;
+  return getPotentialTransfers(fromCandidate, toCandidate.getCandidateID()) 
+    - ((getActualTransfers(fromCandidate, toCandidate) * getTotalTransferableVotes (fromCandidate)) / getSurplus(fromCandidate));
 }
 
 /**
@@ -1158,8 +1150,7 @@ protected /*@ pure @*/ int getTransferRemainder(/*@ non_null @*/ Candidate fromC
   @   firstCandidate.getVoteAtCount(k) == secondCandidate.getVoteAtCount(k)));
   @*/
 	protected /*@ pure @*/ boolean isHigherThan(Candidate firstCandidate, Candidate secondCandidate) {
-		if (firstCandidate.getStatus() == Candidate.CONTINUING
-				&& secondCandidate.getStatus() == Candidate.CONTINUING) {
+		 
 			for (int i = 0; i < countNumberValue; i++) {
 				if (firstCandidate.getVoteAtCount(i) > secondCandidate.getVoteAtCount(i)) {
 					for (int j = 0; j < i; j++) {
@@ -1174,7 +1165,7 @@ protected /*@ pure @*/ int getTransferRemainder(/*@ non_null @*/ Candidate fromC
 					}
 				}
 			}
-		}
+		
 		return false;
 	}
 
@@ -1219,27 +1210,23 @@ protected /*@ pure @*/ int getTransferRemainder(/*@ non_null @*/ Candidate fromC
   @   isHigherThan (candidateList[i], toCandidate)));
   @*/
 protected /*@ pure @*/ int getCandidateOrderByHighestRemainder(Candidate fromCandidate, Candidate toCandidate){
-	int num = 0;
-	if(status == COUNTING && isElected (fromCandidate)){
-		if(toCandidate.getStatus() == Candidate.CONTINUING && toCandidate.getStatus() == Candidate.CONTINUING){
+	int numberOfCandidiates = 0;
+	 
 			for(int i=0; i<totalNumberOfCandidates; i++){
 				if(candidates[i].getCandidateID() != toCandidate.getCandidateID()&& candidates[i].getStatus() == Candidate.CONTINUING){
 					if(getTransferRemainder(fromCandidate, candidates[i]) > getTransferRemainder(fromCandidate, toCandidate)){
-						num++;
+						numberOfCandidiates++;
 					}
 					if(getTransferRemainder(fromCandidate, candidates[i]) == getTransferRemainder(fromCandidate, toCandidate) &&	getActualTransfers(fromCandidate, candidates[i]) > getActualTransfers(fromCandidate, toCandidate)){
-						num++;
+						numberOfCandidiates++;
 					}
 					if(getTransferRemainder(fromCandidate, candidates[i]) == getTransferRemainder(fromCandidate, toCandidate) && getActualTransfers(fromCandidate, candidates[i]) == getActualTransfers(fromCandidate, toCandidate) && isHigherThan (candidates[i], toCandidate)){
-						num++;
+						numberOfCandidiates++;
 					}
 					
 				}
 			}
-		}
-		
-	}
-	return 0;
+	return numberOfCandidiates;
 }
 
 /**
@@ -1257,11 +1244,9 @@ protected /*@ pure @*/ int getCandidateOrderByHighestRemainder(Candidate fromCan
   @*/
 protected /*@ pure @*/ int getTotalTransferableVotes(/*@ non_null @*/ Candidate fromCandidate){
     int numberOfTransfers = 0;
-	if(status == COUNTING){
-		for(int i = 0; i < totalNumberOfCandidates; i++){
+ 		for(int i = 0; i < totalNumberOfCandidates; i++){
 			numberOfTransfers += getPotentialTransfers (fromCandidate, candidates[i].getCandidateID());
 		}
-	}
 	return numberOfTransfers;
 } 
 
@@ -1304,8 +1289,7 @@ protected /*@ pure @*/ void transferVotes(/*@ non_null @*/ Candidate fromCandida
   @   ==> (decisionsMade[n].decisionTaken != Decision.EXCLUDE)));
   @*/
 	protected void updateDecisions() {
-		if (status == COUNTING) {
-			for (int n = 0; n < totalNumberOfCandidates; n++) {
+ 			for (int n = 0; n < totalNumberOfCandidates; n++) {
 				if (decisions[n].decisionTaken != Decision.EXCLUDE) {
                    break;
 				}
@@ -1318,7 +1302,6 @@ protected /*@ pure @*/ void transferVotes(/*@ non_null @*/ Candidate fromCandida
 				}
 			}
 		}
-	}
    
    /**
     * Main method - not implemented yet
