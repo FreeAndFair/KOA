@@ -15,11 +15,17 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>ie.ucd.bon.plugin.boncbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>net.sourceforge.metrics.nature</nature>
 		<nature>ch.ethz.inf.pm.jml.plugin.CheckerNature</nature>
 		<nature>mobius.escjava2.plugin.autocheckEscjavaNature</nature>
+		<nature>ie.ucd.bon.plugin.boncnature</nature>
 	</natures>
 </projectDescription>
