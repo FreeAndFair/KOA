@@ -23,9 +23,22 @@
 --
 
 class_chart BALLOT_BOX
+explanation 
+  "The set of all ballot papers with at least one valid preference"
+query
+  "How many valid ballot papers?"
+constraint
+  "Every ballot paper has at least one preference"
+end
+
+class_chart BALLOT_PILE
+explanation
+  "A set of ballot papers assigned to one candidate"
 end
 
 class_chart CANDIDATE_LIST
+explanation
+  "The set of all valid candidates for election"
 end
 
 class_chart COUNT_PROCESS
