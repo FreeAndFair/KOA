@@ -22,7 +22,7 @@
 -- THE SOFTWARE.
 --
 
-scenario_chart VOTAIL
+scenario_chart KOA
 indexing
   author: "Dermot Cochran";
   created: "2009-02-24-dc"

@@ -24,7 +24,7 @@
 
 -- External (incoming) events
 
-event_chart VOTAIL
+event_chart KOA
 incoming
 indexing
   author: "Dermot Cochran";

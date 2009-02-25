@@ -22,13 +22,15 @@
 -- THE SOFTWARE.
 --
 
-cluster_chart BALLOT_COUNTING
+cluster_chart VOTAIL
 indexing
   author: "Dermot Cochran";
   created: "2009-02-19-dc";
+  revised: "2009-02-25-dc"
  explanation 
-  "The counting of ballot papers"
+  "The PR-STV counting of Irish ballot papers"
 class BALLOT_BOX description "The set of all valid ballots"
+class BALLOT_PILE description "The set of all ballots assigned to one candidate"
 class CANDIDATE_LIST description "The set of all candidates for election and the status of each candidate"
 class COUNT_PROCESS description "The procedure and algorithm for counting of ballots"
 class ELECTION_RESULT description "The number of votes for each candidate at each round of counting"

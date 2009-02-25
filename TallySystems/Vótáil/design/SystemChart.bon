@@ -22,7 +22,9 @@
 -- THE SOFTWARE.
 --
 
-system_chart VOTAIL
-cluster BALLOT_COUNTING description "The counting of ballots"
+system_chart KOA
+explanation
+  "A verified verifiable open source system for electronic voting"
+cluster VOTAIL description "The PR-STV counting of Irish ballots"
 end
  
