@@ -28,22 +28,25 @@ component
   action
     "1" "Start the count"
     "2"	"Get total number of ballots"
-    "3" "Calculate the quota"
-    "4" "Find highest candidate with quota"
-    "4" "Check number of remaining seats"
-    "5" "Check number of continuing candidates"
+    "3" "Find highest candidate with quota"
+    "4" "Declare candidate elected"
+    "5" "Distribute the surplus"
+    "6" "Check number of remaining seats"
+    "7" "Check number of continuing candidates"
+    "8" "Exclude lowest continuing candidate"
   end
   object BALLOT_BOX
-  BALLOT_BOX calls COUNT_PROCESS "1"
-end
-
-dynamic_diagram Distribute_Surplus
-component
-  scenario "DISTRIBUTE_SURPLUS"
-  action
-    "1" "Determine the transfer ratio"
-  end
+  object BALLOT_DISTRUBUTION
   object CANDIDATE_LIST
-  object BALLOT_BOX
-  CANDIDATE_LIST calls BALLOT_BOX "1"
+  object COUNT_PROCESS
+  object ELECTION_OFFICER
+  object SEAT_ALLOCATION
+  ELECTION_OFFICER calls COUNT_PROCESS "1"
+  COUNT_PROCESS calls BALLOT_BOX "2"
+  COUNT_PROCESS calls BALLOT_DISTRIBUTION "3"
+  COUNT_PROCESS calls CANDIDATE_LIST "4"
+  COUNT_PROCESS calls BALLOT_DISTRIBUTION "5"
+  COUNT_PROCESS calls SEAT_ALLOCATION "6"
+  COUNT_PROCESS calls CANDIDATE_LIST "7"
+  COUNT_PROCESS calls BALLOT_DISTRIBUTION "8"
 end
