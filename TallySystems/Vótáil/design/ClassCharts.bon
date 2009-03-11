@@ -34,14 +34,35 @@ end
 class_chart BALLOT_PILE
 explanation
   "A set of ballot papers assigned to one candidate"
+query
+  "Which candidate benefits from this pile of ballots?",
+  "Is this a pile of non-transferable ballots?"
+constraint
+  "Every ballot in this pile is either nontransferable or assigned to the same candidate"
 end
 
 class_chart CANDIDATE_LIST
 explanation
   "The set of all valid candidates for election"
+query
+  "Who are the candidates?"
+  "Which candidates were elected?"
+  "Which candidates were excluded?"
+  "Which candidates were excluded and lost their deposit?",
+  "Who are the continuing candidates?",
+  "How many continuing candidates are there?"
 end
 
 class_chart COUNT_PROCESS
+explanation
+  "The algorithm for tallying of the votes"
+query
+  "Which variant of the algorithm is in force e.g. PR-STV, BC-STV or IRV?"
+command
+  "Start the count"
+  "Begin the next round of counting"
+constraint
+  "Whichever variant is in force, does not change during the count process.  All ballots are counted in the same way."
 end
 
 class_chart ELECTION_RESULT
