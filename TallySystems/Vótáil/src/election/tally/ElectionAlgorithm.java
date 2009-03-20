@@ -684,11 +684,11 @@ protected void eliminateCandidates(Candidate[] candidatesToEliminate, int number
   @   ensures \result.numberElected == numberOfSeats;
   @	  ensures \result.numberElected == \result.electedCandidateIDs.length;
   @*/
-public /*@ non_null @*/ ElectionResults report(){
+public /*@ non_null @*/ ElectionReport report(){
 	 
 	status = REPORT;
 	//@ assert false;
-	return new ElectionResults();
+	return new ElectionReport();
 }
 
 /**

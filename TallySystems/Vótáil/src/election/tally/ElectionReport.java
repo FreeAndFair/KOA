@@ -62,7 +62,7 @@ package election.tally;
  * </BON>
  */
 
-public class ElectionResults {
+public class ElectionReport {
 //@ public invariant 0 <= numberElected;
 //@ public invariant numberElected <= Candidate.MAX_SEATS;
 	public long numberElected;
@@ -82,6 +82,6 @@ public class ElectionResults {
 //@ public invariant 0 <= totalNumberOfCounts;
 	public long totalNumberOfCounts;
 	
-	public /*@ pure @*/ ElectionResults(){
+	public ElectionReport(){
 	}
 }
