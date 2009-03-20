@@ -21,14 +21,41 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
 --
+-- Four Step (Kiniry) Methodology: 
+--   Electoral Law --> 
+--     (System) Diagrams and Table of (Functional) Requirements --> 
+--        Informal BON --> 
+--          JML specifications --> 
+--            Java code
+--
+
+class_chart BALLOT
+query
+  "How many preferences?",
+  "Who is the first preference?",
+  "Who is the next preference?",
+  "Who is the highest preference continuing candidate on this ballot (if any)?",
+  "Is there a fractional weight on this ballot?",
+  "What is the fractional weight on this ballot (non-zero or less than or equal to one)?",
+  "Which elected or continuing candidate benefited from this ballot?"
+command
+  "Divide the weight of this ballot by a transfer factor"
+constraint
+  "The sequence of preferences is unbroken e.g. no candidate is listed twice",
+  "No ballot has a negative, zero weight or a weight greater than one"
+end
 
 class_chart BALLOT_BOX
 explanation 
   "The set of all ballot papers with at least one valid preference"
 query
-  "How many valid ballot papers?"
+  "How many valid ballot papers?",
+  "How many first preference votes for each candidate?",
+  "How many different piles of ballots?"
 constraint
-  "Every ballot paper has at least one preference"
+  "Every ballot paper has at least one preference",
+  "The total number of first preference votes is equal to the number of ballots",
+  "The sum of the number of ballots in each pile is equal to the number of ballots" 
 end
 
 class_chart BALLOT_PILE
@@ -36,34 +63,45 @@ explanation
   "A set of ballot papers assigned to one candidate"
 query
   "Which candidate benefits from this pile of ballots?",
-  "Is this a pile of non-transferable ballots?"
+  "Is this a pile of non-transferable ballots?",
+  "From which elected or excluded candidate were these ballots taken?"
 constraint
-  "Every ballot in this pile is either nontransferable or assigned to the same candidate"
+  "Every ballot in this pile is either nontransferable or assigned to the same candidate",
+  "For each ballot in this pile, there is no continuing candidate of higher preference"
 end
 
 class_chart CANDIDATE_LIST
 explanation
   "The set of all valid candidates for election"
 query
-  "Who are the candidates?"
-  "Which candidates were elected?"
-  "Which candidates were excluded?"
+  "Who are the candidates?",
+  "Which candidates were elected?",
+  "Which candidates were excluded?",
   "Which candidates were excluded and lost their deposit?",
   "Who are the continuing candidates?",
   "How many continuing candidates are there?"
+constraint 
+  "All candidates are either continuing, excluded or elected",
+  "At the beginning of the count all candidates are continuing",
+  "At the end of the count there are no continuing candidates"
 end
 
 class_chart COUNT_PROCESS
 explanation
   "The algorithm for tallying of the votes"
 query
-  "Which variant of the algorithm is in force e.g. PR-STV, BC-STV or IRV?"
+  "Which variant of the algorithm is in force e.g. PR-STV, BC-STV or IRV?",
+  "Are fractional transfers (Gregory Method) allowed?",
+  "How many decimal places are used for fractional transfers (zero if not allowed)?"
 command
-  "Start the count"
+  "Start the count",
   "Begin the next round of counting"
 constraint
   "Whichever variant is in force, does not change during the count process.  All ballots are counted in the same way."
 end
 
 class_chart ELECTION_RESULT
+query
+  "Which candidates were elected?",
+  "Which candidates lost their deposit?"
 end
