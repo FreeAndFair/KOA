@@ -100,7 +100,8 @@ constraint
   "Whichever variant is in force, does not change during the count process.  All ballots are counted in the same way."
 end
 
-class_chart ELECTION_RESULT
+-- See Sections 31-27 of the the Department of the Environment Commentary on Count Rules
+class_chart ELECTION_REPORT
 query
   "Which candidates were elected?",
   "Which candidates lost their deposit?"
