@@ -21,12 +21,11 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
 --
--- Four Step (Kiniry) Methodology: 
+-- Three Step (Kiniry07) Verification Centric Methodology: 
 --   Electoral Law --> 
---     (System) Diagrams and Table of (Functional) Requirements --> 
---        Informal BON --> 
---          JML specifications --> 
---            Java code
+--     Diagrams, Table of Requirements and Informal BON --> 
+--        JML specifications --> 
+--          Java code
 --
 
 class_chart BALLOT
@@ -95,14 +94,23 @@ query
   "How many decimal places are used for fractional transfers (zero if not allowed)?"
 command
   "Start the count",
-  "Begin the next round of counting"
+  "Begin the next round of counting",
+  "Randomise the order of the ballots" -- section 16
 constraint
-  "Whichever variant is in force, does not change during the count process.  All ballots are counted in the same way."
+  "Whichever variant is in force, does not change during the count process.  All ballots are counted in the same way.",
+  "The order of the ballots must be randomised before counting so that same order is used in each recount"
 end
 
--- See Sections 31-27 of the the Department of the Environment Commentary on Count Rules
+-- Election Reporting Requirements:
+-- see sections 19-40 of the Count Requirements and Commentary on Count Rules
+-- from the Department of the Environment and Local Government
+-- Available from http://www.cev.ie/htm/tenders/pdf/1_2.pdf
 class_chart ELECTION_REPORT
 query
-  "Which candidates were elected?",
-  "Which candidates lost their deposit?"
+  "Which candidates were elected in each round?",
+  "Which candidates lost their deposit?",
+  "How was the surplus of each elected candidate distributed?", -- section 19
+  "How were the ballots of each excluded candidate distributed?"
+command
+  
 end
