@@ -1,4 +1,6 @@
-/*
+/**
+ * Votail Cuntais - Irish PR-STV ballot counting system
+ * 
  * Copyright (c) 2005-2009 Dermot Cochran, Joseph R. Kiniry and Patrick E. Tierney
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy

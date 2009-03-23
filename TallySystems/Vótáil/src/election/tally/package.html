@@ -6,15 +6,15 @@
   package.html for the election.tally package.
   $Id$
 
-  Copyright 2007 Systems Research Group, University College Dublin
+  Copyright 2007, 2009 Systems Research Group, University College Dublin (http://kind.ucd.ie)
 
-  Author: Joe Kiniry (kiniry@ucd.ie)
+  Authors: Joe Kiniry (kiniry@ucd.ie) and Dermot Cochran (dermot.cochran@ucd.ie)
 
 -->
 </head>
 <body bgcolor="white">
 
-This package contains Votail, the Irish PRSTV plugin for the KOA vote tally application.
+This package contains Votail Cuntais, the Irish PR-STV ballot counting system.
 
 <h2>Package Specification</h2>
 
@@ -22,11 +22,11 @@ This package contains Votail, the Irish PRSTV plugin for the KOA vote tally appl
 
 <h2>Package Authors</h2>
 
-<p> This plugin was written by Jsoeph R. Kiniry, Dermot Cochran and Patrick E. Tierney.
+<p> This package was written by Joseph R. Kiniry, Dermot Cochran and Patrick E. Tierney.
 
-<h2>Tools Used</h2>
+<h2>Software Engineering Tools Used</h2>
 
-<p> The following tools were used to develop the Votail plugin. </p>
+<p> The following software engineering tools were used to develop the Votail software. </p>
 
 <ul>
   <li> The <a href="http://www.jmlspecs.org/">JML tool suite</a>,
@@ -43,7 +43,7 @@ This package contains Votail, the Irish PRSTV plugin for the KOA vote tally appl
       of the refinement calculus. <br />
 
       JML has been used to express the semantics of all core
-      classes of the Votail plugin.
+      classes of the Votail Cuntais system.
   </li>
 
   <li> The <a
@@ -51,7 +51,7 @@ This package contains Votail, the Irish PRSTV plugin for the KOA vote tally appl
       verification tool <br />
 
       ESC/Java2 has been used to verify some methods of all data
-      structure subcomponents of the Votail plugin.  <em>Verify</em>,
+      structure subcomponents of the Votail Cuntais system.  <em>Verify</em>,
       in this context, means that ESC/Java2 was used to automatically
       prove that the provided implementation fulfills the associated
       contract specified with JML. </p>
@@ -60,12 +60,22 @@ This package contains Votail, the Irish PRSTV plugin for the KOA vote tally appl
   <li> The <a href="http://www.eclipse.org/">Eclipse development
       environment</a>
   </li>
+  
+  <li> The <a
+      href="http://secure.ucd.ie/products/opensource/BONc/">BONc</a>
+      specification tool <br />
+  </li>
+  
+  <li> The <a
+      href="http://secure.ucd.ie/products/opensource/Mobius/">Mobius</a>
+      program verification environment <br />
+  </li>
       
 </ul>
 
 <h2>Development Methodology</h2>
 
-<p> The Votail plugin was developed using the following methodology:
+<p> The Votail Cuntais system was developed using the following methodology:
 
 <ul>
   <li> The specifications (types and JML annotations) for the classes

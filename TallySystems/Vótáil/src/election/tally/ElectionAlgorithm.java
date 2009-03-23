@@ -27,7 +27,7 @@ package election.tally;
  * @see <a href="http://www.jmlspecs.org/">JML Homepage</a>  
  */
 //@ refine "ElectionAlgorithm.java-refined";
-public class ElectionAlgorithm {
+public abstract class ElectionAlgorithm {
 	/**
 	* Abstract State Machine for Election Algorithm.
 	*/
