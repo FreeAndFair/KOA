@@ -1,5 +1,7 @@
 package election.tally;
 
+import election.util.UniqueNumber;
+
 /** 
  * The Candidate object records the number of votes received during
  * each round of counting. Votes can only be added to the candidate's

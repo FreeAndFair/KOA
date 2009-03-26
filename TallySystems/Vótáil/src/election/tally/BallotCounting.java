@@ -26,8 +26,8 @@ package election.tally;
  * Homepage</a>
  * @see <a href="http://www.jmlspecs.org/">JML Homepage</a>  
  */
-//@ refine "ElectionAlgorithm.java-refined";
-public abstract class ElectionAlgorithm {
+//@ refine "BallotCounting.java-refined";
+public abstract class BallotCounting {
 	/**
 	* Abstract State Machine for Election Algorithm.
 	*/
@@ -494,7 +494,7 @@ public static final byte REPORT = 7;
   @   ensures numberElected == 0;
   @   ensures numberEliminated == 0;
   @*/
-public /*@ pure @*/ ElectionAlgorithm(){
+public BallotCounting(){
 	status = EMPTY;
 	countNumberValue = 0;
 	numberOfCandidatesElected = 0;
@@ -725,7 +725,7 @@ public void count(){
 /**
  * Load candidate details and number of seats.
  * 
- * @param electionDetails The candidate details and number of seats
+ * @param electionParameters The candidate details and number of seats
  */
 /*@ also
   @   protected normal_behavior
@@ -736,12 +736,12 @@ public void count(){
   @   ensures totalSeats == electionDetails.totalNumberOfSeats;
   @   assignable state, seats, totalSeats, totalCandidates, candidateList, totalNumberOfSeats, totalNumberOfCandidates, numberOfSeats;
   @*/
-public void setup(ElectionDetails electionDetails){
+public void setup(ElectionParameters electionParameters){
 	if(status == EMPTY){
 		status = PRELOAD;
-		totalNumberOfCandidates = electionDetails.numberOfCandidates;
-		numberOfSeats = electionDetails.numberOfSeatsInThisElection;
-		totalNumberOfSeats = electionDetails.totalNumberOfSeats;
+		totalNumberOfCandidates = electionParameters.numberOfCandidates;
+		numberOfSeats = electionParameters.numberOfSeatsInThisElection;
+		totalNumberOfSeats = electionParameters.totalNumberOfSeats;
 	}
 }
 

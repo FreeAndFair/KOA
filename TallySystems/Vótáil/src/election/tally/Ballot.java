@@ -26,7 +26,7 @@ package election.tally;
 
 //@ refine "Ballot.java-refined";
 
-import election.tally.UniqueNumber;
+import election.util.UniqueNumber;
 
 /* <BON>
  * class_chart BALLOT

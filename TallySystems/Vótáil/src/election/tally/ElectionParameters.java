@@ -33,7 +33,7 @@ package election.tally;
  * </BON>
  */
 
-public class ElectionDetails {
+public class ElectionParameters {
 
 /** Number of candidates for election in this constituency */
 //@ public invariant 0 < numberOfCandidates;
@@ -63,7 +63,7 @@ public class ElectionDetails {
   @*/	
 	public /*@ non_null @*/ long[] candidateIDs;
 	
-	public /*@ pure @*/ ElectionDetails(){
+	public ElectionParameters(){
 		
 	}
 }

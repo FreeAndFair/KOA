@@ -1,5 +1,5 @@
 
-package election.tally;
+package election.util;
 
 /*
  * Copyright (c) 2005-2009 Dermot Cochran
