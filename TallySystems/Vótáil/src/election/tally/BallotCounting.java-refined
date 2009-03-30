@@ -1,12 +1,20 @@
  package election.tally;
 
 /**
- * This is a Java Modeling Language (JML) design specification of the vote counting 
- * algorithm for elections to Dail Eireann.
+ * This is a Java Modeling Language (JML) design specification of the ballot 
+ * counting algorithm for elections to Oireachtas Eireann - the National 
+ * Parliament of Ireland.
  * 
  * @author Dermot Cochran
- * @copyright Systems Research Group and University College Dublin, Ireland.
+ * @copyright 2005-2009 Dermot Cochran
  * @reviewer Joe Kiniry
+ * 
+ * This work was supported, in part, by Science Foundation Ireland
+ * grant 03/CE2/I303_1 to Lero - the Irish Software Engineering
+ * Research Centre (www.lero.ie) and by the European Project  Mobius IST 15909 
+ * within the IST 6th Framework. This software reflects only the authors' views 
+ * and the Community is not liable for any use that may be made of the 
+ * information contained therein.
  * 
  * @design This JML specification and associated Java code is intended
  * to be checkable using ESC/Java2 (the Extended Static Checker for 
@@ -25,17 +33,20 @@
  * @see <a href="http://www.jmlspecs.org/">JML Homepage</a>
  */
 
-public class ElectionAlgorithm {
+public class BallotCounting {
 	
   /**  
    * Abstract State Machine for Election Algorithm.
    * @design 
-   * The election count algorithm is modeled as an abstract state machine with state
-   * values and transitions between those states. The normal path is: 
+   * The election count algorithm is modeled as a two tier state machine with 
+   * state values and transitions between those states. The normal path for the 
+   * outer tier of the state machine is: 
    * <p>
    * EMPTY --> SETUP --> PRELOAD --> LOADING --> PRECOUNT --> 
    * COUNTING --> FINISHED --> REPORT 
    * 
+   * The inner tier of the state machine has two variants; one for Dail 
+   * Eireann - the lower house of the Oireachtas - and one for Seanad Eireann.
    */
   
    /** Start state */
@@ -498,7 +509,7 @@ public class ElectionAlgorithm {
     @   (\sum int i; 0 <= i && i < totalCandidates; 
     @   candidateList[i].getTotalVote());
     @*/
-  protected void distributeSurplus(/*@ non_null @*/ 
+    protected void distributeSurplus(/*@ non_null @*/ 
                                 election.tally.Candidate candidateWithSurplus);
 	
 	

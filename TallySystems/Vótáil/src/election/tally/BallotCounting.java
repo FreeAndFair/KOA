@@ -2,18 +2,53 @@ package election.tally;
 
 
 /**
- * Vote counting algorithm for elections to Dail Eireann.
+ * Ballot counting algorithm for elections to Oireachtas Eireann.
  * 
- * This Java package <code>election.tally</code> is designed to be used as part of the 
- * KOA remote voting system, but does not assume anything about the KOA system
- * other than that it takes care of the remote voting process, supplies a valid
- * set of ballots and candidate IDs to be counted by this algorithm and takes 
- * care of system level issues such as security, authentication and data storage.
+ * ----------------------------------------------------------------------------
  * 
+ * @author Dermot Cochran
+ * @copyright 2005-2009 Dermot Cochran
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * 
+ * This work was supported, in part, by Science Foundation Ireland
+ * grant 03/CE2/I303_1 to Lero - the Irish Software Engineering
+ * Research Centre (www.lero.ie) and, in part, by the European Project Mobius 
+ * IST 15909 within the IST 6th Framework. This software reflects only the 
+ * authors' views and the European Community is not liable for any use that 
+ * may be made of the information contained therein.
+ * 
+ * ----------------------------------------------------------------------------
+ * 
+ * <BON>class_chart BALLOT_COUNTING</BON>
+ * 
+ * This Java package <code>election.tally</code> is designed to be used with 
+ * either an optical ballot scan system or else a remote online voting system 
+ * that supplies a valid set of ballots and candidate IDs to be counted by this 
+ * algorithm and takes care of system level issues such as security, 
+ * authentication and data storage.
  * 
  * @design This JML specification and associated Java code is intended 
  * to be verifiable using the Extended Static Checking for Java
- * version 2 tool (ESCJava2). 
+ * version 2 tool (ESCJava2), the Mobius Program Verification Environment (PVE),
+ * JML4 and other JML compliant software engineering tools. The BON specification
+ * is intended to be checkable with the BONc tool.
  * 
  * @see <a href="http://www.irishstatuebook.ie/1992_23.html">Part XIX of the 
  * Electoral Act, 1992</a>
@@ -458,10 +493,10 @@ public abstract class BallotCounting {
 	
 	
 /**
- * @design The election count algorithm is modeled as an abstract state
+ * @design The election count algorithm is modeled as a two tier abstract state
  * machine with states and transistions between those states:
  * 
- *  <p> The normal path is:
+ *  <p> The normal path for the outer tier is:
  *  <p> Empty --> SETUP --> PRELOAD --> LOADING -->
  *  PRECOUNT --> COUNTING --> FINISHED --> REPORT
  *   
@@ -507,6 +542,8 @@ public BallotCounting(){
  * @param candidate The candidate in question
  * @return True if the candidate has at least a quota of votes
  * @see http://www.cev.ie/htm/tenders/pdf/1_1.pdf, page 79, paragraph 120(2)
+ * 
+ * <BON>query "Has the candidate at least a quota of votes?"</BON>
  */
 /*@ also
   @   protected normal_behavior
@@ -521,6 +558,8 @@ protected /*@ pure @*/ boolean hasQuota(Candidate candidate){
 
 /**
  * Determine if the candidate was elected in any previous round
+ * 
+ * <BON>query "Has the candidate been elected?"</BON>
  * 
  * @param candidate  
  * The candidate record
@@ -542,6 +581,8 @@ protected /*@ pure @*/ boolean isElected(Candidate candidate){
 /**
  * Determine how many surplus votes a candidate has.
  * 
+ * <BON>query "How many surplus votes does this candidate have?"</BON>
+ * 
  * @design The surplus is the maximum number of votes available for transfer
  * @param candidate The candidate record
  * @return The undistributed surplus for that candidate, or zero if the 
@@ -550,12 +591,12 @@ protected /*@ pure @*/ boolean isElected(Candidate candidate){
  */
 /*@ also
   @   protected normal_behavior
-  @   requires candidate != null;
-  @   requires countNumber > 1;
-  @   ensures (hasQuota(candidate) == true) ==> \result ==
-  @   (candidate.getTotalVote() - quota);
-  @   ensures (hasQuota(candidate) == false) ==> \result == 0;
-  @   ensures \result >= 0;
+  @     requires candidate != null;
+  @     requires countNumber > 1;
+  @     ensures (hasQuota(candidate) == true) ==> \result ==
+  @       (candidate.getTotalVote() - quota);
+  @     ensures (hasQuota(candidate) == false) ==> \result == 0;
+  @     ensures \result >= 0;
   @*/
 protected /*@ pure @*/ int getSurplus(Candidate candidate){
 	int surplus = 0;
@@ -566,6 +607,10 @@ protected /*@ pure @*/ int getSurplus(Candidate candidate){
 }
 
 /**
+ * Determine if the candidate has enough votes to save his or her deposit.
+ * 
+ * <BON>query "Has this candidate saved his or her deposit?"</BON>
+ * 
  * @design The deposit saving threshold is one plus one quarter of the full quota
  * @design This needs to be checked just before the candidate is eliminated to include
  *   all transfers received before the candidate was either elected or eliminated
@@ -575,9 +620,9 @@ protected /*@ pure @*/ int getSurplus(Candidate candidate){
  */
 /*@ also
   @   protected normal_behavior
-  @   requires (state == COUNTING) || (state == FINISHED) || (state == REPORT);
-  @   ensures \result == (candidate.getOriginalVote() >= depositSavingThreshold) ||
-  @   (isElected (candidate) == true);
+  @     requires (state == COUNTING) || (state == FINISHED) || (state == REPORT);
+  @     ensures \result == (candidate.getOriginalVote() >= depositSavingThreshold) ||
+  @       (isElected (candidate) == true);
   @*/
 protected /*@ pure @*/ boolean isDepositSaved(Candidate candidate){
  	return ((candidate.getOriginalVote() >= savingThreshold)
@@ -585,7 +630,16 @@ protected /*@ pure @*/ boolean isDepositSaved(Candidate candidate){
 }
 
 /**
- * Distribution of highest surplus
+ * Redistribute ballots from the highest available surplus.
+ * 
+ * <BON>
+ *   command
+ *     "Calculate transfer factor",
+ *     "Calculate non-fractional transfers",
+ *     "Calculate fractional differences for each candidate",
+ *     "Calculate adjusted number of transfers",
+ *     "Move the ballots"
+ * </BON>
  * 
  * @param candidateWithSurplus
  * @design At most one surplus may be distributed in each round
@@ -593,7 +647,6 @@ protected /*@ pure @*/ boolean isDepositSaved(Candidate candidate){
  * 
  * @note ESC/Java2 cannot check assertions that contain the \sum operator
  * 
- * @TODO write a BON specification for this method
  * @TODO determine which ballots are to be transferred
  * @TODO determine that the transfers are in accordance with the preferences
  */
@@ -623,18 +676,19 @@ protected /*@ pure @*/ boolean isDepositSaved(Candidate candidate){
   @     (\sum int i; 0 <= i && i < totalCandidates;
   @   candidateList[i].getTotalVote());
   @*/
-	protected void distributeSurplus(Candidate candidateWithSurplus) {
-		 //@ assert false;
-	}
-				
-			
-		
+	protected abstract void distributeSurplus(Candidate candidateWithSurplus);
 
 /**
  * Elimination of a candidate and transfer of votes.
  * 
+ * <BON>
+ *   command
+ *     "Calculate transfers",
+ *     "Move ballots"
+ * </BON>
+ * 
  * @param candidatesToEliminate One or more candidates to be excluded from the 
- * election in this count
+ *   election in this count
  * @param numberToEliminate Number of candidates to eliminate in this count
  */
 /*@ also
@@ -666,9 +720,8 @@ protected /*@ pure @*/ boolean isDepositSaved(Candidate candidate){
   @     ensures numberElected <= seats;
   @     ensures \old(lowestContinuingVote) <= lowestContinuingVote;
   @*/
-protected void eliminateCandidates(Candidate[] candidatesToEliminate, int numberToEliminate){
-	// @assert false;
-}
+protected abstract void eliminateCandidates(Candidate[] candidatesToEliminate, 
+		int numberToEliminate);
 
 /**
  * Declare results
@@ -718,9 +771,7 @@ public /*@ non_null @*/ ElectionReport report(){
   @ ensures numberEliminated == totalCandidates - numberElected;
   @ ensures numberOfContinuingCandidates == 0;
   @*/
-public void count(){
-	 //@ assert false;
-}
+public abstract void count();
 
 /**
  * Load candidate details and number of seats.
@@ -761,8 +812,7 @@ public void setup(ElectionParameters electionParameters){
   @   ballotsToCount[j].isAssignedTo(candidateList[i].getCandidateID())));
   @*/
 public void load(BallotBox ballotBox) {
-	//@ assert false;	 
-}
+	}
 
 /**
  * Gets the current number of votes for this candidate ID.
@@ -1243,6 +1293,8 @@ protected /*@ pure @*/ int getTotalTransferableVotes(/*@ non_null @*/ Candidate 
  * @param fromCandidate Elected or excluded candidate
  * @param toCandidate Continuing candidate
  * @param numberOfVotes Number of votes to be transferred
+ * 
+ * <BON>command</BON>
  */
 /*@ also
   @   protected normal_behavior
@@ -1255,12 +1307,13 @@ protected /*@ pure @*/ int getTotalTransferableVotes(/*@ non_null @*/ Candidate 
   @   ensures toCandidate.getTotalVote() ==
   @   \old (toCandidate.getTotalVote()) + numberOfVotes;
   @*/
-protected /*@ pure @*/ void transferVotes(/*@ non_null @*/ Candidate fromCandidate, /*@ non_null @*/ Candidate toCandidate, int numberOfVotes){
- 	 //@ assert false;
-}
+protected abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate, 
+		/*@ non_null @*/ Candidate toCandidate, int numberOfVotes);
 
 /**
  * Update list of decision events
+ * 
+ * <BON>command</BON>
  */
 /*@ also
   @   protected normal_behavior
@@ -1275,25 +1328,5 @@ protected /*@ pure @*/ void transferVotes(/*@ non_null @*/ Candidate fromCandida
   @   (decisionsMade[n].candidateID == candidateList[i].getCandidateID())
   @   ==> (decisionsMade[n].decisionTaken != Decision.EXCLUDE)));
   @*/
-	protected void updateDecisions() {
- 			for (int n = 0; n < totalNumberOfCandidates; n++) {
-				if (decisions[n].decisionTaken != Decision.EXCLUDE) {
-                   break;
-				}
-			}
-			for (int i = 0; i < totalNumberOfCandidates; i++) {
-				for (int k = 0; k < totalNumberOfCandidates; k++) {
-					if (decisions[k].candidateID == candidates[i].getCandidateID()&& decisions[k].decisionTaken == Decision.ELECTBYQUOTA) {
-						isElected(candidates[i]);
-					}
-				}
-			}
-		}
-   
-   /**
-    * Main method - not implemented yet
-    */
-   void main() {
-      //@ assert false;
-   }
+	protected abstract void updateDecisions();
 }
