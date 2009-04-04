@@ -28,11 +28,43 @@
 package election.tally.seanad;
 
 import election.tally.BallotCountingModel;
+import election.tally.Candidate;
 
 /**
  * @author Dermot Cochran
+ * @copyright 2009 Dermot Cochran
+ * 
+ * @license
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * 
+ * @sponsors
+ * This work was supported, in part, by Science Foundation Ireland
+ * grant 03/CE2/I303_1 to Lero - the Irish Software Engineering
+ * Research Centre (www.lero.ie) and, in part, by the European Project Mobius 
+ * IST 15909 within the IST 6th Framework. This software reflects only the 
+ * authors' views and the European Community is not liable for any use that 
+ * may be made of the information contained therein.
  *
  */
+
+//@ refine "BallotCounting.java-refined";
+
 public class BallotCounting extends election.tally.BallotCounting {
 
 	/**
@@ -185,6 +217,33 @@ public class BallotCounting extends election.tally.BallotCounting {
 			// No other state transitions are possible
 			return false;
 		}
+	}
+
+	public void count() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void distributeSurplus(Candidate candidateWithSurplus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void eliminateCandidates(Candidate[] candidatesToEliminate,
+			int numberToEliminate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void transferVotes(Candidate fromCandidate,
+			Candidate toCandidate, int numberOfVotes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void updateDecisions() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

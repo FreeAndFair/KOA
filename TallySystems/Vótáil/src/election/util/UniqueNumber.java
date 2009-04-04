@@ -55,6 +55,7 @@ private /*@ spec_public @*/ static volatile int uniqueID = 0;
      @ ensures \old(uniqueID) < \result;
      @*/ 
    public synchronized static int getUniqueID() {
+	   uniqueID += System.currentTimeMillis() % 10;
        return ++uniqueID;
    }
    
@@ -63,13 +64,16 @@ private /*@ spec_public @*/ static volatile int uniqueID = 0;
   *
   */
    //@ requires args != null;
-   public void main (String args[]) {
+   public static void main (String args[]) {
 	   int first = UniqueNumber.getUniqueID();
+	   System.out.println("First unique ID: " + first);
 	   int second = UniqueNumber.getUniqueID();
+	   System.out.println("Second unique ID: " + second);
 	   //@ assert first != second;
  	   int next = 0;
 	   for (int i = 0; i < args.length; i++) {
 		   next = UniqueNumber.getUniqueID();
+		   System.out.println("Next unique ID: " + next);
 		   //@ assert next != second;
 		   //@ assert next != first;
 	   }

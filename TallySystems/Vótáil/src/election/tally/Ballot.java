@@ -1,5 +1,5 @@
 /**
- * Votail Cuntais - Irish PR-STV ballot counting system
+ * Votail - PR-STV ballot counting for Irish elections
  * 
  * Copyright (c) 2005-2009 Dermot Cochran, Joseph R. Kiniry and Patrick E. Tierney
  * 
@@ -53,9 +53,9 @@ import election.util.UniqueNumber;
  * (PRSTV) system.
  * 
  * @see <a href="http://www.cev.ie/htm/tenders/pdf/1_2.pdf">
- * Department of Environment and Local Government, 
- * Count Requirements and Commentary on Count Rules,
- * section 3-14</a>
+   Department of Environment and Local Government, 
+   Count Requirements and Commentary on Count Rules,
+   section 3-14</a>
  * 
  * @author <a href="http://kind.ucd.ie/products/opensource/KOA/V—t‡il.html">Dermot Cochran</a>
  * @copyright 2005-2009

@@ -2,13 +2,13 @@ package election.tally;
 
 
 /**
- * Ballot counting algorithm for elections to Oireachtas Eireann.
- * 
- * ----------------------------------------------------------------------------
+ * Ballot counting algorithm for elections to Oireachtas Eireann - the National 
+ * Parliament of Ireland.
  * 
  * @author Dermot Cochran
  * @copyright 2005-2009 Dermot Cochran
  * 
+ * @license
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -27,6 +27,7 @@ package election.tally;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * 
+ * @sponsors
  * This work was supported, in part, by Science Foundation Ireland
  * grant 03/CE2/I303_1 to Lero - the Irish Software Engineering
  * Research Centre (www.lero.ie) and, in part, by the European Project Mobius 
@@ -34,9 +35,9 @@ package election.tally;
  * authors' views and the European Community is not liable for any use that 
  * may be made of the information contained therein.
  * 
- * ----------------------------------------------------------------------------
+ * @bon class_chart BALLOT_COUNTING
  * 
- * <BON>class_chart BALLOT_COUNTING</BON>
+ * @design
  * 
  * This Java package <code>election.tally</code> is designed to be used with 
  * either an optical ballot scan system or else a remote online voting system 
@@ -44,21 +45,21 @@ package election.tally;
  * algorithm and takes care of system level issues such as security, 
  * authentication and data storage.
  * 
- * @design This JML specification and associated Java code is intended 
+ * This JML specification and associated Java code is intended 
  * to be verifiable using the Extended Static Checking for Java
  * version 2 tool (ESCJava2), the Mobius Program Verification Environment (PVE),
  * JML4 and other JML compliant software engineering tools. The BON specification
  * is intended to be checkable with the BONc tool.
  * 
  * @see <a href="http://www.irishstatuebook.ie/1992_23.html">Part XIX of the 
- * Electoral Act, 1992</a>
+   Electoral Act, 1992</a>
  * @see <a href="http://www.cev.ie/htm/tenders/pdf/1_2.pdf">Department of
- * Environment and Local Government: Count Requirements and Commentary on Count
- * Rules, sections 3-16</a>
+   Environment and Local Government: Count Requirements and Commentary on Count
+   Rules, sections 3-16</a>
  * @see <a href="http://www.secure.ucd.ie/products/opensource/KOA/">The KOA Remote
- * Voting System</a> 
+   Voting System</a> 
  * @see <a href="http://www.secure.ucd.ie/products/opensource/ESCJava2/">ESCJava/2
- * Homepage</a>
+   Homepage</a>
  * @see <a href="http://www.jmlspecs.org/">JML Homepage</a>  
  */
 //@ refine "BallotCounting.java-refined";

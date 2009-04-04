@@ -1,8 +1,19 @@
+package election.tally.dail;
+
+//@ refine "BallotCounting.java-refined";
+
+
+import election.tally.BallotCountingModel;
+import election.tally.Candidate;
+ 
 /**
- * Votail Cuntais - Irish PR-STV ballot counting system
+ * Ballot counting for elections to D‡il ƒireann - the lower house of the Irish 
+ * Parliament.
  * 
- * Copyright (c) 2009 Dermot Cochran
+ * @author Dermot Cochran
+ * @copyright 2009 Dermot Cochran
  * 
+ * @license
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -20,17 +31,14 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- */
-
-/**
- * Ballot counting for elections to D‡il ƒireann
- */
-package election.tally.dail;
-
-import election.tally.BallotCountingModel;
- 
-/**
- * @author Dermot Cochran
+ * 
+ * @sponsors
+ * This work was supported, in part, by Science Foundation Ireland
+ * grant 03/CE2/I303_1 to Lero - the Irish Software Engineering
+ * Research Centre (www.lero.ie) and, in part, by the European Project Mobius 
+ * IST 15909 within the IST 6th Framework. This software reflects only the 
+ * authors' views and the European Community is not liable for any use that 
+ * may be made of the information contained therein.
  *
  */
 public class BallotCounting extends election.tally.BallotCounting {
@@ -204,6 +212,33 @@ public class BallotCounting extends election.tally.BallotCounting {
 			// No other state transitions are possible
 			return false;
 		}
+		
+	}
+
+	public void count() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void distributeSurplus(Candidate candidateWithSurplus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void eliminateCandidates(Candidate[] candidatesToEliminate,
+			int numberToEliminate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void transferVotes(Candidate fromCandidate,
+			Candidate toCandidate, int numberOfVotes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void updateDecisions() {
+		// TODO Auto-generated method stub
 		
 	}
 
