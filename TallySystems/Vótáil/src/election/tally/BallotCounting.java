@@ -735,14 +735,22 @@ protected abstract void eliminateCandidates(Candidate[] candidatesToEliminate,
   @   assignable state;
   @   ensures state == REPORT;
   @   ensures \result != null;
-  @   ensures \result.numberElected == numberOfSeats;
-  @	  ensures \result.numberElected == \result.electedCandidateIDs.length;
+  @   ensures \result.getNumberElected() == numberOfSeats;
+  @	  ensures \result.getNumberElected() == \result.getElectedCandidateIDs().length;
   @*/
 public /*@ non_null @*/ ElectionReport report(){
 	 
 	status = REPORT;
-	//@ assert false;
-	return new ElectionReport();
+	int[] electedCandidateIDs = {};
+ 	
+	int counter = 0;
+	for (int i = 0; i < candidates.length; i ++) {
+		if (isElected(candidates[i])) {
+			electedCandidateIDs[counter++] = candidates[i].candidateID;
+		}
+	}
+	
+	return new ElectionReport(numberOfCandidatesElected, electedCandidateIDs, countNumberValue);
 }
 
 /**

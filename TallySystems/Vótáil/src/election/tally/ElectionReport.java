@@ -63,9 +63,10 @@ package election.tally;
  */
 
 public class ElectionReport {
+	
 //@ public invariant 0 <= numberElected;
 //@ public invariant numberElected <= Candidate.MAX_SEATS;
-	public long numberElected;
+	private /*@ spec_public @*/ int numberElected;
 
 /*@ public invariant (\forall int i;
   @   0 < i && i < numberElected;
@@ -77,11 +78,38 @@ public class ElectionReport {
   @   i != j;
   @   electedCandidateIDs[i] != electedCandidateIDs[j]); 
   @*/
-	public /*@ non_null @*/ long[] electedCandidateIDs;
+	private /*@ non_null spec_public @*/ int[] electedCandidateIDs;
 	
-//@ public invariant 0 <= totalNumberOfCounts;
-	public long totalNumberOfCounts;
+/**
+	 * @return the numberElected
+	 */
+	public /*@ pure @*/ int getNumberElected() {
+		return numberElected;
+	}
+
+	/**
+	 * @return the electedCandidateIDs
+	 */
+	public /*@ pure @*/ int[] getElectedCandidateIDs() {
+		return electedCandidateIDs;
+	}
+
+	//@ public invariant 0 <= totalNumberOfCounts;
+	private /*@ spec_public @*/ int totalNumberOfCounts;
 	
-	public ElectionReport(){
+	//@ requires n == ids.length;
+	//@ requires 0 < c;
+	public ElectionReport(int n, int[] ids, int c){
+		numberElected = n;
+		electedCandidateIDs = ids;
+		totalNumberOfCounts = c;
+	}
+
+	/**
+	 * @return the totalNumberOfCounts
+	 */
+	public /*@ pure @*/ 
+	int getTotalNumberOfCounts() {
+		return totalNumberOfCounts;
 	}
 }
