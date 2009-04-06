@@ -783,9 +783,9 @@ public abstract void count();
   @   protected normal_behavior
   @   requires state == EMPTY;
   @   ensures state == PRELOAD;
-  @   ensures totalCandidates == electionDetails.numberOfCandidates;
-  @   ensures seats == electionDetails.numberOfSeatsInThisElection;
-  @   ensures totalSeats == electionDetails.totalNumberOfSeats;
+  @   ensures totalCandidates == electionParameters.numberOfCandidates;
+  @   ensures seats == electionParameters.numberOfSeatsInThisElection;
+  @   ensures totalSeats == electionParameters.totalNumberOfSeats;
   @   assignable state, seats, totalSeats, totalCandidates, candidateList, totalNumberOfSeats, totalNumberOfCandidates, numberOfSeats;
   @*/
 public void setup(ElectionParameters electionParameters){
@@ -812,8 +812,7 @@ public void setup(ElectionParameters electionParameters){
   @   (\exists int j; 0 <= j && j < totalCandidates;
   @   ballotsToCount[j].isAssignedTo(candidateList[i].getCandidateID())));
   @*/
-public void load(BallotBox ballotBox) {
-	}
+abstract public void load(BallotBox ballotBox);
 
 /**
  * Gets the current number of votes for this candidate ID.

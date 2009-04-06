@@ -16,7 +16,6 @@ import election.util.UniqueNumber;
  * @copyright 2005-2008
  */
 
-//@ refine "Candidate.java-refined";
 public class Candidate {
 	
 /**
@@ -184,7 +183,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  *   How many votes have been added or removed in this count round?
  * </BON>
  */	
-/*@ also
+/*@ 
   @   public normal_behavior
   @   requires state != UNASSIGNED;
   @   requires 0 <= count;
@@ -210,7 +209,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * 
  * @return Net total of votes recieved
  */	
-/*@ also
+/*@ 
   @   public normal_behavior
   @   requires state != UNASSIGNED;
   @   ensures \result == (\sum int i; 0 <= i && i <= lastCountNumber;
@@ -236,7 +235,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * 
  * @return Gross total of votes recieved 
  */	
-/*@ also
+/*@ 
   @   public normal_behavior
   @   requires state != UNASSIGNED;
   @   ensures \result == (\sum int i; 0 <= i && i <=lastCountNumber;
@@ -263,7 +262,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * 
  *  @return State value for this candidate
  */
-/*@ also public normal_behavior
+/*@ public normal_behavior
   @   ensures \result == state;
   @*/	
 	public /*@ pure @*/ byte getStatus(){
@@ -275,7 +274,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * 
  * @return The candidate ID number
  */
-/*@ also
+/*@ 
   @   public normal_behavior
   @   requires state != UNASSIGNED;
   @   ensures \result == candidateID;
@@ -292,7 +291,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
 /**
  * This is the default constructor method for a <code>Candidate</code>
  */	
-/*@	also
+/*@	
   @   public normal_behavior
   @   requires state != UNASSIGNED;
   @*/
@@ -315,7 +314,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * @param numberOfVotes Number of votes to add
  * @param count The round of counting at which the votes were added
  */	
-/*@ also 
+/*@  
   @   public normal_behavior
   @   requires state == CONTINUING;
   @   requires lastCountNumber < count;
@@ -347,7 +346,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * @param numberOfVotes Number of votes to remove from this candidate
  * @param count The round of counting at which the votes were removed 
  */	
-/*@ also
+/*@ 
   @   public normal_behavior
   @   requires state == ELIMINATED || state == ELECTED;
   @   requires lastCountNumber < count;
@@ -375,7 +374,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * @design The candidate ID must be assigned by the client object because 
  * the client object must know who the candidate is.
  */
-/*@ also
+/*@ 
   @   public normal_behavior
   @   requires state == UNASSIGNED;
   @   requires 0 < candidateIDToAssign;
@@ -394,7 +393,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
 	}
 	
 /** Declares the candidate to be elected */
-/*@ also public normal_behavior
+/*@ public normal_behavior
   @   requires state == CONTINUING;
   @   assignable state;
   @   ensures state == ELECTED;
@@ -406,7 +405,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
 	}
 	
 /** Declares the candidate to be eliminated */
-/*@ also public normal_behavior
+/*@ public normal_behavior
   @   requires state == CONTINUING;
   @   assignable state;
   @   ensures state == ELIMINATED;
@@ -427,7 +426,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * 
  * @return The number of votes in the last set added 
  */	
-/*@ also public normal_behavior
+/*@ public normal_behavior
   @   ensures \result == votesAdded[lastSetAddedCountNumber];
   @*/
 	public /*@ pure @*/ int getNumberOfVotesInLastSet(){
@@ -445,7 +444,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * 
  * @return The last count number at which votes were added
  */	
-/*@ also public normal_behavior
+/*@ public normal_behavior
   @   ensures \result == lastSetAddedCountNumber;
   @*/
 	public /*@ pure @*/ int getLastSetAddedCountNumber(){
@@ -463,7 +462,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
  * 
  * @return <code>true</true> if other candidate has lower random number
  */	
-/*@ also
+/*@ 
   @ public normal_behavior
   @ requires state != UNASSIGNED;
   @ ensures (\result == true) <==>

@@ -33,7 +33,7 @@
  * @see <a href="http://www.jmlspecs.org/">JML Homepage</a>
  */
 
-public class BallotCounting {
+public abstract class BallotCounting {
 	
   /**  
    * Abstract State Machine for Election Algorithm.
@@ -509,7 +509,7 @@ public class BallotCounting {
     @   (\sum int i; 0 <= i && i < totalCandidates; 
     @   candidateList[i].getTotalVote());
     @*/
-    protected void distributeSurplus(/*@ non_null @*/ 
+    protected abstract void distributeSurplus(/*@ non_null @*/ 
                                 election.tally.Candidate candidateWithSurplus);
 	
 	
@@ -552,7 +552,7 @@ public class BallotCounting {
     @ ensures numberElected <= seats;
     @ ensures \old(lowestContinuingVote) <= lowestContinuingVote;
     @*/
-  protected void eliminateCandidates(
+  protected abstract void eliminateCandidates(
 		  /*@ non_null @*/ Candidate[] candidatesToEliminate,
 		  int numberToEliminate);
 	
@@ -564,7 +564,7 @@ public class BallotCounting {
     @ assignable state;
     @ ensures state == REPORT;
     @*/
-  public ElectionResults report();
+  public ElectionReport report();
 
 	
   /**
@@ -572,12 +572,12 @@ public class BallotCounting {
    */
   /*@ requires state == EMPTY;
     @ ensures state == PRELOAD;
-    @ ensures totalCandidates == electionDetails.numberOfCandidates;
-    @ ensures seats == electionDetails.numberOfSeatsInThisElection;
-    @ ensures totalSeats == electionDetails.totalNumberOfSeats;
+    @ ensures totalCandidates == electionParameters.numberOfCandidates;
+    @ ensures seats == electionParameters.numberOfSeatsInThisElection;
+    @ ensures totalSeats == electionParameters.totalNumberOfSeats;
     @ assignable state, seats, totalSeats, totalCandidates, candidateList;
     @*/
-  public void setup (ElectionDetails electionDetails);
+  public void setup (ElectionParameters electionParameters);
 	
 	
   /** Loads all valid ballot papers */
@@ -590,7 +590,7 @@ public class BallotCounting {
     @   (\exists int j; 0 <= j && j < totalCandidates;
     @      ballotsToCount[j].isAssignedTo(candidateList[i].getCandidateID())));
     @*/
-  public void load(BallotBox ballotBox);
+  public abstract void load(BallotBox ballotBox);
 	
 	
   /**
@@ -622,7 +622,7 @@ public class BallotCounting {
     @   assignable numberEliminated;
     @   ensures numberEliminated == totalCandidates - numberElected;
     @*/
-  public void count();
+  public abstract void count();
   
   /**
    * Get the status of the algorithm in progress
@@ -1010,7 +1010,7 @@ public class BallotCounting {
     @ ensures toCandidate.getTotalVote() ==
     @   \old (toCandidate.getTotalVote()) + numberOfVotes;
     @*/
-  protected void transferVotes(
+  protected abstract void transferVotes(
 		  /*@ non_null @*/ Candidate fromCandidate,
 		  /*@ non_null @*/ Candidate toCandidate,
 		  int numberOfVotes);
@@ -1030,5 +1030,5 @@ public class BallotCounting {
     	@      ==> (decisionsMade[n].decisionTaken != Decision.EXCLUDE))
     @   );
     @*/
-  protected void updateDecisions();
+  protected abstract void updateDecisions();
 }

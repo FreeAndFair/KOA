@@ -23,10 +23,8 @@ public interface BallotCountingModel extends election.util.StateMachine {
 	public static final int ONE_CONTINUING_CANDIDATE_PER_REMAINING_SEAT = 18;
 	public static final int READY_TO_REWEIGHT_BALLOTS = 19;
 
-	//@ ensures \result == state;
 	public abstract int getState();
 
-	//@ ensures newState == state;
 	public abstract void changeState(int newState);
 
 	/**

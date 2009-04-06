@@ -33,7 +33,7 @@ part
 event
   "Ballot counting starts"
 involves
-  BALLOT_BOX, ELECTION_RESULT
+  BALLOT_BOX, ELECTION_REPORT
 event
   "Ballots are read into the system"
 involves
@@ -61,11 +61,11 @@ involves
 event
   "All seats are filled and counting is finished"
 involves
-  ELECTION_RESULT
+  ELECTION_REPORT
 event
   "A round of counting is completed"
 involves
-  ELECTION_RESULT
+  ELECTION_REPORT
 event
   "A surplus is distributed"
 involves
