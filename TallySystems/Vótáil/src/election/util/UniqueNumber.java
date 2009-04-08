@@ -3,7 +3,7 @@ package election.util;
 
 /*
  * Copyright (c) 2005-2009 Dermot Cochran
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -25,7 +25,7 @@ package election.util;
 
 /**
  * Unique, non-repeated number used for internal identifiers.
- * 
+ *
  * @author Dermot Cochran
  */
 
@@ -40,9 +40,13 @@ package election.util;
  * </BON>
  */
 
+/**
+ * Unique internal identifier.
+ */
 public class UniqueNumber {
    
-private /*@ spec_public @*/ static volatile int uniqueID = 0;
+private static final int _INCREMENT = 10;
+private /*@ spec_public @*/ static int uniqueID = 0;
 
 /**
  * Generates a unique ID number
@@ -55,28 +59,9 @@ private /*@ spec_public @*/ static volatile int uniqueID = 0;
      @ ensures \old(uniqueID) < \result;
      @*/ 
    public synchronized static int getUniqueID() {
-	   uniqueID += System.currentTimeMillis() % 10;
+	   uniqueID += System.currentTimeMillis() % UniqueNumber._INCREMENT;
        return ++uniqueID;
    }
-   
- /**
-  * Simple unit test for uniqueness of generated ID values
-  *
-  */
-   //@ requires args != null;
-   public static void main (String args[]) {
-	   int first = UniqueNumber.getUniqueID();
-	   System.out.println("First unique ID: " + first);
-	   int second = UniqueNumber.getUniqueID();
-	   System.out.println("Second unique ID: " + second);
-	   //@ assert first != second;
- 	   int next = 0;
-	   for (int i = 0; i < args.length; i++) {
-		   next = UniqueNumber.getUniqueID();
-		   System.out.println("Next unique ID: " + next);
-		   //@ assert next != second;
-		   //@ assert next != first;
-	   }
-   }
+
 
 }
