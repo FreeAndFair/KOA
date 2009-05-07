@@ -3,6 +3,7 @@ package election.tally.dail;
 //@ refine "BallotCounting.java-refined";
 
 
+import election.tally.BallotBox;
 import election.tally.BallotCountingModel;
 import election.tally.Candidate;
  
@@ -238,6 +239,11 @@ public class BallotCounting extends election.tally.BallotCounting {
 	}
 
 	protected void updateDecisions() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void load(BallotBox ballotBox) {
 		// TODO Auto-generated method stub
 		
 	}
