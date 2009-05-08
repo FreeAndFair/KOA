@@ -1,13 +1,9 @@
 package external;
 
-import election.tally.ElectionParameters;
-import election.tally.dail.BallotCounting;
-import junit.framework.TestCase;
+import util.AbstractScenarioTest;
 
-public class StartOfCount extends TestCase {
 
-	private /*@ spec_public non_null @*/ BallotCounting ballotCounting;
-	private /*@ spec_public non_null @*/ ElectionParameters electionParameters;
+public class StartOfCount extends AbstractScenarioTest {
 
 	/**
 	 * Test that the count process is started correctly.
@@ -16,15 +12,5 @@ public class StartOfCount extends TestCase {
 		ballotCounting.setup(electionParameters);
 		ballotCounting.count();
 		
-	}
-
-	protected void setUp() throws Exception {
- 		super.setUp();
- 		ballotCounting = new BallotCounting();
- 		electionParameters = new ElectionParameters();
- 		electionParameters.totalNumberOfSeats = 4;
- 		electionParameters.numberOfSeatsInThisElection = 4;
- 		electionParameters.candidateIDs = new long[]{1,2,3};
- 		electionParameters.numberOfCandidates = 3;
 	}
 }
