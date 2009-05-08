@@ -49,4 +49,19 @@ component
   COUNT_PROCESS calls SEAT_ALLOCATION "6"
   COUNT_PROCESS calls CANDIDATE_LIST "7"
   COUNT_PROCESS calls BALLOT_DISTRIBUTION "8"
+  
+component
+  scenario "FILLING_LAST_SEAT"
+  action
+    "1" "Find lowest candidate"
+    "2" "Exclude and transfer votes"
+    "3" "If only two remaining candidates than select highest and deem elected"
+  end
+  object CANDIDATE_LIST
+  object BALLOT_BOX
+  object TALLY_AGENT
+  object SEAT_ALLOCATION
+  TALLY_AGENT calls CANDIDATE_LIST "1"
+  TALLY_AGENT calls BALLOT_BOX "2"
+  TALLY_AGENT calls SEAT_ALLOCATION "3"
 end

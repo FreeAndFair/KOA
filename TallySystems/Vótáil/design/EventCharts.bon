@@ -22,9 +22,6 @@
 -- THE SOFTWARE.
 --
 
--- Methodology: at least one scenario (functional) test for each internal (outgoing) 
---              event and at least one system test for each external (incoming) event
-
 -- External (incoming) events
 
 event_chart Votail
