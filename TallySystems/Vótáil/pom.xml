@@ -4,4 +4,19 @@
   <name>Votail</name>
   <version>0.0.1-SNAPSHOT</version>
   <description>Irish PRSTV</description>
+  <issueManagement>
+  	<system>Trac</system>
+  	<url>http:://trac.ucd.ie</url>
+  </issueManagement>
+  <ciManagement>
+  	<system>Hudson</system>
+  	<url>http://voting.ucd.ie:8080</url>
+  </ciManagement>
+  <scm>
+  	<url>https://trac.ucd.ie/repos</url>
+  </scm>
+  <organization>
+  	<name>Lero Graduate School of Software Engineering</name>
+  	<url>http://www.lero.ie</url>
+  </organization>
 </project>

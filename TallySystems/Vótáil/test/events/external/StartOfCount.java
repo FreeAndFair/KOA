@@ -1,5 +1,6 @@
 package external;
 
+import election.tally.BallotCounting;
 import util.AbstractScenarioTest;
 
 
@@ -10,7 +11,9 @@ public class StartOfCount extends AbstractScenarioTest {
 	 */
 	public void testStartOfCount () {
 		ballotCounting.setup(electionParameters);
+		assert ballotCounting.getStatus() == BallotCounting.PRECOUNT;
 		ballotCounting.count();
+		assert ballotCounting.getStatus() == BallotCounting.FINISHED;
 		
 	}
 }
