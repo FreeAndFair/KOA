@@ -82,7 +82,7 @@ public class BallotCounting extends election.tally.BallotCounting {
 		//@ public constraint isTransition(\old(state), state);
  		private int state;
  		
- 		//@ ensures \result == state;
+ 		//@ also ensures \result == state;
  		/* (non-Javadoc)
 		 * @see election.tally.dail.AbstractBallotCountingMachine#getState()
 		 */
@@ -90,7 +90,7 @@ public class BallotCounting extends election.tally.BallotCounting {
 			return state;
 		}
 
- 		//@ ensures newState == state;
+ 		//@ also ensures newState == state;
 		/* (non-Javadoc)
 		 * @see election.tally.dail.AbstractBallotCountingMachine#changeState(int)
 		 */

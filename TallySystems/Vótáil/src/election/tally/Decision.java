@@ -88,7 +88,7 @@ public class Decision {
   @   ensures candidateID == 0;
   @   ensures chosenByLot == false;
   @*/
-	public /*@ pure @*/ Decision(){
+	public /*@ pure */ Decision(){
 		decisionTaken = NODECISION;
 		atCountNumber = 0;
 		candidateID = 0;

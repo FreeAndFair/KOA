@@ -11,8 +11,4 @@ public class ElectionOfCandidate extends AbstractScenarioTest {
  		assert candidate.getStatus() == Candidate.ELECTED;
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
 }

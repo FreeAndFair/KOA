@@ -109,7 +109,9 @@ public abstract class BallotCounting {
 
 	/** Number of decisions made */
 	/*@ public model int numberOfDecisions;
-	  @ public initially numberOfDecisions == 0;
+	  @ public initially numberOfDecisions == 0 || decisionsMade == null ||
+	  @   (\forall int i; 0 <= i && i < numberOfDecisions;
+	  @   decisionsMade[i].decisionTaken == Decision.NODECISION);
 	  @ public invariant 0 <= numberOfDecisions;
 	  @ public constraint 
 	  @   \old (numberOfDecisions) <= numberOfDecisions;
@@ -523,7 +525,7 @@ public static final byte REPORT = 7;
 /**
  * Default Constructor.
  */
-/*@ 
+/*@ also
   @   protected normal_behavior
   @   ensures state == EMPTY;
   @   ensures countNumber == 0;
@@ -535,6 +537,7 @@ public BallotCounting(){
 	countNumberValue = 0;
 	numberOfCandidatesElected = 0;
 	numberOfCandidatesEliminated = 0;
+	decisions = new Decision[0];
 }
 
 /**
@@ -622,6 +625,7 @@ protected /*@ pure @*/ int getSurplus(Candidate candidate){
 /*@ also
   @   protected normal_behavior
   @     requires (state == COUNTING) || (state == FINISHED) || (state == REPORT);
+  @     requires candidate != null;
   @     ensures \result == (candidate.getOriginalVote() >= depositSavingThreshold) ||
   @       (isElected (candidate) == true);
   @*/

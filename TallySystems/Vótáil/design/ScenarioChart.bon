@@ -22,7 +22,7 @@
 -- THE SOFTWARE.
 --
 
-scenario_chart KOA
+scenario_chart VOTAIL
 explanation 
   "Scenarios for ballot counting"
 scenario 

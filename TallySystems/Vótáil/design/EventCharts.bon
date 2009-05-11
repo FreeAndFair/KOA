@@ -22,6 +22,8 @@
 -- THE SOFTWARE.
 --
 
+-- Last updated on 11-May-2009 by Dermot Cochran
+
 -- External (incoming) events
 
 event_chart Votail
@@ -31,15 +33,15 @@ part
 event
   "Ballot counting starts"
 involves
-  BALLOT_BOX, ELECTION_REPORT
+  BALLOT_BOX, ELECTION_REPORT, TALLY_AGENT
 event
-  "Ballots are read into the system"
+  "Ballots are read into the counting system"
 involves
   BALLOT_BOX
 event
-  "System is reset and list of candidates is loaded"
+  "A ballot is cast"
 involves
-  CANDIDATE_LIST
+  BALLOT, BALLOT_BOX, VOTER
 end
 
 -- Internal (outgoing) events
@@ -58,10 +60,6 @@ involves
   CANDIDATE_LIST
 event
   "All seats are filled and counting is finished"
-involves
-  ELECTION_REPORT
-event
-  "A round of counting is completed"
 involves
   ELECTION_REPORT
 event

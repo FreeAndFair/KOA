@@ -49,7 +49,9 @@ component
   COUNT_PROCESS calls SEAT_ALLOCATION "6"
   COUNT_PROCESS calls CANDIDATE_LIST "7"
   COUNT_PROCESS calls BALLOT_DISTRIBUTION "8"
+end
   
+dynamic_diagram Filling_Last_Seat  
 component
   scenario "FILLING_LAST_SEAT"
   action
