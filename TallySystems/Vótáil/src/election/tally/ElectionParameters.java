@@ -62,8 +62,15 @@ public class ElectionParameters {
   @   candidateIDs[i] != candidateIDs[j]); 
   @*/	
 	public /*@ non_null @*/ long[] candidateIDs;
+
+private Candidate[] candidateList;
 	
 	public ElectionParameters(){
 		
+	}
+
+	public void setCandidateList(Candidate[] candidateList) {
+		// TODO Auto-generated method stub
+		this.candidateList = candidateList;
 	}
 }

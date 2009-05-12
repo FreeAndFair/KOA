@@ -538,7 +538,8 @@ public BallotCounting(){
 	numberOfCandidatesElected = 0;
 	numberOfCandidatesEliminated = 0;
 	decisions = new Decision[0];
-}
+	//@ assume numberOfDecisions == 0;
+} //@ nowarn;
 
 /**
  * Determine if the candidate has enough votes to be elected.
@@ -557,7 +558,7 @@ public BallotCounting(){
   @   ensures \result == (candidate.getTotalVote() >= quota);
   @*/
 public /*@ pure @*/ boolean hasQuota(Candidate candidate){
-	return (candidate.getTotalVote() >= numberOfVotesRequired);
+	return (candidate.getTotalVote() >= numberOfVotesRequired); //@ nowarn;
 }
 
 /**

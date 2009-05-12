@@ -248,4 +248,11 @@ public class BallotCounting extends election.tally.BallotCounting {
 		
 	}
 
+	
+	//@ requires 0 < numberOfSeats;
+	//@ ensures quota == \result;
+	public /*@ pure @*/ int getQuota() {
+ 		return numberOfVotesRequired;
+	}
+
 }
