@@ -230,30 +230,26 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
 	} //@ nowarn Post;
   	
 /**
- * Original number of votes recieved by this candidate before
+ * Original number of votes received by this candidate before
  * transfers due to elimination or distribution of surplus votes.
  * 
- * @return Gross total of votes recieved 
+ * @return Gross total of votes received 
  */	
 /*@ 
   @   public normal_behavior
   @   requires state != UNASSIGNED;
   @   ensures \result == (\sum int i; 0 <= i && i <=lastCountNumber;
   @     votesAdded[i]); 
+  @   ensures 0 <= \result;
   @*/
 	public /*@ pure @*/ int getOriginalVote() {
 		int total = 0;
-		int i = 0;
-		if (state != UNASSIGNED) {
-			while (0 <= i && i <= lastCountNumber) {
-				total = votesAdded[i];
-				i++;
-			}
-			return total;
-		} else {
-			return 0;
+		
+ 		for (int i = 0; i <= lastCountNumber; i++) {
+			total += votesAdded[i];
 		}
-
+ 		 
+		return total;
 	} //@ nowarn Post;
 	
 /**
@@ -385,12 +381,9 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
   @   ensures state == CONTINUING;
   @*/
 	public void setCandidateID(int candidateIDToAssign){
-        if(state == UNASSIGNED && 0 < candidateIDToAssign){
-        	candidateID = candidateIDToAssign;
-        	state = CONTINUING;
-        }
-		
-	}
+        candidateID = candidateIDToAssign;
+        state = CONTINUING;
+	} //@ nowarn Post
 	
 /** Declares the candidate to be elected */
 /*@ public normal_behavior
@@ -399,9 +392,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
   @   ensures state == ELECTED;
   @*/
 	public void declareElected(){
-		if(state == CONTINUING){
-			state = ELECTED;
-		}
+		state = ELECTED;
 	}
 	
 /** Declares the candidate to be eliminated */
@@ -411,9 +402,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
   @   ensures state == ELIMINATED;
   @*/
 	public void declareEliminated(){
-		if(state == CONTINUING){
-			state = ELIMINATED;
-		}
+		state = ELIMINATED;
 	}
 	
 /**
