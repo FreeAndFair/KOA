@@ -221,8 +221,7 @@ public class BallotCounting extends election.tally.BallotCounting {
 		
 	}
 
-	protected void distributeSurplus(Candidate candidateWithSurplus) {
-		// TODO Auto-generated method stub
+	public void distributeSurplus(Candidate candidateWithSurplus) {
 		
 	}
 

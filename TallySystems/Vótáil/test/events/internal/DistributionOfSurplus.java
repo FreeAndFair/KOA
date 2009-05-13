@@ -10,6 +10,7 @@ public class DistributionOfSurplus extends AbstractScenarioTest {
 
 	public void testDistributionOfSurplus() {
 	 
+	int numberOfSeats = 4;
 	electionParameters.setNumberOfSeats(numberOfSeats);
 	int numberOfCandidates = 2 + numberOfSeats;
 	Candidate[] candidates = new Candidate[numberOfCandidates];

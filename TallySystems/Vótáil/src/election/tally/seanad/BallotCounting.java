@@ -83,7 +83,7 @@ public class BallotCounting extends election.tally.BallotCounting {
  		private int state;
  		
  		//@ also ensures \result == state;
- 		/* (non-Javadoc)
+ 		/* 
 		 * @see election.tally.dail.AbstractBallotCountingMachine#getState()
 		 */
  		public int getState() {
@@ -225,7 +225,7 @@ public class BallotCounting extends election.tally.BallotCounting {
 		
 	}
 
-	protected void distributeSurplus(Candidate candidateWithSurplus) {
+	public void distributeSurplus(Candidate candidateWithSurplus) {
 		// TODO Auto-generated method stub
 		
 	}

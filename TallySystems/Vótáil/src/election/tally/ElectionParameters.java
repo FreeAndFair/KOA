@@ -63,14 +63,18 @@ public class ElectionParameters {
   @*/	
 	public /*@ non_null @*/ long[] candidateIDs;
 
-private Candidate[] candidateList;
+	private /*@ spec_public @*/ Candidate[] candidateList;
 	
-	public ElectionParameters(){
-		
+	public ElectionParameters(){	
+		candidateIDs = new long[0];
 	}
 
 	public void setCandidateList(Candidate[] candidateList) {
-		// TODO Auto-generated method stub
 		this.candidateList = candidateList;
 	}
-}
+
+	public void setNumberOfSeats(int numberOfSeats) {
+		this.totalNumberOfSeats = numberOfSeats;
+		
+	}
+};
