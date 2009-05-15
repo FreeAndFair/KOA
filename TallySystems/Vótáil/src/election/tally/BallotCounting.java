@@ -553,7 +553,7 @@ public BallotCounting(){
 /*@ also
   @   protected normal_behavior
   @   requires candidate != null;
-  @   requires countNumber >= 1;
+  @   requires 1 <= countNumber;
   @   requires state == COUNTING;
   @   ensures \result == (candidate.getTotalVote() >= quota);
   @*/
@@ -596,14 +596,14 @@ public /*@ pure @*/ boolean isElected(Candidate candidate){
  */
 /*@ also
   @   protected normal_behavior
-  @     requires candidate != null;
-  @     requires countNumber > 1;
+  @     requires 1 <= countNumber;
+  @     requires COUNTING == state;
   @     ensures (hasQuota(candidate) == true) ==> \result ==
   @       (candidate.getTotalVote() - quota);
   @     ensures (hasQuota(candidate) == false) ==> \result == 0;
   @     ensures \result >= 0;
   @*/
-public /*@ pure @*/ int getSurplus(Candidate candidate){
+public /*@ pure @*/ int getSurplus(final /*@ non_null @*/ Candidate candidate){
 	int surplus = 0;
  	if (hasQuota(candidate)) {			
  		surplus = candidate.getTotalVote() - numberOfVotesRequired;
@@ -630,7 +630,7 @@ public /*@ pure @*/ int getSurplus(Candidate candidate){
   @     ensures \result == (candidate.getOriginalVote() >= depositSavingThreshold) ||
   @       (isElected (candidate) == true);
   @*/
-public /*@ pure @*/ boolean isDepositSaved(Candidate candidate){
+public /*@ pure @*/ boolean isDepositSaved(/*@ non_null @*/ Candidate candidate){
  	return ((candidate.getOriginalVote() >= savingThreshold)
 		|| (isElected (candidate)));
 }

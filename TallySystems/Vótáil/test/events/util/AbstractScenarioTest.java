@@ -7,7 +7,7 @@ import election.tally.ElectionParameters;
 import election.tally.dail.BallotCounting;
 import junit.framework.TestCase;
 
-public abstract class AbstractScenarioTest extends TestCase {
+public abstract class AbstractScenarioTest extends TestCase { //@ nowarn
 
 	protected /*@ spec_public non_null @*/ BallotCounting ballotCounting;
 	protected /*@ spec_public non_null @*/ ElectionParameters electionParameters;

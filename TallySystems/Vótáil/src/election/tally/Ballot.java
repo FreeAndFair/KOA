@@ -166,9 +166,13 @@ public static final int NONTRANSFERABLE = 0;
     positionInList = 0;
     candidateID = NONTRANSFERABLE; 
     ballotID = NO_ID_YET;
-    randomNumber = UniqueNumber.getUniqueID(); 
+    assignRandomNumber(); 
     //@ set _randomNumber = randomNumber;
   }
+
+private void assignRandomNumber() {
+	randomNumber = UniqueNumber.getUniqueID();
+}
     
   /**
    * Get the location of the ballot at each count
@@ -243,6 +247,7 @@ public static final int NONTRANSFERABLE = 0;
     @     (candidateIDList[i]) > 0);
     @   requires candidateIDList.length == listSize;
     @   requires positionInList < listSize;
+    @	assignable numberOfPreferences, ballotID, preferenceList, candidateID;
     @   ensures numberOfPreferences == listSize;
     @   ensures ballotID != NO_ID_YET;
     @   ensures preferenceList.length == listSize;
