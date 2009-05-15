@@ -218,12 +218,7 @@ public class BallotCounting extends election.tally.BallotCounting {
 		}
 	}
 
-	@Override
-	public void count() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void distributeSurplus(Candidate candidateWithSurplus) {
 		// TODO Auto-generated method stub
@@ -231,27 +226,8 @@ public class BallotCounting extends election.tally.BallotCounting {
 	}
 
 	@Override
-	protected void eliminateCandidates(Candidate[] candidatesToEliminate,
-			int numberToEliminate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void load(BallotBox ballotBox) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void transferVotes(Candidate fromCandidate,
+	public void transferVotes(Candidate fromCandidate,
 			Candidate toCandidate, int numberOfVotes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void updateDecisions() {
 		// TODO Auto-generated method stub
 		
 	}

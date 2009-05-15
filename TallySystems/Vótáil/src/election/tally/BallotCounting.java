@@ -726,8 +726,9 @@ public /*@ pure @*/ boolean isDepositSaved(/*@ non_null @*/ Candidate candidate)
   @     ensures numberElected <= seats;
   @     ensures \old(lowestContinuingVote) <= lowestContinuingVote;
   @*/
-protected abstract void eliminateCandidates(Candidate[] candidatesToEliminate, 
-		int numberToEliminate);
+public void eliminateCandidates(Candidate[] candidatesToEliminate, 
+		int numberToEliminate) {
+}
 
 /**
  * Declare results
@@ -785,7 +786,8 @@ public /*@ non_null @*/ ElectionReport report(){
   @ ensures numberEliminated == totalCandidates - numberElected;
   @ ensures numberOfContinuingCandidates == 0;
   @*/
-public abstract void count();
+public void count() {
+}
 
 /**
  * Load candidate details and number of seats.
@@ -825,7 +827,8 @@ public void setup(ElectionParameters electionParameters){
   @   (\exists int j; 0 <= j && j < totalCandidates;
   @   ballotsToCount[j].isAssignedTo(candidateList[i].getCandidateID())));
   @*/
-abstract public void load(BallotBox ballotBox);
+public void load(BallotBox ballotBox) {
+}
 
 /**
  * Gets the current number of votes for this candidate ID.
@@ -1320,7 +1323,7 @@ protected /*@ pure @*/ int getTotalTransferableVotes(/*@ non_null @*/ Candidate 
   @   ensures toCandidate.getTotalVote() ==
   @   \old (toCandidate.getTotalVote()) + numberOfVotes;
   @*/
-protected abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate, 
+public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate, 
 		/*@ non_null @*/ Candidate toCandidate, int numberOfVotes);
 
 /**
@@ -1341,5 +1344,6 @@ protected abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
   @   (decisionsMade[n].candidateID == candidateList[i].getCandidateID())
   @   ==> (decisionsMade[n].decisionTaken != Decision.EXCLUDE)));
   @*/
-	protected abstract void updateDecisions();
+	protected void updateDecisions() {
+}
 }

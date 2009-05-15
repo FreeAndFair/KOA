@@ -1,10 +1,7 @@
 package internal;
 
-import election.tally.Ballot;
-import election.tally.BallotBox;
-import election.tally.Candidate;
-import election.tally.dail.BallotCounting;
 import util.AbstractScenarioTest;
+import election.tally.Candidate;
 
 public class DistributionOfSurplus extends AbstractScenarioTest {
 
@@ -12,18 +9,19 @@ public class DistributionOfSurplus extends AbstractScenarioTest {
 	 
 	int numberOfSeats = 4;
 	electionParameters.setNumberOfSeats(numberOfSeats);
+	
+	// Generate candidates
 	int numberOfCandidates = 2 + numberOfSeats;
 	Candidate[] candidates = new Candidate[numberOfCandidates];
 	for (int i = 0; i < numberOfCandidates; i++) {
 		candidates[i] = new Candidate();
 	}
 	
-	int numberOfBallots = 59000;
+	// Add enough votes to elect the first candidate
+	int numberOfBallots = ballotCounting.getQuota() + 20;
+	candidates[0].addVote(numberOfBallots, 1);
 	
-	candidates[0].addVote(ballotCounting.getQuota(), 1);
-	candidates[1] = new Candidate();
-	electionParameters.setCandidateList(candidates);
- 	Ballot ballotForFirstCandidate = new Ballot();
+ 	electionParameters.setCandidateList(candidates);
  	ballotCounting.distributeSurplus(candidates[0]);
 	}
 }

@@ -1,9 +1,5 @@
 package election.tally.dail;
 
-//@ refine "BallotCounting.java-refined";
-
-
-import election.tally.BallotBox;
 import election.tally.BallotCountingModel;
 import election.tally.Candidate;
  
@@ -42,7 +38,7 @@ import election.tally.Candidate;
  * may be made of the information contained therein.
  *
  */
-public class BallotCounting extends election.tally.BallotCounting {
+public class DailBallotCounting extends election.tally.BallotCounting {
 
 	/**
 	 * Inner class for state machine
@@ -56,28 +52,29 @@ public class BallotCounting extends election.tally.BallotCounting {
 
 		//@ public invariant isPossibleState (state);
 		//@ public constraint isTransition(\old(state), state);
- 		private int state;
+ 		private /*@ spec_public @*/ int state;
  		
+ 		/**
+ 		 * Get the state of the inner automaton for counting ballots in Dail elections.
+ 		 * 
+ 		 * @return The state of the count.
+ 		 */
  		//@ also ensures \result == state;
- 		/* (non-Javadoc)
-		 * @see election.tally.dail.AbstractBallotCountingMachine#getState()
-		 */
  		public int getState() {
 			return state;
 		}
 
  		//@ also ensures newState == state;
-		/* (non-Javadoc)
-		 * @see election.tally.dail.AbstractBallotCountingMachine#changeState(int)
-		 */
-		public void changeState(int newState) {
+		public void changeState(final int newState) {
 			state = newState;
 		}
 
-		/* (non-Javadoc)
-		 * @see election.tally.dail.AbstractBallotCountingMachine#isPossibleState(int)
+		/**
+		 * Is this a valid state for the count to be in?
+		 * 
+		 * @return <code>true</code> if this state exists with the automaton for counting of Dail ballots
 		 */
-		public boolean isPossibleState(int value) {
+		public boolean isPossibleState(final int value) {
  			return ((READY_TO_COUNT == value) ||
  					(NO_SEATS_FILLED_YET == value) ||
  					(CANDIDATES_HAVE_QUOTA == value) ||
@@ -98,10 +95,12 @@ public class BallotCounting extends election.tally.BallotCounting {
  					(ONE_CONTINUING_CANDIDATE_PER_REMAINING_SEAT == value));
 		}
 		
-		/* (non-Javadoc)
-		 * @see election.tally.dail.AbstractBallotCountingMachine#isTransition(int, int)
+		/**
+		 * Is this a valid transition in the counts state?
+		 * 
+		 * @return <code>true</code> if this transition exists with the automaton for counting of Dail ballots
 		 */
-		public boolean isTransition(int fromState, int toState) {
+		public boolean isTransition(final int fromState, final int toState) {
 			
 			// Self transitions are allowed
 			if (toState == fromState) {
@@ -216,38 +215,62 @@ public class BallotCounting extends election.tally.BallotCounting {
 		
 	}
 
-	public void count() {
-		// TODO Auto-generated method stub
-		
+	 
+    /**
+     * Distribute the surplus of an elected Dail candidate.
+     * 
+     * @param candidate The elected Dail candidate
+     */
+	public void distributeSurplus(/*@ non_null @*/ final Candidate candidate) {
+		for (int i = 0; i < totalNumberOfCandidates; i++) {
+			if (candidates[i].getStatus() == Candidate.CONTINUING) {
+				int numberOfTransfers = getPotentialTransfers (candidate, candidates[i].getCandidateID());
+				if (0 < numberOfTransfers) {
+					transferVotes (candidate, candidates[i], numberOfTransfers);
+				}
+			}
+			
+		}
 	}
 
-	public void distributeSurplus(Candidate candidateWithSurplus) {
-		
-	}
-
-	protected void eliminateCandidates(Candidate[] candidatesToEliminate,
-			int numberToEliminate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	protected void transferVotes(Candidate fromCandidate,
+	/**
+	 * Transfer votes from one Dail candidate to another.
+	 * 
+	 * @param fromCandidate The elected or excluded candidate from which to transfer votes
+	 * @param toCandidate The continuing candidate to receive the transferred votes
+	 * @param numberOfVotes The number of votes to be transferred
+	 */
+	@Override
+	public void transferVotes(Candidate fromCandidate,
 			Candidate toCandidate, int numberOfVotes) {
-		// TODO Auto-generated method stub
 		
+		// Update the totals for each candidate
+		fromCandidate.removeVote(numberOfVotes, countNumberValue);
+		toCandidate.addVote(numberOfVotes, countNumberValue);
+		
+		// Transfer the required number of ballots
+		int fromCandidateID = fromCandidate.getCandidateID();
+		int toCandidateID = toCandidate.getCandidateID();
+		int ballotsMoved = 0;
+		for (int b = 0; b < totalNumberOfVotes && ballotsMoved < numberOfVotes; b++) {
+			if ((ballots[b].getCandidateID() == fromCandidateID) &&
+				(ballots[b].getNextPreference(1) == toCandidateID)) {
+				 
+						ballots[b].transfer(countNumberValue);
+						ballotsMoved++;
+				 
+			}
+		}
+		assert (numberOfVotes == ballotsMoved);
 	}
 
-	protected void updateDecisions() {
-		// TODO Auto-generated method stub
-		
-	}
+	 
 
-	public void load(BallotBox ballotBox) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
+	/**
+	 * What is the Droop Quota for this electoral constituency?
+	 * 
+	 * @return The Droop Quota for this electoral constituency.
+	 */
 	//@ requires 0 < numberOfSeats;
 	//@ ensures quota == \result;
 	public /*@ pure @*/ int getQuota() {

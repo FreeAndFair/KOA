@@ -3,7 +3,7 @@ package internal;
 import election.tally.Candidate;
 import util.AbstractScenarioTest;
 
-public class ElectionOfCandidate extends AbstractScenarioTest {
+public class ElectionOfHighestCandidate extends AbstractScenarioTest {
 
 	public void testElectionOfCandidate() {
  		assert candidate.getStatus() == Candidate.CONTINUING;
