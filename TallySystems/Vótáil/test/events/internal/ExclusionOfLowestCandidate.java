@@ -12,16 +12,14 @@ public class ExclusionOfLowestCandidate extends TestCase {
 
 	protected BallotCounting ballotCounting;
 	protected ElectionParameters parameters;
-	protected Candidate candidate;
-	protected BallotBox ballotBox;
 
 	public final void testExclusionOfLowestCandidate() {
 		 
  	 	ballotCounting.setup(parameters);
 	 	
 	 	// Eliminate the lowest candidate
- 	 	Candidate[] candidatesToEliminate = ballotCounting.findLowestCandidates();
-	 	ballotCounting.eliminateCandidates(candidatesToEliminate);
+ 	 	Candidate candidate = ballotCounting.findLowestCandidate();
+	 	ballotCounting.eliminateCandidate(candidate);
  	}
 
 	protected void setUp() throws Exception {

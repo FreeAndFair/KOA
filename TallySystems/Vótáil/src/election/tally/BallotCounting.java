@@ -695,7 +695,6 @@ public /*@ pure @*/ boolean isDepositSaved(/*@ non_null @*/ Candidate candidate)
  * 
  * @param candidatesToEliminate One or more candidates to be excluded from the 
  *   election in this count
- * @param numberToEliminate Number of candidates to eliminate in this count
  */
 /*@ also
   @   protected normal_behavior
@@ -726,8 +725,7 @@ public /*@ pure @*/ boolean isDepositSaved(/*@ non_null @*/ Candidate candidate)
   @     ensures numberElected <= seats;
   @     ensures \old(lowestContinuingVote) <= lowestContinuingVote;
   @*/
-public void eliminateCandidates(Candidate[] candidatesToEliminate, 
-		int numberToEliminate) {
+public void eliminateCandidates(Candidate[] candidatesToEliminate) {
 }
 
 /**
@@ -1385,10 +1383,30 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	 * 
 	 * @return The continuing candidates with the least votes
 	 */
-	public Candidate[] findLowestCandidates() {
-		Candidate[] lowestCandidates = new Candidate[1];
+	public /*@ pure non_null @*/ Candidate findLowestCandidate() {
+		Candidate lowestCandidate = new Candidate();
 		
 		long highestPossibleVote = ballots.length;
-		return lowestCandidates;
+		return lowestCandidate;
+	}
+
+	/**
+	 * Exclude one candidate from the election.
+	 * 
+	 * @param candidate to be excluded
+	 */
+	/*@ requires isLowestCandidate (candidate);
+	  @ requires candidate.isContinuing();
+	  @ ensures candidate.isExcluded();
+	  @ ensures candidate.noTransferableBallots();
+	  @*/
+	public void eliminateCandidate(Candidate candidate) {
+		candidate.declareEliminated();
+		redistributeBallots(candidate);
+	}
+
+	private void redistributeBallots(Candidate candidate) {
+		// TODO Auto-generated method stub
+		
 	}
 }

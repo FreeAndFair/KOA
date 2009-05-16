@@ -1,17 +1,17 @@
 package external;
 
+import junit.framework.TestCase;
 import election.tally.Ballot;
 import election.tally.BallotBox;
 import election.tally.BallotCounting;
 import election.tally.Candidate;
 import election.tally.ElectionParameters;
 import election.tally.dail.DailBallotCounting;
-import util.AbstractScenarioTest;
 
 
 public class StartOfCount extends TestCase {
 
-	protected BallotCounting ballotCounting;
+	protected DailBallotCounting ballotCounting;
 	protected ElectionParameters parameters;
 	protected Candidate candidate;
 	protected BallotBox ballotBox;
@@ -20,7 +20,7 @@ public class StartOfCount extends TestCase {
 	 * Test that the count process is started correctly.
 	 */
 	public void testStartOfCount () {
-		ballotCounting.setup(electionParameters);
+		ballotCounting.setup(parameters);
 		assert ballotCounting.getStatus() == BallotCounting.PRECOUNT;
 		ballotCounting.count();
 		assert ballotCounting.getStatus() == BallotCounting.FINISHED;
