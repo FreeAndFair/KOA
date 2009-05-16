@@ -27,7 +27,6 @@
  */
 package election.tally.seanad;
 
-import election.tally.BallotBox;
 import election.tally.BallotCountingModel;
 import election.tally.Candidate;
 
@@ -64,7 +63,7 @@ import election.tally.Candidate;
  *
  */
 
-public class BallotCounting extends election.tally.BallotCounting {
+public class FractionalBallotCounting extends election.tally.BallotCounting {
 
 	/**
 	 * Inner class for state machine
@@ -81,22 +80,16 @@ public class BallotCounting extends election.tally.BallotCounting {
  		private int state;
  		
  		//@ also ensures \result == state;
- 		/* 
-		 * @see election.tally.dail.AbstractBallotCountingMachine#getState()
-		 */
  		public int getState() {
 			return state;
 		}
 
  		//@ also ensures newState == state;
-		/* (non-Javadoc)
-		 * @see election.tally.dail.AbstractBallotCountingMachine#changeState(int)
-		 */
 		public void changeState(int newState) {
 			state = newState;
 		}
 
-		public boolean isPossibleState(int value) {
+		public boolean isPossibleState(final int value) {
  			return ((READY_TO_COUNT == value) ||
  					(NO_SEATS_FILLED_YET == value) ||
  					(CANDIDATES_HAVE_QUOTA == value) ||
@@ -116,7 +109,7 @@ public class BallotCounting extends election.tally.BallotCounting {
  					(READY_TO_REWEIGHT_BALLOTS == value));
 		}
 
-		public boolean isTransition(int fromState, int toState) {
+		public boolean isTransition(final int fromState, final int toState) {
 			// Self transitions are allowed
 			if (toState == fromState) {
 				return true;
@@ -218,17 +211,13 @@ public class BallotCounting extends election.tally.BallotCounting {
 		}
 	}
 
-	
-	@Override
 	public void distributeSurplus(Candidate candidateWithSurplus) {
-		// TODO Auto-generated method stub
+		// TODO
 		
 	}
 
-	@Override
 	public void transferVotes(Candidate fromCandidate,
 			Candidate toCandidate, int numberOfVotes) {
-		// TODO Auto-generated method stub
-		
+		// TODO 
 	}
 }

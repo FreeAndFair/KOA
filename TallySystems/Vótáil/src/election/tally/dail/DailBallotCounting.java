@@ -64,6 +64,9 @@ public class DailBallotCounting extends election.tally.BallotCounting {
 			return state;
 		}
 
+ 		/**
+ 		 * Move along the next valid transition in state.
+ 		 */
  		//@ also ensures newState == state;
 		public void changeState(final int newState) {
 			state = newState;
@@ -215,12 +218,17 @@ public class DailBallotCounting extends election.tally.BallotCounting {
 		
 	}
 
+
+
+	private BallotCountingModel ballotCountingMachine;
+
 	 
     /**
      * Distribute the surplus of an elected Dail candidate.
      * 
      * @param candidate The elected Dail candidate
      */
+	//@ requires ballotCountingMachine.getState() == BallotCountingModel.SURPLUS_AVAILABLE;
 	public void distributeSurplus(/*@ non_null @*/ final Candidate candidate) {
 		for (int i = 0; i < totalNumberOfCandidates; i++) {
 			if (candidates[i].getStatus() == Candidate.CONTINUING) {
@@ -231,8 +239,10 @@ public class DailBallotCounting extends election.tally.BallotCounting {
 			}
 			
 		}
+		ballotCountingMachine.changeState(BallotCountingModel.READY_FOR_NEXT_ROUND_OF_COUNTING);
 	}
 
+	
 	/**
 	 * Transfer votes from one Dail candidate to another.
 	 * 
@@ -240,9 +250,9 @@ public class DailBallotCounting extends election.tally.BallotCounting {
 	 * @param toCandidate The continuing candidate to receive the transferred votes
 	 * @param numberOfVotes The number of votes to be transferred
 	 */
-	@Override
-	public void transferVotes(Candidate fromCandidate,
-			Candidate toCandidate, int numberOfVotes) {
+	//@ requires ballotCountingMachine.getState() == BallotCountingModel.READY_TO_MOVE_BALLOTS;
+	public void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
+			/*@ non_null @*/ Candidate toCandidate, int numberOfVotes) {
 		
 		// Update the totals for each candidate
 		fromCandidate.removeVote(numberOfVotes, countNumberValue);
@@ -265,7 +275,6 @@ public class DailBallotCounting extends election.tally.BallotCounting {
 	}
 
 	 
-
 	/**
 	 * What is the Droop Quota for this electoral constituency?
 	 * 

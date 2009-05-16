@@ -15,7 +15,7 @@ public class Decision {
  * State value of decision to declare this candidate elected by
  * reaching the quota
  */	
-	public final static byte ELECTBYQUOTA = 0;
+	public final static byte ELECT_BY_QUOTA = 0;
 	
 /**
  * State value for decision to eliminate this candidate as the lowest
@@ -26,24 +26,24 @@ public class Decision {
 /**
  * Default state value to indicate that no decision has been taken
  */	
-	public final static byte NODECISION = 2;
+	public final static byte NO_DECISION = 2;
 	
 /**
  * State value for decision to round up a fractional transfer of votes
  * to this candidate
  */	
-	public final static byte ROUNDUPFRACTION = 3;
+	public final static byte ROUND_UP_FRACTION = 3;
 	
 /**
  * State value for decision to distribute the surplus of this candidate
  */	
-	public final static byte DISTRIBUTESURPLUS = 4;
+	public final static byte DISTRIBUTE_SURPLUS = 4;
 
 /**
  * State value for the decision to deem this candidate elected as one
  * of the highest continuing candidates for the last remaining seats 
  */	
-	public final static byte DEEMELECTED = 5;
+	public final static byte DEEM_ELECTED = 5;
 	
 /** Type of decision taken */
 //@ public initially decisionTaken == NODECISION;
@@ -89,7 +89,7 @@ public class Decision {
   @   ensures chosenByLot == false;
   @*/
 	public /*@ pure */ Decision(){
-		decisionTaken = NODECISION;
+		decisionTaken = NO_DECISION;
 		atCountNumber = 0;
 		candidateID = 0;
 		chosenByLot = false;	

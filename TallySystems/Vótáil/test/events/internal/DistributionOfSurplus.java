@@ -3,7 +3,7 @@ package internal;
 import util.AbstractScenarioTest;
 import election.tally.Candidate;
 
-public class DistributionOfSurplus extends AbstractScenarioTest {
+public class DistributionOfSurplus extends TestCase {
 
 	public void testDistributionOfSurplus() {
 	 
