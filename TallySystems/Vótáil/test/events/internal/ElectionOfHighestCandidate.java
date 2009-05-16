@@ -1,12 +1,12 @@
 package internal;
 
+import junit.framework.TestCase;
 import election.tally.Ballot;
 import election.tally.BallotBox;
 import election.tally.BallotCounting;
 import election.tally.Candidate;
 import election.tally.ElectionParameters;
 import election.tally.dail.DailBallotCounting;
-import util.AbstractScenarioTest;
 
 public class ElectionOfHighestCandidate extends TestCase {
 

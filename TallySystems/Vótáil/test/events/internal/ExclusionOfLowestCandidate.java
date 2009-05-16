@@ -1,12 +1,12 @@
 package internal;
 
+import junit.framework.TestCase;
 import election.tally.Ballot;
 import election.tally.BallotBox;
 import election.tally.BallotCounting;
 import election.tally.Candidate;
 import election.tally.ElectionParameters;
 import election.tally.dail.DailBallotCounting;
-import util.AbstractScenarioTest;
 
 public class ExclusionOfLowestCandidate extends TestCase {
 
@@ -16,26 +16,13 @@ public class ExclusionOfLowestCandidate extends TestCase {
 	protected BallotBox ballotBox;
 
 	public final void testExclusionOfLowestCandidate() {
-		int numberOfSeats = 4;
-		electionParameters.setNumberOfSeats(numberOfSeats);
-		
-		// Generate candidates
-		int numberOfCandidates = 2 + numberOfSeats;
-		Candidate[] candidates = new Candidate[numberOfCandidates];
-		for (int i = 0; i < numberOfCandidates; i++) {
-			candidates[i] = new Candidate();
-			candidates[i].addVote(i*1000, 1);
-		}
-				
-	 	electionParameters.setCandidateList(candidates);
-	 	ballotCounting.setup(electionParameters);
+		 
+ 	 	ballotCounting.setup(parameters);
 	 	
 	 	// Eliminate the lowest candidate
-	 	int numberToEliminate = 1;
-	 	Candidate[] candidatesToEliminate = {candidates[0]};
-	 	ballotCounting.eliminateCandidates(candidatesToEliminate, numberToEliminate);
-	 	assert(candidates[0].getStatus() == Candidate.ELIMINATED);
-	}
+ 	 	Candidate[] candidatesToEliminate = ballotCounting.findLowestCandidates();
+	 	ballotCounting.eliminateCandidates(candidatesToEliminate);
+ 	}
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -43,9 +30,13 @@ public class ExclusionOfLowestCandidate extends TestCase {
 		parameters = new ElectionParameters();
 		parameters.totalNumberOfSeats = 4;
 		parameters.numberOfSeatsInThisElection = 4;
-		parameters.candidateIDs = new long[]{1,2,3};
-		parameters.numberOfCandidates = 3;
-		candidate = new Candidate();
+		// Generate candidates
+		int numberOfCandidates = 2 + parameters.numberOfSeatsInThisElection;
+		Candidate[] candidates = new Candidate[numberOfCandidates];
+		for (int i = 0; i < numberOfCandidates; i++) {
+			candidates[i] = new Candidate();
+			candidates[i].addVote(i*1000, 1);
+		}
 		ballotBox = new BallotBox();
 		ballotBox.numberOfBallots = 2;
 		Ballot ballot1 = new Ballot();

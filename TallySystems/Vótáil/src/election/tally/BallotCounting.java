@@ -1335,8 +1335,8 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
   @   protected normal_behavior
   @   requires state == COUNTING;
   @   ensures (\forall int i; 0 <= i && i < totalCandidates;
-  @   isElected (candidateList[i]) ==> (\exists int k;
-  @   0 <= k && k < numberOfDecisions;
+  @     isElected (candidateList[i]) ==> (\exists int k;
+  @     0 <= k && k < numberOfDecisions;
   @   (decisionsMade[k].candidateID == candidateList[i].getCandidateID()) &&
   @   ((decisionsMade[k].decisionTaken == Decision.ELECTBYQUOTA) ||
   @   (decisionsMade[k].decisionTaken == Decision.DEEMELECTED))) &&
@@ -1345,5 +1345,50 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
   @   ==> (decisionsMade[n].decisionTaken != Decision.EXCLUDE)));
   @*/
 	protected void updateDecisions() {
+		// TODO
 }
+
+	/**
+	 * Who is the highest candidate?
+	 * 
+	 * @return The candidate with the most votes
+	 */
+	//@ ensures (\forall int i; 0 <= i && i < totalCandidates;
+	//@   candidates[i].getTotalVotes() <= \result.getTotalVotes());
+	//@ ensures (\exists int i; 0 <= i && i < totalCandidates;
+	//@   candidates[i].equals(\result);
+	public /*@ non_null pure @*/ Candidate findHighestCandidate() {
+		
+		long mostVotes = 0;
+		/*@ non_null @*/ Candidate highestCandidate = new Candidate();
+	
+		//@ loop_constraint \old(mostVotes) <= mostVotes
+		for (int i=0; i < totalNumberOfCandidates; i++) {
+			if (candidates[i].getTotalVote() > mostVotes) {
+				mostVotes = candidates[i].getTotalVote();
+				highestCandidate = candidates[i];
+			} else if (candidates[i].getTotalVote() == mostVotes) {
+				// resolve tie for equal highest vote in accordance with electoral law
+				if (isHigherThan(candidates[i],highestCandidate)) {
+					highestCandidate = candidates[i];
+				}
+			}
+		}
+		
+		assert highestCandidate.getTotalVote() == mostVotes;
+		
+		return highestCandidate;
+	}
+
+	/**
+	 * Who are the lowest continuing candidates?
+	 * 
+	 * @return The continuing candidates with the least votes
+	 */
+	public Candidate[] findLowestCandidates() {
+		Candidate[] lowestCandidates = new Candidate[1];
+		
+		long highestPossibleVote = ballots.length;
+		return lowestCandidates;
+	}
 }

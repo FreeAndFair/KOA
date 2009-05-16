@@ -13,7 +13,7 @@ import election.util.UniqueNumber;
  * section 3-14</a>
  * 
  * @author Dermot Cochran
- * @copyright 2005-2008
+ * @copyright 2005-2009
  */
 
 public class Candidate {
@@ -24,13 +24,13 @@ public class Candidate {
  * @see <a href="http://en.wikipedia.org/wiki/List_of_political_parties_in_the_Republic_of_Ireland">
  * List of political parties in Ireland</a>	
  * 
- * The average number of candidates could me much less.
+ * The average number of candidates could be much less.
  */
 public static final int MAX_SEATS = 5;
 public static final int MAX_MAJOR_PARTIES = 7; // Large enough to contest two or more seats
 public static final int MAX_MINOR_PARTIES = 7; // Too small to contest more than one seat
 public static final int MAX_INDEPENDENTS = 7;
-public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_MINOR_PARTIES + MAX_INDEPENDENTS; // Forty Nine
+public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_MINOR_PARTIES + MAX_INDEPENDENTS + 1; // Fifty
 
 /** Identifier for the candidate.
  * 
@@ -353,19 +353,15 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
   @   ensures votesRemoved[count] == numberOfVotes;
   @   ensures lastCountNumber == count;
   @*/
-  public void removeVote(int numberOfVotes, int count){
-    if(state == ELIMINATED || state == ELECTED){
-      if(lastCountNumber < count && votesRemoved[count] == 0){
+  public void removeVote(final int numberOfVotes, final int count){
         votesRemoved[count] = numberOfVotes;
         lastCountNumber = count;
-      }
     }
-  }	
 	
 /** 
  * Sets the candidate ID
  * 
- * @param candidateIDToAssign Identification number for this candidate
+ * @param internalID Identification number for this candidate
  * 
  * @design The candidate ID must be assigned by the client object because 
  * the client object must know who the candidate is.
@@ -380,10 +376,10 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
   @   ensures candidateID == candidateIDToAssign;
   @   ensures state == CONTINUING;
   @*/
-	public void setCandidateID(int candidateIDToAssign){
-        candidateID = candidateIDToAssign;
+	public void setCandidateID(int internalID){
+        this.candidateID = internalID;
         state = CONTINUING;
-	} //@ nowarn Post
+	} //@ nowarn
 	
 /** Declares the candidate to be elected */
 /*@ public normal_behavior
@@ -458,9 +454,21 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
   @   (this.randomNumber > other.randomNumber);
   @*/
 	public /*@ pure @*/ boolean isAfter(/*@ non_null @*/ Candidate other){
-			if(this.randomNumber > other.randomNumber){
-				return true;
-			}
-		return false;
+		return (this.randomNumber > other.randomNumber);
+	}
+	
+/**
+ * Is this the same candidate?
+ * 
+ * @return <code>true</code> if this is the same candidate
+ */
+/*@ ensures \result == ((other != null) && 
+  @   (other.getCandidateID() == candidateID));
+  @*/
+	public /*@ pure @*/ boolean equals(Candidate other) {
+		if (other == null) {
+			return false;
+		}
+		return (other.getCandidateID() == this.candidateID);
 	}
 }
