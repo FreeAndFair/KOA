@@ -1,5 +1,6 @@
 package election.tally.dail;
 
+import election.tally.AbstractBallotCounting;
 import election.tally.BallotCountingModel;
 import election.tally.Candidate;
  
@@ -38,7 +39,7 @@ import election.tally.Candidate;
  * may be made of the information contained therein.
  *
  */
-public class DailBallotCounting extends election.tally.BallotCounting {
+public class DailBallotCounting extends AbstractBallotCounting {
 
 	/**
 	 * Inner class for state machine
@@ -232,7 +233,7 @@ public class DailBallotCounting extends election.tally.BallotCounting {
 	public void distributeSurplus(/*@ non_null @*/ final Candidate candidate) {
 		for (int i = 0; i < totalNumberOfCandidates; i++) {
 			if (candidates[i].getStatus() == Candidate.CONTINUING) {
-				int numberOfTransfers = getPotentialTransfers (candidate, candidates[i].getCandidateID());
+				int numberOfTransfers = getActualTransfers (candidate, candidates[i]);
 				if (0 < numberOfTransfers) {
 					transferVotes (candidate, candidates[i], numberOfTransfers);
 				}

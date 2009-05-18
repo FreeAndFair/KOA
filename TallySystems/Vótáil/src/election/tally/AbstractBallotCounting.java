@@ -63,7 +63,7 @@ package election.tally;
  * @see <a href="http://www.jmlspecs.org/">JML Homepage</a>  
  */
 //@ refine "BallotCounting.java-refined";
-public abstract class BallotCounting {
+public abstract class AbstractBallotCounting {
 	/**
 	* Abstract State Machine for Election Algorithm.
 	*/
@@ -523,8 +523,6 @@ public static final byte FINISHED = 6;
 /** Declare election result */
 public static final byte REPORT = 7;
 
-private static final long MAXIMUM_POSSIBLE_NUMBER_OF_VOTES = 0;
-
 /**
  * Default Constructor.
  */
@@ -535,7 +533,7 @@ private static final long MAXIMUM_POSSIBLE_NUMBER_OF_VOTES = 0;
   @   ensures numberElected == 0;
   @   ensures numberEliminated == 0;
   @*/
-public BallotCounting(){
+public AbstractBallotCounting(){
 	status = EMPTY;
 	countNumberValue = 0;
 	numberOfCandidatesElected = 0;
@@ -633,7 +631,7 @@ public /*@ pure @*/ int getSurplus(final /*@ non_null @*/ Candidate candidate){
   @     ensures \result == (candidate.getOriginalVote() >= depositSavingThreshold) ||
   @       (isElected (candidate) == true);
   @*/
-public /*@ pure @*/ boolean isDepositSaved(/*@ non_null @*/ Candidate candidate){
+public /*@ pure @*/ boolean isDepositSaved(/*@ non_null @*/ final Candidate candidate){
  	return ((candidate.getOriginalVote() >= savingThreshold)
 		|| (isElected (candidate)));
 }
@@ -650,14 +648,8 @@ public /*@ pure @*/ boolean isDepositSaved(/*@ non_null @*/ Candidate candidate)
  *     "Move the ballots"
  * </BON>
  * 
- * @param candidateWithSurplus
- * @design At most one surplus may be distributed in each round
+ * @param candidateWithSurplus The elected candidate whose surplus is to be transferred
  * @see http://www.cev.ie/htm/tenders/pdf/1_2.pdf, section 12, page 47
- * 
- * @note ESC/Java2 cannot check assertions that contain the \sum operator
- * 
- * @TODO determine which ballots are to be transferred
- * @TODO determine that the transfers are in accordance with the preferences
  */
 /*@ also
   @   protected normal_behavior
@@ -1330,7 +1322,7 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 /**
  * Update list of decision events.
  * 
- * @param The decision to be audited.
+ * @param The decision to be added.
  */
 /*@ also
   @   protected normal_behavior
@@ -1364,7 +1356,6 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 		long mostVotes = 0;
 		/*@ non_null @*/ Candidate highestCandidate = new Candidate();
 	
-		//@ loop_constraint \old(mostVotes) <= mostVotes
 		for (int i=0; i < totalNumberOfCandidates; i++) {
 			if (candidates[i].getTotalVote() > mostVotes) {
 				mostVotes = candidates[i].getTotalVote();
@@ -1398,7 +1389,6 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 		long leastVotes = MAXVOTES;
 		/*@ non_null @*/ Candidate lowestCandidate = new Candidate();
 		
-		//@ loop_constraint leastVotes <= \old(leastVotes);
 		for (int i=0; i < totalNumberOfCandidates; i++) {
 			if (candidates[i].getTotalVote() < leastVotes) {
 				leastVotes = candidates[i].getTotalVote();
@@ -1444,6 +1434,9 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	 */
 	/*@ requires \exists (int i; 0 <= i && i < totalCandidates;
 	  @  candidates[i].getCandidateID == candidateID);
+	  @ requires (decisionType == Decision.EXCLUDE) ||
+	  @   (decisionType == Decision.DEEMELECTED) ||
+	  @   (decisionType == Decision.ELECTBYQUOTA);
 	  @ ensures \old(numberOfDecisions) < numberOfDecisions;
 	  @*/
 	protected void auditDecision(final byte decisionType, final int candidateID) {
@@ -1457,15 +1450,16 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	}
 
 	/**
-	 * Redistribute the transferable ballots of an exlclduded candidate.
+	 * Redistribute the transferable ballots of an excluded candidate.
 	 * 
 	 * @param The unique identifier for the excluded candidate
 	 */
 	/*@ requires candidate.getStatus() == candidate.EXCLUDED;
+	  @ requires ballots != null;
 	  @ ensures \forall (int b; 0 <= b && b < ballots.length;
 	  @   ballots[b].getCandidateID != candidateID);
 	  @*/
-	protected void redistributeBallots(/*@ non_null @*/ final int candidateID) {
+	protected void redistributeBallots(final int candidateID) {
 
 		for (int b = 0; b < ballots.length; b++) {
 			if (ballots[b].getCandidateID() == candidateID) {

@@ -3,7 +3,6 @@ package external;
 import junit.framework.TestCase;
 import election.tally.Ballot;
 import election.tally.BallotBox;
-import election.tally.BallotCounting;
 import election.tally.Candidate;
 import election.tally.ElectionParameters;
 import election.tally.dail.DailBallotCounting;
@@ -21,9 +20,9 @@ public class StartOfCount extends TestCase {
 	 */
 	public void testStartOfCount () {
 		ballotCounting.setup(parameters);
-		assert ballotCounting.getStatus() == BallotCounting.PRECOUNT;
+		assert ballotCounting.getStatus() == DailBallotCounting.PRECOUNT;
 		ballotCounting.count();
-		assert ballotCounting.getStatus() == BallotCounting.FINISHED;
+		assert ballotCounting.getStatus() == DailBallotCounting.FINISHED;
 		
 	}
 

@@ -27,6 +27,7 @@
  */
 package election.tally.seanad;
 
+import election.tally.AbstractBallotCounting;
 import election.tally.BallotCountingModel;
 import election.tally.Candidate;
 
@@ -63,7 +64,7 @@ import election.tally.Candidate;
  *
  */
 
-public class FractionalBallotCounting extends election.tally.BallotCounting {
+public class FractionalBallotCounting extends AbstractBallotCounting {
 
 	/**
 	 * Inner class for state machine
@@ -211,13 +212,41 @@ public class FractionalBallotCounting extends election.tally.BallotCounting {
 		}
 	}
 
+	private BallotCountingModel ballotCountingMachine;
+
 	public void distributeSurplus(Candidate candidateWithSurplus) {
-		// TODO
+		for (int i = 0; i < totalNumberOfCandidates; i++) {
+			if (candidates[i].getStatus() == Candidate.CONTINUING) {
+				int numberOfTransfers = getActualTransfers (candidateWithSurplus, candidates[i]);
+				if (0 < numberOfTransfers) {
+					transferVotes (candidateWithSurplus, candidates[i], numberOfTransfers);
+				}
+			}
+			
+		}
+		ballotCountingMachine.changeState(BallotCountingModel.READY_FOR_NEXT_ROUND_OF_COUNTING);
 		
 	}
 
 	public void transferVotes(Candidate fromCandidate,
 			Candidate toCandidate, int numberOfVotes) {
-		// TODO 
+		// Update the totals for each candidate
+		fromCandidate.removeVote(numberOfVotes, countNumberValue);
+		toCandidate.addVote(numberOfVotes, countNumberValue);
+		
+		// Transfer the required number of ballots
+		int fromCandidateID = fromCandidate.getCandidateID();
+		int toCandidateID = toCandidate.getCandidateID();
+		int ballotsMoved = 0;
+		for (int b = 0; b < totalNumberOfVotes && ballotsMoved < numberOfVotes; b++) {
+			if ((ballots[b].getCandidateID() == fromCandidateID) &&
+				(ballots[b].getNextPreference(1) == toCandidateID)) {
+				 
+						ballots[b].transfer(countNumberValue);
+						ballotsMoved++;
+				 
+			}
+		}
+		assert (numberOfVotes == ballotsMoved); 
 	}
 }
