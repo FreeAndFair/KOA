@@ -2,14 +2,13 @@ package internal;
 
 import junit.framework.TestCase;
 import election.tally.BallotBox;
-import election.tally.BallotCounting;
 import election.tally.Candidate;
 import election.tally.ElectionParameters;
 import election.tally.dail.DailBallotCounting;
 
 public class DistributionOfSurplus extends TestCase {
 	
-	protected BallotCounting ballotCounting;
+	protected DailBallotCounting ballotCounting;
 	protected ElectionParameters parameters;
 	protected Candidate candidate;
 	protected BallotBox ballotBox;

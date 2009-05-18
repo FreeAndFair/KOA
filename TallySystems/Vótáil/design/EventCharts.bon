@@ -79,8 +79,7 @@ event
 involves 
   BALLOT_BOX, CANDIDATE_LIST
 event
-  "Ballot data integrity or security guarantees are waived for testing purposes, \
-  but this is properly recorded in the audit log"
+  "Ballot data integrity or security guarantees are waived for testing purposes"
 involves
   AUDIT_LOG, BALLOT_BOX, DATA_INTEGRITY, SCENARIO_TEST, SECURITY_GUARANTEE, VOTE_SET
 end
