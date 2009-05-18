@@ -492,6 +492,7 @@ public abstract class BallotCounting {
 	  @*/
 	/**  Number of candidates with equal lowest non-zero votes */
 	protected int totalNumberOfEqualLowestContinuing;
+private int nextDecision;
    //@ protected represents numberOfEqualLowestContinuing <- totalNumberOfEqualLowestContinuing;
 	
 	
@@ -1327,9 +1328,9 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 		/*@ non_null @*/ Candidate toCandidate, int numberOfVotes);
 
 /**
- * Update list of decision events
+ * Update list of decision events.
  * 
- * <BON>command</BON>
+ * @param The decision to be audited.
  */
 /*@ also
   @   protected normal_behavior
@@ -1344,8 +1345,9 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
   @   (decisionsMade[n].candidateID == candidateList[i].getCandidateID())
   @   ==> (decisionsMade[n].decisionTaken != Decision.EXCLUDE)));
   @*/
-	protected void updateDecisions() {
-		// TODO
+	protected void updateDecisions(Decision decision) {
+		decisions[nextDecision] = decision;
+		nextDecision++;
 }
 
 	/**
@@ -1418,25 +1420,50 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	/**
 	 * Exclude one candidate from the election.
 	 * 
-	 * @param candidate to be excluded
+	 * @param candidateID The candidate to be excluded
 	 */
 	/*@ requires isLowestCandidate (candidate);
-	  @ requires candidate.isContinuing();
-	  @ ensures candidate.isExcluded();
-	  @ ensures candidate.noTransferableBallots();
+	  @ requires candidate.getStatus == Candidate.CONTINUING;
+	  @ ensures candidate.getStatus() == Candidate.EXCLUDED;
+	  @ ensures ensures \forall (int b; 0 <= b && b < ballots.length;
+	  @   ballots[b].getCandidateID != candidate.getCandidateID());
 	  @*/
 	public void eliminateCandidate(Candidate candidate) {
+		final int candidateID = candidate.getCandidateID();
+
 		candidate.declareEliminated();
-		redistributeBallots(candidate.getCandidateID());
+		redistributeBallots(candidateID);
+		auditDecision(Decision.EXCLUDE, candidateID);
+	}
+
+	/**
+	 * Audit a decision event.
+	 * 
+	 * @param decisionType The type of decision made
+	 * @param candidateID The candidate about which the decision was made
+	 */
+	/*@ requires \exists (int i; 0 <= i && i < totalCandidates;
+	  @  candidates[i].getCandidateID == candidateID);
+	  @ ensures \old(numberOfDecisions) < numberOfDecisions;
+	  @*/
+	protected void auditDecision(final byte decisionType, final int candidateID) {
+		 
+		Decision decision = new Decision();
+		decision.atCountNumber = countNumberValue;
+		decision.candidateID = candidateID;
+		decision.chosenByLot = false;
+		decision.decisionTaken = decisionType;
+		updateDecisions(decision);
 	}
 
 	/**
 	 * Redistribute the transferable ballots of an exlclduded candidate.
 	 * 
-	 * @param The exlcuded candidate
+	 * @param The unique identifier for the excluded candidate
 	 */
-	/*@ requires candidate.isExcluded();
-	  @ ensures candidate.noTransferableBallots();
+	/*@ requires candidate.getStatus() == candidate.EXCLUDED;
+	  @ ensures \forall (int b; 0 <= b && b < ballots.length;
+	  @   ballots[b].getCandidateID != candidateID);
 	  @*/
 	protected void redistributeBallots(/*@ non_null @*/ final int candidateID) {
 
