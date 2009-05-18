@@ -1427,7 +1427,7 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	  @*/
 	public void eliminateCandidate(Candidate candidate) {
 		candidate.declareEliminated();
-		redistributeBallots(candidate);
+		redistributeBallots(candidate.getCandidateID());
 	}
 
 	/**
@@ -1436,10 +1436,14 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	 * @param The exlcuded candidate
 	 */
 	/*@ requires candidate.isExcluded();
-	  @ ensures candidate.noTransferabkeBallots();
+	  @ ensures candidate.noTransferableBallots();
 	  @*/
-	protected void redistributeBallots(/*@ non_null @*/ final Candidate candidate) {
-		// TODO Auto-generated method stub
-		
+	protected void redistributeBallots(/*@ non_null @*/ final int candidateID) {
+
+		for (int b = 0; b < ballots.length; b++) {
+			if (ballots[b].getCandidateID() == candidateID) {
+				ballots[b].transfer(countNumberValue);
+			}
+		}
 	}
 }
