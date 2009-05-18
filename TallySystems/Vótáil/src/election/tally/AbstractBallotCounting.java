@@ -1416,7 +1416,7 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	/*@ requires isLowestCandidate (candidate);
 	  @ requires candidate.getStatus == Candidate.CONTINUING;
 	  @ ensures candidate.getStatus() == Candidate.EXCLUDED;
-	  @ ensures ensures (\forall int b; 0 <= b && b < ballots.length;
+	  @ ensures (\forall int b; 0 <= b && b < ballots.length;
 	  @   ballots[b].getCandidateID != candidate.getCandidateID());
 	  @*/
 	public void eliminateCandidate(Candidate candidate) {
