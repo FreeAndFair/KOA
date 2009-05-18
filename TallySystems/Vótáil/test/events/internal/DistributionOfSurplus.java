@@ -37,7 +37,6 @@ public class DistributionOfSurplus extends TestCase {
 	public void testDistributionOfSurplus() {
 	 
 	 	ballotCounting.setup(parameters);
-	 	Candidate firstCandidate = ballotCounting.findHighestCandidate(); 
-	 	ballotCounting.distributeSurplus(firstCandidate);
+	 	ballotCounting.distributeSurplus(ballotCounting.findHighestCandidate());
 	}
 }

@@ -33,7 +33,7 @@
  * @see <a href="http://www.jmlspecs.org/">JML Homepage</a>
  */
 
-public abstract class BallotCounting {
+public abstract class AbstractBallotCounting {
 	
   /**  
    * Abstract State Machine for Election Algorithm.

@@ -62,7 +62,7 @@ package election.tally;
    Homepage</a>
  * @see <a href="http://www.jmlspecs.org/">JML Homepage</a>  
  */
-//@ refine "BallotCounting.java-refined";
+//@ refine "AbstractBallotCounting.java-refined";
 public abstract class AbstractBallotCounting {
 	/**
 	* Abstract State Machine for Election Algorithm.
@@ -1347,10 +1347,11 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	 * 
 	 * @return The candidate with the most votes
 	 */
-	//@ ensures (\forall int i; 0 <= i && i < totalCandidates;
-	//@   candidates[i].getTotalVotes() <= \result.getTotalVotes());
-	//@ ensures (\exists int i; 0 <= i && i < totalCandidates;
-	//@   candidates[i].equals(\result));
+	/*@ ensures (\forall int i; 0 <= i && i < totalCandidates;
+	  @   candidates[i].getTotalVotes() <= \result.getTotalVotes());
+	  @ ensures (\exists int i; 0 <= i && i < totalCandidates;
+	  @   candidates[i].equals(\result));
+	  @*/
 	public /*@ non_null pure @*/ Candidate findHighestCandidate() {
 		
 		long mostVotes = 0;
@@ -1415,7 +1416,7 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	/*@ requires isLowestCandidate (candidate);
 	  @ requires candidate.getStatus == Candidate.CONTINUING;
 	  @ ensures candidate.getStatus() == Candidate.EXCLUDED;
-	  @ ensures ensures \forall (int b; 0 <= b && b < ballots.length;
+	  @ ensures ensures (\forall int b; 0 <= b && b < ballots.length;
 	  @   ballots[b].getCandidateID != candidate.getCandidateID());
 	  @*/
 	public void eliminateCandidate(Candidate candidate) {
@@ -1432,7 +1433,7 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	 * @param decisionType The type of decision made
 	 * @param candidateID The candidate about which the decision was made
 	 */
-	/*@ requires \exists (int i; 0 <= i && i < totalCandidates;
+	/*@ requires (\exists int i; 0 <= i && i < totalCandidates;
 	  @  candidates[i].getCandidateID == candidateID);
 	  @ requires (decisionType == Decision.EXCLUDE) ||
 	  @   (decisionType == Decision.DEEMELECTED) ||
@@ -1456,7 +1457,7 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	 */
 	/*@ requires candidate.getStatus() == candidate.EXCLUDED;
 	  @ requires ballots != null;
-	  @ ensures \forall (int b; 0 <= b && b < ballots.length;
+	  @ ensures (\forall int b; 0 <= b && b < ballots.length;
 	  @   ballots[b].getCandidateID != candidateID);
 	  @*/
 	protected void redistributeBallots(final int candidateID) {
