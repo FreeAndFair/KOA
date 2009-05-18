@@ -10,6 +10,8 @@
 -- copies of the Software, and to permit persons to whom the Software is
 -- furnished to do so, subject to the following conditions:
 --
+-- The voting security infrastructure (VoteSET) may be the subject or one or more pending patents. 
+--
 -- The above copyright notice and this permission notice shall be included in
 -- all copies or substantial portions of the Software.
 --
@@ -22,8 +24,6 @@
 -- THE SOFTWARE.
 --
 
--- Last updated on 11-May-2009 by Dermot Cochran
-
 -- External (incoming) events
 
 event_chart Votail
@@ -33,15 +33,15 @@ part
 event
   "Ballot counting starts"
 involves
-  BALLOT_BOX, ELECTION_REPORT, TALLY_AGENT
+  BALLOT_BOX, BALLOT_COUNTING
 event
   "Ballots are read into the counting system"
 involves
-  BALLOT_BOX
+  BALLOT_BOX, DATA_INTEGRITY, VOTE_SET
 event
   "A ballot is cast"
 involves
-  BALLOT, BALLOT_BOX, VOTER
+  BALLOT, BALLOT_BOX, SECURITY_GUARANTEE, VOTER, VOTE_SET
 end
 
 -- Internal (outgoing) events
@@ -51,21 +51,25 @@ outgoing
 part
   "2/2"
 event
-  "One or more candidates are deemed elected"
+  "One or more candidates are elected"
 involves
-  CANDIDATE_LIST
+  CANDIDATE, BALLOT_COUNTING
 event 
   "One or more candidates are excluded"
 involves
-  CANDIDATE_LIST
+  CANDIDATE, BALLOT_COUNTING
 event
-  "All seats are filled and counting is finished"
+  "All seats are filled"
 involves
   ELECTION_REPORT
 event
   "A surplus is distributed"
 involves
   BALLOT_BOX
+event
+  "The transferable votes of an excluded candidate are redistributed"
+involves
+  BALLOT, BALLOT_BOX, BALLOT_COUNTING, CANDIDATE
 event
   "Two or more elected candidates have the highest surplus"
 involves
@@ -74,4 +78,9 @@ event
   "Two or more continuing candidates have the lowest vote"
 involves 
   BALLOT_BOX, CANDIDATE_LIST
+event
+  "Ballot data integrity or security guarantees are waived for testing purposes, \
+  but this is properly recorded in the audit log"
+involves
+  AUDIT_LOG, BALLOT_BOX, DATA_INTEGRITY, SCENARIO_TEST, SECURITY_GUARANTEE, VOTE_SET
 end

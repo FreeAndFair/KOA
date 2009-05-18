@@ -522,6 +522,8 @@ public static final byte FINISHED = 6;
 /** Declare election result */
 public static final byte REPORT = 7;
 
+private static final long MAXIMUM_POSSIBLE_NUMBER_OF_VOTES = 0;
+
 /**
  * Default Constructor.
  */
@@ -1354,7 +1356,7 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	//@ ensures (\forall int i; 0 <= i && i < totalCandidates;
 	//@   candidates[i].getTotalVotes() <= \result.getTotalVotes());
 	//@ ensures (\exists int i; 0 <= i && i < totalCandidates;
-	//@   candidates[i].equals(\result);
+	//@   candidates[i].equals(\result));
 	public /*@ non_null pure @*/ Candidate findHighestCandidate() {
 		
 		long mostVotes = 0;
@@ -1381,12 +1383,35 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 	/**
 	 * Who are the lowest continuing candidates?
 	 * 
-	 * @return The continuing candidates with the least votes
+	 * @return The continuing candidate with the least votes
 	 */
+	/*@ requires 1 <= totalCandidates;
+	  @ ensures (\forall int i; 0 <= i && i < totalCandidates && candidates[i].getStatus == Candidate.CONTINUING;
+	  @   candidates[i].getTotalVotes() >= \result.getTotalVotes());
+	  @ ensures (\exists int i; 0 <= i && i < totalCandidates && candidates[i].getStatus == Candidate.CONTINUING;
+	  @   candidates[i].equals(\result));
+	  @*/
 	public /*@ pure non_null @*/ Candidate findLowestCandidate() {
-		Candidate lowestCandidate = new Candidate();
 		
-		long highestPossibleVote = ballots.length;
+		long leastVotes = MAXVOTES;
+		/*@ non_null @*/ Candidate lowestCandidate = new Candidate();
+		
+		//@ loop_constraint leastVotes <= \old(leastVotes);
+		for (int i=0; i < totalNumberOfCandidates; i++) {
+			if (candidates[i].getTotalVote() < leastVotes) {
+				leastVotes = candidates[i].getTotalVote();
+				lowestCandidate = candidates[i];
+			} else if (candidates[i].getTotalVote() == leastVotes) {
+				// resolve tie for equal lowest vote in accordance with electoral law
+				if (isHigherThan(lowestCandidate,candidates[i])) {
+					lowestCandidate = candidates[i];
+				}
+			}
+		}
+		
+		assert lowestCandidate.getTotalVote() == leastVotes;
+		assert 0 <= leastVotes;
+		
 		return lowestCandidate;
 	}
 
@@ -1405,7 +1430,15 @@ public abstract void transferVotes(/*@ non_null @*/ Candidate fromCandidate,
 		redistributeBallots(candidate);
 	}
 
-	private void redistributeBallots(Candidate candidate) {
+	/**
+	 * Redistribute the transferable ballots of an exlclduded candidate.
+	 * 
+	 * @param The exlcuded candidate
+	 */
+	/*@ requires candidate.isExcluded();
+	  @ ensures candidate.noTransferabkeBallots();
+	  @*/
+	protected void redistributeBallots(/*@ non_null @*/ final Candidate candidate) {
 		// TODO Auto-generated method stub
 		
 	}
