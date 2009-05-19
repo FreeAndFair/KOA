@@ -1236,43 +1236,46 @@ protected /*@ pure @*/ int getTransferRemainder(/*@ non_null @*/ Candidate fromC
  */
 /*@ also
   @   protected normal_behavior
-  @   requires state == COUNTING;
-  @   requires isElected (fromCandidate);
-  @   requires toCandidate.getStatus() == election.tally.Candidate.CONTINUING;
-  @   requires getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate);
-  @   ensures \result == (\num_of int i; i <= 0 && i < totalCandidates &&
-  @   candidateList[i].getCandidateID() != toCandidate.getCandidateID()&&
-  @   candidateList[i].getStatus() == election.tally.Candidate.CONTINUING;
-  @   (getTransferRemainder(fromCandidate, candidateList[i]) >
-  @   getTransferRemainder(fromCandidate, toCandidate)) ||
-  @   ((getTransferRemainder(fromCandidate, candidateList[i]) ==
-  @   getTransferRemainder(fromCandidate, toCandidate)) &&
-  @   (getActualTransfers(fromCandidate, candidateList[i]) >
-  @   getActualTransfers(fromCandidate, toCandidate))) ||
-  @   ((((getTransferRemainder(fromCandidate, candidateList[i]) ==
-  @   getTransferRemainder(fromCandidate, toCandidate)) &&
-  @   (getActualTransfers(fromCandidate, candidateList[i]) ==
-  @   getActualTransfers(fromCandidate, toCandidate)))) &&
-  @   isHigherThan (candidateList[i], toCandidate)));
+  @     requires state == COUNTING;
+  @     requires isElected (fromCandidate);
+  @     requires toCandidate.getStatus() == election.tally.Candidate.CONTINUING;
+  @     requires getSurplus(fromCandidate) < getTotalTransferableVotes(fromCandidate);
+  @     ensures \result == (\num_of int i; i <= 0 && i < totalCandidates &&
+  @       candidateList[i].getCandidateID() != toCandidate.getCandidateID()&&
+  @       candidateList[i].getStatus() == election.tally.Candidate.CONTINUING;
+  @       (getTransferRemainder(fromCandidate, candidateList[i]) >
+  @       getTransferRemainder(fromCandidate, toCandidate)) ||
+  @       ((getTransferRemainder(fromCandidate, candidateList[i]) ==
+  @       getTransferRemainder(fromCandidate, toCandidate)) &&
+  @       (getActualTransfers(fromCandidate, candidateList[i]) >
+  @       getActualTransfers(fromCandidate, toCandidate))) ||
+  @       ((((getTransferRemainder(fromCandidate, candidateList[i]) ==
+  @       getTransferRemainder(fromCandidate, toCandidate)) &&
+  @       (getActualTransfers(fromCandidate, candidateList[i]) ==
+  @       getActualTransfers(fromCandidate, toCandidate)))) &&
+  @       isHigherThan (candidateList[i], toCandidate)));
   @*/
 protected /*@ pure @*/ int getCandidateOrderByHighestRemainder(Candidate fromCandidate, Candidate toCandidate){
-	int numberOfCandidiates = 0;
+	int numberHigherThan = 0;
 	 
 			for(int i=0; i<totalNumberOfCandidates; i++){
 				if(candidates[i].getCandidateID() != toCandidate.getCandidateID()&& candidates[i].getStatus() == Candidate.CONTINUING){
 					if(getTransferRemainder(fromCandidate, candidates[i]) > getTransferRemainder(fromCandidate, toCandidate)){
-						numberOfCandidiates++;
+						numberHigherThan++;
 					}
-					if(getTransferRemainder(fromCandidate, candidates[i]) == getTransferRemainder(fromCandidate, toCandidate) &&	getActualTransfers(fromCandidate, candidates[i]) > getActualTransfers(fromCandidate, toCandidate)){
-						numberOfCandidiates++;
+					else if(getTransferRemainder(fromCandidate, candidates[i]) == getTransferRemainder(fromCandidate, toCandidate) &&	
+							getActualTransfers(fromCandidate, candidates[i]) > getActualTransfers(fromCandidate, toCandidate)){
+						numberHigherThan++;
 					}
-					if(getTransferRemainder(fromCandidate, candidates[i]) == getTransferRemainder(fromCandidate, toCandidate) && getActualTransfers(fromCandidate, candidates[i]) == getActualTransfers(fromCandidate, toCandidate) && isHigherThan (candidates[i], toCandidate)){
-						numberOfCandidiates++;
+					else if(getTransferRemainder(fromCandidate, candidates[i]) == getTransferRemainder(fromCandidate, toCandidate) && 
+							getActualTransfers(fromCandidate, candidates[i]) == getActualTransfers(fromCandidate, toCandidate) && 
+							isHigherThan (candidates[i], toCandidate)){
+						numberHigherThan++;
 					}
 					
 				}
 			}
-	return numberOfCandidiates;
+	return numberHigherThan;
 }
 
 /**

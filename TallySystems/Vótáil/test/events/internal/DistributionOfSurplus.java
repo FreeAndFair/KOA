@@ -6,6 +6,10 @@ import election.tally.Candidate;
 import election.tally.ElectionParameters;
 import election.tally.dail.DailBallotCounting;
 
+/**
+ * @author Dermot Cochran
+ *
+ */
 public class DistributionOfSurplus extends TestCase {
 	
 	protected DailBallotCounting ballotCounting;
@@ -22,7 +26,6 @@ public class DistributionOfSurplus extends TestCase {
 		parameters = new ElectionParameters();
 		parameters.totalNumberOfSeats = 4;
 		parameters.numberOfSeatsInThisElection = 4;
-		parameters.candidateIDs = new long[]{1,2,3};
 		parameters.numberOfCandidates = parameters.totalNumberOfSeats + 2;
 		
 		// Generate sample candidates
