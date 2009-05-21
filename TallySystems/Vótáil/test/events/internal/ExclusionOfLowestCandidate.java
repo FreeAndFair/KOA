@@ -1,6 +1,8 @@
 package internal;
 
 import junit.framework.TestCase;
+import election.tally.Ballot;
+import election.tally.BallotBox;
 import election.tally.Candidate;
 import election.tally.ElectionParameters;
 import election.tally.dail.DailBallotCounting;
@@ -8,6 +10,8 @@ import election.tally.dail.DailBallotCounting;
 public class ExclusionOfLowestCandidate extends TestCase {
 
 	private DailBallotCounting ballotCounting;
+	private int nextBallot;
+	private BallotBox ballotBox;
 
 	public final void testExclusionOfLowestCandidate() {
 	 	
@@ -29,10 +33,19 @@ public class ExclusionOfLowestCandidate extends TestCase {
 		Candidate[] candidates = new Candidate[numberOfCandidates];
 		for (int i = 0; i < numberOfCandidates; i++) {
 			candidates[i] = new Candidate();
-			candidates[i].addVote(i*1000, 1);
+			int numberOfVotes = i*1000;
+			candidates[i].addVote(numberOfVotes, 1);
+			
+			// Generate first preference ballots
+			for (int b = 0; b < numberOfVotes; b++) {
+				
+				ballotBox.ballots[nextBallot++] = new Ballot(candidates[i].getCandidateID());
+			}
 		}
+		
 		
 		parameters.setCandidateList(candidates);
  	 	ballotCounting.setup(parameters);
+ 	 	ballotCounting.load(ballotBox);
 	}
 }
