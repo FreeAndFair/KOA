@@ -24,10 +24,10 @@
 -- Methodology: allocate a BON cluster for each major subsystem
 --
 
-system_chart KOA
+system_chart VOTAIL
 explanation
   "A verified verifiable open source system for electronic (i.e. computer mediated) voting"
 cluster VOTAIL description "Counting of (Irish) ballots by proportional representation with single transferable vote"
---cluster SCORE_VOTING description "Counting of ballots by median score voting"
+cluster SECURITY description ""
 end
  

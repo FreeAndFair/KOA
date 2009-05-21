@@ -26,7 +26,7 @@
 
 -- External (incoming) events
 
-event_chart Votail
+event_chart VOTAIL
 incoming
 part
   "1/2"
@@ -46,7 +46,7 @@ end
 
 -- Internal (outgoing) events
 
-event_chart Votail
+event_chart VOTAIL
 outgoing
 part
   "2/2"

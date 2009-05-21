@@ -148,3 +148,30 @@ command
   "Declare remaining candidates elected",
   "Close the count" 
 end
+
+class_chart VOTE_SET
+explanation
+  "Security infrastructure for electronic voting. Patent pending. All rights reserved."
+end
+
+class_chart DATA_INTEGRITY
+end
+
+class_chart SECURITY_GUARANTEE
+end
+
+class_chart CANDIDATE
+explanation
+  "A person eligible and nominated for election"
+end
+
+class_chart VOTER
+explanation
+  "A person who casts a ballot in an election"
+end
+
+class_chart AUDIT_LOG
+end
+
+class_chart SCENARIO_TEST
+end
