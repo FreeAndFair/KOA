@@ -170,15 +170,7 @@ public static final int NONTRANSFERABLE = 0;
     //@ set _randomNumber = randomNumber;
   }
 
- /**
-  * Generate a single-preference ballot for test purposes
-  * 
-  * @param candidateID2
-  */
-public Ballot(int candidateID2) {
-	numberOfPreferences = 1;
-	candidateID = candidateID2;
-}
+ 
 
 private void assignRandomNumber() {
 	randomNumber = UniqueNumber.getUniqueID();

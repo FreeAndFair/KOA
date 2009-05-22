@@ -1,5 +1,6 @@
 package internal;
 
+import ie.lero.evoting.tally.test.util.TestBallotBox;
 import junit.framework.TestCase;
 import election.tally.BallotBox;
 import election.tally.Candidate;
@@ -23,6 +24,7 @@ public class DistributionOfSurplus extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		ballotCounting = new DailBallotCounting();
+		ballotBox = new TestBallotBox();
 		parameters = new ElectionParameters();
 		parameters.totalNumberOfSeats = 4;
 		parameters.numberOfSeatsInThisElection = 4;
@@ -32,7 +34,13 @@ public class DistributionOfSurplus extends TestCase {
 	 	Candidate[] candidates = new Candidate[parameters.numberOfCandidates];
 		for (int i = 0; i < parameters.numberOfCandidates; i++) {
 			candidates[i] = new Candidate();
-			candidates[i].addVote(i*1000, 1);
+			int numberOfVotes = i*1000;
+			candidates[i].addVote(numberOfVotes, 1);
+			
+			// Generate first preference ballots to match
+			for (int b = 0; b < numberOfVotes; b++) {
+				ballotBox.addBallot(candidates[i].getCandidateID());
+			}
 		}
 	 	parameters.setCandidateList(candidates);	
 	}

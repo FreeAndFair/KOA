@@ -11,21 +11,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>net.sourceforge.metrics.builder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>ch.ethz.inf.pm.jml.plugin.CheckerBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>ie.ucd.bon.plugin.boncbuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</name>
 			<arguments>
 			</arguments>
@@ -36,7 +21,22 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+			<name>ie.ucd.bon.plugin.boncbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>ch.ethz.inf.pm.jml.plugin.CheckerBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>mobius.escjava2.plugin.autocheckEscjavaBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>net.sourceforge.metrics.builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>

@@ -60,4 +60,3 @@ public class BallotBox {
 	public /*@ pure @*/ BallotBox(){
 		numberOfBallots = 0;
 	}
-}
