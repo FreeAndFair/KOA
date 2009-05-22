@@ -96,7 +96,7 @@ public abstract class AbstractBallotCounting {
 	/*@ public model non_null election.tally.Decision[] decisionsMade;
 	  @ public invariant 
 	  @   (\forall int i; 0 <= i && i < numberOfDecisions;
-	  @   decisionsMade[i].decisionTaken != Decision.NODECISION &&
+	  @   decisionsMade[i].decisionTaken != Decision.NO_DECISION &&
 	  @   decisionsMade[i].atCountNumber < countNumber &&
 	  @   (\exists int k; 0 <= k && k < totalCandidates;
 	  @     decisionsMade[i].candidateID == 
@@ -111,7 +111,7 @@ public abstract class AbstractBallotCounting {
 	/*@ public model int numberOfDecisions;
 	  @ public initially numberOfDecisions == 0 || decisionsMade == null ||
 	  @   (\forall int i; 0 <= i && i < numberOfDecisions;
-	  @   decisionsMade[i].decisionTaken == Decision.NODECISION);
+	  @   decisionsMade[i].decisionTaken == Decision.NO_DECISION);
 	  @ public invariant 0 <= numberOfDecisions;
 	  @ public constraint 
 	  @   \old (numberOfDecisions) <= numberOfDecisions;

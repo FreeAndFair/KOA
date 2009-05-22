@@ -379,7 +379,7 @@ public static final int MAX_CANDIDATES = (MAX_SEATS * MAX_MAJOR_PARTIES) + MAX_M
 	public void setCandidateID(int internalID){
         this.candidateID = internalID;
         state = CONTINUING;
-	} //@ nowarn
+	}
 	
 /** Declares the candidate to be elected */
 /*@ public normal_behavior

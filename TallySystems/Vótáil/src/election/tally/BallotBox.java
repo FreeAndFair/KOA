@@ -39,7 +39,7 @@ public class BallotBox {
   @   i != j;
   @   ballots[i].ballotID != ballots[j].ballotID);
   @*/	
-	public /*@ non_null @*/ Ballot[] ballots;
+	protected /*@ spec_public non_null @*/ Ballot[] ballots;
 	
 /**
  * @return the number of ballots in this ballot box
@@ -60,3 +60,4 @@ public class BallotBox {
 	public /*@ pure @*/ BallotBox(){
 		numberOfBallots = 0;
 	}
+}

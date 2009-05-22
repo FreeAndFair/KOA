@@ -1,5 +1,6 @@
 package internal;
 
+import ie.lero.evoting.tally.test.util.TestBallot;
 import ie.lero.evoting.tally.test.util.TestBallotBox;
 import junit.framework.TestCase;
 import election.tally.BallotBox;

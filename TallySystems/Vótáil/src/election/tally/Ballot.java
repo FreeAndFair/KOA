@@ -63,7 +63,7 @@ import election.util.UniqueNumber;
 
 
 public class Ballot {
-  public static final int MAX_POSSIBLE_BALLOTS = 150000;
+  public static final int MAX_BALLOTS = 150000;
 
 /**
  * Candidate ID value to use for non-transferable ballot papers
@@ -179,7 +179,7 @@ private void assignRandomNumber() {
   /**
    * Get the location of the ballot at each count
    * 
-   * @param countNumber
+   * @param countNumber The round of counting which we need to check
    * @return The candidate ID or the NONTRANSFERABLE constant
    */    
   /*@ also public normal_behavior
@@ -187,7 +187,7 @@ private void assignRandomNumber() {
     @ requires countNumber <= countNumberAtLastTransfer;
     @ ensures \result == candidateIDAtCount[countNumber];
     @*/
-  public /*@ pure @*/ int getPreferenceAtCount(int countNumber) {
+  public /*@ pure @*/ int getPreferenceAtCount(final int countNumber) {
     return candidateIDAtCount[countNumber];
   }
     
