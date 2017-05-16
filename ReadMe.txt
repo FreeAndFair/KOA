@@ -3,7 +3,7 @@ KOA/2 Alpha Release
 
 This is first alpha release of the KOA/2 remote voting system.  This system is intended for use a platform for research 
 in electronic voting and applied formal methods.  It is not intended for use in governmental elections.  For further 
-information please visit http://kind.ucd.ie/products/opensource/KOA.
+information please visit http://kindsoftware.com/products/opensource/KOA.
 
 License
 =======
